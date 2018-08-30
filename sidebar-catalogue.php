@@ -27,9 +27,9 @@
 <!-- Filter by File Format -->
 <!-- <div class="filter format-filter" aria-label="Filter datasets by format">
   <h2>Formats</h2>
-    <li><a href="/wordpress/catalogue?format=csv">CSV</a></li>
-    <li><a href="/wordpress/catalogue?format=json">JSON</a></li>
-    <li><a href="/wordpress/catalogue?format=shp">Shapefile</a></li>
+    <li><a href="/catalogue?format=csv">CSV</a></li>
+    <li><a href="/catalogue?format=json">JSON</a></li>
+    <li><a href="/catalogue?format=shp">Shapefile</a></li>
   <ul></ul>
 </div> -->
 <!-- End Filter by File Format -->

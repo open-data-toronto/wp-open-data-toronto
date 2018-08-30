@@ -13,7 +13,7 @@
       </p>
 
       <!-- Webtrends Tracking Code -->
-      <script src="/wordpress/wp-content/themes/wp-open-data-toronto/js/webtrends-infinity.load.js"></script>
+      <script src="/wp-content/themes/wp-open-data-toronto/js/webtrends-infinity.load.js"></script>
       <!-- End Webtrends Tracking Code -->
 
     </div>

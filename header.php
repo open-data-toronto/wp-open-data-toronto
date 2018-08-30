@@ -15,11 +15,11 @@
     <?php wp_head(); ?>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="/wordpress/wp-content/themes/wp-open-data-toronto/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/wp-content/themes/wp-open-data-toronto/fonts/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src="/wordpress/wp-content/themes/wp-open-data-toronto/js/createUI.js"></script>
+    <script src="/wp-content/themes/wp-open-data-toronto/js/createUI.js"></script>
   </head>
 
   <body <?php body_class(); ?>>
@@ -44,12 +44,12 @@
           <div class="row">
             <div class="col-3">
               <a href="http://www.toronto.ca">
-                <img src="/wordpress/wp-content/themes/wp-open-data-toronto/img/logo.svg" alt="City of Toronto" />
+                <img src="/wp-content/themes/wp-open-data-toronto/img/logo.svg" alt="City of Toronto" />
               </a>
             </div>
             <div class="col-9">
               <div class="social-media float-right">
-                <a href="https://twitter.com/Open_TO" target="_blank"><img src="/wordpress/wp-content/themes/wp-open-data-toronto/img/tw.png" alt="Open Data on Twitter"></a>
+                <a href="https://twitter.com/Open_TO" target="_blank"><img src="/wp-content/themes/wp-open-data-toronto/img/tw.png" alt="Open Data on Twitter"></a>
               </div>
             </div>
           </div>

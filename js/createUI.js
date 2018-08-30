@@ -42,7 +42,7 @@ var Catalogue = (function() {
             // Build the HTML for each of the datasets and append to the table
             var ele = '<div class="row">' +
                         '<div class="col-md-8">' +
-                          '<h2><a href="/wordpress/dataset#' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                          '<h2><a href="/dataset#' + row['name'] + '">' + row['title'] + '</a></h2>' +
                           row['excerpt'] +
                           '<div class="formats-available">' +
                             '<h3 class="sr-only">Formats Available for ' + row['title'] + '</h3>' +
@@ -335,7 +335,7 @@ var Dataset = (function() {
                 case 'tags':
                     for (var i = 0; i < data[$(this).data('field')].length; i++) {
                         if (!$(this).is(':empty')) $(this).append(', ');
-                        $(this).append('<a href="/wordpress/catalogue/?tags=' + data[$(this).data('field')][i]['display_name'] + '">' + data[$(this).data('field')][i]['display_name'] + '</a>');
+                        $(this).append('<a href="/catalogue/?tags=' + data[$(this).data('field')][i]['display_name'] + '">' + data[$(this).data('field')][i]['display_name'] + '</a>');
                     }
                     break;
                 case 'dataset_category':
