@@ -1,0 +1,1300 @@
+/*
+Theme Name:      WP Open Data Toronto
+Description:     Theme created to integrate CKAN with WP
+Author:          Sidra Mahmood & Yizhao Tan
+Template:        wp-bootstrap-starter
+Version:         1.2.0
+-------------------------------------------------------------- */
+
+/* Index
+===========================
+1. Global Styles and Resets
+2. Typography / Buttons
+3. Layout / Breadcrumbs / Pagination
+4. Header and Navigation
+5. Footer
+6. Homepage Template
+7. Plain Page Template
+8. Form Fields
+9. Catalogue Page Template
+10. Blog Index Template
+11. Dynamic Fields / Accordion
+12. Ninja Forms Overrides
+13. Tablepress Overrides
+14. Device-specific Styles
+===========================
+*/
+
+/* Accessible Focus Indicators */
+/* Default */ *:focus{outline-style: solid; outline-color: #cccccc; outline-width: 2px}
+/* COT Header */ #super-header a:focus{outline-style: solid; outline-color: #222222; outline-width: 1px;text-decoration: underline;}
+/* Text */ #content a:focus{text-decoration: underline; border: 0;}
+/* Buttons */ button:focus, a.btn:focus{background: #222222 !important;}
+/* Breadcrumbs and Sidebar */ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{background: #FFEB9C;}
+/* Tables */ .table a:focus{background: #FFEB9C;}
+
+dd {
+    word-wrap: break-word;
+}
+
+ul.pagination li{
+  padding: 0;
+  margin: 0;
+}
+ul.pagination li a{
+    background: #f4f4f4;
+    font-size: 16px !important;
+    line-height: 20px;
+}
+ul.pagination a:link,
+ul.pagination a:visited{
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #175787;
+  border-radius: 0;
+  height: 30px
+}
+ul.pagination a:hover{
+  font-weight: 500;
+  font-family: 'Roboto';
+  color: #fff;
+  background: #175787;
+  border: 1px solid #175787
+}
+
+a.navbar-brand {
+    font-size: 25px;
+    margin: 8px 50px 12px 0;
+    color: #185688 !important;
+    font-weight: 500;
+}
+
+#temporary-notice {
+    font-size: 12px;
+    font-weight: 600;
+}
+#temporary-notice a:link,
+#temporary-notice a:visited{
+    color: #000000
+}
+#masthead .navbar-nav > li > a:focus, #masthead .navbar-nav > li > a:hover {
+    text-decoration: underline;
+}
+@media (max-width:1700px){
+    #toc_container{position: initial !important;}
+}
+
+@media (max-width: 767px) {
+
+
+.hero .jumbotron .heading {
+    font-size: 24px !important;
+}
+.jumbotron.text-center {
+    padding: 30px 20px 50px 20px !important;
+}
+section#about{
+    padding: 0 !important;
+}
+p{
+    font-size: 13px !important;
+}
+section#about h2{
+    margin-top: 40px;
+}
+a.btn.btn-md {
+    float: left;
+    margin: 2px 0 3px 0;
+}
+section#data-stories .jumbotron {
+    height: 330px !important
+}
+#pages h2 {
+    margin-top: 30px;
+    text-align: center;
+}
+.time{
+    text-align: left !important
+}
+}
+
+#data-stories h3 {
+    font-size: 48px;
+    margin: 0 20px 20px 20px;
+}
+/**
+1. Global Styles and Resets
+**/
+.time{
+    text-align:right;
+}
+body, html, *{padding: 0;margin:0;}
+li{
+    font-size: 14px;
+    line-height: 20px;
+    /* margin: 0 15px */
+}
+ul, li{
+    list-style: none;
+    padding: 0;
+}
+a{
+    color: #155687;
+}
+.code{
+
+    padding: 15px 20px 20px 20px;
+    font-family: monospace;
+    background: #f4f4f4;
+    color: #666666;
+    white-space: pre-wrap;
+}
+.card-block{
+    padding: 0;
+}
+.card-img-top img{
+	height: 300px;
+	box-shadow: 0px 0px 2px #ccc;
+}
+/**
+2. Typography / Buttons
+**/
+h1,h2,h3,h4,h5,h6{padding: 0; margin: 0;}
+h1 {
+    font-size: 19px;
+    font-weight: 300;
+    color: #666666;
+    padding: 0 0 12px 0;
+}
+h1.entry-title {
+    font-size: 20px;
+    font-weight: 300;
+}
+h2{
+    font-size: 22px;
+    margin: 0 0 6px 0;
+}
+button.btn.btn-default {
+    background: #1594a3;
+}
+
+button.btn{
+    border: 0;
+    background: #0e626b;
+    color: #fff;
+    border-radius: 0;
+    font-weight: bold;
+}
+.btn{
+    border-radius: 0px;
+}
+a.btn.btn-md {
+    color: #ffffff;
+    background: #165788;
+}
+/**
+3. Layout / Breadcrumbs / Pagination
+**/
+#crestashareiconincontent{
+        float: right;
+    margin-top: -20px;
+}
+#crestashareicon{
+    display: none;
+}
+#pages{
+    padding: 40px 0;
+}
+.breadcrumb {
+    padding: .75rem 0 0 0;
+    margin-bottom: 1rem;
+    list-style: none;
+    background: 0 !important;
+    border-radius: .25rem;
+    font-weight: 500;
+    font-size: 14px;
+}
+.breadcrumb a:link{
+    text-decoration: underline;
+}
+
+.wp-pagenavi a, .wp-pagenavi span {
+    text-decoration: none;
+    border: 0;
+    padding: 0;
+    margin: 0 5px 0 0;
+}
+.wp-pagenavi span.current {
+    font-weight: bold;
+    margin-left: 11px;
+}
+.background h1 {
+    color: #fff;
+    display: block;
+    position: absolute;
+    left: 40px;
+    font-size: 40px;
+    bottom: 30px;
+    font-weight: 300;
+    text-align: left
+}
+.background {
+    background: rgba(34, 34, 34, 0.54);
+    color: #fff;
+    padding: 0;
+    height: 20rem;
+}
+.card-header {
+    padding: 0;
+    margin-bottom: 0;
+    background: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.card{
+    border: 0;
+    border-radius: none;
+    }
+.card h4 a {
+    display: block;
+    padding: 15px;
+}
+.page-content .large.heading {
+font-size: 218px;
+text-align: center;
+color: #0097a6;
+}
+.page-content .subtext {
+text-align: center;
+font-size: 52px;
+margin: 0 0 210px 0;
+}
+
+/**
+4. Header and Navigation
+**/
+
+.social-media img {
+width: 19px !important;
+    margin: 2px 0 0 0;
+}
+#masthead .navbar-nav > li > a {
+    color: #353535;
+    padding: 8px;
+}
+header#masthead {
+    box-shadow: none !important;
+    margin-bottom: 0;
+}
+button.navbar-toggler{
+        position: absolute;
+    right: 0;
+    top: 17px;
+}
+
+a.navbar-brand img {
+    width: 102px;
+    margin: 0 0 0 -8px;
+}
+  .navbar{padding: 0 !important;}
+.navbar-light .navbar-toggler {
+    color: rgb(0, 0, 0) !important;
+    border: 1px solid #cccccc !important;
+}
+
+.profile-photo img {
+    margin: 15px 0;
+    max-width: 100%;
+}
+p.biography{
+    font-size: 14px;
+}
+
+/**
+5. Footer
+**/
+
+#footer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #165788;
+}
+nav#footer-nav img {
+    display: inline-block;
+    margin-right: 5px;
+}
+nav#footer-nav{
+    text-align: left;
+    background: #165788;
+}
+nav#footer-nav a{
+    display: inline;
+    width: 100%;
+    color: #ffffff;
+    background: #165788;
+}
+nav#footer-nav a:visited{
+    color: #ffffff;
+    background: #165788;
+}
+nav#footer-nav li a:visited{
+    color: #ffffff;
+    background: #165788;
+}
+nav#footer-nav li a{
+    background: #165788;
+    color: #ffffff;
+}
+footer#footer li a:visited{
+    color: #ffffff;
+    background: #165788;
+}
+footer#footer a:link{
+    color: #ffffff;
+    background: #165788;
+}
+footer#footer p a:visited{
+    color: #ffffff;
+    background: #165788;
+}
+footer#footer p a:link{
+    color: #ffffff;
+    background: #165788;
+}
+footer#footer{
+    background: #165788;
+}
+#footer-nav img {
+    width: auto;
+    max-width: 3.25rem;
+    height: 1rem;
+}
+#footer-nav a:not(:last-of-type) {
+    margin-right: 1.5em;
+}
+.pre-footer{
+    margin-top: 80px;
+}
+
+
+/**
+6. Homepage Template
+**/
+
+.hero .jumbotron{
+    padding: 8rem 2rem 10rem 2rem;
+}
+.jumbotron .heading{
+    padding: 15px 0;
+    font-weight: lighter
+}
+#content h2{
+    margin: 0 0 22px 0;
+}
+#about p {
+    padding-top: 8px;
+    padding-bottom: 23px;
+}
+.home section{
+    padding: 0;
+    margin: 20px 0 40px 0;
+}
+ul.newsfeed{
+    width: 100%;
+    margin-top: 12px
+}
+ul.newsfeed li {
+    padding: 4px 0;
+    margin: 0;
+    font-size: 13px;
+    border-bottom: 1px solid #f4f4f4;
+}
+ul.newsfeed li:last-child{
+    border-bottom: none;
+}
+#super-header {
+    background: #165788;
+    padding: 6px 0;
+}
+#super-header img {
+    width: 72px;
+    height: 22px;
+}
+section#about {
+    padding: 50px 0;
+}
+.hero .jumbotron {
+    background-image: url(/wp-content/uploads/2018/03/city.jpeg);
+    background-size: cover;
+    background-position: 50% 73%;
+}
+div[id*="ajaxsearchlite"] {
+    box-shadow: none !important;
+}
+.hero .jumbotron .heading{
+    padding: 15px 0;
+    font-weight: normal;
+    color: #fff;
+    font-size: 32px;
+    text-shadow: 1px 1px 6px #222;
+}
+section#data-stories{
+    color: #ffffff;
+    background: #000000;
+}
+section#data-stories .jumbotron {
+    height: 500px;
+}
+section#data-stories .jumbotron .heading{
+    padding: 15px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+.background-video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #000;
+    overflow: hidden
+}
+.jumbotron h2 {
+    font-size: 42px;
+    color: #fff;
+}
+.jumbotron button.btn {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 0;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+.jumbotron{
+    position: relative;
+    overflow: hidden
+}
+.jumbotron iframe{
+    opacity: 0.4;
+    margin-top: -100px;
+}
+.hero .jumbotron button.btn {
+    background: #117b86;
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+.hero input.form-control {
+    border: 0;
+    border-radius: 0;
+}
+.jumbotron{
+    border-radius: 0;
+}
+
+/**
+7. Plain Page Template
+**/
+
+#content.site-content {
+    padding-bottom: 0;
+    padding-top: 0px;
+}
+
+.page-template-default .content-area h3{
+    padding: 0;
+    margin: 0px 0 10px 0;
+    font-weight: 500;
+}
+
+#content{
+    background: #ffffff;
+    border-top: 1px solid #f4f4f4;
+    padding: 20px 0 0 0
+}
+#content p, #content li {
+    font-size: 16px;
+    line-height: 24px;
+}
+.home #content{
+    background :#ffffff
+}
+.main-content h3 {
+    font-size: 19px;
+    font-weight: 400;
+    padding: 0 0 15px 0;
+    margin: 0;
+}
+.main-content p {
+    padding: 0 0 15px 0;
+    margin: 0;
+}
+.main-content ul li {
+    list-style-type: disc;
+}
+.main-content ol li{
+    list-style-type: decimal;
+    margin-left: 8px !imortant;
+}
+.main-content a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.meta-box {
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    padding: 20px 20px 5px 20px;
+    border: 1px solid #ccc;
+    margin: 0 0 10px 0;
+}
+.meta-box h4 {
+    font-size: 16px;
+    padding: 0 0 4px 0;
+    margin: 0;
+    }
+.meta-box p {
+    font-size: 14px;
+    line-height: 17px;
+    padding: 0 0 10px 0;
+}
+
+/**
+8. Form Fields
+**/
+select{
+    border-radius: 0 !important;
+}
+input{
+    border-radius: 0 !important;
+}
+/** Search Results **/
+.search-results-content {
+    width: 100%;
+    display: block;
+    border: 1px solid #dddddd;
+    margin-top: -1px;
+    padding: 30px;
+}
+.search-results-content a {
+    text-decoration: none;
+}
+.search-results-content a p{
+    color: #666;
+}
+.search-results-content h3 {
+    font-weight: 400;
+    margin: 0 0 6px 0;
+}
+.search-results-content p {
+    font-size: 15px;
+}
+.sidebar {
+    padding: 0;
+    border: 1px solid #ccc;
+}
+ul.page-list {
+    margin: 0;
+}
+ul.page-list a {
+    font-weight: 600;
+    padding: 10px 11px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+ul.page-list li ul li a{
+    padding: 8px 12px 8px 26px;
+    margin: 0;
+}
+ul.page-list li ul li:last-child a{
+    border: 0;
+}
+ul.page-list li{
+    padding: 0;
+    margin: 0;
+}
+ul.page-list li ul li:before {
+    content: '\00bb';
+    position: absolute;
+    padding: 8px 12px;
+}
+#sidebar-search{
+    background: transparent;
+    color: #bfbfbf;
+    margin-left: -40px;
+}
+#ajaxsearchlite1 .probox .proinput input{
+    font-size: 20px !important;
+}
+#ajaxsearchlite1 .probox{
+    height: 40px !important;
+}
+#ajaxsearchlite1 .probox .proinput{
+    padding: 5px 5px !important
+}
+
+.probox .promagnifier .innericon svg {
+    fill: rgb(195, 195, 195) !important;
+    width: 60px !important;
+    margin-left: -14px !important;
+    margin-top: 5px !important;
+    height: 78% !important;
+}
+.probox .promagnifier{
+    width: 38px !important;
+    height: 38px !important
+}
+
+#ajaxsearchlite1.probox{
+background-color: #ffffff;
+box-shadow: 0 !important;
+border: 1px solid #ddd;
+}
+
+#ajaxsearchlite1.probox.proinput{
+color:#222222 !important;
+text-shadow: none !important
+}
+
+/**
+9. Catalogue Page Template
+**/
+a.dataset-tags{
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+.data-type-filter ul li {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+}
+.data-type-filter h2{
+margin-top: 40px;
+}
+a.dataset-tags:after{
+    content: ', ';
+    display: inline-block;
+    margin-left: -2px;
+}
+a.dataset-tags:last-child:after{
+    content: '';
+}
+.about-dataset .title{
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #666666;
+}
+
+.title h3 {
+    font-size: 21px;
+    text-transform: none;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+}
+
+.about-dataset .value {
+    font-size: 14px;
+    color: #222222;
+    font-weight: 400;
+    margin: 6px 0 10px 0;
+}
+.about-dataset .sm{
+    font-size: 12px;
+}
+.about-dataset .value a:link,
+.about-dataset .value a:visited{
+    color: #245484;
+}
+.about-dataset .lg{
+    font-size: 24px;
+}
+
+.about-dataset hr{
+    padding: 0 0 10px 0;
+}
+#description-dataset{
+    margin:0 0 20px 0;
+}
+#description-dataset h4{
+    font-weight: 400;
+    font-size: 22px;
+}
+#dataset-preview,
+#explore-dataset,
+#download-datset{
+    margin: 0 0 40px 0;
+}
+#explore-dataset a.btn {
+    color: #fff;
+    background: #165788;
+}
+#description-dataset hr{
+    margin: 0 0 20px 0;
+}
+.dataset-download{
+    margin: 0 0 40px 0;
+}
+table.border{
+    border: 1px solid #eee;
+}
+.table{
+    margin-bottom: 35px;
+}
+.content-area #columns-dataset h3 {
+    padding: 0;
+    margin: 0;
+}
+.content-area #columns-dataset h3 a:link,
+.content-area #columns-dataset h3 a:visited{
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+#download-dataset h3 a:link,
+#download-dataset h3 a:visited{
+    padding: 0 !important;
+    margin: 0;
+    display: block;
+}
+
+.home #pages img{
+    margin-bottom: 12px;
+}
+.banner{
+    background: #000000;
+    height: 20rem;
+    margin: 0 0 20px 0;
+    text-align: center;
+    padding: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.table-list .row {
+    border: 1px solid #ccc;
+    background: #ffffff;
+    padding: 8px 12px;
+    margin:  -1px 0 0 0;
+    transition: all .2s ease-in-out;
+}
+.table-list li:nth-child(even){
+    background: #f4f4f4;
+}
+.table-list li:hover{
+    transform: scale(1.02);
+    border: 1px solid #ccc;
+}
+.table-list{
+    display: block;
+    margin: 12px 0;
+}
+.table-list h2 a:visited,
+.table-list h2 a:link{
+    color: #155687 !important;
+}
+.btn-secondary:hover {
+    color: #ffffff;
+    background-color: #0e626b;
+    border-color: none
+}
+.table-list h2 a:hover{
+    text-decoration: underline !important;
+}
+.table-list h2 {
+    padding: 12px 0 0 0;
+}
+.table-list li h3 {
+    font-size: 18px;
+    margin: 12px 0 12px 0;
+}
+.table-list a h3 {
+    color: #155687;
+    font-weight: 500;
+}
+.table-list p {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 10px 0
+}
+.attributes p {
+    font-size: 11px !important;
+    padding: 17px 0 0 0;
+    line-height: 12px;
+    margin-bottom: -6px;
+}
+.category-filter li, .format-filter li, .division-filter li{
+    margin: 0;
+    font-weight: 500;
+    line-height: 23px;
+}
+.category-filter {margin-top: 22px;}
+ul.tag-list li {
+    border: 0;
+    display: inline-block;
+    font-size: 15px;
+    padding: 2px 7px;
+    margin: 0 3px 4px 0;
+    color: #ffffff;
+    background: #0e626b;
+    border-radius: 5px;
+}
+.table-list ul.tag-list li a:link,
+.table-list ul.tag-list li a:visited{
+    color: #ffffff;
+}
+ul.tag-list li:hover{
+    transform: none;
+    border: 0;
+}
+ul.tag-list li.autocad{
+    background-color: #1e617d;
+}
+ul.tag-list li.csv{
+    background-color: #1b6f3f;
+}
+ul.tag-list li.erdas-imagine{
+    background-color: #0c5688;
+}
+ul.tag-list li.esri-shapefile{
+    background-color: #025AA3;
+}
+ul.tag-list li.excel{
+    background-color: #34495e;
+}
+ul.tag-list li.geojson{
+    background-color: #a95f1d;
+}
+ul.tag-list li.google-spreadsheet{
+    background-color: #88170b;
+}
+ul.tag-list li.ivt{
+    background-color: #34495e;
+}
+ul.tag-list li.json{
+    background-color: #795332;
+}
+ul.tag-list li.multipatch{
+    background-color: #105a8a;
+}
+ul.tag-list li.sketchup{
+    background-color: #03632c;
+}
+ul.tag-list li.wgs84{
+    background-color: #035388;
+}
+ul.tag-list li.xml{
+    background-color: #9b59b6;
+}
+ul.tag-list li.pdf{
+    background-color: #222222;
+}
+.formats-available{
+    font-size: 10px;
+    margin: 12px 0;
+}
+
+/**
+10. Blog Index Template
+**/
+
+.featured-banner img.img-responsive {
+    margin: 0 0 20px 0;
+}
+.featured-banner h3{
+    font-size: 1.4rem;
+}
+.featured-banner .attributes{
+    font-size: 13px;
+}
+.featured-content {
+    padding-bottom: 2px;
+    margin-bottom: 8px;
+}
+.excerpt p{
+    line-height: 1.4em
+}
+.excerpt{
+    font-size: 14px;
+    line-height: 22px;
+    margin: 12px 0 0 0;
+}
+
+.excerpt a{
+    color: #666;
+}
+.excerpt a:hover{
+    text-decoration: none
+}
+.showcase-thumbnail {
+    padding: 0 0 20px 0;
+    background: #222;
+}
+.showcase-thumbnail img{
+    margin-bottom: 20px;
+
+}
+ul.post-list .showcase-thumbnail{
+    height: 120px;
+}
+.showcase-thumbnail {
+    height: 120px;
+    background-size: 100%;
+    background-position: 50% 50%;
+    transition: all .3s ease-in-out;
+    border: 1px solid #ddd;
+}
+.showcase-thumbnail:hover{
+    background-size: 110%;
+}
+.page-template-blog-template h4{
+    font-size: 20px;
+    margin: 0;
+}
+.single-post h5 {
+    font-size: 18px;
+    margin: 20px 0;
+    color: #5ac1a4;
+}
+.single-long-post{
+    margin: 0 0 25px 0;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0 0 28px 0;
+}
+.single-long-post a p{
+    color: #222;
+}
+.page-template-blog-template p a{
+    color: #666666;
+}
+.page-template-blog-template p a:hover{
+    color: #666666;
+    text-decoration: none
+}
+.page-template-blog-template a:hover{
+    text-decoration: none
+}
+.page-template-blog-template p{
+    margin: 15px 0 25px 0;
+    font-size: 15px;
+}
+.blog-posts-sidebar h3 {
+    padding: 0;
+    margin: 0;
+}
+.single-post h4 {
+    font-size: 18px;
+    margin: 40px 0;
+    border-top: 1px solid gainsboro;
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+    text-transform: uppercase;
+    color: #666;
+}
+
+ul.post-list {
+    padding: 0;
+    margin: 0
+}
+ul.post-list li{
+    font-weight: 500;
+}
+
+.blog-sidebar {
+    padding: 0;
+}
+.page-template-blog-template h3 {
+    font-size: 18px;
+}
+.blog-posts-sidebar{
+    margin: 0 0 40px 0;
+}
+ul.post-list li {
+    font-weight: 500;
+    padding: 0 0 6px 0;
+    margin: 0;
+}
+.post-list li:first-child{
+    border: none;
+}
+.post-template-default .show-full-length li {
+    font-size: 15px;
+    line-height: 27px;
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+.post-template-default .show-full-length img{
+    margin: 0 0 20px 0;
+}
+.page-template-blog-template .attributes {
+    font-size: 14px;
+    font-weight: 500;
+}
+/**
+11. Dynamic Fields / Accordion
+**/
+#accordion{border-top: 1px solid #ddd;}
+#collapseOne img {
+    margin-bottom: 20px;
+}
+
+#collapseOne,
+#collapseTwo,
+#collapseThree,
+#collapseFour,
+#collapseFive{
+    padding: 40px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.tablepress{
+    border: 1px solid #dddddd !important;
+    margin: 15px 0;
+}
+.dataTables_scrollBody {
+    border-right: 1px solid #ddd;
+}
+.card-header:first-child {
+    border-radius: 0;
+}
+.card-header h4 a{
+     background: #165788;
+    color: #fff;
+}
+.card-header h4 a.collapsed{
+   background: #fff !important;
+   color: #165788;
+}
+h4.card-title {
+    font-size: 20px;
+}
+.accordion-arrow {
+    display: inline-block;
+    float: right;
+    margin: 0 5px;
+}
+
+span.fa.fa-chevron-down {
+    transform: rotate(180deg);
+    /* Firefox */
+    -moz-transition: all 1s ease;
+    /* WebKit */
+    -webkit-transition: all 1s ease;
+    /* Opera */
+    -o-transition: all 1s ease;
+    /* Standard */
+    transition: all 1s ease;
+}
+.collapsed span.fa.fa-chevron-down {
+    transform: rotate(0deg);
+    /* Firefox */
+    -moz-transition: all 1s ease;
+    /* WebKit */
+    -webkit-transition: all 1s ease;
+    /* Opera */
+    -o-transition: all 1s ease;
+    /* Standard */
+    transition: all 1s ease;
+}
+
+/**
+12. Ninja Forms Adaption
+
+.nf-breadcrumbs li a {
+    display: inline-block;
+    margin-right: 0;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 1px #ccc inset;
+    text-decoration: none;
+    padding: 22px 0;
+    width: 100%;
+    text-align: center;
+    color: #666;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+}
+.nf-breadcrumbs li {
+    float: left;
+    width: calc(100% / 6);
+}
+.nf-breadcrumbs li.active a,
+.nf-breadcrumbs li a:hover{
+    font-weight: normal;
+    background: #155687;
+    color: #fff;
+    height: 62px
+}
+.nf-breadcrumbs li.active a:after,
+.nf-breadcrumbs li:hover a:after{
+    content: '';
+    position: relative;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 15px;
+    background: #155687;
+    top: 13px;
+    display: block;
+    left: calc(50% - 8px);
+}
+div#nf-field-19-container {
+    font-size: 16px;
+    color: #222222;
+    font-weight: 300;
+    text-align: center
+}
+.nf-field-label label {
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    color: #222222;
+}
+.nf-field-label {
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    padding: 15px 0 0;
+}
+.nf-field-description p {
+    font-size: 14px;
+    color: #666;
+}
+.nf-progress-container{
+        display: none; /* Temporarily Hide
+}
+#nf-field-54-wrap blockquote {
+    border: 2px solid #bf271c;
+    border-radius: 4px;
+    padding: 7px;
+    color: #c12f24;
+    width: 310px;
+}
+#nf-field-20-wrap {
+    text-align: center;
+    margin: 0 auto;
+    width: 60%;
+    padding: 20px 20px;
+}
+
+#nf-field-20-wrap  .nf-field-label{
+    border: 0
+}
+#nf-field-20-wrap .nf-field-description p:last-child {
+    margin: 0;
+    padding: 25px 0;
+}
+.nf-fu-progress {
+    margin-top: 40px;
+}
+
+.nf-mp-header {margin-top: -112px;}
+.nf-mp-body{padding: 0 15%;}
+
+input.nf-next, input.nf-previous {
+    padding: 10px 20px;
+    border: 0;
+    background: #025aa5;
+    color: #ffffff;
+    margin: 0 20px;
+    font-weight: bold;
+}
+.list-checkbox-wrap .nf-field-element li {
+    padding-left: 10px;
+    margin: 0 0 12px 5px !important;
+    text-indent: initial !important;
+    width: calc(100% / 3.1);
+    display: inline-block;
+    font-size: 13px;
+}
+**/
+blockquote.error-state{
+    text-align: center;
+    width: 100%;
+}
+.nf-mp-header h3 {
+    text-align: center;
+    font-weight: 100;
+    font-size: 23px;
+    padding: 30px 0;
+}
+.nf-field-element h2 {
+    font-size: 19px;
+}
+
+/* 13. Tablepress Overrides */
+
+table.tablepress{
+    border: 1px solid #ddd;
+    margin: 0;
+}
+div#data-attributes {
+    margin: 15px 0;
+}
+table.tablepress thead th {
+    background-color: #ffffff;
+    color: #025aa5;
+    font-weight: 500;
+}
+
+#mapid {height: 200px;}
+
+table.download-table {
+    border: 1px solid #ddd;
+}
+.download-table th {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    font-weight: 500;
+    color: #165788;
+}
+.download-table tbody tr td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #222;
+}
+.download-table tbody tr:nth-child(even) {
+    background: #f4f4f4;
+}
+
+#collapseFive h4{
+    margin: 0 0 12px 0;
+}
+.share_buttons_1 {
+    display: none;
+}
+.alert{
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+}
+.explore-line{
+    border-bottom: 1px solid #ddd;
+    margin: 0px 15px 29px 15px;
+}
+.explore-line:last-child{
+    border-bottom: 0;
+}
+
+/** Device Specific **/
+
+/** Change how the toggle menu looks on mobile **/
+@media (max-width: 991px) {
+    ul#menu-homepage li{
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0 15px;
+        margin: -1px 0 0 0px;
+        text-align: center;
+        border: 1px solid #ccc;
+        background: #fbfbfb;
+        font-weight: 500;
+    }
+}
