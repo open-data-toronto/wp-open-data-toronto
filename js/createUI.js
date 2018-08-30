@@ -164,9 +164,8 @@ var Catalogue = (function() {
             var search = new URLSearchParams(window.location.search).get('search');
             if (!!search) {
                 filter['search'] = ['title:"' + search + '"', 'notes:"' + search + '"'];
+                $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>');
             }
-
-            $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>')
         }
 
         // Logic for checkbox filters
