@@ -76,7 +76,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                   <!-- Primary Navigation -->
-                  <!-- <?php
+                  <?php
                   wp_nav_menu([
                     'theme_location'  => 'primary',
                     'container'       => 'li',
@@ -88,7 +88,7 @@
                     'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
                     'walker'          => new wp_bootstrap_navwalker()
                   ]);
-                  ?> -->
+                  ?>
 
                   <!-- Search -->
                   <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get" aria-label="Search Open Data Website">

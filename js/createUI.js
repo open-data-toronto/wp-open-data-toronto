@@ -42,7 +42,7 @@ var Catalogue = (function() {
             // Build the HTML for each of the datasets and append to the table
             var ele = '<div class="row">' +
                         '<div class="col-md-8">' +
-                          '<h2><a href="/dataset#' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                          '<h2><a href="/package#' + row['name'] + '">' + row['title'] + '</a></h2>' +
                           row['excerpt'] +
                           '<div class="formats-available">' +
                             '<h3 class="sr-only">Formats Available for ' + row['title'] + '</h3>' +
