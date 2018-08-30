@@ -33,53 +33,53 @@
 <?php get_header(); ?>
 
   <section class="content-area">
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-md-12">
-  				<!-- Breadcrumbs -->
-  				<nav class="breadcrumb" aria-label="breadcrumbs">
-  					<a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
-  					<a class="breadcrumb-item"><?php the_title(); ?></a>
-  				</nav>
-  				<!-- End breadcrumbs -->
-  			</div>
-  		</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Breadcrumbs -->
+          <nav class="breadcrumb" aria-label="breadcrumbs">
+            <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
+            <a class="breadcrumb-item"><?php the_title(); ?></a>
+          </nav>
+          <!-- End breadcrumbs -->
+        </div>
+      </div>
 
-  		<div class="row">
-  			<div class="col-md-12">
-  				<div class="banner" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>) !important">
-  					<div class="background">
-  						<h1><?php the_title(); ?></h1>
-  					</div>
-  				</div>
-  			</div>
-  		</div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="banner" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>) !important">
+            <div class="background">
+              <h1><?php the_title(); ?></h1>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  		<div class="row">
-  			<div class="col-md-3">
-  				<div class="hide-full-length">
-  					<!-- Call General Sidebar // sidebar.php -->
-  					<?php get_sidebar(); ?>
-  				</div>
-  			</div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="hide-full-length">
+            <!-- Call General Sidebar // sidebar.php -->
+            <?php get_sidebar(); ?>
+          </div>
+        </div>
 
-  			<div class="col-md-9">
-  				<div class="show-full-length">
-  					<div class="main-content">
-  					<!-- Query page content-->
-  					<?php
+        <div class="col-md-9">
+          <div class="show-full-length">
+            <div class="main-content">
+            <!-- Query page content-->
+            <?php
             if ( have_posts() ) :
-  					  while ( have_posts() ) :
+              while ( have_posts() ) :
                 the_post();
                 the_content();
               endwhile;
             endif;
             ?>
-  					</div>
-  				</div>
-  			</div>
-  		</div>
-  	</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
-<?php get_footer(); ?>
+<?php get_footer();
