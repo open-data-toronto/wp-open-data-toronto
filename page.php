@@ -4,8 +4,7 @@
 <?php
 $something = types_render_field( 'hide-sidebar-page');
 $something2 = types_render_field( 'hide-sidebar-page', array( 'value'=>1 ) );
-echo "<script>console.log(" . $something . + ");</script>";
-echo "<script>console.log(" . $something2 . + ");</script>";
+echo "<script>console.log(" . $something . "); console.log(" . $something2 . ");</script>";
 ?>
 <?php if ( types_render_field( 'hide-sidebar-page', array( 'value'=>1 ) ) ) : ?>
 <!-- Conditional Display for Sidebar on page.php // Do not remove -->
