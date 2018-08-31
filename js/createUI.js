@@ -9,7 +9,7 @@ var Catalogue = (function() {
     /* ========= Global variables ========= */
 
     var $ = jQuery.noConflict();
-    var settings = $.extend({}, DEFAULT, {
+    var config = $.extend({}, DEFAULT, {
         cataloguePages: 0,
         currentPage: 0,
         datasetsPerPage: 5,
@@ -21,7 +21,7 @@ var Catalogue = (function() {
 
     function buildCatalogue(response) {
         var data = response['result'];
-        settings['cataloguePages'] = Math.ceil(data['count'] / settings['datasetsPerPage']);
+        config['cataloguePages'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
         // Iterate over each of the datasets within the returned results
         for (var i = 0; i < data['results'].length; i++) {
@@ -73,11 +73,11 @@ var Catalogue = (function() {
         }
 
         // Build pagination nav if number of datasets in the catalogue is more than the datasetsPerPage limit
-        if (data['count'] > settings['datasetsPerPage']) {
+        if (data['count'] > config['datasetsPerPage']) {
             $('#nav-catalogue .page-remove').remove();
 
             // Build the pages navs
-            for (var i = 0; i < settings['cataloguePages']; i++) {
+            for (var i = 0; i < config['cataloguePages']; i++) {
                 var pageNumber = i + 1 + '';
                 $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
                                                            '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page=' + i + '>' +
@@ -87,12 +87,12 @@ var Catalogue = (function() {
             }
 
             // Controls the css for the pagination nav buttons
-            switch(settings['currentPage']) {
+            switch(config['currentPage']) {
                 case 0:
                     $('#nav-catalogue .page-keep').first().addClass('disabled');
                     $('#nav-catalogue .page-keep').last().removeClass('disabled');
                     break;
-                case (settings['cataloguePages'] - 1):
+                case (config['cataloguePages'] - 1):
                     $('#nav-catalogue .page-keep').last().addClass('disabled');
                     $('#nav-catalogue .page-keep').first().removeClass('disabled');
                     break;
@@ -100,7 +100,7 @@ var Catalogue = (function() {
                     $('#nav-catalogue .page-keep').removeClass('disabled');
             }
 
-            $('#nav-catalogue li:nth-child(' + (settings['currentPage'] + 2) + ')').addClass('active'); // +1 for index starting at 1 and +1 for the previous page element
+            $('#nav-catalogue li:nth-child(' + (config['currentPage'] + 2) + ')').addClass('active'); // +1 for index starting at 1 and +1 for the previous page element
 
             // Event function needs to be re-created as the page number nav buttons are recreated each time the catalogue is loaded
             $('#nav-catalogue .page-remove a').on('click', function() {
@@ -110,7 +110,7 @@ var Catalogue = (function() {
             $('#nav-catalogue').show();
         }
 
-        if (settings['isInitializing']) buildUI();
+        if (config['isInitializing']) buildUI();
     }
 
     var buildUI = function() {
@@ -134,21 +134,21 @@ var Catalogue = (function() {
         $('#nav-catalogue .page-keep a').on('click', function() {
             switch($(this).data('page')) {
                 case '+1':
-                    var page = settings['currentPage'] + 1;
+                    var page = config['currentPage'] + 1;
                     break;
                 case '-1':
-                    var page = settings['currentPage'] - 1;
+                    var page = config['currentPage'] - 1;
                     break;
                 default:
                     var page = $(this).data('page');
             }
 
             // Refresh catalogue if page number is valid
-            if (page >= 0 && page < settings['cataloguePages']) loadCatalogue(page);
+            if (page >= 0 && page < config['cataloguePages']) loadCatalogue(page);
         });
 
         // Set isInitializing to false to prevent duplication of events
-        settings['isInitializing'] = false;
+        config['isInitializing'] = false;
     }
 
     function loadCatalogue(pageNumber=0) {
@@ -156,11 +156,11 @@ var Catalogue = (function() {
         $('.table-list').empty();
         $('#nav-catalogue').hide();
 
-        settings['currentPage'] = pageNumber;
+        config['currentPage'] = pageNumber;
 
         var filter = {};
 
-        if (settings['isInitializing']) {
+        if (config['isInitializing']) {
             var search = new URLSearchParams(window.location.search).get('search');
             if (!!search) {
                 filter['search'] = ['title:"' + search + '"', 'notes:"' + search + '"'];
@@ -191,12 +191,12 @@ var Catalogue = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: settings['ckan'] + 'package_search',
+            url: config['ckan'] + 'package_search',
             data: {
                 'q': q.join(' AND '), // Merge searches with multiple fields by AND
-                'rows': settings['datasetsPerPage'],
+                'rows': config['datasetsPerPage'],
                 'sort': 'name asc',
-                'start': pageNumber * settings['datasetsPerPage']
+                'start': pageNumber * config['datasetsPerPage']
             }
         }).done(buildCatalogue);
     }
@@ -205,7 +205,7 @@ var Catalogue = (function() {
         var ownerDivison = "311 Toronto, Accounting Services, Children's Services, City Clerk's Office, City Manager's Office, City Planning, Corporate Finance, Court Services, Economic Development and Culture, Employment and Social Services, Engineering and Construction Services, Environment and Energy, Equity, Diversity and Human Rights, Facilities Management, Financial Planning, Fire Services, Fleet Services, Human Resources, Information and Technology, Lobbyist Registrar, Long-Term Care Home and Services, Municipal Licensing and Standards, Paramedic Services, Parks, Forestry and Recreation, Public Health, Purchasing and Materials Management, Revenue Services, Shelter, Support and Housing Administration, Social Development, Finance and Administration, Solid Waste Management Services, Strategic and Corporate Policy, Toronto Building, Toronto Parking Authority, Toronto Police Services, Toronto Public Library, Toronto School District School Board, Toronto Transit Commission, Toronto Water, Transportation Services".split(', ')
 
         for (var i in ownerDivison) {
-            // if (i > settings['filterSize']) break;
+            // if (i > config['filterSize']) break;
             if (i != 35 && i != 27) continue; // tmp code for testing
             $('.filter-division ul').before('<div class="checkbox checkbox-filter">' +
                                               '<label><input type="checkbox" data-field="owner_division" value="' + ownerDivison[i] + '">&nbsp;' + ownerDivison[i] + '</label>' +
@@ -231,18 +231,18 @@ var Dataset = (function() {
     /* ========= Global variables ========= */
 
     var $ = jQuery.noConflict();
-    var settings = $.extend({}, DEFAULT);
+    var config = $.extend({}, DEFAULT);
 
     /* ========= Private methods ========= */
 
     function buildFeatures() {
-        if (!settings['package'] || !$('#table-features tbody').is(':empty')) return;
+        if (!config['package'] || !$('#table-features tbody').is(':empty')) return;
 
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: settings['ckan'] + 'datastore_search',
-            data: { 'resource_id': settings['package']['primary_resource'] }
+            url: config['ckan'] + 'datastore_search',
+            data: { 'resource_id': config['package']['primary_resource'] }
         }).done(function(response) {
             var fields = response['result']['fields'],
                 ele = '';
@@ -256,14 +256,14 @@ var Dataset = (function() {
     }
 
     function buildDevelopers() {
-        if (!settings['package']) return;
+        if (!config['package']) return;
 
         if ($('#code-javascript').is(':empty')) {
             var jsSnippet = '$.ajax({\n' +
                             '    dataType: "json",\n' +
                             '    type: "GET",\n' +
-                            '    url: "' + settings['ckan'] + 'package_search",\n' +
-                            '    data: { "q": \'title:"' + settings['package']['title'] + '"\' }\n' +
+                            '    url: "' + config['ckan'] + 'package_search",\n' +
+                            '    data: { "q": \'title:"' + config['package']['title'] + '"\' }\n' +
                             '}).done(function(response) {\n' +
                             '   console.log(response);\n' +
                             '});';
@@ -274,8 +274,8 @@ var Dataset = (function() {
             var pySnippet = 'import requests\n' +
                             'import json\n' +
                             '\n' +
-                            'url = "' + settings['ckan'] + 'package_search"\n' +
-                            'response = requests.get(url, data={ "q": "title:\'' + settings['package']['title'] + '\'" })\n' +
+                            'url = "' + config['ckan'] + 'package_search"\n' +
+                            'response = requests.get(url, data={ "q": "title:\'' + config['package']['title'] + '\'" })\n' +
                             'results = json.loads(response.content)\n' +
                             'print(results)';
             $('#code-python').text(pySnippet);
@@ -283,10 +283,10 @@ var Dataset = (function() {
     }
 
     function buildDownloads() {
-        if (!settings['package'] || !$('#table-resources tbody').is(':empty')) return;
+        if (!config['package'] || !$('#table-resources tbody').is(':empty')) return;
 
-        for (var i = 0; i < settings['package']['resources'].length; i++) {
-            var resource = settings['package']['resources'][i];
+        for (var i = 0; i < config['package']['resources'].length; i++) {
+            var resource = config['package']['resources'][i];
             $('#table-resources tbody').append('<tr>' +
                                                  '<td>' + resource['format'] + '</td>' +
                                                  '<td>' + resource['name'] + '</td>' +
@@ -299,9 +299,9 @@ var Dataset = (function() {
     }
 
     function buildPreview() {
-        if (!settings['package'] || !$('#table-preview tbody').is(':empty')) return;
+        if (!config['package'] || !$('#table-preview tbody').is(':empty')) return;
 
-        var preview = settings['package']['preview_data'].split('\\n');
+        var preview = config['package']['preview_data'].split('\\n');
         for (var i = 0; i < preview.length; i++) {
             var row = preview[i].split(','),
                 element = '<tr>';
@@ -319,7 +319,7 @@ var Dataset = (function() {
         $('#heading-features').on('click', buildFeatures);
         $('#heading-download').on('click', buildDownloads);
         $('#heading-developers').on('click', buildDevelopers);
-        settings['isInitializing'] = false;
+        config['isInitializing'] = false;
     }
 
     function buildDataset(response) {
@@ -350,10 +350,10 @@ var Dataset = (function() {
             }
         });
 
-        if (!settings['package']['preview_data']) $('#heading-preview').hide();
-        if (!settings['package']['primary_resource']) $('#heading-features').hide();
+        if (!config['package']['preview_data']) $('#heading-preview').hide();
+        if (!config['package']['primary_resource']) $('#heading-features').hide();
 
-        if (settings['isInitializing']) buildUI();
+        if (config['isInitializing']) buildUI();
     }
 
     function loadDataset() {
@@ -362,10 +362,10 @@ var Dataset = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: settings['ckan'] + 'package_show',
+            url: config['ckan'] + 'package_show',
             data: data
         }).done(function(response) {
-            settings['package'] = response['result'];
+            config['package'] = response['result'];
             buildDataset(response);
         });
     }
@@ -387,7 +387,7 @@ var Homepage = (function() {
     /* ========= Global variables ========= */
 
     var $ = jQuery.noConflict();
-    var settings = $.extend({}, DEFAULT, {
+    var config = $.extend({}, DEFAULT, {
         datasetsShown: 5
     });
 
@@ -423,9 +423,9 @@ var Homepage = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: settings['ckan'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
+            url: config['ckan'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
             data: {
-                'rows': settings['datasetsShown'],
+                'rows': config['datasetsShown'],
                 'sort': 'metadata_created desc'
             }
         }).done(buildWidget);
