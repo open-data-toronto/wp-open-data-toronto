@@ -38,27 +38,7 @@
 
             <div class="col-md-6 offset-md-1">
               <h2>Latest Datasets</h2>
-              <?php
-              query_posts([
-                'post_type' => 'dataset',
-                'showposts' => 5 ,
-                'orderby'   => 'modified'
-              ]);
-              ?>
-
-              <ul class="newsfeed">
-                <?php while (have_posts()) : the_post(); ?>
-                <li>
-                  <a href="<?php the_permalink() ?>">
-                    <?php the_title(); ?>
-                    <div class="float-right">
-                      <span class="sr-only">Last updated:</span>
-                      <?php echo human_time_diff( get_the_modified_time('U'), current_time('timestamp') ) . ' ago'; ?>
-                    </div>
-                  </a>
-                </li>
-                <?php endwhile;?>
-              </ul>
+              <ul class="newsfeed"></ul>
               <a class="btn btn-md" href="/catalogue/">Explore the Catalogue</a>
             </div>
           </div>
@@ -107,7 +87,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-
+        Homepage.init();
     });
 </script>
 

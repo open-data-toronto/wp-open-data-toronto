@@ -380,3 +380,64 @@ var Dataset = (function() {
         init: init
     }
 } ());
+
+var Homepage = (function() {
+    'use strict';
+
+    /* ========= Global variables ========= */
+
+    var $ = jQuery.noConflict();
+    var settings = $.extend({}, DEFAULT, {
+        datasetsShown: 5
+    });
+
+    /* ========= Private methods ========= */
+
+    function buildWidget(response) {
+        var data = response['result'];
+        for (var i =0; i < data['results'].length; i++) {
+            var row = data['results'][i];
+            var days = Math.round((Date.now() - new Date(row['metadata_modified']).getTime())/(24*60*60*1000));
+
+            var timeSince = 'yesterday';
+            if (days > 1 && days <= 60) {
+                var timeSince = days + ' days ago';
+            } else if (days <= 365) {
+                var timeSince = Math.round(days / 30.) + ' months ago';
+            } else {
+                var timeSince = Math.round(days / 365.) + ' years ago';
+            }
+
+            $('.newsfeed').append('<li>' +
+                                    '<a href="/package#' + row['name'] + '">' +
+                                      row['title'] +
+                                      '<div class="float-right">' +
+                                        '<span class="sr-only">Last updated:</span>' + timeSince +
+                                      '</div>' +
+                                    '</a>' +
+                                  '</li>')
+        }
+    }
+
+    function loadDatasetList() {
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: settings['ckan'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
+            data: {
+                'rows': settings['datasetsShown'],
+                'sort': 'metadata_created desc'
+            }
+        }).done(buildWidget);
+    }
+
+    /* ========= Private methods ========= */
+
+    function init() {
+        loadDatasetList();
+    }
+
+    return {
+        init: init
+    }
+} ());
