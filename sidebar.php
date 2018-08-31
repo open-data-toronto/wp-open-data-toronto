@@ -18,8 +18,8 @@
   </nav>
 </div>
 
-<?php if ( is_active_sidebar( 'left-sidebar' ) ) : ?>
+<!-- <?php if ( is_active_sidebar( 'left-sidebar' ) ) : ?>
   <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
     <?php dynamic_sidebar( 'left-sidebar' ); ?>
   </div><!-- #primary-sidebar -->
-<?php endif; ?>
+<?php endif; ?> -->
