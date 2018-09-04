@@ -44,7 +44,7 @@
                   <h2><span class="fa fa-table"></span>&nbsp; Data Attributes</h2>
                   <dl>
                     <dt>Dataset type<span class="sr-only">: </span></dt>
-                    <dd data-field="dataset_type">[type-of-data]</dd>
+                    <dd data-field="dataset_category">[type-of-data]</dd>
                     <dt>Columns<span class="sr-only">: </span></dt>
                     <dd data-field="shape_columns">[number-of-columns]</dd>
                     <dt>Rows<span class="sr-only">: </span></dt>
