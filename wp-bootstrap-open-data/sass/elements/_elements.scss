@@ -1,0 +1,16 @@
+body {
+	background: $color__background-body; /* Fallback for when there is no custom background color defined. */
+}
+
+@import "lists";
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+}
+
+figure {
+	margin: 1em 0; /* Extra wide images within figure tags don't overflow the content area. */
+}
+
+@import "tables";

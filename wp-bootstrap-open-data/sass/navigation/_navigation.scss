@@ -1,0 +1,64 @@
+header#masthead {
+  box-shadow: 0 0 2px -1px #333;
+  margin-bottom: 0;
+}
+.navbar-brand > a {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  outline: medium none;
+  text-decoration: none;
+}
+.navbar-brand > a:visited, .navbar-brand > a:hover {
+  text-decoration: none;
+}
+div#page-sub-header {
+  padding: 30px 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  position: relative;
+  background-color: #563d7c;
+  color: #cdbfe3;
+  padding: 4rem 15px;
+  text-align: center;
+  font-size: 20px;
+  background-size: cover;
+}
+div#page-sub-header h1{
+  margin-top: 0;
+  color: #fff;
+  margin-bottom: 10px;
+}
+div#page-sub-header p{
+  margin-bottom: 0;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+
+@media screen and (min-width: 768px) {
+  div#page-sub-header h1{
+    font-size: 60px;
+    line-height: 1;
+  }
+  div#page-sub-header {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: left;
+    font-size: 24px;
+  }
+}
+@media screen and (min-width: 992px) {
+  div#page-sub-header p{
+    max-width: 640px;
+  }
+}
+
+
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+@import "links";
+
+/*--------------------------------------------------------------
+## Menus
+--------------------------------------------------------------*/
+@import "menus";

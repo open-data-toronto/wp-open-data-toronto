@@ -1,0 +1,240 @@
+=== WP Bootstrap Starter ===
+
+Tags: blog, custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, sticky-post, full-width-template
+Requires at least: 4.0
+Tested up to: 4.7
+
+Copyright (c) 2016 by Afterimage Designs (https://afterimagedesigns.com/)
+This Theme is distributed under the terms of the GNU GPL.
+
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+== Description ==
+
+The best WordPress starter theme based on the most powerful frameworks in the world:
+    “_s” – by Automattic, the main people behind WordPress development
+    Twitter Bootstrap – the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+    Font Awesome – a full suite of 675+ pictographic icons for easy scalable vector graphics on websites
+
+This theme, like WordPress, is licensed under the GPL. You can use this theme as base for your next WordPress theme project and you are allowed to remove the link at the footer or do whatever you want. Your feedback on how we can continuously improve this WordPress Starter Theme Bootstrap will be highly appreciated.
+
+Page templates
+* Right-sidebar (default page template)
+* Left-Sidebar
+* Full-Width
+* Blank with container
+* Blank without container Page
+
+Other features:
+* Currently using Bootstrap v4.0.0-alpha.6
+* Font Awesome integrated
+* Widgetized footer area
+* WooCommerce ready
+* Compatible with Contact Form 7
+* Compatible with Visual Composer
+* Compatible with Elementor Page Builder
+
+
+This theme will be an active project which we will update from time to time. Check this page regularly for the updates.
+
+== Installation ==
+
+1. In your admin panel, go to Appearance > Themes and click the Add New button.
+2. Click Upload and Choose File, then select the theme's .zip file. Click Install Now.
+3. Click Activate to use your new theme right away.
+
+== Frequently Asked Questions ==
+
+= Does this theme support any plugins? =
+
+WP Bootstrap Starter includes support for Infinite Scroll in Jetpack.
+
+== Credits ==
+
+* Based on Underscores http://underscores.me/, (C) 2012-2016 Automattic, Inc., [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+* normalize.css http://necolas.github.io/normalize.css/, (C) 2012-2016 Nicolas Gallagher and Jonathan Neal, [MIT](http://opensource.org/licenses/MIT)
+* Bootstrap http://getbootstrap.com, (C) 2011-2015 Twitter, Inc., [MIT] (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+* WP Bootstrap Navwalker https://github.com/wp-bootstrap/wp-bootstrap-navwalker, [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+* Font Awesome icons, Copyright (C) Dave Gandy License: SIL Open Font License, version 1.1. - http://fontawesome.io/
+
+== Changelog ==
+= 2.3.5 - July 17, 2017 =
+* Add preset style under customizer -> typography
+
+= 2.3.4 - July 16, 2017 =
+* Update the site info in footer
+
+= 2.3.3 - July 14, 2017 =
+* Update the content of the jumbotron to load default content after theme install
+
+= 2.3.2 - July 14, 2017 =
+* Update the site info in footer
+
+= 2.3.1 - July 11, 2017 =
+* Update the SASS files
+
+= 2.3.0 - July 10, 2017 =
+* Add Header Panel in customizer
+
+= 2.2.9 - July 6, 2017 =
+* Add SASS functionality
+
+= 2.2.8 - July 6, 2017 =
+* Add an option in customizer to change the jumbotron content in homepage
+
+= 2.2.7 - July 3, 2017 =
+* Update the style of woocommerce form
+
+= 2.2.6 - June 30, 2017 =
+* Update the woocommerce template
+
+= 2.2.5 - June 30, 2017 =
+* Change theme info
+
+= 2.2.4 - June 29, 2017 =
+* Change the look and feel of the menu to bootstrap 4
+* Change the style the background color of the jumbotron
+* Change the arrow of the submenu toarrow pointing to the right
+
+= 2.2.3 - June 28, 2017 =
+* Remove the underline below the sitename/logo
+
+= 2.2.2 - June 28, 2017 =
+* Change the theme info
+
+= 2.2.1 - June 28, 2017 =
+* Change the style of the of the sticky post
+* Change the font to the default font of the Bootstrap 4
+* Make the Default theme menu visible to all visitors
+
+= 2.1.9 - June 28, 2017 =
+* Add Spacing between comment and comment icon
+
+= 2.1.8 - June 28, 2017 =
+* Remove the border around the hamburger menu
+
+= 2.1.7 - June 27, 2017 =
+* Change theme info
+
+= 2.1.6 - June 27, 2017 =
+* Remove the header and footer in the blank page template
+* Fix the layout of the edit address page of woocommerce
+* Fix the submenu
+* Remove the page title in the Blank  without container template
+* Add hover effect on the sidebar menus
+* Change the padding of the menu item
+* Add hover effect in the menu item
+* Change the font size of the site name
+
+= 2.0.8 - June 27, 2017 =
+* Add blank page width container and Blank page without container Template
+
+= 2.0.7 - June 26, 2017 =
+* Make the comments visible in page
+* Add css style in the pingback and Trackback
+* Fix the style of the Threaded comment list
+* Change the password protected form with bootstrap 4 form
+* Add style in the single post navigation
+* Reduce the spacing between the page banner and the main content
+* Change the footer link
+* Remove the css that override Bootstrap 4 font
+* Fix the price filter
+
+= 2.0.6 - June 26, 2017 =
+* Add form-control class in contact form 7 field
+
+= 2.0.5 - June 23, 2017 =
+* Fix the css to make the theme compatible in Visual Composer
+* Adjust the code of content-page.php to remove the title if the page is build using visual composer
+
+= 2.0.4 - June 23, 2017 =
+* Fix the css to make the theme compatible in Elementor Page Builder just use the fullwidth template to include the header and footer in the page
+
+= 2.0.3 - June 23, 2017 =
+* Create woocommerce template
+* Fix the sidebar in woocommerce page
+* Fix the form in checkout page
+* Fix the layout of the cart page
+* Fix the lightbox and product gallery slider in single product page
+* Fix the layout of 404 page
+
+= 2.0.2 - June 21, 2017 =
+* Add fallback menu
+
+= 2.0.1 - June 15, 2017 =
+* Adjust the breakpoint of the maincontent and sidebar
+* Remove the jumbotron in the header of internal pages except the homepage
+* Add spacing between the menu and the main content
+
+= 2.0.0 - June 14, 2017 =
+* Upgrade the theme to bootstrap 4
+* Update the html markup to bootstrap 4
+* Change the navwalker to work in bootstrap 4
+* Fix the style of the header
+* Fix the responsiveness of the menu
+
+= 1.3.2 - June 8, 2017 =
+* Added an option to add Logo
+
+= 1.3.1 - June 6, 2017 =
+* Added left sidebar template
+* Added blank template
+* Added fullwidth template
+
+= 1.3.0 - June 5, 2017 =
+* Added 3 footer widget area
+* Added the function add_theme_support( "custom-header", $args )
+* Added the function add_editor_style()
+
+= 1.2.9 - May 26, 2017 =
+* Added "link_before" and "link_after" attribute in the menu
+
+= 1.2.8 - May 19, 2017 =
+* Add theme description
+
+= 1.2.7 - May 10, 2017 =
+* Remove the css customization to make the theme simple
+
+= 1.2.6 - May 4, 2017 =
+* Include the theme URI in style.css
+
+= 1.2.5 - May 2, 2017 =
+* Remove the theme URI in style.css
+* Fix the translatable content issue in template-tags.php
+* Remove script in header.php and enqueue it in the functions.php
+* Fix the Missing singular placeholder in comments.php
+* Remove rtl.css
+* Remove Languages folder in the theme
+* Remove search-form from add_theme_support( 'html5' )
+* Escape value of height and width with esc_attr()
+* Add blog in theme tag
+* Put back the colors and Background image section in Customizer
+* Update the readme.txt
+
+= 1.2.4 - March 22, 2017 =
+* Remove the custom-editor-style.css
+* Add space between Edit link and tags
+* Remove custom-header file in the theme
+
+= 1.2.3 - March 15, 2017 =
+* Remove the layout directory containing the content-sidebar.css and sidebar-content.css
+* Style the threaded comment
+
+= 1.2.2 - March 14, 2017 =
+* Add Fullwidth Template
+
+= 1.2.1 - March 9, 2017 =
+* Translate Toggle Navigation in header.php
+* Add escape url for bloginfo('name');
+* Remove menu from the wp_nav_menu();
+* Fix the mobile navigation toggle button
+* Adjust the spacing of the mobile navigation
+* Adjust the spacing of the header
+* Fix the broken sidebar in the search.php
+
+= 1.2 - Nov 23, 2016 =
+* Change the theme name to WP Bootstrap Starter
+
+= 1.0 - Nov 13, 2016 =
+* Initial release

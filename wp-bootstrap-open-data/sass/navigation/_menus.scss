@@ -1,0 +1,125 @@
+#masthead nav {
+	padding-left: 0;
+	padding-right: 0;
+}
+#masthead .navbar-nav > li > a {
+	color: #8e869d;
+	padding: 8px;
+}
+#masthead .navbar-nav > li > a:hover {
+	color: #292b2c;
+	/*background: #f9f9f9;*/
+}
+
+.navbar-brand {
+	height: auto;
+}
+.navbar-toggle .icon-bar {
+	background: #000 none repeat scroll 0 0;
+}
+.dropdown-menu .dropdown-toggle::after {
+	border-bottom: 0.3em solid transparent;
+	border-left: 0.3em solid;
+	border-top: 0.3em solid transparent;
+}
+
+
+/* Small menu. */
+.menu-toggle,
+.main-navigation.toggled ul {
+	display: block;
+}
+.dropdown-item {
+	line-height: 1.2;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+.dropdown-menu {
+	min-width: 200px;
+}
+.dropdown .open .dropdown-menu {
+	display: block;
+	left: 196px;
+	top: 0;
+
+}
+.dropdown-menu .dropdown-item {
+	white-space: normal;
+}
+
+@media screen and (min-width: 37.5em) {
+	.menu-toggle {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 769px) {
+	.dropdown-menu li > .dropdown-menu {
+		right: -158px;
+		top: 22px;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.dropdown-menu {
+		border: medium none;
+		margin-left: 20px;
+		padding: 0;
+	}
+	.dropdown-menu li a {
+		padding: 0;
+	}
+	#masthead .navbar-nav > li > a {
+		padding-bottom: 10px;
+		padding-top: 5px;
+	}
+	.navbar-light .navbar-toggler {
+		border: medium none;
+		outline: none;
+	}
+}
+
+
+.site-main .comment-navigation,
+.site-main .posts-navigation,
+.site-main .post-navigation {
+	margin: 0 0 1.5em;
+	overflow: hidden;
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	float: left;
+	width: 50%;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	float: right;
+	text-align: right;
+	width: 50%;
+}
+
+.navigation.post-navigation {
+	padding-top: 30px;
+}
+.post-navigation .nav-previous a,
+.post-navigation .nav-next a {
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	display: inline-block;
+	padding: 5px 14px;
+	text-decoration: none;
+}
+.post-navigation .nav-next a::after {
+	content: " \2192";
+}
+.post-navigation .nav-previous a::before {
+	content: "\2190 ";
+}
+.post-navigation .nav-previous a:hover,
+.post-navigation .nav-next a:hover {
+	background: #eee none repeat scroll 0 0;
+}
