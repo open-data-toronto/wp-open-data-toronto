@@ -33,6 +33,12 @@ Version:         1.2.0
 /* Breadcrumbs and Sidebar */ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{background: #FFEB9C;}
 /* Tables */ .table a:focus{background: #FFEB9C;}
 
+header#masthead {
+    box-shadow: 0 0 2px -1px #333;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
 dd {
     word-wrap: break-word;
 }

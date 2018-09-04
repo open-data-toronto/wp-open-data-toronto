@@ -399,13 +399,20 @@ var Homepage = (function() {
             var row = data['results'][i];
             var days = Math.round((Date.now() - new Date(row['metadata_modified']).getTime())/(24*60*60*1000));
 
-            var timeSince = 'yesterday';
-            if (days > 1 && days <= 60) {
-                var timeSince = days + ' days ago';
+            if (days <= 60) {
+                var period = days == 1 ? 'yesterday' : ' days ago';
+
+                var timeSince = days + period;
             } else if (days <= 365) {
-                var timeSince = Math.round(days / 30.) + ' months ago';
+                var months = Math.round(days / 30.);
+                var period = months > 1 ? ' months ago' : ' month ago';
+
+                var timeSince = months + period;
             } else {
-                var timeSince = Math.round(days / 365.) + ' years ago';
+                var years = Math.round(days / 30.);
+                var period = years > 1 ? ' years ago' : ' year ago';
+
+                var timeSince = years + period;
             }
 
             $('.newsfeed').append('<li>' +
