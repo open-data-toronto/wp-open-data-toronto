@@ -2,7 +2,7 @@
 wp-open-data-toronto
 =============
 
-Integrates CKAN dataset catalog with WordPress webpage:
+Integrates CKAN dataset catalog with WordPress webpage
     - Display/search CKAN packages
     - Provide dataset information from CKAN
 
