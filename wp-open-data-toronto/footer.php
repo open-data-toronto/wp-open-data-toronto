@@ -11,11 +11,6 @@
           <span class="sr-only">Copyright</span> City of Toronto 1998 - 2018
         </a>
       </p>
-
-      <!-- Webtrends Tracking Code -->
-      <script src="/wp-content/themes/wp-open-data-toronto/js/webtrends-infinity.load.js"></script>
-      <!-- End Webtrends Tracking Code -->
-
     </div>
   </footer>
 </div>
