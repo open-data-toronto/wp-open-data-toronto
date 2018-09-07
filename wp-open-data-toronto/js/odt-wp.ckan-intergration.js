@@ -128,7 +128,15 @@ var Catalogue = (function() {
         });
 
         // Controls the checkbox filters
-        $('.checkbox-filter input').on('click', function() { loadCatalogue() });
+        $('.checkbox-filter input').on('click', function() {
+            if ($(this).is(':checked')) {
+                $(this).parent('label').addClass('checkbox-checked');
+            } else {
+                $(this).parent('label').removeClass('checkbox-checked');
+            }
+
+            loadCatalogue();
+        });
 
         // Controls the previous and next nav buttons for pagination
         $('#nav-catalogue .page-keep a').on('click', function() {
