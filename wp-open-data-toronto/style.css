@@ -39,6 +39,26 @@ span.select2-selection.select2-selection--multiple {
     border-color: #cccccc !important;
     box-shadow: 1px 1px 5px #ccc inset;
 }
+span.select2-dropdown.select2-dropdown--below {
+    border-radius: 0;
+    border: 1px solid #185688;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #185688 !important;
+    color: white;
+    font-weight: bold !important;
+}
+.filter.filter-division {
+    margin: 20px 0 20px 0;
+}
+.checkbox-filter input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
+.checkbox-filter label{
+    margin-left: -2px;
+}
 
 
 dd {
@@ -161,8 +181,8 @@ a{
     padding: 0;
 }
 .card-img-top img{
-	height: 300px;
-	box-shadow: 0px 0px 2px #ccc;
+    height: 300px;
+    box-shadow: 0px 0px 2px #ccc;
 }
 /**
 2. Typography / Buttons
