@@ -301,17 +301,29 @@ var Dataset = (function() {
     function buildPreview() {
         if (!config['package'] || !$('#table-preview tbody').is(':empty')) return;
 
-        var preview = config['package']['preview_data'].split('\\n');
-        for (var i = 0; i < preview.length; i++) {
-            var row = preview[i].split(','),
-                element = '<tr>';
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: config['ckan'] + 'datastore_search',
+            data: { 'resource_id': config['package']['primary_resource'], 'limit': 3 }
+        }).done(function(response) {
+            var fields = response['result']['fields'];
+            var data = response['result']['records'];
 
-            for (var j = 0; j < row.length; j++) {
-                element += '<' + (i == 0 ? 'th' : 'td') + '>' + row[j].trim() + '</' + (i == 0 ? 'th' : 'td') + '>';
+            for (var i = 0; i < fields.length; i++) {
+                if (!fields[i]['id'].startsWith('_')) {
+                    $('#table-preview thead').append('<th>' + fields[i]['id'] + '</th>');
+                }
             }
 
-            $('#table-preview ' + (i == 0 ? 'thead' : 'tbody')).append(element + '</tr>');
-        }
+            for (var i = 0; i < data.length; i++) {
+                var row = '<tr>';
+                for (var j in fields) {
+                    if (!fields[j]['id'].startsWith('_')) row += '<td>' + data[i][fields[j]['id']] + '</td>';
+                }
+                $('#table-preview tbody').append(row + '</tr>');
+            }
+        });
     }
 
     function buildUI() {
@@ -350,8 +362,10 @@ var Dataset = (function() {
             }
         });
 
-        if (!config['package']['preview_data']) $('#heading-preview').hide();
-        if (!config['package']['primary_resource']) $('#heading-features').hide();
+        if (!config['package']['primary_resource']) {
+            $('#heading-features').hide();
+            $('#heading-preview').hide();
+        }
 
         if (config['isInitializing']) buildUI();
     }
