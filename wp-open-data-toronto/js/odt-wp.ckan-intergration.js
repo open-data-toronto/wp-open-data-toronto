@@ -413,8 +413,10 @@ var Homepage = (function() {
             var row = data['results'][i];
             var days = Math.round((Date.now() - new Date(row['metadata_modified']).getTime())/(24*60*60*1000));
 
-            if (days <= 60) {
-                var timeSince = days == 1 ? 'yesterday' : days + ' days ago';
+            if (days <= 1) {
+                var timeSince = days == 0 ? 'today' : 'yesterday';
+            } else if (days <= 60) {
+                var timeSince = days + ' days ago';
             } else if (days <= 365) {
                 var months = Math.round(days / 30.);
                 var period = months > 1 ? ' months ago' : ' month ago';
@@ -445,7 +447,7 @@ var Homepage = (function() {
             url: config['ckan'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
             data: {
                 'rows': config['datasetsShown'],
-                'sort': 'metadata_created desc'
+                'sort': 'metadata_modified desc'
             }
         }).done(buildWidget);
     }
