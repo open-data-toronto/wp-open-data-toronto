@@ -1,5 +1,6 @@
 var DEFAULT = {
     ckan: 'https://ckanadmin1.intra.dev-toronto.ca/api/3/action/',
+    ckanKey: '6414e5d5-c07c-4d6d-9761-802cc8a88780',
     isInitializing: true
 }
 
@@ -13,7 +14,10 @@ var Catalogue = (function() {
         cataloguePages: 0,
         currentPage: 0,
         datasetsPerPage: 5,
-        filterSize: 5,
+        filters: {},
+        filterResource: '81b52bbd-35a7-41dc-b297-2ef80558fdb2',
+        filterShowFull: [],
+        filterSize: 3,
         package: {}
     });
 
@@ -113,6 +117,29 @@ var Catalogue = (function() {
         if (config['isInitializing']) buildUI();
     }
 
+    function buildCatalogueSidebar(response) {
+        if (response) {
+            var data = config['filter'] = response['result'];
+        } else {
+            var data = config['filter']
+        }
+
+        $('.filter ul').empty();
+
+        for (var i = 0; i < data['records'].length; i++) {
+            var f = data['records'][i]
+            var el = $('.filter-' + f['field'] + ' ul');
+
+            if (el.find('input').length < config['filterSize'] || config['filterShowFull'].indexOf(f['field']) != -1) {
+                el.append('<div class="checkbox checkbox-filter">' +
+                            '<label><input type="checkbox" data-field="' + f['field'] + '" value="' + f['value'] + '">&nbsp;' + f['value'] + '</label>' +
+                          '</div>');
+            }
+        }
+
+        buildUISidebar();
+    }
+
     var buildUI = function() {
         // Initialize the select2 element for catalogue search
         $('#select-search').select2({
@@ -124,17 +151,6 @@ var Catalogue = (function() {
             tags: true,
             width: '100%'
         }).on('change.select2', function() {
-            loadCatalogue();
-        });
-
-        // Controls the checkbox filters
-        $('.checkbox-filter input').on('click', function() {
-            if ($(this).is(':checked')) {
-                $(this).parent('label').addClass('checkbox-checked');
-            } else {
-                $(this).parent('label').removeClass('checkbox-checked');
-            }
-
             loadCatalogue();
         });
 
@@ -153,6 +169,25 @@ var Catalogue = (function() {
 
             // Refresh catalogue if page number is valid
             if (page >= 0 && page < config['cataloguePages']) loadCatalogue(page);
+        });
+    }
+
+    function buildUISidebar() {
+        // Controls the checkbox filters
+        $('.checkbox-filter input').on('click', function() {
+            if ($(this).is(':checked')) {
+                $(this).parent('label').addClass('checkbox-checked');
+            } else {
+                $(this).parent('label').removeClass('checkbox-checked');
+            }
+
+            loadCatalogue();
+        });
+
+        $('.btn-show-more').on('click', function() {
+            $(this).hide();
+            config['filterShowFull'].push($(this).data('field'));
+            buildCatalogueSidebar();
         });
 
         // Set isInitializing to false to prevent duplication of events
@@ -210,15 +245,13 @@ var Catalogue = (function() {
     }
 
     function loadCatalogueSidebar() {
-        var ownerDivison = "311 Toronto, Accounting Services, Children's Services, City Clerk's Office, City Manager's Office, City Planning, Corporate Finance, Court Services, Economic Development and Culture, Employment and Social Services, Engineering and Construction Services, Environment and Energy, Equity, Diversity and Human Rights, Facilities Management, Financial Planning, Fire Services, Fleet Services, Human Resources, Information and Technology, Lobbyist Registrar, Long-Term Care Home and Services, Municipal Licensing and Standards, Paramedic Services, Parks, Forestry and Recreation, Public Health, Purchasing and Materials Management, Revenue Services, Shelter, Support and Housing Administration, Social Development, Finance and Administration, Solid Waste Management Services, Strategic and Corporate Policy, Toronto Building, Toronto Parking Authority, Toronto Police Services, Toronto Public Library, Toronto School District School Board, Toronto Transit Commission, Toronto Water, Transportation Services".split(', ')
-
-        for (var i in ownerDivison) {
-            // if (i > config['filterSize']) break;
-            if (i != 35 && i != 27) continue; // tmp code for testing
-            $('.filter-division ul').before('<div class="checkbox checkbox-filter">' +
-                                              '<label><input type="checkbox" data-field="owner_division" value="' + ownerDivison[i] + '">&nbsp;' + ownerDivison[i] + '</label>' +
-                                            '</div>');
-        }
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: config['ckan'] + 'datastore_search',
+            data: { 'resource_id': config['filterResource'] },
+            beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', config['ckanKey']); }
+        }).done(buildCatalogueSidebar);
     }
 
     /* ========= Public methods ========= */
@@ -339,6 +372,7 @@ var Dataset = (function() {
         $('#heading-features').on('click', buildFeatures);
         $('#heading-download').on('click', buildDownloads);
         $('#heading-developers').on('click', buildDevelopers);
+
         config['isInitializing'] = false;
     }
 
