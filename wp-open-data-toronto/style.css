@@ -56,11 +56,19 @@ span.select2-dropdown.select2-dropdown--below {
    top: -9999px;
    left: -9999px;
 }
-.checkbox-filter label{
-    margin-left: -2px;
+.checkbox-filter label:before {
+    width: 20px;
+    height: 30px;
+    content: '\25b6';
+    color: #cacaca;
 }
-
-
+.checkbox-filter label {
+    color: #6d6d6d;
+}
+.checkbox-filter label:hover {
+    color: #185688;
+    font-weight: bold;
+}
 dd {
     word-wrap: break-word;
 }
