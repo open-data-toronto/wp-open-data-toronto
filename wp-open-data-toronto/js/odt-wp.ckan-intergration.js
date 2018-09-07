@@ -414,9 +414,7 @@ var Homepage = (function() {
             var days = Math.round((Date.now() - new Date(row['metadata_modified']).getTime())/(24*60*60*1000));
 
             if (days <= 60) {
-                var period = days == 1 ? 'yesterday' : ' days ago';
-
-                var timeSince = period;
+                var timeSince = days == 1 ? 'yesterday' : days + ' days ago';
             } else if (days <= 365) {
                 var months = Math.round(days / 30.);
                 var period = months > 1 ? ' months ago' : ' month ago';
