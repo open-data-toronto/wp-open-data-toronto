@@ -39,7 +39,7 @@
   <h2>Division</h2>
   <ul></ul>
   <div class="checkbox">
-    <label><input type="checkbox" >&nbsp;Show more...</label>
+    <label class="button-box"><input type="checkbox" >Show more...</label>
   </div>
 </div>
 <!-- End Filter by Division -->
@@ -50,12 +50,12 @@
   <ul>
     <li>
       <div class="checkbox checkbox-filter">
-        <label><input type="checkbox" data-field="dataset_category" value="Tabular">&nbsp;Tabular</label>
+        <label><input type="checkbox" data-field="dataset_category" value="Tabular">&nbsp; Tabular</label>
       </div>
     </li>
     <li>
       <div class="checkbox checkbox-filter">
-        <label><input type="checkbox" data-field="dataset_category" value="Geospatial">&nbsp;Geospatial</label>
+        <label><input type="checkbox" data-field="dataset_category" value="Geospatial">&nbsp; Geospatial</label>
       </div>
     </li>
   </ul>
