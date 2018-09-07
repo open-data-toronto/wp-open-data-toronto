@@ -51,6 +51,8 @@ span.select2-dropdown.select2-dropdown--below {
 .filter.filter-division {
     margin: 20px 0 20px 0;
 }
+
+/** Checkbox Styles **/
 .checkbox-filter input[type=checkbox] {
    position: absolute;
    top: -9999px;
@@ -69,6 +71,18 @@ span.select2-dropdown.select2-dropdown--below {
     color: #185688;
     font-weight: bold;
 }
+.checkbox-filter label:hover::before{
+    color: #185688;
+}
+.checkbox-filter label.checkbox-checked{
+    color: #185688;
+    font-weight: bold;
+}
+.checkbox-filter label.checkbox-checked::before{
+    color: #185688;
+}
+/** Checkbox Styles **/
+
 dd {
     word-wrap: break-word;
 }
