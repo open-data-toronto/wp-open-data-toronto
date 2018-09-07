@@ -416,7 +416,7 @@ var Homepage = (function() {
             if (days <= 60) {
                 var period = days == 1 ? 'yesterday' : ' days ago';
 
-                var timeSince = days + period;
+                var timeSince = period;
             } else if (days <= 365) {
                 var months = Math.round(days / 30.);
                 var period = months > 1 ? ' months ago' : ' month ago';
