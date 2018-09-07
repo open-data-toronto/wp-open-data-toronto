@@ -2,7 +2,7 @@
 Theme Name:      WP Open Data Toronto
 Description:     Theme created to integrate CKAN with WP
 Author:          Sidra Mahmood & Yizhao Tan
-Template:        wp-bootstrap-open-data
+Template:        wp-bootstrap-starter
 Version:         1.2.0
 -------------------------------------------------------------- */
 
@@ -32,6 +32,15 @@ Version:         1.2.0
 /* Buttons */ button:focus, a.btn:focus{background: #222222 !important;}
 /* Breadcrumbs and Sidebar */ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{background: #FFEB9C;}
 /* Tables */ .table a:focus{background: #FFEB9C;}
+
+/* Select.css Overrides */
+span.select2-selection.select2-selection--multiple {
+    border-radius: 0;
+    border-color: #cccccc !important;
+    box-shadow: 1px 1px 5px #ccc inset;
+}
+
+
 dd {
     word-wrap: break-word;
 }
