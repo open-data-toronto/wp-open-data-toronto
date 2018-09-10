@@ -156,7 +156,9 @@ var Catalogue = (function() {
 
         // Controls the previous and next nav buttons for pagination
         $('#nav-catalogue .page-keep a').on('click', function() {
-            switch($(this).data('page')) {
+            var control = $(this).data('page') + '';
+
+            switch($(this).data('page') + '') {
                 case '+1':
                     var page = config['currentPage'] + 1;
                     break;
