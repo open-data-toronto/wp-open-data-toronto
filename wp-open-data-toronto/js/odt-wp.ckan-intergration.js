@@ -13,9 +13,6 @@ var Catalogue = (function() {
         cataloguePages: 0,
         currentPage: 0,
         datasetsPerPage: 5,
-        filters: {},
-        filterResource: '81b52bbd-35a7-41dc-b297-2ef80558fdb2',
-        filterShowFull: [],
         filterSize: 3,
         package: {}
     });
@@ -117,28 +114,24 @@ var Catalogue = (function() {
     }
 
     function buildCatalogueSidebar(response) {
-        if (!!response) {
-            for (var i in response['result']['search_facets']) {
-                var field = response['result']['search_facets'][i];
-                for (var j in field['items']) {
-                    config['filters'][field['title']] = config['filters'][field['title']] || [];
-                    config['filters'][field['title']].push(field['items'][j]['name']);
-                }
+        var data = {};
+        for (var i in response['result']['search_facets']) {
+            var field = response['result']['search_facets'][i];
+            for (var j in field['items']) {
+                data[field['title']] = data[field['title']] || [];
+                data[field['title']].push(field['items'][j]['name']);
             }
         }
 
-        $('.filter ul').empty();
-
-        for (var field in config['filters']) {
-            var f = config['filters'][field];
-            for (var i = 0; i < f.length; i++) {
+        for (var field in data) {
+            var f = data[field];
+            for (var i = f.length - 1; i >= 0; i--) {
                 var el = $('.filter-' + field + ' ul');
+                el.append('<div class="checkbox checkbox-filter">' +
+                            '<label><input type="checkbox" data-field="' + field + '" value="' + f[i] + '">&nbsp;' + f[i] + '</label>' +
+                          '</div>');
 
-                if (el.find('input').length < config['filterSize'] || config['filterShowFull'].indexOf(field) != -1) {
-                    el.append('<div class="checkbox checkbox-filter">' +
-                                '<label><input type="checkbox" data-field="' + field + '" value="' + f[i] + '">&nbsp;' + f[i] + '</label>' +
-                              '</div>');
-                }
+                if (i == 0) el.find('.checkbox-filter:nth-child(n+' + (config['filterSize'] + 1) +')').hide();
             }
         }
 
@@ -196,8 +189,7 @@ var Catalogue = (function() {
 
         $('.btn-show-more').on('click', function() {
             $(this).hide();
-            config['filterShowFull'].push($(this).data('field'));
-            buildCatalogueSidebar();
+            $('.filter-' + $(this).data('field') + ' ul').find('.checkbox-filter').show();
         });
     }
 
