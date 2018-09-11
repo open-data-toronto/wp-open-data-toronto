@@ -1,6 +1,5 @@
 var DEFAULT = {
     ckan: 'https://ckanadmin1.intra.dev-toronto.ca/api/3/action/',
-    ckanKey: '6414e5d5-c07c-4d6d-9761-802cc8a88780',
     isInitializing: true
 }
 
@@ -118,22 +117,28 @@ var Catalogue = (function() {
     }
 
     function buildCatalogueSidebar(response) {
-        if (response) {
-            var data = config['filter'] = response['result'];
-        } else {
-            var data = config['filter']
+        if (!!response) {
+            for (var i in response['result']['search_facets']) {
+                var field = response['result']['search_facets'][i];
+                for (var j in field['items']) {
+                    config['filters'][field['title']] = config['filters'][field['title']] || [];
+                    config['filters'][field['title']].push(field['items'][j]['name']);
+                }
+            }
         }
 
         $('.filter ul').empty();
 
-        for (var i = 0; i < data['records'].length; i++) {
-            var f = data['records'][i]
-            var el = $('.filter-' + f['field'] + ' ul');
+        for (var field in config['filters']) {
+            var f = config['filters'][field];
+            for (var i = 0; i < f.length; i++) {
+                var el = $('.filter-' + field + ' ul');
 
-            if (el.find('input').length < config['filterSize'] || config['filterShowFull'].indexOf(f['field']) != -1) {
-                el.append('<div class="checkbox checkbox-filter">' +
-                            '<label><input type="checkbox" data-field="' + f['field'] + '" value="' + f['value'] + '">&nbsp;' + f['value'] + '</label>' +
-                          '</div>');
+                if (el.find('input').length < config['filterSize'] || config['filterShowFull'].indexOf(field) != -1) {
+                    el.append('<div class="checkbox checkbox-filter">' +
+                                '<label><input type="checkbox" data-field="' + field + '" value="' + f[i] + '">&nbsp;' + f[i] + '</label>' +
+                              '</div>');
+                }
             }
         }
 
@@ -250,9 +255,7 @@ var Catalogue = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'datastore_search',
-            data: { 'resource_id': config['filterResource'] },
-            beforeSend: function(xhr) { xhr.setRequestHeader('Authorization', config['ckanKey']); }
+            url: config['ckan'] + 'package_search?q=&rows=0&facet=on&facet.field=dataset_category&facet.field=owner_division',
         }).done(buildCatalogueSidebar);
     }
 
