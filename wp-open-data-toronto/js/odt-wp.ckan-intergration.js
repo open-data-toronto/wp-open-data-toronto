@@ -177,6 +177,9 @@ var Catalogue = (function() {
             // Refresh catalogue if page number is valid
             if (page >= 0 && page < config['cataloguePages']) loadCatalogue(page);
         });
+
+        // Set isInitializing to false to prevent duplication of events
+        config['isInitializing'] = false;
     }
 
     function buildUISidebar() {
@@ -196,9 +199,6 @@ var Catalogue = (function() {
             config['filterShowFull'].push($(this).data('field'));
             buildCatalogueSidebar();
         });
-
-        // Set isInitializing to false to prevent duplication of events
-        config['isInitializing'] = false;
     }
 
     function loadCatalogue(pageNumber=0) {
