@@ -37,7 +37,7 @@
 
   <!-- Filter by Division -->
   <div class="filter filter-owner_division" aria-label="Filter datasets by division">
-    <h2>Owner Division</h2>
+    <h2>Division</h2>
     <ul></ul>
     <button type="button" class="btn btn-primary btn-show-more" data-field="owner_division">Show more..</button>
   </div>
@@ -46,7 +46,7 @@
 
   <!-- Filter by Data Type -->
   <div class="filter filter-dataset_category" aria-label="Filter datasets by type of data">
-    <h2>Dataset Category</h2>
+    <h2>Dataset Type</h2>
     <ul></ul>
   </div>
   <!-- End Filter by Division -->
