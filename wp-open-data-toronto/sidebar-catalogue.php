@@ -5,15 +5,6 @@
   <div class="filter filter-dataset">
     <h2>Search Catalogue</h2>
     <select id="select-search" multiple="multiple"></select>
-    <!-- <div id="custom-search">
-      <div class="input-group">
-        <label for="search" class="sr-only">Search</label>
-        <input type="text" class="form-control" name="search" placeholder="Search datasets">
-        <span class="input-group-btn">
-          <button class="btn btn-secondary" type="submit">Search</button>
-        </span>
-      </div>
-    </div> -->
   </div>
   <br/>
   <!-- End Dataset Search -->
@@ -38,8 +29,9 @@
   <!-- Filter by Division -->
   <div class="filter filter-owner_division" aria-label="Filter datasets by division">
     <h2>Division</h2>
-    <ul></ul>
-    <button type="button" class="btn btn-primary btn-show-more" data-field="owner_division">Show more..</button>
+    <!-- <ul></ul>
+    <button type="button" class="btn btn-primary btn-show-more" data-field="owner_division">Show more..</button> -->
+    <select id="select-division" multiple="multiple"></select>
   </div>
   <br/>
   <!-- End Filter by Division -->

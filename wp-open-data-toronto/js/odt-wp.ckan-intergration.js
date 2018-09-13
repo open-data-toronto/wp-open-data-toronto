@@ -13,7 +13,6 @@ var Catalogue = (function() {
         cataloguePages: 0,
         currentPage: 0,
         datasetsPerPage: 5,
-        filterSize: 3,
         package: {}
     });
 
@@ -118,20 +117,15 @@ var Catalogue = (function() {
         for (var i in response['result']['search_facets']) {
             var field = response['result']['search_facets'][i];
             for (var j in field['items']) {
-                data[field['title']] = data[field['title']] || [];
-                data[field['title']].push(field['items'][j]['name']);
-            }
-        }
-
-        for (var field in data) {
-            var f = data[field];
-            for (var i = f.length - 1; i >= 0; i--) {
-                var el = $('.filter-' + field + ' ul');
-                el.append('<div class="checkbox checkbox-filter">' +
-                            '<label><input type="checkbox" data-field="' + field + '" value="' + f[i] + '">&nbsp;' + f[i] + '</label>' +
-                          '</div>');
-
-                if (i == 0) el.find('.checkbox-filter:nth-child(n+' + (config['filterSize'] + 1) +')').hide();
+                if (['owner_division'].indexOf(field['title']) !== -1) {
+                    var el = $('.filter-' + field['title'] + ' select');
+                    el.prepend('<option data-field="' + field['title'] + '" value="' + field['items'][j]['name'] + '">' + field['items'][j]['name'] + '</option>');
+                } else {
+                    var el = $('.filter-' + field['title'] + ' ul');
+                    el.append('<div class="checkbox checkbox-filter">' +
+                                '<label><input type="checkbox" data-field="' + field['title'] + '" value="' + field['items'][j]['name'] + '">&nbsp;' + field['items'][j]['name'] + '</label>' +
+                              '</div>');
+                }
             }
         }
 
@@ -139,19 +133,6 @@ var Catalogue = (function() {
     }
 
     var buildUI = function() {
-        // Initialize the select2 element for catalogue search
-        $('#select-search').select2({
-            language: {
-                noResults: function() {
-                    return 'Start typing search term...';
-                }
-            },
-            tags: true,
-            width: '100%'
-        }).on('change.select2', function() {
-            loadCatalogue();
-        });
-
         // Controls the previous and next nav buttons for pagination
         $('#nav-catalogue .page-keep a').on('click', function() {
             var control = $(this).data('page') + '';
@@ -176,21 +157,39 @@ var Catalogue = (function() {
     }
 
     function buildUISidebar() {
-        // Controls the checkbox filters
-        $('.checkbox-filter input').on('click', function() {
-            if ($(this).is(':checked')) {
-                $(this).parent('label').addClass('checkbox-checked');
-            } else {
-                $(this).parent('label').removeClass('checkbox-checked');
-            }
-
+        $('#select-search').select2({
+            language: {
+                noResults: function() {
+                    return 'Start typing search term...';
+                }
+            },
+            tags: true,
+            width: '100%'
+        }).on('change.select2', function() {
             loadCatalogue();
         });
 
-        $('.btn-show-more').on('click', function() {
-            $(this).hide();
-            $('.filter-' + $(this).data('field') + ' ul').find('.checkbox-filter').show();
+        $('#select-division').select2({
+            language: {
+                noResults: function() {
+                    return 'Start typing search term...';
+                }
+            },
+            maximumSelectionLength: 1,
+            width: '100%'
+        }).on('change.select2', function() {
+            loadCatalogue();
         });
+
+        $('.checkbox-filter input').on('click', function() {
+           if ($(this).is(':checked')) {
+               $(this).parent('label').addClass('checkbox-checked');
+           } else {
+               $(this).parent('label').removeClass('checkbox-checked');
+           }
+
+           loadCatalogue();
+       });
     }
 
     function loadCatalogue(pageNumber=0) {
@@ -215,6 +214,12 @@ var Catalogue = (function() {
             var f = $(ele).data('field');
             filter[f] = filter[f] || [];
             filter[f].push(f + ':"' + $(ele).val() + '"');
+        });
+
+        // Logic for division dropdown
+        $.each($('#select-division').val(), function(idx, val) {
+            filter['owner_division'] = filter[val] || [];
+            filter['owner_division'].push('owner_division:"' + val + '"');
         });
 
         // Logic for search (search for dataset name and description)
