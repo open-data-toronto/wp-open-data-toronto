@@ -22,19 +22,25 @@ var Catalogue = (function() {
         var data = response['result'];
         config['cataloguePages'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
+        if (data['results'].length == 0) {
+            var ele = '<div class="row">' +
+                        '<div class="col-md-12">' +
+                          '<h2>No datasets found </h2>' +
+                        '</div>' +
+                      '</div>';
+
+            $('.table-list').append(ele);
+        }
+
         // Iterate over each of the datasets within the returned results
         for (var i = 0; i < data['results'].length; i++) {
             var row = data['results'][i];
+            var formatEle = '';
 
-            // Iterrate over each of the resources within the dataset and determine the available file formats
-            var formats = [], formatEle = '';
-            for (var j = 0; j < row['resources'].length; j++) {
-                if ($.inArray(row['resources'][j]['format'], formats)==-1) {
-                    if (!row['resources'][j]['format']) continue;
-                    formatEle += '<li class=' + row['resources'][j]['format'].toLowerCase() + '>' +
-                                   '<a href="#">' + row['resources'][j]['format'] + '</a>' +
-                                 '</li>';
-                    formats.push(row['resources'][j]['format']);
+            if (row['resource_formats']) {
+                var resource = row['resource_formats'].split(' ');
+                for (var j = 0; j < resource.length; j++) {
+                    formatEle += '<li class=' + resource[j].toLowerCase() + '>' + resource[j].toUpperCase() + '</li>';
                 }
             }
 
@@ -53,11 +59,6 @@ var Catalogue = (function() {
                             '<span class="sr-only">Last Updated: </span>' +
                             row['published_date'] + '&nbsp; ' +
                             '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
-                          '</p>' +
-                          '<p>' +
-                            '<span class="sr-only">Division: </span>' +
-                            row['organization']['title'] + '&nbsp; ' +
-                            '<span class="fa fa-home" aria-hidden="true"></span>' +
                           '</p>' +
                           '<p>' +
                             '<span class="sr-only">Data Type: </span>' +
@@ -117,13 +118,29 @@ var Catalogue = (function() {
         for (var i in response['result']['search_facets']) {
             var field = response['result']['search_facets'][i];
             for (var j in field['items']) {
-                if (['owner_division'].indexOf(field['title']) !== -1) {
-                    var el = $('.filter-' + field['title'] + ' select');
-                    el.prepend('<option data-field="' + field['title'] + '" value="' + field['items'][j]['name'] + '">' + field['items'][j]['name'] + '</option>');
+                data[field['title']] = data[field['title']] || [];
+
+                if (['resource_formats'].indexOf(field['title']) !== -1) {
+                    var splits = field['items'][j]['name'].split(' ');
+
+                    for (var k in splits) {
+                        if (data[field['title']].indexOf(splits[k]) == -1) data[field['title']].push(splits[k]);
+                    }
                 } else {
-                    var el = $('.filter-' + field['title'] + ' ul');
-                    el.append('<div class="checkbox checkbox-filter">' +
-                                '<label><input type="checkbox" data-field="' + field['title'] + '" value="' + field['items'][j]['name'] + '">&nbsp;' + field['items'][j]['name'] + '</label>' +
+                    data[field['title']].push(field['items'][j]['name']);
+                }
+            }
+        }
+
+        for (var field in data) {
+            for (var i = 0; i < data[field].length; i++) {
+                if (['owner_division', 'resource_formats'].indexOf(field) !== -1) {
+                    var el = $('.filter-' + field + ' select');
+                    el.prepend('<option data-field="' + field + '" value="' + data[field][i] + '">' + data[field][i] + '</option>');
+                } else {
+                    var el = $('.filter-' + field + ' ul');
+                    el.prepend('<div class="checkbox checkbox-filter">' +
+                                '<label><input type="checkbox" data-field="' + field + '" value="' + data[field][i] + '">&nbsp;' + data[field][i] + '</label>' +
                               '</div>');
                 }
             }
@@ -169,7 +186,7 @@ var Catalogue = (function() {
             loadCatalogue();
         });
 
-        $('#select-division').select2({
+        $('#select-divisions, #select-formats').select2({
             language: {
                 noResults: function() {
                     return 'Start typing search term...';
@@ -217,10 +234,16 @@ var Catalogue = (function() {
         });
 
         // Logic for division dropdown
-        $.each($('#select-division').val(), function(idx, val) {
+        $.each($('#select-divisions').val(), function(idx, val) {
             filter['owner_division'] = filter[val] || [];
             filter['owner_division'].push('owner_division:"' + val + '"');
         });
+
+        $.each($('#select-formats').val(), function(idx, val) {
+            filter['resource_formats'] = filter[val] || [];
+            filter['resource_formats'].push('resource_formats:*' + val + '*');
+        });
+
 
         // Logic for search (search for dataset name and description)
         $.each($('#select-search').val(), function(idx, val) {
@@ -252,7 +275,7 @@ var Catalogue = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'package_search?q=&rows=0&facet=on&facet.field=dataset_category&facet.field=owner_division',
+            url: config['ckan'] + 'package_search?q=&rows=0&facet=on&facet.field=dataset_category&facet.field=owner_division&facet.field=resource_formats',
         }).done(buildCatalogueSidebar);
     }
 
