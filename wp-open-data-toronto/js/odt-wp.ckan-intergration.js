@@ -351,17 +351,37 @@ var Dataset = (function() {
     function buildDownloads() {
         if (!config['package'] || !$('#table-resources tbody').is(':empty')) return;
 
+        var formatDropdown = '<select class="select-download-formats">' +
+                               '<option value="csv">CSV</option>' +
+                               '<option value="json">JSON</option>' +
+                               '<option value="tsv">TSV</option>' +
+                               '<option value="xml">XML</option>' +
+                             '</select>';
+
         for (var i = 0; i < config['package']['resources'].length; i++) {
             var resource = config['package']['resources'][i];
+
+            if (resource['datastore_active']) resource['format'] = formatDropdown;
             $('#table-resources tbody').append('<tr>' +
                                                  '<td>' + resource['format'] + '</td>' +
                                                  '<td>' + resource['name'] + '</td>' +
-                                                 '<td>' + (resource['size'] / 1000000.).toFixed(2) + ' MB </td>' +
                                                  '<td>' +
                                                    '<a href="' + resource['url'] + '" target="_blank" rel="noopener">Download <span class="sr-only">' + resource['name'] + '</span></a>' +
                                                  '</td>' +
                                                '</tr>');
         }
+
+        $('#table-resources tbody a').on('click', function(evt) {
+            evt.preventDefault();
+            var link = $(this).attr('href');
+            var format = $(this).parents().eq(1).find('select').val();
+
+            link += '?format=' + format;
+
+            if (['tsv', 'csv'].indexOf(format) !== -1) link += '&bom=True';
+
+            window.open(link, '_blank');
+        });
     }
 
     function buildPreview() {

@@ -176,8 +176,7 @@
                                 <thead>
                                   <tr>
                                     <th scope="col">Format</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Size</th>
+                                    <th scope="col">File Name</th>
                                     <th scope="col">Download</th>
                                   </tr>
                                 </thead>
