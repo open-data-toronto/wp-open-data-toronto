@@ -351,17 +351,17 @@ var Dataset = (function() {
     function buildDownloads() {
         if (!config['package'] || !$('#table-resources tbody').is(':empty')) return;
 
-        var formatDropdown = '<select class="select-download-formats">' +
-                               '<option value="csv">CSV</option>' +
-                               '<option value="json">JSON</option>' +
-                               '<option value="tsv">TSV</option>' +
-                               '<option value="xml">XML</option>' +
-                             '</select>';
-
         for (var i = 0; i < config['package']['resources'].length; i++) {
             var resource = config['package']['resources'][i];
 
-            if (resource['datastore_active']) resource['format'] = formatDropdown;
+            if (resource['datastore_active']) {
+                resource['format'] = '<select class="select-download-formats">' +
+                                       (resource['format'].toUpperCase() == 'CSV' ? '<option value="csv">CSV</option>' : '') +
+                                       '<option value="json">JSON</option>' +
+                                       '<option value="xml">XML</option>' +
+                                     '</select>';
+            }
+
             $('#table-resources tbody').append('<tr>' +
                                                  '<td>' + resource['format'] + '</td>' +
                                                  '<td>' + resource['name'] + '</td>' +
