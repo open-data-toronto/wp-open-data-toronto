@@ -1,3 +1,5 @@
 bootstrap-child/
 twenty*/
+
 .DS_STORE
+config.js

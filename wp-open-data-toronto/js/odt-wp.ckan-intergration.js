@@ -1,15 +1,12 @@
-var DEFAULT = {
-    ckan: 'https://ckanadmin1.intra.dev-toronto.ca/api/3/action/',
-    isInitializing: true
-}
+var $ = jQuery.noConflict();
+$.extend(config, { 'isInitializing': true });
 
 var Catalogue = (function() {
     'use strict';
 
     /* ========= Global variables ========= */
 
-    var $ = jQuery.noConflict();
-    var config = $.extend({}, DEFAULT, {
+    $.extend(config, {
         cataloguePages: 0,
         currentPage: 0,
         datasetsPerPage: 5,
@@ -96,7 +93,7 @@ var Catalogue = (function() {
                     $('#nav-catalogue .page-keep').last().addClass('disabled');
                     $('#nav-catalogue .page-keep').first().removeClass('disabled');
                     break;
-                default:
+                config:
                     $('#nav-catalogue .page-keep').removeClass('disabled');
             }
 
@@ -161,7 +158,7 @@ var Catalogue = (function() {
                 case '-1':
                     var page = config['currentPage'] - 1;
                     break;
-                default:
+                config:
                     var page = $(this).data('page');
             }
 
@@ -210,7 +207,7 @@ var Catalogue = (function() {
     }
 
     function loadCatalogue(pageNumber=0) {
-        // Default empty catalogue page and no pagination
+        // config empty catalogue page and no pagination
         $('.table-list').empty();
         $('#nav-catalogue').hide();
 
@@ -294,11 +291,6 @@ var Catalogue = (function() {
 var Dataset = (function() {
     'use strict';
 
-    /* ========= Global variables ========= */
-
-    var $ = jQuery.noConflict();
-    var config = $.extend({}, DEFAULT);
-
     /* ========= Private methods ========= */
 
     function buildFeatures() {
@@ -372,7 +364,7 @@ var Dataset = (function() {
         }
 
         $('#table-resources tbody a').on('click', function(evt) {
-            evt.preventDefault();
+            evt.preventconfig();
             var link = $(this).attr('href');
             var format = $(this).parents().eq(1).find('select').val();
 
@@ -444,7 +436,7 @@ var Dataset = (function() {
                         $('[data-field="shape_columns"]').hide();
                         $('[data-field="shape_columns"]').prev().hide();
                     }
-                default:
+                config:
                     $(this).text(data[$(this).data('field')]);
             }
         });
@@ -487,8 +479,7 @@ var Homepage = (function() {
 
     /* ========= Global variables ========= */
 
-    var $ = jQuery.noConflict();
-    var config = $.extend({}, DEFAULT, {
+    $.extend({}, config, {
         datasetsShown: 5
     });
 

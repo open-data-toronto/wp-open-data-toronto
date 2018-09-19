@@ -18,6 +18,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="/wp-content/themes/wp-open-data-toronto/js/config.js"></script>
     <script src="/wp-content/themes/wp-open-data-toronto/js/odt-wp.ckan-intergration.js"></script>
     <script src="/wp-content/themes/wp-open-data-toronto/js/webtrends-infinity.load.js"></script>
   </head>
