@@ -7,10 +7,10 @@ var Catalogue = (function() {
     /* ========= Global variables ========= */
 
     $.extend(config, {
-        cataloguePages: 0,
-        currentPage: 0,
-        datasetsPerPage: 5,
-        package: {}
+        'cataloguePages': 0,
+        'currentPage': 0,
+        'datasetsPerPage': 5,
+        'package': {}
     });
 
     /* ========= Private methods ========= */
@@ -93,7 +93,7 @@ var Catalogue = (function() {
                     $('#nav-catalogue .page-keep').last().addClass('disabled');
                     $('#nav-catalogue .page-keep').first().removeClass('disabled');
                     break;
-                config:
+                default:
                     $('#nav-catalogue .page-keep').removeClass('disabled');
             }
 
@@ -158,7 +158,7 @@ var Catalogue = (function() {
                 case '-1':
                     var page = config['currentPage'] - 1;
                     break;
-                config:
+                default:
                     var page = $(this).data('page');
             }
 
@@ -414,7 +414,7 @@ var Dataset = (function() {
     }
 
     function buildDataset(response) {
-        var data = response['result'];
+        var data = config['package'] = response['result'];
 
         // Fill fields
         $('[data-field]').each(function(idx) {
@@ -436,17 +436,24 @@ var Dataset = (function() {
                         $('[data-field="shape_columns"]').hide();
                         $('[data-field="shape_columns"]').prev().hide();
                     }
-                config:
+                default:
                     $(this).text(data[$(this).data('field')]);
             }
         });
 
-        if (!config['package']['primary_resource']) {
+        var inDatastore = false;
+        for (var i = 0; i < data['resources'].length; i++) {
+            if (data['resources'][i]['id'] == data['primary_resource']) {
+                inDatastore = data['resources'][i]['datastore_active'];
+            }
+        }
+
+        if (!data['primary_resource'] || !inDatastore) {
             $('#heading-features').hide();
             $('#heading-preview').hide();
         }
 
-        if (config['isInitializing']) buildUI();
+        buildUI();
     }
 
     function loadDataset() {
@@ -457,10 +464,7 @@ var Dataset = (function() {
             type: 'GET',
             url: config['ckan'] + 'package_show',
             data: data
-        }).done(function(response) {
-            config['package'] = response['result'];
-            buildDataset(response);
-        });
+        }).done(buildDataset);
     }
 
     /* ========= Public methods ========= */
@@ -479,9 +483,7 @@ var Homepage = (function() {
 
     /* ========= Global variables ========= */
 
-    $.extend({}, config, {
-        datasetsShown: 5
-    });
+    $.extend(config, { 'datasetsShown': 5 });
 
     /* ========= Private methods ========= */
 
