@@ -49,7 +49,7 @@
                     <div class="col-container">
                       <div class="col">
                         <h3>1. Source System Connection</h3>
-                        <div class="progress-circle" data-percentage="<?php echo types_render_field("source-system-connection", array("output"=>"raw")); ?>">
+                        <div class="progress-circle" data-percentage="<?php echo types_render_field("source-system-connection"); ?>">
                                     <span class="progress-circle-left">
                                         <span class="progress-circle-bar"></span>
                                     </span>
