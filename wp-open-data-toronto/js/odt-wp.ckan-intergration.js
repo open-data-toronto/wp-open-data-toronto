@@ -371,9 +371,7 @@ var Dataset = (function() {
                 link += '?format=' + $(this).parents().eq(1).find('select').val()
             }
 
-            console.log(link)
-
-            // window.open(link, '_blank');
+            window.open(link, '_blank');
         });
     }
 
