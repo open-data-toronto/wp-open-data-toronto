@@ -258,7 +258,7 @@ var Catalogue = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'package_search',
+            url: config['ckanAPI'] + 'package_search',
             data: {
                 'q': q.join(' AND '), // Merge searches with multiple fields by AND
                 'rows': config['datasetsPerPage'],
@@ -272,7 +272,7 @@ var Catalogue = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'package_search?q=&rows=0&facet=on&facet.field=dataset_category&facet.field=owner_division&facet.field=resource_formats',
+            url: config['ckanAPI'] + 'package_search?q=&rows=0&facet=on&facet.field=dataset_category&facet.field=owner_division&facet.field=resource_formats',
         }).done(buildCatalogueSidebar);
     }
 
@@ -299,7 +299,7 @@ var Dataset = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'datastore_search',
+            url: config['ckanAPI'] + 'datastore_search',
             data: { 'resource_id': config['package']['primary_resource'] }
         }).done(function(response) {
             var fields = response['result']['fields'],
@@ -320,7 +320,7 @@ var Dataset = (function() {
             var jsSnippet = '$.ajax({\n' +
                             '    dataType: "json",\n' +
                             '    type: "GET",\n' +
-                            '    url: "' + config['ckan'] + 'package_search",\n' +
+                            '    url: "' + config['ckanAPI'] + 'package_search",\n' +
                             '    data: { "q": \'title:"' + config['package']['title'] + '"\' }\n' +
                             '}).done(function(response) {\n' +
                             '   console.log(response);\n' +
@@ -332,7 +332,7 @@ var Dataset = (function() {
             var pySnippet = 'import requests\n' +
                             'import json\n' +
                             '\n' +
-                            'url = "' + config['ckan'] + 'package_search"\n' +
+                            'url = "' + config['ckanAPI'] + 'package_search"\n' +
                             'response = requests.get(url, data={ "q": "title:\'' + config['package']['title'] + '\'" })\n' +
                             'results = json.loads(response.content)\n' +
                             'print(results)';
@@ -354,25 +354,26 @@ var Dataset = (function() {
                                      '</select>';
             }
 
-            $('#table-resources tbody').append('<tr>' +
+            $('#table-resources tbody').append('<tr data-resource="' + resource['id'] + '" data-stored="' + resource['datastore_active'] + '">' +
                                                  '<td>' + resource['format'] + '</td>' +
                                                  '<td>' + resource['name'] + '</td>' +
                                                  '<td>' +
-                                                   '<a href="' + resource['url'] + '" target="_blank" rel="noopener">Download <span class="sr-only">' + resource['name'] + '</span></a>' +
+                                                   '<a href="#">Download <span class="sr-only">' + resource['name'] + '</span></a>' +
                                                  '</td>' +
                                                '</tr>');
         }
 
         $('#table-resources tbody a').on('click', function(evt) {
-            evt.preventconfig();
-            var link = $(this).attr('href');
-            var format = $(this).parents().eq(1).find('select').val();
+            evt.preventDefault();
+            var link = config['ckanURL'] + '/download_resource/' + $(this).parents('tr').data('resource');
 
-            link += '?format=' + format;
+            if ($(this).parents('tr').data('stored')) {
+                link += '?format=' + $(this).parents().eq(1).find('select').val()
+            }
 
-            if (['tsv', 'csv'].indexOf(format) !== -1) link += '&bom=True';
+            console.log(link)
 
-            window.open(link, '_blank');
+            // window.open(link, '_blank');
         });
     }
 
@@ -382,7 +383,7 @@ var Dataset = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'datastore_search',
+            url: config['ckanAPI'] + 'datastore_search',
             data: { 'resource_id': config['package']['primary_resource'], 'limit': 3 }
         }).done(function(response) {
             var fields = response['result']['fields'];
@@ -462,7 +463,7 @@ var Dataset = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'package_show',
+            url: config['ckanAPI'] + 'package_show',
             data: data
         }).done(buildDataset);
     }
@@ -524,7 +525,7 @@ var Homepage = (function() {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckan'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
+            url: config['ckanAPI'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
             data: {
                 'rows': config['datasetsShown'],
                 'sort': 'metadata_modified desc'
