@@ -61,7 +61,7 @@
                     <dt>Contact<span class="sr-only">: </span></dt>
                     <dd data-field="owner_email">[dataset-owner-contact]</dd>
                   </dl>
-                  <h2><span class="fas fa-book-open"></span>&nbsp; Additional Info</h2>
+                  <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
                   <dl>
                     <!-- <dt>Categories<span class="sr-only">: </span></dt>
                     <dd>[categories]</dd> -->

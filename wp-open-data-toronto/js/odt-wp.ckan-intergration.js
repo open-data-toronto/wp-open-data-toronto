@@ -218,7 +218,7 @@ var Catalogue = (function() {
         if (config['isInitializing']) {
             var search = new URLSearchParams(window.location.search).get('search');
             if (!!search) {
-                filter['search'] = ['title:"' + search + '"', 'notes:"' + search + '"'];
+                filter['search'] = ['title:"' + search + '"', 'excerpt:"*' + search + '*"'];
                 $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>');
             }
         }
