@@ -32,13 +32,18 @@ var Catalogue = (function() {
         // Iterate over each of the datasets within the returned results
         for (var i = 0; i < data['results'].length; i++) {
             var row = data['results'][i];
-            var formatEle = '';
 
-            if (row['resource_formats']) {
-                var resource = row['resource_formats'].split(' ');
-                for (var j = 0; j < resource.length; j++) {
-                    formatEle += '<li class=' + resource[j].toLowerCase() + '>' + resource[j].toUpperCase() + '</li>';
+            var formats = [], formatEle = '';
+            for (var j = 0; j < row['resources'].length; j++) {
+                if (!!row['resources'][j]['format'] && formats.indexOf(row['resources'][j]['format']) == -1) {
+                    formats.push(row['resources'][j]['format'].toUpperCase());
                 }
+            }
+
+            formats.sort();
+
+            for (var j = 0; j < formats.length; j++) {
+                formatEle += '<li class=' + formats[j].toLowerCase() + '>' + formats[j] + '</li>';
             }
 
             // Build the HTML for each of the datasets and append to the table
@@ -78,7 +83,7 @@ var Catalogue = (function() {
                 var pageNumber = i + 1 + '';
                 $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
                                                            '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page=' + i + '>' +
-                                                             pageNumber +
+                                                              pageNumber +
                                                            '</a>' +
                                                          '</li>');
             }
@@ -128,10 +133,10 @@ var Catalogue = (function() {
                 }
             }
         }
-
+        console.log(response)
         for (var field in data) {
             for (var i = 0; i < data[field].length; i++) {
-                if (['owner_division', 'resource_formats'].indexOf(field) !== -1) {
+                if (['owner_division', 'tags'].indexOf(field) !== -1) {
                     var el = $('.filter-' + field + ' select');
                     el.prepend('<option data-field="' + field + '" value="' + data[field][i] + '">' + data[field][i] + '</option>');
                 } else {
@@ -183,7 +188,7 @@ var Catalogue = (function() {
             loadCatalogue();
         });
 
-        $('#select-divisions, #select-formats').select2({
+        $('#select-divisions, #select-tags').select2({
             language: {
                 noResults: function() {
                     return 'Start typing search term...';
@@ -216,10 +221,17 @@ var Catalogue = (function() {
         var filter = {};
 
         if (config['isInitializing']) {
-            var search = new URLSearchParams(window.location.search).get('search');
+            var url = new URLSearchParams(window.location.search);
+            var search = url.get('search'),
+                tags = url.get('tags');
+
             if (!!search) {
-                filter['search'] = ['title:"' + search + '"', 'excerpt:"*' + search + '*"'];
+                // filter['search'] = ['title:"' + search + '"', 'excerpt:"*' + search + '*"'];
                 $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>');
+            }
+
+            if (!!tags) {
+                $('#select-tags').append('<option selected="selected" data-select2-tag="true">' + tags + '</option>');
             }
         }
 
@@ -236,11 +248,15 @@ var Catalogue = (function() {
             filter['owner_division'].push('owner_division:"' + val + '"');
         });
 
-        $.each($('#select-formats').val(), function(idx, val) {
-            filter['resource_formats'] = filter[val] || [];
-            filter['resource_formats'].push('resource_formats:*' + val + '*');
+        $.each($('#select-tags').val(), function(idx, val) {
+            filter['tags'] = filter[val] || [];
+            filter['tags'].push('tags:"' + val + '"');
         });
 
+        // $.each($('#select-formats').val(), function(idx, val) {
+        //     filter['resource_formats'] = filter[val] || [];
+        //     filter['resource_formats'].push('resource_formats:*' + val + '*');
+        // });
 
         // Logic for search (search for dataset name and description)
         $.each($('#select-search').val(), function(idx, val) {
@@ -269,10 +285,24 @@ var Catalogue = (function() {
     }
 
     function loadCatalogueSidebar() {
+        var params = {
+            'q': [''],
+            'rows': [0],
+            'facet': ['on'],
+            'facet.field': ['dataset_category', 'owner_division', 'resource_formats', 'tags']
+        }
+
+        var query = []
+        for (var key in params) {
+            for (var i in params[key]) {
+                query.push(key + '=' + params[key][i])
+            }
+        }
+
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: config['ckanAPI'] + 'package_search?q=&rows=0&facet=on&facet.field=dataset_category&facet.field=owner_division&facet.field=resource_formats',
+            url: config['ckanAPI'] + 'package_search?' + query.join('&'),
         }).done(buildCatalogueSidebar);
     }
 
@@ -420,6 +450,9 @@ var Dataset = (function() {
             switch($(this).data('field')) {
                 case 'image_url':
                     $(this).css('background-image', 'url("' + data[$(this).data('field')] + '")');
+                    break;
+                case 'information_url':
+                    $(this).append('<a href="' + data[$(this).data('field')] + '">' + 'External Link' + '</a>');
                     break;
                 case 'tags':
                     for (var i = 0; i < data[$(this).data('field')].length; i++) {

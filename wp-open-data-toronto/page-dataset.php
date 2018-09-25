@@ -35,31 +35,31 @@
                   <h2><span class="fa fa-database"></span>&nbsp; About this Dataset</h2>
                   <dl>
                     <dt>Last updated<span class="sr-only">: </span></dt>
-                    <dd data-field="metadata_modified">[last-update-date]</dd>
+                    <dd data-field="metadata_modified"></dd>
                     <dt>Published on<span class="sr-only">: </span></dt>
-                    <dd data-field="published_date">[published-on-date]</dd>
+                    <dd data-field="published_date"></dd>
                     <dt>Refreshed<span class="sr-only">: </span></dt>
-                    <dd data-field="refresh_rate">[refresh-rate]</dd>
+                    <dd data-field="refresh_rate"></dd>
                   </dl>
                   <h2><span class="fa fa-table"></span>&nbsp; Data Attributes</h2>
                   <dl>
                     <dt>Dataset type<span class="sr-only">: </span></dt>
-                    <dd data-field="dataset_category">[type-of-data]</dd>
+                    <dd data-field="dataset_category"></dd>
                     <dt>Columns<span class="sr-only">: </span></dt>
-                    <dd data-field="shape_columns">[number-of-columns]</dd>
+                    <dd data-field="shape_columns"></dd>
                     <dt>Rows<span class="sr-only">: </span></dt>
-                    <dd data-field="shape_rows">[numbers-of-rows]</dd>
+                    <dd data-field="shape_rows"></dd>
                     <dt>More information<span class="sr-only">: </span></dt>
-                    <dd data-field="information_url">[more-information-link]</dd>
+                    <dd data-field="information_url"></dd>
                   </dl>
                   <h2><span class="fa fa-user"></span>&nbsp; Data Owner</h2>
                   <dl>
                     <dt>Owner type<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_type">[owner-type]</dd>
+                    <dd data-field="owner_type"></dd>
                     <dt>Published by<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_division">[dataset-owner-division]</dd>
+                    <dd data-field="owner_division"></dd>
                     <dt>Contact<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_email">[dataset-owner-contact]</dd>
+                    <dd data-field="owner_email"></dd>
                   </dl>
                   <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
                   <dl>
@@ -71,9 +71,9 @@
                   <h2><span class="fa fa-bar-chart"></span>&nbsp;  Analytics</h2>
                   <dl> -->
                       <dt>Pageviews<span class="sr-only">: </span></dt>
-                      <dd>[pageviews]</dd>
+                      <dd></dd>
                       <dt>Downloads<span class="sr-only">: </span></dt>
-                      <dd>[downloads]</dd>
+                      <dd></dd>
                     </dl>
                 </div>
               </div>
@@ -87,14 +87,14 @@
                 <div class="col-md-12">
                   <h3>About <span data-field="title"><span></h3>
                   <br/>
-                  <h2>Purpose</h2>
-                  <p>[dataset-purpose]</p>
+                  <!-- <h2>Purpose</h2>
+                  <p>[dataset-purpose]</p> -->
                   <h2>Collection Method</h2>
-                  <p data-field="collection_method">[data-collection-method]</p>
+                  <p data-field="collection_method"></p>
                   <h2>Description</h2>
-                  <p data-field="notes">[dataset-description]</p>
+                  <p data-field="notes"></p>
                   <h2>Limitations</h2>
-                  <p data-field="limitations">[dataset-limitations]</p>
+                  <p data-field="limitations"></p>
                 </div>
               </div>
 
@@ -202,14 +202,13 @@
                         <div id="collapse-explore" class="collapse" role="tabpanel" aria-labelledby="heading-explore">
                           <div class="row explore-line">
                             <div class="col-md-3">
-                              [logo-of-explore-software]
                             </div>
                             <div class="col-md-5">
-                              <h4 class="card-title">[explore-title]</h4>
-                              <p>[explore-description]</p>
+                              <h4 class="card-title"></h4>
+                              <p></p>
                             </div>
                             <div class="col-md-4">
-                              <a href="[explore-link]" class="btn btn-md" target="_blank">Open <span class="sr-only">[explore-title] Visualization</span> in a New Window</a>
+                              <a href="" class="btn btn-md" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
                             </div>
                           </div>
                         </div>
