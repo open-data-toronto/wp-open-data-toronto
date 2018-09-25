@@ -447,29 +447,25 @@ var Dataset = (function() {
 
         // Fill fields
         $('[data-field]').each(function(idx) {
-            switch($(this).data('field')) {
+            var field = $(this).data('field');
+            switch(field) {
                 case 'image_url':
-                    $(this).css('background-image', 'url("' + data[$(this).data('field')] + '")');
+                    $(this).css('background-image', 'url("' + data[field] + '")');
                     break;
                 case 'information_url':
-                    $(this).append('<a href="' + data[$(this).data('field')] + '">' + 'External Link' + '</a>');
+                    $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
                     break;
                 case 'tags':
-                    for (var i = 0; i < data[$(this).data('field')].length; i++) {
+                    for (var i = 0; i < data[field].length; i++) {
                         if (!$(this).is(':empty')) $(this).append(', ');
-                        $(this).append('<a href="/catalogue/?tags=' + data[$(this).data('field')][i]['display_name'] + '">' + data[$(this).data('field')][i]['display_name'] + '</a>');
+                        $(this).append('<a href="/catalogue/?tags=' + data[field][i]['display_name'] + '">' + data[field][i]['display_name'] + '</a>');
                     }
                     break;
-                case 'dataset_category':
-                    if (data[$(this).data('field')] != 'Tabular') {
-                        $('[data-field="shape_rows"').hide();
-                        $('[data-field="shape_rows"').prev().hide();
-
-                        $('[data-field="shape_columns"]').hide();
-                        $('[data-field="shape_columns"]').prev().hide();
-                    }
+                case 'metadata_modified':
+                    $(this).text(data[field].substring(0, 10));
+                    break
                 default:
-                    $(this).text(data[$(this).data('field')]);
+                    $(this).text(data[field]);
             }
         });
 
