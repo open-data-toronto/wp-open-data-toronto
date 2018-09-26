@@ -9,7 +9,7 @@ var Catalogue = (function() {
     $.extend(config, {
         'cataloguePages': 0,
         'currentPage': 0,
-        'datasetsPerPage': 5,
+        'datasetsPerPage': 3,
         'package': {}
     });
 
