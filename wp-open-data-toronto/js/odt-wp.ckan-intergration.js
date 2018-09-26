@@ -33,13 +33,11 @@ var Catalogue = (function() {
         for (var i = 0; i < data['results'].length; i++) {
             var row = data['results'][i];
 
-            var formats = [], formatEle = '';
-            for (var j = 0; j < row['resources'].length; j++) {
-                if (!!row['resources'][j]['format'] && formats.indexOf(row['resources'][j]['format']) == -1) {
-                    formats.push(row['resources'][j]['format'].toUpperCase());
-                }
-            }
+            var formats = row['resource_formats'].split(' '), formatEle = '';
 
+            formats = formats.filter(function(value, index, self) {
+                return self.indexOf(value) === index;
+            })
             formats.sort();
 
             for (var j = 0; j < formats.length; j++) {
@@ -133,7 +131,7 @@ var Catalogue = (function() {
                 }
             }
         }
-        console.log(response)
+
         for (var field in data) {
             for (var i = 0; i < data[field].length; i++) {
                 if (['owner_division', 'tags'].indexOf(field) !== -1) {
@@ -212,37 +210,30 @@ var Catalogue = (function() {
     }
 
     function loadCatalogue(pageNumber=0) {
-        // config empty catalogue page and no pagination
         $('.table-list').empty();
         $('#nav-catalogue').hide();
 
         config['currentPage'] = pageNumber;
-
-        var filter = {};
-
         if (config['isInitializing']) {
             var url = new URLSearchParams(window.location.search);
             var search = url.get('search'),
                 tags = url.get('tags');
 
-            if (!!search) {
-                // filter['search'] = ['title:"' + search + '"', 'excerpt:"*' + search + '*"'];
-                $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>');
-            }
+            // If redirected from home page search box
+            if (!!search) $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>');
 
-            if (!!tags) {
-                $('#select-tags').append('<option selected="selected" data-select2-tag="true">' + tags + '</option>');
-            }
+            // If redirected from dataset page tags selects
+            if (!!tags) $('#select-tags').append('<option selected="selected" data-select2-tag="true">' + tags + '</option>');
         }
 
-        // Logic for checkbox filters
+        var filter = {};
+
         $.each($('.checkbox-filter input:checked'), function(idx, ele) {
             var f = $(ele).data('field');
             filter[f] = filter[f] || [];
-            filter[f].push(f + ':"' + $(ele).val() + '"');
+            filter[f].push(f + ':*' + $(ele).val() + '*');
         });
 
-        // Logic for division dropdown
         $.each($('#select-divisions').val(), function(idx, val) {
             filter['owner_division'] = filter[val] || [];
             filter['owner_division'].push('owner_division:"' + val + '"');
@@ -253,12 +244,6 @@ var Catalogue = (function() {
             filter['tags'].push('tags:"' + val + '"');
         });
 
-        // $.each($('#select-formats').val(), function(idx, val) {
-        //     filter['resource_formats'] = filter[val] || [];
-        //     filter['resource_formats'].push('resource_formats:*' + val + '*');
-        // });
-
-        // Logic for search (search for dataset name and description)
         $.each($('#select-search').val(), function(idx, val) {
             filter[val] = filter[val] || [];
             filter[val].push('title:"' + val + '"');
@@ -323,26 +308,6 @@ var Dataset = (function() {
 
     /* ========= Private methods ========= */
 
-    function buildFeatures() {
-        if (!config['package'] || !$('#table-features tbody').is(':empty')) return;
-
-        $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: config['ckanAPI'] + 'datastore_search',
-            data: { 'resource_id': config['package']['primary_resource'] }
-        }).done(function(response) {
-            var fields = response['result']['fields'],
-                ele = '';
-
-            for (var i = 0; i < fields.length; i++) {
-                ele += '<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>';
-            }
-
-            $('#table-features tbody').append(ele);
-        });
-    }
-
     function buildDevelopers() {
         if (!config['package']) return;
 
@@ -405,6 +370,50 @@ var Dataset = (function() {
         });
     }
 
+    function buildExplore() {
+        if (!config['package']) return;
+
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: config['ckanAPI'] + 'resource_view_list',
+            data: { 'id': config['package']['primary_resource'] }
+        }).done(function(response) {
+            var results = response['result'];
+
+            for (var i = 0; i < results.length; i++) {
+                var view = results[i];
+                if (config['package']['dataset_category'] == 'Tabular' && view['view_type'] == 'recline_view') {
+                    var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                    $('#redirect-ckan').attr('href', viewURL);
+                    break;
+                }
+            }
+        });
+
+        // $('#redirect-ckan').attr('href', )
+    }
+
+    function buildFeatures() {
+        if (!config['package'] || !$('#table-features tbody').is(':empty')) return;
+
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: config['ckanAPI'] + 'datastore_search',
+            data: { 'resource_id': config['package']['primary_resource'] }
+        }).done(function(response) {
+            var fields = response['result']['fields'],
+                ele = '';
+
+            for (var i = 0; i < fields.length; i++) {
+                ele += '<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>';
+            }
+
+            $('#table-features tbody').append(ele);
+        });
+    }
+
     function buildPreview() {
         if (!config['package'] || !$('#table-preview tbody').is(':empty')) return;
 
@@ -434,10 +443,11 @@ var Dataset = (function() {
     }
 
     function buildUI() {
-        $('#heading-preview').on('click', buildPreview);
-        $('#heading-features').on('click', buildFeatures);
-        $('#heading-download').on('click', buildDownloads);
         $('#heading-developers').on('click', buildDevelopers);
+        $('#heading-download').on('click', buildDownloads);
+        $('#heading-explore').on('click', buildExplore);
+        $('#heading-features').on('click', buildFeatures);
+        $('#heading-preview').on('click', buildPreview);
 
         config['isInitializing'] = false;
     }

@@ -197,13 +197,14 @@
                         <div id="collapse-explore" class="collapse" role="tabpanel" aria-labelledby="heading-explore">
                           <div class="row explore-line">
                             <div class="col-md-3">
+                              <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png">
                             </div>
                             <div class="col-md-5">
-                              <h4 class="card-title"></h4>
-                              <p></p>
+                              <h4 class="card-title">Visualize this data!</h4>
+                              <p>Want to explore this data without having to download it? Try it here</p>
                             </div>
                             <div class="col-md-4">
-                              <a href="" class="btn btn-md" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
+                              <a href="#" class="btn btn-md" id="redirect-ckan" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
                             </div>
                           </div>
                         </div>
