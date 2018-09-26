@@ -474,6 +474,10 @@ var Dataset = (function() {
                 case 'metadata_modified':
                     $(this).text(data[field].substring(0, 10));
                     break
+                case 'notes':
+                    var converter = new showdown.Converter();
+                    $(this).html(converter.makeHtml(data[field]));
+                    break;
                 default:
                     $(this).text(data[field]);
             }
