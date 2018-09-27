@@ -232,7 +232,7 @@ var Catalogue = (function() {
         });
 
         $.each($('#select-tags').val(), function(idx, val) {
-            filter['tags'] = filter[val] || [];
+            filter['tags'] = filter['tags'] || [];
             filter['tags'].push('tags:"' + val + '"');
         });
 
