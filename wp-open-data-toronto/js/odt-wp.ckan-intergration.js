@@ -458,28 +458,32 @@ var Dataset = (function() {
         // Fill fields
         $('[data-field]').each(function(idx) {
             var field = $(this).data('field');
-            switch(field) {
-                case 'image_url':
-                    $(this).css('background-image', 'url("' + data[field] + '")');
-                    break;
-                case 'information_url':
-                    $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
-                    break;
-                case 'tags':
-                    for (var i = 0; i < data[field].length; i++) {
-                        if (!$(this).is(':empty')) $(this).append(', ');
-                        $(this).append('<a href="/catalogue/?tags=' + data[field][i]['display_name'] + '">' + data[field][i]['display_name'] + '</a>');
-                    }
-                    break;
-                case 'metadata_modified':
-                    $(this).text(data[field].substring(0, 10));
-                    break
-                case 'notes':
-                    var converter = new showdown.Converter();
-                    $(this).html(converter.makeHtml(data[field]));
-                    break;
-                default:
-                    $(this).text(data[field]);
+            if (!!data[field]) {
+                switch(field) {
+                    case 'image_url':
+                        $(this).css('background-image', 'url("' + data[field] + '")');
+                        break;
+                    case 'information_url':
+                        $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
+                        break;
+                    case 'tags':
+                        for (var i = 0; i < data[field].length; i++) {
+                            if (!$(this).is(':empty')) $(this).append(', ');
+                            $(this).append('<a href="/catalogue/?tags=' + data[field][i]['display_name'] + '">' + data[field][i]['display_name'] + '</a>');
+                        }
+                        break;
+                    case 'metadata_modified':
+                        $(this).text(data[field].substring(0, 10));
+                        break
+                    case 'notes':
+                        var converter = new showdown.Converter();
+                        $(this).html(converter.makeHtml(data[field]));
+                        break;
+                    default:
+                        $(this).text(data[field]);
+                }
+            } else {
+                $(this).prev().hide();
             }
         });
 

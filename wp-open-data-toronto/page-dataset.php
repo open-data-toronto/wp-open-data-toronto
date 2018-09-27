@@ -45,10 +45,10 @@
                   <dl>
                     <dt>Dataset type<span class="sr-only">: </span></dt>
                     <dd data-field="dataset_category"></dd>
-                    <!-- <dt>Columns<span class="sr-only">: </span></dt>
+                    <dt>Columns<span class="sr-only">: </span></dt>
                     <dd data-field="shape_columns"></dd>
                     <dt>Rows<span class="sr-only">: </span></dt>
-                    <dd data-field="shape_rows"></dd> -->
+                    <dd data-field="shape_rows"></dd>
                     <dt>More information<span class="sr-only">: </span></dt>
                     <dd data-field="information_url"></dd>
                   </dl>
@@ -58,18 +58,18 @@
                     <dd data-field="owner_type"></dd>
                     <dt>Published by<span class="sr-only">: </span></dt>
                     <dd data-field="owner_division"></dd>
-                    <!-- <dt>Contact<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_email"></dd> -->
+                    <dt>Contact<span class="sr-only">: </span></dt>
+                    <dd data-field="owner_email"></dd>
                   </dl>
                   <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
                   <dl>
                     <dt>Tags<span class="sr-only">: </span></dt>
                     <dd data-field="tags"></dd>
-                      <!-- <dt>Pageviews<span class="sr-only">: </span></dt>
-                      <dd></dd>
-                      <dt>Downloads<span class="sr-only">: </span></dt>
-                      <dd></dd> -->
-                    </dl>
+                    <dt>Pageviews<span class="sr-only">: </span></dt>
+                    <dd data-field="pageviews"></dd>
+                    <dt>Downloads<span class="sr-only">: </span></dt>
+                    <dd data-field="downloads"></dd>
+                  </dl>
                 </div>
               </div>
             </div>
