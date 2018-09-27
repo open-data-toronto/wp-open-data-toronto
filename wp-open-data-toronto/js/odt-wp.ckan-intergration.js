@@ -1,6 +1,17 @@
 var $ = jQuery.noConflict();
 $.extend(config, { 'isInitializing': true });
 
+/* ========= Utility functions ========= */
+
+function getURLParam(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results == null) {
+        return null;
+    } else {
+       return decodeURI(results[1]) || 0;
+    }
+}
+
 var Catalogue = (function() {
     'use strict';
 
@@ -199,7 +210,7 @@ var Catalogue = (function() {
        });
     }
 
-    function loadCatalogue(pageNumber=0) {
+    function loadCatalogue(pageNumber) {
         if (typeof(pageNumber) != 'number' || isNaN(pageNumber)) pageNumber = 0;
 
         $('.table-list').empty();
@@ -207,9 +218,8 @@ var Catalogue = (function() {
 
         config['currentPage'] = pageNumber;
         if (config['isInitializing']) {
-            var url = new URLSearchParams(window.location.search);
-            var search = url.get('search'),
-                tags = url.get('tags');
+            var search = getURLParam('search'),
+                tags = getURLParam('tags');
 
             // If redirected from home page search box
             if (!!search) $('#select-search').append('<option selected="selected" data-select2-tag="true">' + search + '</option>');
@@ -310,7 +320,7 @@ var Dataset = (function() {
                             '    url: "' + config['ckanAPI'] + 'package_search",\n' +
                             '    data: { "q": \'title:"' + config['package']['title'] + '"\' }\n' +
                             '}).done(function(response) {\n' +
-                            '   console.log(response);\n' +
+                            '    console.log(response);\n' +
                             '});';
             $('#code-javascript').text(jsSnippet);
         }
@@ -419,7 +429,8 @@ var Dataset = (function() {
             var data = response['result']['records'];
 
             for (var i = 0; i < fields.length; i++) {
-                if (!fields[i]['id'].startsWith('_')) {
+                console.log(typeof(fields[i]['id']))
+                if (!fields[i]['id'].indexOf('_') == 0) {
                     $('#table-preview thead').append('<th>' + fields[i]['id'] + '</th>');
                 }
             }
@@ -427,7 +438,7 @@ var Dataset = (function() {
             for (var i = 0; i < data.length; i++) {
                 var row = '<tr>';
                 for (var j in fields) {
-                    if (!fields[j]['id'].startsWith('_')) row += '<td>' + data[i][fields[j]['id']] + '</td>';
+                    if (!fields[j]['id'].indexOf('_') == 0) row += '<td>' + data[i][fields[j]['id']] + '</td>';
                 }
                 $('#table-preview tbody').append(row + '</tr>');
             }

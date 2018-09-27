@@ -4,11 +4,12 @@
  * @package WP_Bootstrap_Starter
  */
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <title><?php echo get_bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
 
