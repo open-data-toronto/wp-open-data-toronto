@@ -1,20 +1,22 @@
 <!-- Sidebar for Dataset Catalogue Page -->
 <div class="sidebar" style="border: 0" role="complementary">
   <div class="filter filter-dataset">
-    <h2>Search Catalogue</h2>
-    <select id="select-search" multiple="multiple"></select>
+    <h2>Search</h2>
+    <select class="select-select2" id="select-search" multiple="multiple"></select>
   </div>
   <br/>
 
+  <hr/>
+
   <div class="filter filter-owner_division" aria-label="Filter datasets by division">
     <h2>Division</h2>
-    <select id="select-divisions" data-field="owner_division" multiple="multiple"></select>
+    <select class="select-select2" id="select-divisions" data-field="owner_division" multiple="multiple"></select>
   </div>
   <br/>
 
   <div class="filter filter-tags" aria-label="Filter datasets by tags">
     <h2>Tags</h2>
-    <select id="select-tags" data-field="tags" multiple="multiple"></select>
+    <select class="select-select2" id="select-tags" data-field="tags" multiple="multiple"></select>
   </div>
   <br/>
 

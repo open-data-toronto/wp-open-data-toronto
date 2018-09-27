@@ -82,8 +82,6 @@
                 <div class="col-md-12">
                   <h3>About <span data-field="title"><span></h3>
                   <br/>
-                  <!-- <h2>Purpose</h2>
-                  <p>[dataset-purpose]</p> -->
                   <h2>Collection Method</h2>
                   <p data-field="collection_method"></p>
                   <h2>Description</h2>

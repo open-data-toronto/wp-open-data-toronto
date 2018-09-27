@@ -174,29 +174,19 @@ var Catalogue = (function() {
     }
 
     function buildUISidebar() {
-        $('#select-search').select2({
+        var select2Settings = {
             language: {
                 noResults: function() {
                     return 'Start typing search term...';
                 }
             },
-            tags: true,
             width: '100%'
-        }).on('change.select2', function() {
-            loadCatalogue();
-        });
+        }
 
-        $('#select-divisions, #select-tags').select2({
-            language: {
-                noResults: function() {
-                    return 'Start typing search term...';
-                }
-            },
-            maximumSelectionLength: 1,
-            width: '100%'
-        }).on('change.select2', function() {
-            loadCatalogue();
-        });
+        $('#select-search').select2($.extend({}, select2Settings, { 'tags': true }));
+        $('#select-divisions').select2($.extend({}, select2Settings, { 'maximumSelectionLength': 1 }));
+        $('#select-tags').select2(select2Settings);
+        $('.select-select2').on('change.select2', loadCatalogue);
 
         $('.checkbox-filter input').on('click', function() {
            if ($(this).is(':checked')) {
@@ -210,6 +200,8 @@ var Catalogue = (function() {
     }
 
     function loadCatalogue(pageNumber=0) {
+        if (typeof(pageNumber) != 'number' || isNaN(pageNumber)) pageNumber = 0;
+
         $('.table-list').empty();
         $('#nav-catalogue').hide();
 
