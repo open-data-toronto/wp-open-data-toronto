@@ -429,7 +429,6 @@ var Dataset = (function() {
             var data = response['result']['records'];
 
             for (var i = 0; i < fields.length; i++) {
-                console.log(typeof(fields[i]['id']))
                 if (!fields[i]['id'].indexOf('_') == 0) {
                     $('#table-preview thead').append('<th>' + fields[i]['id'] + '</th>');
                 }
