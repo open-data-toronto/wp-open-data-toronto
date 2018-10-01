@@ -3,12 +3,13 @@ $.extend(config, { 'isInitializing': true });
 
 /* ========= Utility functions ========= */
 
+// Retrieve parameters from URL
 function getURLParam(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results == null) {
         return null;
     } else {
-       return decodeURI(results[1]) || 0;
+        return decodeURI(results[1]) || 0;
     }
 }
 
@@ -18,10 +19,9 @@ var Catalogue = (function() {
     /* ========= Global variables ========= */
 
     $.extend(config, {
-        'cataloguePages': 0,
-        'currentPage': 0,
-        'datasetsPerPage': 3,
-        'package': {}
+        'cataloguePages': 0,                  // Total number of pages within the catalogue
+        'currentPage': 0,                     // Current page number displayed by the catalogue page
+        'datasetsPerPage': 3                  // Number of datasets to display per page
     });
 
     /* ========= Private methods ========= */
@@ -30,32 +30,29 @@ var Catalogue = (function() {
         var data = response['result'];
         config['cataloguePages'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
+        // If no datasets are returned (due to searches/filters)
         if (data['results'].length == 0) {
-            var ele = '<div class="row">' +
-                        '<div class="col-md-12">' +
-                          '<h2>No datasets found </h2>' +
-                        '</div>' +
-                      '</div>';
-
-            $('.table-list').append(ele);
+            $('.table-list').append('<div class="row">' +
+                                      '<div class="col-md-12">' +
+                                        '<h2>No datasets found </h2>' +
+                                      '</div>' +
+                                    '</div>');
+            return
         }
 
-        // Iterate over each of the datasets within the returned results
+        // Iterrates over each of the results and build the HTML for each of the dataset
         for (var i = 0; i < data['results'].length; i++) {
             var row = data['results'][i];
 
-            var formats = row['resource_formats'].split(' '), formatEle = '';
-
-            formats = formats.filter(function(value, index, self) {
-                return self.indexOf(value) === index;
-            })
-            formats.sort();
+            // Build the format tags
+            var formats = row['resource_formats'].split(' '),
+                formatEle = '';
 
             for (var j = 0; j < formats.length; j++) {
                 formatEle += '<li class=' + formats[j].toLowerCase() + '>' + formats[j] + '</li>';
             }
 
-            // Build the HTML for each of the datasets and append to the table
+            // Build the dataset card with field values
             var ele = '<div class="row">' +
                         '<div class="col-md-8">' +
                           '<h2><a href="/package#' + row['name'] + '">' + row['title'] + '</a></h2>' +
@@ -79,15 +76,15 @@ var Catalogue = (function() {
                         '</div>' +
                       '</div>';
 
-            // Append the dataset to the catalogue
             $('.table-list').append(ele);
         }
 
-        // Build pagination nav if number of datasets in the catalogue is more than the datasetsPerPage limit
+        // Build the catalogue page navigation
+        // This needs to be built on every catalogue refresh because total number of pages changes based on searches and filters
         if (data['count'] > config['datasetsPerPage']) {
             $('#nav-catalogue .page-remove').remove();
 
-            // Build the pages navs
+            // Build the page buttons
             for (var i = 0; i < config['cataloguePages']; i++) {
                 var pageNumber = i + 1 + '';
                 $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
@@ -97,7 +94,7 @@ var Catalogue = (function() {
                                                          '</li>');
             }
 
-            // Controls the css for the pagination nav buttons
+            // Disable/enable the previous/next page buttons on either sides of the page navigation based on current page
             switch(config['currentPage']) {
                 case 0:
                     $('#nav-catalogue .page-keep').first().addClass('disabled');
@@ -111,9 +108,11 @@ var Catalogue = (function() {
                     $('#nav-catalogue .page-keep').removeClass('disabled');
             }
 
-            $('#nav-catalogue li:nth-child(' + (config['currentPage'] + 2) + ')').addClass('active'); // +1 for index starting at 1 and +1 for the previous page element
+            // Create/remove highlight on the selected page number button
+            // +2 because index starts at 1 and +1 for the previous page button
+            $('#nav-catalogue li:nth-child(' + (config['currentPage'] + 2) + ')').addClass('active');
 
-            // Event function needs to be re-created as the page number nav buttons are recreated each time the catalogue is loaded
+            // Event function needs to be re-created as the page number buttons are recreated each time the catalogue is loaded
             $('#nav-catalogue .page-remove a').on('click', function() {
                 loadCatalogue($(this).data('page'))
             });
@@ -126,16 +125,20 @@ var Catalogue = (function() {
 
     function buildCatalogueSidebar(response) {
         var data = {};
+
         for (var i in response['result']['search_facets']) {
             var field = response['result']['search_facets'][i];
+
             for (var j in field['items']) {
                 data[field['title']] = data[field['title']] || [];
 
-                if (['resource_formats'].indexOf(field['title']) !== -1) {
+                if (['resource_formats'].indexOf(field['title']) !== -1) { // Convert array fields stored on CKAN
                     var splits = field['items'][j]['name'].split(' ');
 
                     for (var k in splits) {
-                        if (data[field['title']].indexOf(splits[k]) == -1) data[field['title']].push(splits[k]);
+                        if (data[field['title']].indexOf(splits[k]) == -1) {
+                            data[field['title']].push(splits[k]);
+                        }
                     }
                 } else {
                     data[field['title']].push(field['items'][j]['name']);
@@ -146,9 +149,11 @@ var Catalogue = (function() {
         for (var field in data) {
             for (var i = 0; i < data[field].length; i++) {
                 if (['owner_division', 'tags'].indexOf(field) !== -1) {
+                    // Select2 dropdown filters
                     var el = $('.filter-' + field + ' select');
                     el.prepend('<option data-field="' + field + '" value="' + data[field][i] + '">' + data[field][i] + '</option>');
                 } else {
+                    // Checkboxes filters
                     var el = $('.filter-' + field + ' ul');
                     el.prepend('<div class="checkbox checkbox-filter">' +
                                 '<label><input type="checkbox" data-field="' + field + '" value="' + data[field][i] + '">&nbsp;' + data[field][i] + '</label>' +
@@ -161,7 +166,7 @@ var Catalogue = (function() {
     }
 
     var buildUI = function() {
-        // Controls the previous and next nav buttons for pagination
+        // Controls the previous and next navigation buttons for pagination
         $('#nav-catalogue .page-keep a').on('click', function() {
             var control = $(this).data('page') + '';
 
@@ -194,19 +199,20 @@ var Catalogue = (function() {
             width: '100%'
         }
 
-        $('#select-search').select2($.extend({}, select2Settings, { 'tags': true }));
         $('#select-divisions').select2($.extend({}, select2Settings, { 'maximumSelectionLength': 1 }));
+        $('#select-search').select2($.extend({}, select2Settings, { 'tags': true }));
         $('#select-tags').select2(select2Settings);
+
         $('.select-select2').on('change.select2', loadCatalogue);
 
         $('.checkbox-filter input').on('click', function() {
-           if ($(this).is(':checked')) {
-               $(this).parent('label').addClass('checkbox-checked');
-           } else {
-               $(this).parent('label').removeClass('checkbox-checked');
-           }
+            if ($(this).is(':checked')) {
+                $(this).parent('label').addClass('checkbox-checked');
+            } else {
+                $(this).parent('label').removeClass('checkbox-checked');
+            }
 
-           loadCatalogue();
+            loadCatalogue();
        });
     }
 
@@ -241,15 +247,20 @@ var Catalogue = (function() {
             filter['owner_division'].push('owner_division:"' + val + '"');
         });
 
-        $.each($('#select-tags').val(), function(idx, val) {
-            filter['tags'] = filter['tags'] || [];
-            filter['tags'].push('tags:"' + val + '"');
-        });
-
         $.each($('#select-search').val(), function(idx, val) {
             filter[val] = filter[val] || [];
             filter[val].push('title:"' + val + '"');
-            filter[val].push('notes:"' + val + '"');
+
+            var tokens = val.split(' ');
+            for (var i = 0; i < tokens.length; i++) {
+                tokens[i] = '*' + tokens[i] + '*';
+            }
+            filter[val].push('excerpt:(' + tokens.join(' AND ') + ')');
+        });
+
+        $.each($('#select-tags').val(), function(idx, val) {
+            filter['tags'] = filter['tags'] || [];
+            filter['tags'].push('tags:"' + val + '"');
         });
 
         // Merge searches with multiple values per field searched by OR
@@ -307,6 +318,8 @@ var Catalogue = (function() {
 
 var Dataset = (function() {
     'use strict';
+
+    $.extend(config, { 'package': {} });
 
     /* ========= Private methods ========= */
 
@@ -392,8 +405,6 @@ var Dataset = (function() {
                 }
             }
         });
-
-        // $('#redirect-ckan').attr('href', )
     }
 
     function buildFeatures() {
