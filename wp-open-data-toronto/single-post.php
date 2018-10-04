@@ -32,7 +32,7 @@
 
   <section class="content-area" aria-label="Blog Post">
     <div class="container">
-      < div class="row">
+      <div class="row">
         <div class="col-md-12">
           <!-- Breadcrumbs -->
           <nav class="breadcrumb" aria-label="breadcrumbs">
