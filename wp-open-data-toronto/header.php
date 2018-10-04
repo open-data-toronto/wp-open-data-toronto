@@ -95,10 +95,10 @@
 
                   <!-- Search -->
                   <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get" aria-label="Search Open Data Website">
-                    <label class="sr-only" for="search">
+                    <label class="sr-only" for="s">
                       Search
                     </label>
-                    <input type="text" class="form-control mr-sm-2" placeholder="Search" name="s" aria-label="Search" id="search" value="<?php the_search_query() ?>">
+                    <input type="text" class="form-control mr-sm-2" placeholder="Search" name="s" aria-label="Search site" id="s" value="<?php the_search_query() ?>">
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">
                       Search
                     </button>
