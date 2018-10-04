@@ -77,7 +77,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+                  <ul>
                   <!-- Primary Navigation -->
                   <?php
                   wp_nav_menu([
@@ -92,7 +92,8 @@
                     'walker'          => new wp_bootstrap_navwalker()
                   ]);
                   ?>
-
+                </ul>
+                
                   <!-- Search -->
                   <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get" aria-label="Search Open Data Website">
                     <label class="sr-only" for="s">
