@@ -29,7 +29,7 @@ Version:         1.2.0
 /* Default */ *:focus{outline-style: solid; outline-color: #cccccc; outline-width: 2px}
 /* COT Header */ #super-header a:focus{outline-style: solid; outline-color: #222222; outline-width: 1px;text-decoration: underline;}
 /* Text */ #content a:focus{text-decoration: underline; border: 0;}
-/* Buttons */ button:focus, a.btn:focus{background: #222222 !important;}
+/* Buttons */ button:focus, a.btn:focus{background: #abdbff !important;}
 /* Breadcrumbs and Sidebar */ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{background: #FFEB9C;}
 /* Tables */ .table a:focus{background: #FFEB9C;}
 
