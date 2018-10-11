@@ -110,12 +110,7 @@
 
                         <div id="collapse-preview" class="collapse" role="tabpanel" aria-labelledby="heading-preview">
                           <div class="row">
-                            <div class="col-md-12">
-                              <table class="table table-striped table-responsive" id="table-preview">
-                                <thead></thead>
-                                <tbody></tbody>
-                              </table>
-                            </div>
+                            <div class="col-md-12"></div>
                           </div>
                         </div>
                       </div>
@@ -193,7 +188,7 @@
                         </div>
 
                         <div id="collapse-explore" class="collapse" role="tabpanel" aria-labelledby="heading-explore">
-                          <div class="row explore-line">
+                          <div class="row explore-line" id="explore-ckan">
                             <div class="col-md-3">
                               <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png">
                             </div>
@@ -203,6 +198,18 @@
                             </div>
                             <div class="col-md-4">
                               <a href="#" class="btn btn-md" id="redirect-ckan" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
+                            </div>
+                          </div>
+                          <div class="row explore-line" id="explore-esri">
+                            <div class="col-md-3">
+                              <img src="https://i1.wp.com/geoawesomeness.com/wp-content/uploads/2016/09/Esri-logo.jpg?fit=754%2C754">
+                            </div>
+                            <div class="col-md-5">
+                              <h4 class="card-title">Visualize with advanced mapping features</h4>
+                              <p>Want to explore this geospatial data further? Try ArcGIS, where you could create and share maps like the one in "Preview Data" or combine it with other geospatial data!</p>
+                            </div>
+                            <div class="col-md-4">
+                              <a href="#" class="btn btn-md" id="redirect-esri" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
                             </div>
                           </div>
                         </div>

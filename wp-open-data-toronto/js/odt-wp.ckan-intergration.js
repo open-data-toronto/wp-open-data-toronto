@@ -13,6 +13,23 @@ function getURLParam(name){
     }
 }
 
+function getFullDate(date) {
+    var day = parseInt(date[2]),
+        month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'][(parseInt(date[1]) - 1)],
+        year = date[0];
+
+    return month + ' ' + day + ', ' + year;
+}
+
+function getCKAN(endpoint, data, callback) {
+    $.ajax({
+        dataType: 'json',
+        type: 'GET',
+        url: config['ckanAPI'] + endpoint,
+        data: data,
+    }).done(callback).fail(function( jqXHR, textStatus, errorThrown ) {console.log(jqXHR)});
+}
+
 var Catalogue = (function() {
     'use strict';
 
@@ -21,7 +38,7 @@ var Catalogue = (function() {
     $.extend(config, {
         'cataloguePages': 0,                  // Total number of pages within the catalogue
         'currentPage': 0,                     // Current page number displayed by the catalogue page
-        'datasetsPerPage': 3                  // Number of datasets to display per page
+        'datasetsPerPage': 15                 // Number of datasets to display per page
     });
 
     /* ========= Private methods ========= */
@@ -388,34 +405,35 @@ var Dataset = (function() {
     function buildExplore() {
         if (!config['package']) return;
 
-        $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: config['ckanAPI'] + 'resource_view_list',
-            data: { 'id': config['package']['primary_resource'] }
-        }).done(function(response) {
-            var results = response['result'];
+        var dataset = config['package'];
 
-            for (var i = 0; i < results.length; i++) {
-                var view = results[i];
-                if (config['package']['dataset_category'] == 'Tabular' && view['view_type'] == 'recline_view') {
-                    var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
-                    $('#redirect-ckan').attr('href', viewURL);
-                    break;
-                }
-            }
-        });
+        switch (dataset['dataset_category']) {
+            case 'Tabular':
+                $('#explore-esri').hide();
+                getCKAN('resource_view_list', { 'id': config['package']['primary_resource'] }, function(response) {
+                    var results = response['result'];
+
+                    for (var i = 0; i < results.length; i++) {
+                        var view = results[i];
+                        if (view['view_type'] == 'recline_view') {
+                            var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                            break;
+                        }
+                    }
+                });
+                $('#redirect-ckan').attr('href', viewURL);
+                break;
+            case 'Geospatial':
+                $('#explore-ckan').hide();
+                $('#redirect-ckan').attr('href', config['package']['explore_url']);
+                break;
+        }
     }
 
     function buildFeatures() {
         if (!config['package'] || !$('#table-features tbody').is(':empty')) return;
 
-        $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: config['ckanAPI'] + 'datastore_search',
-            data: { 'resource_id': config['package']['primary_resource'] }
-        }).done(function(response) {
+        getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource'] }, function(response) {
             var fields = response['result']['fields'],
                 ele = '';
 
@@ -428,31 +446,47 @@ var Dataset = (function() {
     }
 
     function buildPreview() {
-        if (!config['package'] || !$('#table-preview tbody').is(':empty')) return;
+        if (!config['package'] || !$('#collapse-preview .col-md-12').is(':empty')) return;
+        var dataset = config['package'];
 
-        $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: config['ckanAPI'] + 'datastore_search',
-            data: { 'resource_id': config['package']['primary_resource'], 'limit': 3 }
-        }).done(function(response) {
-            var fields = response['result']['fields'];
-            var data = response['result']['records'];
+        switch (dataset['dataset_category']) {
+            case 'Tabular':
+                getCKAN('datastore_search', { 'resource_id': dataset['primary_resource'], 'limit': 3 }, function(response) {
+                    var fields = response['result']['fields'],
+                        data = response['result']['records'];
 
-            for (var i = 0; i < fields.length; i++) {
-                if (!fields[i]['id'].indexOf('_') == 0) {
-                    $('#table-preview thead').append('<th>' + fields[i]['id'] + '</th>');
-                }
-            }
+                    var head = '<thead>',
+                        body = '<tbody>';
 
-            for (var i = 0; i < data.length; i++) {
-                var row = '<tr>';
-                for (var j in fields) {
-                    if (!fields[j]['id'].indexOf('_') == 0) row += '<td>' + data[i][fields[j]['id']] + '</td>';
-                }
-                $('#table-preview tbody').append(row + '</tr>');
-            }
-        });
+                    for (var i = 0; i < data.length; i++) {
+                        body += '<tr>';
+                        for (var j in fields) {
+                            if (i == 0) head += '<th>' + fields[j]['id'] + '</th>';
+                            body += '<td>' + data[i][fields[j]['id']] + '</td>';
+                        }
+                    }
+
+                    $('#collapse-preview .col-md-12').append('<table class="table table-striped table-responsive">' + head + body + '</table>');
+                });
+                break;
+            case 'Geospatial':
+                getCKAN('resource_view_list', { 'id': config['package']['primary_resource'] }, function(response) {
+                    var results = response['result'];
+
+                    for (var i = 0; i < results.length; i++) {
+                        var view = results[i];
+                        if (view['view_type'] == 'geojson_view') {
+                            var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                            var w = $('#collapse-preview .col-md-12').width(),
+                                h = w / 2;
+
+                            $('#collapse-preview .col-md-12').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                            break;
+                        }
+                    }
+                });
+                break;
+        }
     }
 
     function buildUI() {
@@ -486,7 +520,7 @@ var Dataset = (function() {
                         }
                         break;
                     case 'metadata_modified':
-                        $(this).text(data[field].substring(0, 10));
+                        $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
                         break
                     case 'notes':
                         var converter = new showdown.Converter();
@@ -507,29 +541,22 @@ var Dataset = (function() {
             }
         }
 
-        if (!data['primary_resource'] || !inDatastore) {
-            $('#heading-features').hide();
+        if (data['dataset_category'] == 'Archived') {
+           $('#heading-preview, #heading-features, #heading-explore').hide();
+        } else if (!data['primary_resource'] || (data['dataset_category'] == 'Tabular' && !inDatastore)) {
             $('#heading-preview').hide();
+            $('#heading-features').hide();
+        } else if (data['dataset_category'] == 'Geospatial') {
+            $('#heading-features').hide();
         }
 
         buildUI();
     }
 
-    function loadDataset() {
-        var data = { 'id': window.location.hash.substr(1) };
-
-        $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: config['ckanAPI'] + 'package_show',
-            data: data
-        }).done(buildDataset);
-    }
-
     /* ========= Public methods ========= */
 
     function init() {
-        loadDataset();
+        getCKAN('package_show', { 'id': window.location.hash.substr(1) }, buildDataset);
     }
 
     return {
@@ -579,22 +606,10 @@ var Homepage = (function() {
         }
     }
 
-    function loadDatasetList() {
-        $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: config['ckanAPI'] + 'package_search?fl=name&fl=title&fl=metadata_modified',
-            data: {
-                'rows': config['datasetsShown'],
-                'sort': 'metadata_modified desc'
-            }
-        }).done(buildWidget);
-    }
-
     /* ========= Private methods ========= */
 
     function init() {
-        loadDatasetList();
+        getCKAN('package_search?fl=name&fl=title&fl=metadata_modified', { 'rows': config['datasetsShown'], 'sort': 'metadata_modified desc' }, buildWidget);
     }
 
     return {
