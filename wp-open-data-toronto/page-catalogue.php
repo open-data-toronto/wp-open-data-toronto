@@ -59,9 +59,7 @@
 </div>
 
 <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        Catalogue.init();
-    });
+    jQuery(document).ready(function($) { init(); });
 </script>
 
 <?php get_footer();

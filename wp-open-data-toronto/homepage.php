@@ -86,9 +86,7 @@
 </div>
 
 <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        Homepage.init();
-    });
+    jQuery(document).ready(function($) { init(); });
 </script>
 
 <?php get_footer(); ?>

@@ -544,8 +544,7 @@ var Dataset = (function() {
         if (data['dataset_category'] == 'Archived') {
            $('#heading-preview, #heading-features, #heading-explore').hide();
         } else if (!data['primary_resource'] || (data['dataset_category'] == 'Tabular' && !inDatastore)) {
-            $('#heading-preview').hide();
-            $('#heading-features').hide();
+            $('#heading-preview, #heading-features').hide();
         } else if (data['dataset_category'] == 'Geospatial') {
             $('#heading-features').hide();
         }

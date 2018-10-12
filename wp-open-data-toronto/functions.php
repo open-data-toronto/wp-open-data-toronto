@@ -1,24 +1,29 @@
 <?php
+add_action( 'init', 'custom_url_rewrite' );
+function custom_url_rewrite() {
+    add_rewrite_rule(
+        '^package/([^/]+)([/]?)(.*)/?$',
+        'index.php?pagename=package&package=$matches[1]',
+        'top'
+    );
+}
 
-// function custom_rewrite_basic() {
-//     add_rewrite_rule('^dataset/([a-zA-Z0-9-]+)/?', 'index.php?post_type=page&name=dataset&dataset=$matches[1]', 'top');
-// }
-// add_action('init', 'custom_rewrite_basic');
+add_filter('query_vars', function( $vars ){
+    $vars[] = 'package';
+    return $vars;
+});
+
+function custom_flush_rewrites() {
+    global $wp_rewrite;
+    $wp_rewrite->flush_rules();
+}
+register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+register_activation_hook( __FILE__, 'custom_flush_rewrites' );
 
 function my_theme_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 }
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
-
-// function template_chooser($template) {
-//     global $wp_query;
-//     $post_type = get_query_var('post_type');
-//     if ( $wp_query->is_search && $post_type == 'dataset' ) {
-//         return locate_template('dataset-search.php');  //  redirect to archive-search.php
-//     }
-//     return $template;
-// }
-// add_filter('template_include', 'template_chooser');
 
 add_theme_support( 'post-thumbnails' );
 

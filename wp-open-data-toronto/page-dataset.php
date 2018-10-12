@@ -267,7 +267,8 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-        Dataset.init();
+        var package_name = '<?php echo get_query_var( 'package' ) ?>';
+        init(package_name);
     });
 </script>
 
