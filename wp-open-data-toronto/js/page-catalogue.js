@@ -63,7 +63,7 @@ function buildCatalogue(response) {
                     '<div class="col-md-4 text-right attributes">' +
                       '<p>' +
                         '<span class="sr-only">Last Updated: </span>' +
-                        row['published_date'] + '&nbsp; ' +
+                        getFullDate(row['published_date'].split('-')) + '&nbsp; ' +
                         '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
                       '</p>' +
                       '<p>' +
@@ -102,18 +102,18 @@ function buildCatalogue(response) {
         }
 
         // Disable/enable the previous/next page buttons on either sides of the page navigation based on current page
-        // switch(state['page']) {
-        //     case 0:
-        //         $('#nav-catalogue .page-keep').first().addClass('disabled');
-        //         $('#nav-catalogue .page-keep').last().removeClass('disabled');
-        //         break;
-        //     case (state['size'] - 1):
-        //         $('#nav-catalogue .page-keep').last().addClass('disabled');
-        //         $('#nav-catalogue .page-keep').first().removeClass('disabled');
-        //         break;
-        //     default:
-        //         $('#nav-catalogue .page-keep').removeClass('disabled');
-        // }
+        switch(state['page']) {
+            case 0:
+                $('#nav-catalogue .page-keep').first().addClass('disabled');
+                $('#nav-catalogue .page-keep').last().removeClass('disabled');
+                break;
+            case (state['size'] - 1):
+                $('#nav-catalogue .page-keep').last().addClass('disabled');
+                $('#nav-catalogue .page-keep').first().removeClass('disabled');
+                break;
+            default:
+                $('#nav-catalogue .page-keep').removeClass('disabled');
+        }
 
         $('[data-page="' + state['page'] + '"]').parent('li').addClass('active');
 
