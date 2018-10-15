@@ -187,7 +187,7 @@ function buildDataset(response) {
                 case 'tags':
                     for (var i = 0; i < data[field].length; i++) {
                         if (!$(this).is(':empty')) $(this).append(', ');
-                        $(this).append('<a href="/catalogue/' +  + '">' + data[field][i]['display_name'] + '</a>');
+                        $(this).append('<a href="/catalogue?vocab_tags=' + data[field][i]['display_name'] + '">' + data[field][i]['display_name'] + '</a>');
                     }
                     break;
                 case 'metadata_modified':

@@ -11,8 +11,8 @@ $.extend(config, {
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
     'filters': {
         'checkboxes': ['dataset_category', 'resource_formats'],
-        'dropdowns': ['owner_division', 'vocab_keywords'],
-        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'vocab_keywords']
+        'dropdowns': ['owner_division', 'vocab_tags'],
+        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'vocab_tags']
     },
     'select2': {
         'language': {
@@ -162,7 +162,6 @@ function buildCatalogueSidebar(response) {
 
             if (config['filters']['dropdowns'].indexOf(field) !== -1) {         // Select2 dropdowns filters
                 var checked = !!selected && selected.indexOf(value) !== -1 ? ' selected="selected" ' : ' ';
-
                 $('.filter-' + field + ' select').prepend('<option' + checked + 'data-field="' + field + '" value="' + value + '">' +
                                                             value +
                                                           '</option>');
@@ -211,7 +210,7 @@ var buildUI = function() {
 function buildUISidebar() {
     $('#select-division').select2($.extend({}, config['select2'], { 'maximumSelectionLength': 1 }));
     $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
-    $('#select-tag').select2(config['select2']);
+    $('#select-vocab_tags').select2(config['select2']);
 
     $('.select-select2').on('change.select2', function() {
         state['filters'][$(this).data('field')] = $(this).val();
@@ -232,12 +231,28 @@ function buildUISidebar() {
 function loadCatalogue() {
     if (state['page'] != 0 && (state['page'] < 0 || state['page'] >= state['size'])) return;
 
-    history.replaceState(state, '');
-
     $('.table-list').empty();
     $('#nav-catalogue').hide();
 
     var filters = {};
+
+    if (config['isInitializing']) {
+        var redirectFilters = ['search', 'vocab_tags'];
+
+        for (i in redirectFilters) {
+            var k = redirectFilters[i],
+                v = getURLParam(redirectFilters[i]);
+
+            if (!!v) {
+                filters[k] = filters[k] || [];
+                filters[k].push(v);
+            }
+        }
+
+        state['filters'] = $.extend(true, state['filters'], filters);
+        history.replaceState(state, '', '/catalogue');
+    }
+
     for (var f in state['filters']) {
         if (!state['filters'][f] || !state['filters'][f].length) continue;
 
@@ -278,6 +293,7 @@ function loadCatalogue() {
         'start': state['page'] * config['datasetsPerPage']
     }
 
+    history.replaceState(state, '');
     getCKAN('package_search', params, buildCatalogue);
 }
 
@@ -286,6 +302,7 @@ function loadCatalogueSidebar() {
         'q': [''],
         'rows': [0],
         'facet': ['on'],
+        'facet.limit': [-1],
         'facet.field': config['filters']['filters']
     }
 
