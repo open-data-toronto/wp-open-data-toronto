@@ -3,16 +3,16 @@ var $ = jQuery.noConflict(),
         'filters': {},
         'page': 0,
         'size': 1
-    }
+    };
 
 $.extend(config, {
     'isInitializing': true,
-    'cataloguePages': 0,                  // Total number of pages within the catalogue
-    'datasetsPerPage': 15,                 // Number of datasets to display per page
+    'cataloguePages': 0,                                                        // Total number of pages within the catalogue
+    'datasetsPerPage': 10,                                                      // Number of datasets to display per page
     'filters': {
         'checkboxes': ['dataset_category', 'resource_formats'],
-        'dropdowns': ['owner_division', 'tags'],
-        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'tags']
+        'dropdowns': ['owner_division', 'vocab_keywords'],
+        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'vocab_keywords']
     },
     'select2': {
         'language': {
@@ -85,34 +85,44 @@ function buildCatalogue(response) {
         // Build the page buttons
         for (var i = 0; i < state['size']; i++) {
             var pageNumber = i + 1 + '';
-            $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
-                                                       '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page=' + i + '>' +
-                                                          pageNumber +
-                                                       '</a>' +
-                                                     '</li>');
+
+            if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
+                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
+                                                           '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page=' + i + '>' +
+                                                              pageNumber +
+                                                           '</a>' +
+                                                         '</li>');
+            } else if (Math.abs(state['page'] - i) == 3) {
+                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove disabled">' +
+                                                           '<a class="page-link" href="#" aria-label="...">' +
+                                                              '...' +
+                                                           '</a>' +
+                                                         '</li>');
+            }
         }
 
         // Disable/enable the previous/next page buttons on either sides of the page navigation based on current page
-        switch(state['page']) {
-            case 0:
-                $('#nav-catalogue .page-keep').first().addClass('disabled');
-                $('#nav-catalogue .page-keep').last().removeClass('disabled');
-                break;
-            case (state['size'] - 1):
-                $('#nav-catalogue .page-keep').last().addClass('disabled');
-                $('#nav-catalogue .page-keep').first().removeClass('disabled');
-                break;
-            default:
-                $('#nav-catalogue .page-keep').removeClass('disabled');
-        }
+        // switch(state['page']) {
+        //     case 0:
+        //         $('#nav-catalogue .page-keep').first().addClass('disabled');
+        //         $('#nav-catalogue .page-keep').last().removeClass('disabled');
+        //         break;
+        //     case (state['size'] - 1):
+        //         $('#nav-catalogue .page-keep').last().addClass('disabled');
+        //         $('#nav-catalogue .page-keep').first().removeClass('disabled');
+        //         break;
+        //     default:
+        //         $('#nav-catalogue .page-keep').removeClass('disabled');
+        // }
 
-        // Create/remove highlight on the selected page number button
-        // +2 because index starts at 1 and +1 for the previous page button
-        $('#nav-catalogue li:nth-child(' + (state['page'] + 2) + ')').addClass('active');
+        $('[data-page="' + state['page'] + '"]').parent('li').addClass('active');
 
         // Event function needs to be re-created as the page number buttons are recreated each time the catalogue is loaded
         $('#nav-catalogue .page-remove a').on('click', function() {
-            loadCatalogue($(this).data('page'))
+            state['page'] = $(this).data('page');
+            $(this).addClass('active');
+
+            loadCatalogue();
         });
 
         $('#nav-catalogue').show();
@@ -125,7 +135,8 @@ function buildCatalogueSidebar(response) {
     var data = {};
 
     for (var i in response['result']['search_facets']) {
-        var field = response['result']['search_facets'][i];
+        var field = response['result']['search_facets'][i],
+            title = field['title'];
 
         for (var j in field['items']) {
             data[field['title']] = data[field['title']] || [];
@@ -182,30 +193,19 @@ function buildCatalogueSidebar(response) {
 var buildUI = function() {
     // Controls the previous and next navigation buttons for pagination
     $('#nav-catalogue .page-keep a').on('click', function() {
-        var control = $(this).data('page') + '';
-
-        switch($(this).data('page') + '') {
-            case '+1':
-                var page = state['page'] + 1;
+        switch($(this).data('page')) {
+            case 'previous':
+                state['page'] -= 1;
                 break;
-            case '-1':
-                var page = state['page'] - 1;
+            case 'next':
+                state['page'] += 1;
                 break;
-            default:
-                var page = $(this).data('page');
         }
 
         loadCatalogue();
     });
 
-    $(window).on('popstate', function(e) {
-        state = history.state;
-
-        loadCatalogue();
-    });
-
-    // Set isInitializing to false to prevent duplication of events
-    config['isInitializing'] = false;
+    config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
 }
 
 function buildUISidebar() {
@@ -215,7 +215,7 @@ function buildUISidebar() {
 
     $('.select-select2').on('change.select2', function() {
         state['filters'][$(this).data('field')] = $(this).val();
-        updateState();
+        loadCatalogue();
     });
 
     $('.checkbox-filter input').on('click', function() {
@@ -225,12 +225,14 @@ function buildUISidebar() {
         $.each($('[data-field="' + $(this).data('field') + '"]:checked'), function(idx, el) {
             state['filters'][$(this).data('field')].push($(el).val());
         });
-        updateState();
+        loadCatalogue();
    });
 }
 
 function loadCatalogue() {
     if (state['page'] != 0 && (state['page'] < 0 || state['page'] >= state['size'])) return;
+
+    history.replaceState(state, '');
 
     $('.table-list').empty();
     $('#nav-catalogue').hide();
@@ -296,20 +298,6 @@ function loadCatalogueSidebar() {
 
     getCKAN('package_search?' + query.join('&'), {}, buildCatalogueSidebar);
 }
-
-function updateState() {
-    // if (config['isInitializing']) return;
-
-    if (!!history.state) {
-        history.pushState(state, '');
-    } else {
-        history.replaceState(state, '');
-    }
-
-    loadCatalogue();
-}
-
-/* ========= Public methods ========= */
 
 function init() {
     loadCatalogue();

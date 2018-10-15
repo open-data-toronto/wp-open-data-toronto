@@ -278,7 +278,7 @@ a:link
   font-weight: bold !important;
 }
  .col{
-                      
+
                       width: 50%;
                       padding: 15px;
                       display: table-cell;
@@ -607,7 +607,11 @@ a.navbar-brand img {
     width: 102px;
     margin: 0 0 0 -8px;
 }
-  .navbar{padding: 0 !important;}
+
+.navbar {
+    padding: 0 !important;
+}
+
 .navbar-light .navbar-toggler {
     color: rgb(0, 0, 0) !important;
     border: 1px solid #cccccc !important;
@@ -619,6 +623,11 @@ a.navbar-brand img {
 }
 p.biography{
     font-size: 14px;
+}
+
+#nav-catalogue {
+    margin: auto;
+    width: 50%;
 }
 
 /**

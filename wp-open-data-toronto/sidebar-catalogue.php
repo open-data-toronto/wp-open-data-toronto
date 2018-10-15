@@ -14,9 +14,9 @@
   </div>
   <br/>
 
-  <div class="filter filter-tags" aria-label="Filter datasets by tags">
+  <div class="filter filter-vocab_keywords" aria-label="Filter datasets by tags">
     <h2>Tags</h2>
-    <select class="select-select2" id="select-tag" data-field="tags" multiple="multiple"></select>
+    <select class="select-select2" id="select-tag" data-field="vocab_keywords" multiple="multiple"></select>
   </div>
   <br/>
 

@@ -39,13 +39,13 @@
           <nav id="nav-catalogue" aria-label="Page Navigation">
             <ul class="pagination pagination-sm">
               <li class="page-item page-keep">
-                <a class="page-link" href="#" aria-label="Go to previous page" data-page="-1">
+                <a class="page-link" href="#" aria-label="Go to previous page" data-page="previous">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
               <li class="page-item page-keep">
-                <a class="page-link" href="#" aria-label="Go to next page" data-page="+1">
+                <a class="page-link" href="#" aria-label="Go to next page" data-page="next">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>

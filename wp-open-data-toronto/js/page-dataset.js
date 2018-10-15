@@ -162,11 +162,20 @@ function buildUI() {
 }
 
 function buildDataset(response) {
-    var data = config['package'] = response['result'];
+    var data = config['package'] = response['result'],
+        resource = {};
+
+    for (var i in data['resource']) {
+        if (data['resource'][i]['id'] == data['primary_resource']) {
+            resource = data['resource'][i];
+        }
+    }
 
     // Fill fields
     $('[data-field]').each(function(idx) {
         var field = $(this).data('field');
+        data['image_url'] = data['image_url'] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+
         if (!!data[field]) {
             switch(field) {
                 case 'image_url':
@@ -178,11 +187,13 @@ function buildDataset(response) {
                 case 'tags':
                     for (var i = 0; i < data[field].length; i++) {
                         if (!$(this).is(':empty')) $(this).append(', ');
-                        $(this).append('<a href="/catalogue/?tags=' + data[field][i]['display_name'] + '">' + data[field][i]['display_name'] + '</a>');
+                        $(this).append('<a href="/catalogue/' +  + '">' + data[field][i]['display_name'] + '</a>');
                     }
                     break;
                 case 'metadata_modified':
-                    $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
+                    var date = resource['last_modified'] || data[field];
+
+                    $(this).text(getFullDate(date.substring(0, 10).split('-')));
                     break
                 case 'notes':
                     var converter = new showdown.Converter();
