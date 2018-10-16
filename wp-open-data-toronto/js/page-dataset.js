@@ -218,7 +218,7 @@ function buildDataset(response) {
         }
     }
 
-    if (data['dataset_category'] == 'Archived') {
+    if (data['dataset_category'] == 'Migrated') {
         $('#heading-preview, #heading-features, #heading-explore').hide();
     } else if (!data['primary_resource'] || (data['dataset_category'] == 'Tabular' && !inDatastore)) {
         $('#heading-preview, #heading-features').hide();
