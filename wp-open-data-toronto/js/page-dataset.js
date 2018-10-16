@@ -73,17 +73,19 @@ function buildExplore() {
         case 'Tabular':
             $('#explore-esri').hide();
             getCKAN('resource_view_list', { 'id': config['package']['primary_resource'] }, function(response) {
-                var results = response['result'];
+                var results = response['result'],
+                    viewURL = '#';
 
                 for (var i = 0; i < results.length; i++) {
                     var view = results[i];
                     if (view['view_type'] == 'recline_view') {
-                        var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                        viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
                         break;
                     }
                 }
+
+                $('#redirect-ckan').attr('href', viewURL);
             });
-            $('#redirect-ckan').attr('href', viewURL);
             break;
         case 'Geospatial':
             $('#explore-ckan').hide();
