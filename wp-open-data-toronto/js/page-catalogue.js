@@ -169,11 +169,11 @@ function buildCatalogueSidebar(response) {
                 var checked = !!selected && selected.indexOf(value) !== -1 ? ' checked="true" ' : ' ',
                     labelChecked = !!selected && selected.indexOf(value) !== -1 ? ' class="checkbox-checked" ' : ' ';
 
-                $('.filter-' + field + ' ul').prepend('<div class="checkbox checkbox-filter">' +
+                $('.filter-' + field + ' ul').prepend('<li class="checkbox checkbox-filter">' +
                                                         '<label' + labelChecked + '>' +
                                                           '<input type="checkbox"' + checked + 'data-field="' + field + '" value="' + value + '">' + '&nbsp;' + value +
                                                         '</label>' +
-                                                      '</div>');
+                                                      '</li>');
             }
         }
     }
