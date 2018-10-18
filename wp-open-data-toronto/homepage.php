@@ -12,15 +12,13 @@
             <div class="col-md-6 offset-md-3">
                 <!-- Start Dataset Search TO DO MAKE THIS WORK-->
               <div class="dataset-filter" id="search-dataset" aria-label="Search the Open Data Catalogue">
-                <form role="search" action="<?php echo site_url('/catalogue/'); ?>" method="get" aria-label="Search the Open Data Catalogue">
-                  <div class="input-group">
-                    <label for="search" class="sr-only">Search Dataset</label>
-                    <input type="text" class="form-control" name="search" id="search" placeholder="Search datasets"/>
-                    <span class="input-group-btn">
-                      <button class="btn btn-secondary" type="submit">Search Datasets</button>
-                    </span>
-                  </div>
-                </form>
+                <div class="input-group">
+                  <label for="search" class="sr-only">Search Dataset</label>
+                  <input type="text" class="form-control" name="search" id="search" placeholder="Search datasets"/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit">Search Datasets</button>
+                  </span>
+                </div>
               </div>
             </div>
           </div>

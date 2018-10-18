@@ -118,7 +118,8 @@ function buildCatalogue(response) {
         $('[data-page="' + state['page'] + '"]').parent('li').addClass('active');
 
         // Event function needs to be re-created as the page number buttons are recreated each time the catalogue is loaded
-        $('#nav-catalogue .page-remove a').on('click', function() {
+        $('#nav-catalogue .page-remove a').on('click', function(evt) {
+            evt.preventDefault();
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
@@ -132,27 +133,44 @@ function buildCatalogue(response) {
 }
 
 function buildCatalogueSidebar(response) {
-    var data = {};
+    var results = response['result'],
+        data = {};
 
-    for (var i in response['result']['search_facets']) {
-        var field = response['result']['search_facets'][i],
-            title = field['title'];
+    for (var i in results['search_facets']) {
+        var field = results['search_facets'][i];
 
+        data[field['title']] = {};
         for (var j in field['items']) {
-            data[field['title']] = data[field['title']] || [];
+            var item = field['items'][j];
 
-            if (['resource_formats'].indexOf(field['title']) !== -1) {          // Convert array fields stored on CKAN
-                var splits = field['items'][j]['name'].split(' ');
+            if (['resource_formats'].indexOf(field['title']) !== -1) {
+                var splits = item['name'].split(' ');
 
                 for (var k in splits) {
-                    if (data[field['title']].indexOf(splits[k]) == -1) {
-                        data[field['title']].push(splits[k]);
+                    if (data[field['title']][splits[k]] === undefined) {
+                        data[field['title']][splits[k]] = {
+                            'count': item['count'],
+                            'name': splits[k]
+                        };
+                    } else {
+                        data[field['title']][splits[k]]['count'] += item['count'];
                     }
                 }
             } else {
-                data[field['title']].push(field['items'][j]['name']);
+                data[field['title']][item['name']] = {
+                    'count': item['count'],
+                    'name': item['name']
+                };
             }
         }
+
+        data[field['title']] = Object.values(data[field['title']]);
+        data[field['title']].sort(function(a, b) {
+            if (b['count'] == a['count']) {
+                return a['name'] < b['name'] ? -1 : 1;
+            }
+            return b['count'] - a['count'];
+        });
     }
 
     for (var field in data) {
@@ -161,17 +179,18 @@ function buildCatalogueSidebar(response) {
                 selected = state['filters'][field];
 
             if (config['filters']['dropdowns'].indexOf(field) !== -1) {         // Select2 dropdowns filters
-                var checked = !!selected && selected.indexOf(value) !== -1 ? ' selected="selected" ' : ' ';
-                $('.filter-' + field + ' select').prepend('<option' + checked + 'data-field="' + field + '" value="' + value + '">' +
-                                                            value +
+                var checked = !!selected && selected.indexOf(value['name']) !== -1 ? ' selected="selected" ' : ' ';
+                $('.filter-' + field + ' select').append('<option' + checked + 'data-field="' + field + '" value="' + value['name'] + '">' +
+                                                            value['name'] +
                                                           '</option>');
             } else if (config['filters']['checkboxes'].indexOf(field) !== -1) { // Checkboxes filters
-                var checked = !!selected && selected.indexOf(value) !== -1 ? ' checked="true" ' : ' ',
-                    labelChecked = !!selected && selected.indexOf(value) !== -1 ? ' class="checkbox-checked" ' : ' ';
+                var checked = !!selected && selected.indexOf(value['name']) !== -1 ? ' checked="true" ' : ' ',
+                    labelChecked = !!selected && selected.indexOf(value['name']) !== -1 ? ' class="checkbox-checked" ' : ' ';
 
-                $('.filter-' + field + ' ul').prepend('<li class="checkbox checkbox-filter">' +
+                $('.filter-' + field + ' ul').append('<li class="checkbox checkbox-filter">' +
                                                         '<label' + labelChecked + '>' +
-                                                          '<input type="checkbox"' + checked + 'data-field="' + field + '" value="' + value + '">' + '&nbsp;' + value +
+                                                          '<input type="checkbox"' + checked + 'data-field="' + field + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
+                                                            '&nbsp;<small>(' + value['count'] + ')</small>' +
                                                         '</label>' +
                                                       '</li>');
             }
@@ -236,21 +255,25 @@ function loadCatalogue() {
 
     var filters = {};
 
-    if (config['isInitializing']) {
-        var redirectFilters = ['search', 'vocab_tags'];
+    if (config['isInitializing']) {                                             // Build filters based on history or redirect params
+        var redirectFilters = ['q', 'n'];
 
-        for (i in redirectFilters) {
-            var k = redirectFilters[i],
-                v = getURLParam(redirectFilters[i]);
+        for (var i in redirectFilters) {
+            var paramName = redirectFilters[i],
+                paramValue = getURLParam(redirectFilters[i]);
 
-            if (!!v) {
-                filters[k] = filters[k] || [];
-                filters[k].push(v);
+            if (!!paramValue) {
+                if (paramName == 'n') {
+                    state['page'] = paramValue;
+                } else if (paramName == 'q') {
+                    paramValue = paramValue.split('+');
+                    for (var j in paramValue) {
+                        var content = paramValue[j].substring(1, paramValue[j].length - 1).split(':');
+                        state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ')
+                    }
+                }
             }
         }
-
-        state['filters'] = $.extend(true, state['filters'], filters);
-        history.replaceState(state, '', '/catalogue');
     }
 
     for (var f in state['filters']) {
@@ -263,7 +286,7 @@ function loadCatalogue() {
                 checks.push('*' + state['filters'][f][i] + '*');
             }
 
-            filters[f].push(f + ':(' + checks.join(' AND ') + ')');
+            filters[f].push(f + ':(' + checks.join(' OR ') + ')');
         } else {
             $.each(state['filters'][f], function(idx, val) {
                 if (config['filters']['dropdowns'].indexOf(f) !== -1) {         // Filter for CKAN field
@@ -293,7 +316,12 @@ function loadCatalogue() {
         'start': state['page'] * config['datasetsPerPage']
     }
 
-    history.replaceState(state, '');
+    var urlParam = ['n=' + state['page']];
+    if (!!q.length) {
+        urlParam.push('q=' + encodeURI(q.join('+')));
+    }
+
+    history.replaceState(state, '', '/catalogue?' + urlParam.join('&'));
     getCKAN('package_search', params, buildCatalogue);
 }
 

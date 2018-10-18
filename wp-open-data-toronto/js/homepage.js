@@ -24,4 +24,11 @@ function buildWidget(response) {
 function init() {
     var fields = ['fl=metadata_modified', 'fl=name', 'fl=title'];
     getCKAN('package_search?' + fields.join('&'), { 'rows': config['datasetsShown'], 'sort': 'metadata_modified desc' }, buildWidget);
+
+    $('#search-dataset button').on('click', function() {
+        var term = $('#search-dataset input').val();
+        if (!!term.length) {
+            window.location.href = '../catalogue?q=(search:"' + $('#search-dataset input').val() + '")';
+        }
+    });
 }

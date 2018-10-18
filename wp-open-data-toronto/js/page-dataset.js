@@ -89,7 +89,7 @@ function buildExplore() {
             break;
         case 'Geospatial':
             $('#explore-ckan').hide();
-            $('#redirect-ckan').attr('href', config['package']['explore_url']);
+            $('#redirect-esri').attr('href', config['package']['explore_url']);
             break;
     }
 }
@@ -189,7 +189,7 @@ function buildDataset(response) {
                 case 'tags':
                     for (var i = 0; i < data[field].length; i++) {
                         if (!$(this).is(':empty')) $(this).append(', ');
-                        $(this).append('<a href="/catalogue?vocab_tags=' + data[field][i]['display_name'] + '">' + data[field][i]['display_name'] + '</a>');
+                        $(this).append('<a href="/catalogue?q=(vocab_tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
                     }
                     break;
                 case 'metadata_modified':
