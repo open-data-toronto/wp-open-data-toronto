@@ -35,6 +35,8 @@ function buildDownloads() {
     for (var i = 0; i < config['package']['resources'].length; i++) {
         var resource = config['package']['resources'][i];
 
+        if (resource['file_type'] == 'Preview resource') continue;
+
         if (resource['datastore_active']) {
             resource['format'] = '<select class="select-download-formats">' +
                                    (resource['format'].toUpperCase() == 'CSV' ? '<option value="csv">CSV</option>' : '') +
@@ -72,7 +74,7 @@ function buildExplore() {
     switch (dataset['dataset_category']) {
         case 'Tabular':
             $('#explore-esri').hide();
-            getCKAN('resource_view_list', { 'id': config['package']['primary_resource'] }, function(response) {
+            getCKAN('resource_view_list', { 'id': config['package']['primary_resource']['id'] }, function(response) {
                 var results = response['result'],
                     viewURL = '#';
 
@@ -97,7 +99,7 @@ function buildExplore() {
 function buildFeatures() {
     if (!config['package'] || !$('#table-features tbody').is(':empty')) return;
 
-    getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource'] }, function(response) {
+    getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource']['id'] }, function(response) {
         var fields = response['result']['fields'],
             ele = '';
 
@@ -115,7 +117,7 @@ function buildPreview() {
 
     switch (dataset['dataset_category']) {
         case 'Tabular':
-            getCKAN('datastore_search', { 'resource_id': dataset['primary_resource'], 'limit': 3 }, function(response) {
+            getCKAN('datastore_search', { 'resource_id': dataset['primary_resource']['id'], 'limit': 3 }, function(response) {
                 var fields = response['result']['fields'],
                     data = response['result']['records'];
 
@@ -134,7 +136,9 @@ function buildPreview() {
             });
             break;
         case 'Geospatial':
-            getCKAN('resource_view_list', { 'id': config['package']['primary_resource'] }, function(response) {
+            var preview = !!config['package']['preview_resource'] ? config['package']['preview_resource'] : config['package']['primary_resource'];
+
+                getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
                 var results = response['result'];
 
                 for (var i = 0; i < results.length; i++) {
@@ -164,12 +168,20 @@ function buildUI() {
 }
 
 function buildDataset(response) {
-    var data = config['package'] = response['result'],
-        resource = {};
+    var data = config['package'] = response['result'];
+    data['primary_resource'] = {};
+    data['preview_resource'] = {};
 
-    for (var i in data['resource']) {
-        if (data['resource'][i]['id'] == data['primary_resource']) {
-            resource = data['resource'][i];
+    for (var i in data['resources']) {
+        if (!!data['resources'][i]['file_type']) {
+            switch (data['resources'][i]['file_type']) {
+                case 'Primary resource':
+                    data['primary_resource'] = data['resources'][i];
+                    break;
+                case 'Preview resource':
+                    data['preview_resource'] = data['resources'][i];
+                    break;
+            }
         }
     }
 
@@ -193,7 +205,7 @@ function buildDataset(response) {
                     }
                     break;
                 case 'metadata_modified':
-                    var date = resource['last_modified'] || data[field];
+                    var date = data['primary_resource']['last_modified'] || data[field];
                     $(this).text(getFullDate(date.substring(0, 10).split('-')));
                     break
                 case 'published_date':

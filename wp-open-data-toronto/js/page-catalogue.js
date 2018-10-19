@@ -280,6 +280,7 @@ function loadCatalogue() {
         if (!state['filters'][f] || !state['filters'][f].length) continue;
 
         filters[f] = [];
+
         if (config['filters']['checkboxes'].indexOf(f) !== -1) {                // Filter from checkboxes
             var checks = [];
             for (var i in state['filters'][f]) {
@@ -292,6 +293,9 @@ function loadCatalogue() {
                 if (config['filters']['dropdowns'].indexOf(f) !== -1) {         // Filter for CKAN field
                     filters[f].push(f + ':"' + val + '"');
                 } else if (f == 'search') {                                     // Filter from search
+                    filters['temporary'] = filters['temporary'] || [];
+                    filters['temporary'].push('search:' + val);
+
                     filters[f].push('title:"' + val + '"');
 
                     var tokens = val.split(' ');
@@ -304,21 +308,33 @@ function loadCatalogue() {
         }
     }
 
-    var q = [];                                                                 // Merge searches with multiple values per field searched by OR
+    var search_q = [],
+        params_q = [];                                                                 // Merge searches with multiple values per field searched by OR
     for (var i in filters) {
-        q.push('(' + filters[i].join(' OR ') + ')');
+        var val = '(' + filters[i].join(' OR ') + ')';
+        switch (i) {
+            case 'temporary':
+                params_q.push(val);
+                break;
+            case 'search':
+                search_q.push(val);
+                break;
+            default:
+                params_q.push(val);
+                search_q.push(val);
+        }
     }
 
     var params = {
-        'q': q.join(' AND '),                                                   // Merge searches with multiple fields by AND
+        'q': search_q.join(' AND '),                                                   // Merge searches with multiple fields by AND
         'rows': config['datasetsPerPage'],
         'sort': 'name asc',
         'start': state['page'] * config['datasetsPerPage']
     }
 
     var urlParam = ['n=' + state['page']];
-    if (!!q.length) {
-        urlParam.push('q=' + encodeURI(q.join('+')));
+    if (!!search_q.length) {
+        urlParam.push('q=' + encodeURI(params_q.join('+')));
     }
 
     history.replaceState(state, '', '/catalogue?' + urlParam.join('&'));
