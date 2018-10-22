@@ -233,6 +233,8 @@ function buildUISidebar() {
 
     $('.select-select2').on('change.select2', function() {
         state['filters'][$(this).data('field')] = $(this).val();
+
+        state['page'] = 0;
         loadCatalogue();
     });
 
@@ -243,6 +245,8 @@ function buildUISidebar() {
         $.each($('[data-field="' + $(this).data('field') + '"]:checked'), function(idx, el) {
             state['filters'][$(this).data('field')].push($(el).val());
         });
+
+        state['page'] = 0;
         loadCatalogue();
    });
 }

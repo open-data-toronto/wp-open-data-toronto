@@ -137,6 +137,7 @@ function buildPreview() {
             break;
         case 'Geospatial':
             var preview = !$.isEmptyObject(config['package']['preview_resource']) ? config['package']['preview_resource'] : config['package']['primary_resource'];
+
             getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
                 var results = response['result'];
 
@@ -231,7 +232,7 @@ function buildDataset(response) {
 
     if (data['dataset_category'] == 'Migrated') {
         $('#heading-preview, #heading-features, #heading-explore').hide();
-    } else if (!data['primary_resource'] || (data['dataset_category'] == 'Tabular' && !inDatastore)) {
+    } else if ((!$.isEmptyObject(config['package']['primary_resource']) && !$.isEmptyObject(config['package']['preview_resource'])) || (data['dataset_category'] == 'Tabular' && !inDatastore)) {
         $('#heading-preview, #heading-features').hide();
     } else if (data['dataset_category'] == 'Geospatial') {
         $('#heading-features').hide();
