@@ -136,9 +136,8 @@ function buildPreview() {
             });
             break;
         case 'Geospatial':
-            var preview = !!config['package']['preview_resource'] ? config['package']['preview_resource'] : config['package']['primary_resource'];
-
-                getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
+            var preview = !$.isEmptyObject(config['package']['preview_resource']) ? config['package']['preview_resource'] : config['package']['primary_resource'];
+            getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
                 var results = response['result'];
 
                 for (var i = 0; i < results.length; i++) {
@@ -175,10 +174,10 @@ function buildDataset(response) {
     for (var i in data['resources']) {
         if (!!data['resources'][i]['file_type']) {
             switch (data['resources'][i]['file_type']) {
-                case 'Primary resource':
+                case 'Primary data':
                     data['primary_resource'] = data['resources'][i];
                     break;
-                case 'Preview resource':
+                case 'Preview data':
                     data['preview_resource'] = data['resources'][i];
                     break;
             }
