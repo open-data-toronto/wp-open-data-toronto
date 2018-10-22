@@ -43,7 +43,7 @@
                   </dl>
                   <h2><span class="fa fa-table"></span>&nbsp; Data Attributes</h2>
                   <dl>
-                    <dt>Dataset type<span class="sr-only">: </span></dt>
+                    <dt>Data type<span class="sr-only">: </span></dt>
                     <dd data-field="dataset_category"></dd>
                     <dt>Columns<span class="sr-only">: </span></dt>
                     <dd data-field="shape_columns"></dd>
@@ -149,7 +149,7 @@
                         <div class="card-header" role="tab" id="heading-download">
                           <h4 class="mb-0">
                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-download" aria-expanded="true" aria-controls="collapse-download">
-                              Download Data
+                              Get Data
                               <span class="accordion-arrow">
                                 <span class="fa fa-chevron-down"></span>
                               </span>
