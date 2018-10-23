@@ -223,18 +223,9 @@ function buildDataset(response) {
         }
     });
 
-    var inDatastore = false;
-    for (var i = 0; i < data['resources'].length; i++) {
-        if (data['resources'][i]['id'] == data['primary_resource']) {
-            inDatastore = data['resources'][i]['datastore_active'];
-        }
-    }
-
-    if (data['dataset_category'] == 'Migrated') {
+    if ((['Maps', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || data['is_visualizable'] == 'false') {
         $('#heading-preview, #heading-features, #heading-explore').hide();
-    } else if ((!$.isEmptyObject(config['package']['primary_resource']) && !$.isEmptyObject(config['package']['preview_resource'])) || (data['dataset_category'] == 'Tabular' && !inDatastore)) {
-        $('#heading-preview, #heading-features').hide();
-    } else if (data['dataset_category'] == 'Geospatial') {
+    } else if (data['dataset_category'] == 'Maps') {
         $('#heading-features').hide();
     }
 

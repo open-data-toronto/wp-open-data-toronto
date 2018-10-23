@@ -137,9 +137,9 @@ function buildCatalogueSidebar(response) {
         data = {};
 
     for (var i in results['search_facets']) {
-        var field = results['search_facets'][i];
+        var field = results['search_facets'][i],
+            sidebar = {};
 
-        data[field['title']] = {};
         for (var j in field['items']) {
             var item = field['items'][j];
 
@@ -147,49 +147,47 @@ function buildCatalogueSidebar(response) {
                 var splits = item['name'].split(' ');
 
                 for (var k in splits) {
-                    if (data[field['title']][splits[k]] === undefined) {
-                        data[field['title']][splits[k]] = {
+                    if (sidebar[splits[k]] === undefined) {
+                        sidebar[splits[k]] = {
                             'count': item['count'],
                             'name': splits[k]
                         };
                     } else {
-                        data[field['title']][splits[k]]['count'] += item['count'];
+                        sidebar[splits[k]]['count'] += item['count'];
                     }
                 }
             } else {
-                data[field['title']][item['name']] = {
+                sidebar[item['name']] = {
                     'count': item['count'],
                     'name': item['name']
                 };
             }
         }
 
-        data[field['title']] = Object.values(data[field['title']]);
-        data[field['title']].sort(function(a, b) {
+        sidebar = Object.values(sidebar);
+        sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? -1 : 1;
             }
             return b['count'] - a['count'];
         });
-    }
 
-    for (var field in data) {
-        for (var i = 0; i < data[field].length; i++) {
-            var value = data[field][i],
-                selected = state['filters'][field];
+        for (var i = 0; i < sidebar.length; i++) {
+            var value = sidebar[i],
+                selected = state['filters'][field['title']];
 
-            if (config['filters']['dropdowns'].indexOf(field) !== -1) {         // Select2 dropdowns filters
+            if (config['filters']['dropdowns'].indexOf(field['title']) !== -1) {         // Select2 dropdowns filters
                 var checked = !!selected && selected.indexOf(value['name']) !== -1 ? ' selected="selected" ' : ' ';
-                $('.filter-' + field + ' select').append('<option' + checked + 'data-field="' + field + '" value="' + value['name'] + '">' +
+                $('.filter-' + field['title'] + ' select').append('<option' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' +
                                                             value['name'] +
                                                           '</option>');
-            } else if (config['filters']['checkboxes'].indexOf(field) !== -1) { // Checkboxes filters
+            } else if (config['filters']['checkboxes'].indexOf(field['title']) !== -1) { // Checkboxes filters
                 var checked = !!selected && selected.indexOf(value['name']) !== -1 ? ' checked="true" ' : ' ',
                     labelChecked = !!selected && selected.indexOf(value['name']) !== -1 ? ' class="checkbox-checked" ' : ' ';
 
-                $('.filter-' + field + ' ul').append('<li class="checkbox checkbox-filter">' +
+                $('.filter-' + field['title'] + ' ul').append('<li class="checkbox checkbox-filter">' +
                                                         '<label' + labelChecked + '>' +
-                                                          '<input type="checkbox"' + checked + 'data-field="' + field + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
+                                                          '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
                                                             '&nbsp;<small>(' + value['count'] + ')</small>' +
                                                         '</label>' +
                                                       '</li>');
@@ -341,27 +339,20 @@ function loadCatalogue() {
         urlParam.push('q=' + encodeURI(params_q.join('+')));
     }
 
-    history.replaceState(state, '', '/catalogue?' + urlParam.join('&'));
+    history.replaceState(state, '', '/catalogue/?' + urlParam.join('&'));
     getCKAN('package_search', params, buildCatalogue);
 }
 
 function loadCatalogueSidebar() {
     var params = {
-        'q': [''],
-        'rows': [0],
-        'facet': ['on'],
-        'facet.limit': [-1],
-        'facet.field': config['filters']['filters']
+        'q': '',
+        'rows': 0,
+        'facet': 'on',
+        'facet.limit': -1,
+        'facet.field': JSON.stringify(config['filters']['filters'])
     }
 
-    var query = []
-    for (var key in params) {
-        for (var i in params[key]) {
-            query.push(key + '=' + params[key][i])
-        }
-    }
-
-    getCKAN('package_search?' + query.join('&'), {}, buildCatalogueSidebar);
+    getCKAN('package_search', params, buildCatalogueSidebar);
 }
 
 function init() {
