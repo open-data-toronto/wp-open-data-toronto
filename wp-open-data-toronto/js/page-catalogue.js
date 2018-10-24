@@ -107,10 +107,6 @@ function buildCatalogue(response) {
 
         $('#nav-catalogue').show();
     }
-
-    buildDynamicUI();
-
-    if (config['isInitializing']) buildStaticUI();
 }
 
 function buildCatalogueSidebar(response) {
@@ -185,6 +181,9 @@ function buildCatalogueSidebar(response) {
             $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
         }
     }
+
+    if (config['isInitializing']) buildStaticUI();
+    buildDynamicUI();
 }
 
 var buildStaticUI = function() {

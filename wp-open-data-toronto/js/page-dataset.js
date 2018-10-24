@@ -71,7 +71,7 @@ function buildExplore() {
 
     var dataset = config['package'];
     switch (dataset['dataset_category']) {
-        case 'Tabular':
+        case 'Table':
             $('#explore-esri').hide();
             getCKAN('resource_view_list', { 'id': config['package']['primary_resource']['id'] }, function(response) {
                 var results = response['result'],
@@ -88,7 +88,7 @@ function buildExplore() {
                 $('#redirect-ckan').attr('href', viewURL);
             });
             break;
-        case 'Geospatial':
+        case 'Maps':
             $('#explore-ckan').hide();
             $('#redirect-esri').attr('href', config['package']['explore_url']);
             break;
@@ -115,7 +115,7 @@ function buildPreview() {
     var dataset = config['package'];
 
     switch (dataset['dataset_category']) {
-        case 'Tabular':
+        case 'Table':
             getCKAN('datastore_search', { 'resource_id': dataset['primary_resource']['id'], 'limit': 3 }, function(response) {
                 var fields = response['result']['fields'],
                     data = response['result']['records'];
@@ -134,7 +134,7 @@ function buildPreview() {
                 $('#collapse-preview .col-md-12').append('<table class="table table-striped table-responsive">' + head + body + '</table>');
             });
             break;
-        case 'Geospatial':
+        case 'Maps':
             var preview = !$.isEmptyObject(config['package']['preview_resource']) ? config['package']['preview_resource'] : config['package']['primary_resource'];
 
             getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
