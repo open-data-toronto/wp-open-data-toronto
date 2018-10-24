@@ -143,7 +143,7 @@ function buildCatalogueSidebar(response) {
             }
         }
 
-        sidebar = Object.values(sidebar);
+        sidebar =  Object.keys(sidebar).map(function(x) { return sidebar[x] });
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? -1 : 1;
@@ -334,7 +334,7 @@ function parseFilters() {
         for (var i in state['search']) {
             tokens = tokens.concat(state['search'][i].split(' '));
         }
-        tokens = tokens.map(x => '*' + x + '*').join(' AND ');
+        tokens = tokens.map(function(x) { return '*' + x + '*' }).join(' AND ');
 
         q.push('(excerpt: (' + tokens + ')) OR (title: (' + tokens + '))');
     }
@@ -354,7 +354,7 @@ function parseParams() {
                 state['page'] = parseInt(value);
                 break;
             case 'q':
-                value = value.split(' AND ').map(x => x.substring(1, x.length - 1).split(':'));
+                value = value.split(' AND ').map(function(x) { return x.substring(1, x.length - 1).split(':'); });
                 $.each(value, function(idx, content) {
                     if (config['filters']['filters'].indexOf(content[0]) !== -1) {
                         state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ');
