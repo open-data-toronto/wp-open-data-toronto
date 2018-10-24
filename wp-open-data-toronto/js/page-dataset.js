@@ -70,7 +70,6 @@ function buildExplore() {
     if (!config['package']) return;
 
     var dataset = config['package'];
-
     switch (dataset['dataset_category']) {
         case 'Tabular':
             $('#explore-esri').hide();

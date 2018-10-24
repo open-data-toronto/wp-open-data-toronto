@@ -1,6 +1,7 @@
 var $ = jQuery.noConflict(),
     state = history.state || {
         'filters': {},
+        'search': [],
         'page': 0,
         'size': 1
     };
@@ -25,6 +26,9 @@ $.extend(config, {
 });
 
 function buildCatalogue(response) {
+    $('.table-list').empty();
+    $('#nav-catalogue').hide();
+
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
@@ -101,38 +105,17 @@ function buildCatalogue(response) {
             }
         }
 
-        // Disable/enable the previous/next page buttons on either sides of the page navigation based on current page
-        switch(state['page']) {
-            case 0:
-                $('#nav-catalogue .page-keep').first().addClass('disabled');
-                $('#nav-catalogue .page-keep').last().removeClass('disabled');
-                break;
-            case (state['size'] - 1):
-                $('#nav-catalogue .page-keep').last().addClass('disabled');
-                $('#nav-catalogue .page-keep').first().removeClass('disabled');
-                break;
-            default:
-                $('#nav-catalogue .page-keep').removeClass('disabled');
-        }
-
-        $('[data-page="' + state['page'] + '"]').parent('li').addClass('active');
-
-        // Event function needs to be re-created as the page number buttons are recreated each time the catalogue is loaded
-        $('#nav-catalogue .page-remove a').on('click', function(evt) {
-            evt.preventDefault();
-            state['page'] = $(this).data('page');
-            $(this).addClass('active');
-
-            loadCatalogue();
-        });
-
         $('#nav-catalogue').show();
     }
 
-    if (config['isInitializing']) buildUI();
+    buildDynamicUI();
+
+    if (config['isInitializing']) buildStaticUI();
 }
 
 function buildCatalogueSidebar(response) {
+    $('.filter ul, .filter select').empty();
+
     var results = response['result'],
         data = {};
 
@@ -195,18 +178,16 @@ function buildCatalogueSidebar(response) {
         }
     }
 
-    if (!!state['filters']['search']) {
-        for (var i in state['filters']['search']) {
-            var value = state['filters']['search'][i];
+    if (state['search'].length > 0) {
+        for (var i in state['search']) {
+            var value = state['search'][i];
 
             $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
         }
     }
-
-    buildUISidebar();
 }
 
-var buildUI = function() {
+var buildStaticUI = function() {
     // Controls the previous and next navigation buttons for pagination
     $('#nav-catalogue .page-keep a').on('click', function() {
         switch($(this).data('page')) {
@@ -221,16 +202,45 @@ var buildUI = function() {
         loadCatalogue();
     });
 
+    $('#select-division, #select-vocab_tags').select2(config['select2']);
+    $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
+
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
 }
 
-function buildUISidebar() {
-    $('#select-division').select2($.extend({}, config['select2'], { 'maximumSelectionLength': 1 }));
-    $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
-    $('#select-vocab_tags').select2(config['select2']);
+function buildDynamicUI() {
+    switch(state['page']) {
+        case 0:
+            $('#nav-catalogue .page-keep').first().addClass('disabled');
+            $('#nav-catalogue .page-keep').last().removeClass('disabled');
+            break;
+        case (state['size'] - 1):
+            $('#nav-catalogue .page-keep').last().addClass('disabled');
+            $('#nav-catalogue .page-keep').first().removeClass('disabled');
+            break;
+        default:
+            $('#nav-catalogue .page-keep').removeClass('disabled');
+    }
+
+    $('[data-page="' + state['page'] + '"]').parent('li').addClass('active');
+
+    $('#nav-catalogue .page-remove a').on('click', function(evt) {
+        evt.preventDefault();
+        state['page'] = $(this).data('page');
+        $(this).addClass('active');
+
+        loadCatalogue();
+    });
 
     $('.select-select2').on('change.select2', function() {
-        state['filters'][$(this).data('field')] = $(this).val();
+        var field = $(this).data('field'),
+            value = $(this).val();
+
+        if ($(this).is('#select-search')) {
+            state['search'] = value || [];
+        } else {
+            state['filters'][field] = value;
+        }
 
         state['page'] = 0;
         loadCatalogue();
@@ -239,9 +249,13 @@ function buildUISidebar() {
     $('.checkbox-filter input').on('click', function() {
         $(this).parent('label').toggleClass('checkbox-checked');
 
-        state['filters'][$(this).data('field')] = [];
-        $.each($('[data-field="' + $(this).data('field') + '"]:checked'), function(idx, el) {
-            state['filters'][$(this).data('field')].push($(el).val());
+        var field = $(this).data('field'),
+            filters = state['filters'],
+            value = $(this).val();
+
+        filters[field] = [];
+        $.each($('[data-field="' + field + '"]:checked'), function(idx, element) {
+            filters[field].push($(element).val());
         });
 
         state['page'] = 0;
@@ -250,102 +264,37 @@ function buildUISidebar() {
 }
 
 function loadCatalogue() {
-    if (state['page'] != 0 && (state['page'] < 0 || state['page'] >= state['size'])) return;
+    if (!config['isInitializing'] && (state['page'] < 0 || state['page'] >= state['size'])) return;
 
-    $('.table-list').empty();
-    $('#nav-catalogue').hide();
-
-    var filters = {};
-
-    if (config['isInitializing']) {                                             // Build filters based on history or redirect params
-        var redirectFilters = ['q', 'n'];
-
-        for (var i in redirectFilters) {
-            var paramName = redirectFilters[i],
-                paramValue = getURLParam(redirectFilters[i]);
-
-            if (!!paramValue) {
-                if (paramName == 'n') {
-                    state['page'] = paramValue;
-                } else if (paramName == 'q') {
-                    paramValue = paramValue.split('+');
-                    for (var j in paramValue) {
-                        var content = paramValue[j].substring(1, paramValue[j].length - 1).split(':');
-                        state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ')
-                    }
-                }
-            }
-        }
-    }
-
-    for (var f in state['filters']) {
-        if (!state['filters'][f] || !state['filters'][f].length) continue;
-
-        filters[f] = [];
-
-        if (config['filters']['checkboxes'].indexOf(f) !== -1) {                // Filter from checkboxes
-            var checks = [];
-            for (var i in state['filters'][f]) {
-                checks.push('*' + state['filters'][f][i] + '*');
-            }
-
-            filters[f].push(f + ':(' + checks.join(' OR ') + ')');
-        } else {
-            $.each(state['filters'][f], function(idx, val) {
-                if (config['filters']['dropdowns'].indexOf(f) !== -1) {         // Filter for CKAN field
-                    filters[f].push(f + ':"' + val + '"');
-                } else if (f == 'search') {                                     // Filter from search
-                    filters['temporary'] = filters['temporary'] || [];
-                    filters['temporary'].push('search:' + val);
-
-                    filters[f].push('title:"' + val + '"');
-
-                    var tokens = val.split(' ');
-                    for (var i = 0; i < tokens.length; i++) {
-                        tokens[i] = '*' + tokens[i] + '*';
-                    }
-                    filters[f].push('excerpt:(' + tokens.join(' AND ') + ')');
-                }
-            });
-        }
-    }
-
-    var search_q = [],
-        params_q = [];                                                                 // Merge searches with multiple values per field searched by OR
-    for (var i in filters) {
-        var val = '(' + filters[i].join(' OR ') + ')';
-        switch (i) {
-            case 'temporary':
-                params_q.push(val);
-                break;
-            case 'search':
-                search_q.push(val);
-                break;
-            default:
-                params_q.push(val);
-                search_q.push(val);
-        }
-    }
-
+    var q = config['isInitializing'] ? parseParams() : parseFilters();
     var params = {
-        'q': search_q.join(' AND '),                                                   // Merge searches with multiple fields by AND
+        'q': q,
         'rows': config['datasetsPerPage'],
         'sort': 'name asc',
         'start': state['page'] * config['datasetsPerPage']
     }
 
-    var urlParam = ['n=' + state['page']];
-    if (!!search_q.length) {
-        urlParam.push('q=' + encodeURI(params_q.join('+')));
+    var urlParam = [];
+    if (state['page'] != 0) {
+        urlParam.push('n=' + state['page'])
     }
 
-    history.replaceState(state, '', '/catalogue/?' + urlParam.join('&'));
+    if (q.length > 0) {
+        urlParam.push('q=' + encodeURI(q));
+    }
+
+    if (state['search'].length > 0) {
+        urlParam.push('r=' + encodeURI(state['search'].join('+')));
+    }
+
+    loadCatalogueSidebar(q);
     getCKAN('package_search', params, buildCatalogue);
+    history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
 }
 
-function loadCatalogueSidebar() {
+function loadCatalogueSidebar(query) {
     var params = {
-        'q': '',
+        'q': query,
         'rows': 0,
         'facet': 'on',
         'facet.limit': -1,
@@ -355,7 +304,73 @@ function loadCatalogueSidebar() {
     getCKAN('package_search', params, buildCatalogueSidebar);
 }
 
+function parseFilters() {
+    var q = [];
+
+    for (var field in state['filters']) {
+        if (state['filters'][field] == null || !state['filters'][field].length) continue;
+
+        var filter = {};
+        if (config['filters']['checkboxes'].indexOf(field) !== -1) {            // Filter from checkboxes
+            var checks = [];
+            for (var idx in state['filters'][field]) {
+                checks.push('*' + state['filters'][field][idx] + '*');
+            }
+
+            filter[field] = [field + ':(' + checks.join(' OR ') + ')'];
+        } else if (config['filters']['dropdowns'].indexOf(field) !== -1) {      // Filter for CKAN field
+            filter[field] = [];
+            $.each(state['filters'][field], function(idx, val) {
+                filter[field].push(field + ':"' + val + '"');
+            });
+        }
+
+        for (var name in filter) {
+            q.push('(' + filter[name].join(' OR ') + ')');
+        }
+    }
+
+    if (state['search'] != null && state['search'].length > 0) {
+        var tokens = [];
+        for (var i in state['search']) {
+            tokens = tokens.concat(state['search'][i].split(' '));
+        }
+        tokens = tokens.map(x => '*' + x + '*').join(' AND ');
+
+        q.push('(excerpt: (' + tokens + ')) OR (title: (' + tokens + '))');
+    }
+
+    return q.join(' AND ');
+}
+
+function parseParams() {
+    var redirectFilters = ['n', 'q', 'r'];
+
+    for (var i in redirectFilters) {
+        var value = getURLParam(redirectFilters[i]);
+        if (value == null) continue;
+
+        switch (redirectFilters[i]) {
+            case 'n':
+                state['page'] = parseInt(value);
+                break;
+            case 'q':
+                value = value.split(' AND ').map(x => x.substring(1, x.length - 1).split(':'));
+                $.each(value, function(idx, content) {
+                    if (config['filters']['filters'].indexOf(content[0]) !== -1) {
+                        state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ');
+                    }
+                });
+                break;
+            case 'r':
+                state['search'] = value.split('+');
+                break
+        }
+    }
+
+    return getURLParam('q') || '';
+}
+
 function init() {
     loadCatalogue();
-    loadCatalogueSidebar();
 }
