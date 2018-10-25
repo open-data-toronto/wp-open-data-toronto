@@ -32,7 +32,6 @@ function buildCatalogue(response) {
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
-    // If no datasets are returned (due to searches/filters)
     if (data['results'].length == 0) {
         $('.table-list').append('<div class="row">' +
                                   '<div class="col-md-12">' +
@@ -153,23 +152,32 @@ function buildCatalogueSidebar(response) {
 
         for (var i = 0; i < sidebar.length; i++) {
             var value = sidebar[i],
-                selected = state['filters'][field['title']];
+                selected = state['filters'][field['title']],
+                checked = ' ',
+                labelChecked = ' ';
 
             if (config['filters']['dropdowns'].indexOf(field['title']) !== -1) {         // Select2 dropdowns filters
-                var checked = !!selected && selected.indexOf(value['name']) !== -1 ? ' selected="selected" ' : ' ';
-                $('.filter-' + field['title'] + ' select').append('<option' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' +
-                                                            value['name'] +
-                                                          '</option>');
-            } else if (config['filters']['checkboxes'].indexOf(field['title']) !== -1) { // Checkboxes filters
-                var checked = !!selected && selected.indexOf(value['name']) !== -1 ? ' checked="true" ' : ' ',
-                    labelChecked = !!selected && selected.indexOf(value['name']) !== -1 ? ' class="checkbox-checked" ' : ' ';
+                if (selected.length > 0 && selected.indexOf(value['name']) !== -1) {
+                    checked += 'selected="selected" ';
+                }
 
-                $('.filter-' + field['title'] + ' ul').append('<li class="checkbox checkbox-filter">' +
-                                                        '<label' + labelChecked + '>' +
-                                                          '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
-                                                            '&nbsp;<small>(' + value['count'] + ')</small>' +
-                                                        '</label>' +
-                                                      '</li>');
+                $('.filter-' + field['title'] + ' select').append(
+                    '<option' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' +
+                      value['name'] +
+                    '</option>');
+            } else if (config['filters']['checkboxes'].indexOf(field['title']) !== -1) { // Checkboxes filters
+                if (selected.length > 0 && selected.indexOf(value['name']) !== -1) {
+                    checked += 'checked="true" ';
+                    labelChecked += 'class="checkbox-checked" ';
+                }
+
+                $('.filter-' + field['title'] + ' ul').append(
+                    '<li class="checkbox checkbox-filter">' +
+                      '<label' + labelChecked + '>' +
+                        '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
+                          '&nbsp;<small>(' + value['count'] + ')</small>' +
+                      '</label>' +
+                    '</li>');
             }
         }
     }
@@ -225,6 +233,7 @@ function buildDynamicUI() {
 
     $('#nav-catalogue .page-remove a').on('click', function(evt) {
         evt.preventDefault();
+
         state['page'] = $(this).data('page');
         $(this).addClass('active');
 
@@ -232,13 +241,12 @@ function buildDynamicUI() {
     });
 
     $('.select-select2').on('change.select2', function() {
-        var field = $(this).data('field'),
-            value = $(this).val();
+        var value = $(this).val();
 
         if ($(this).is('#select-search')) {
             state['search'] = value || [];
         } else {
-            state['filters'][field] = value;
+            state['filters'][$(this).data('field')] = value;
         }
 
         state['page'] = 0;
@@ -248,13 +256,11 @@ function buildDynamicUI() {
     $('.checkbox-filter input').on('click', function() {
         $(this).parent('label').toggleClass('checkbox-checked');
 
-        var field = $(this).data('field'),
-            filters = state['filters'],
-            value = $(this).val();
+        var field = $(this).data('field');
+        state['filters'][field] = [];
 
-        filters[field] = [];
         $.each($('[data-field="' + field + '"]:checked'), function(idx, element) {
-            filters[field].push($(element).val());
+            state['filters'][field].push($(element).val());
         });
 
         state['page'] = 0;

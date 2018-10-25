@@ -1,41 +1,42 @@
 var $ = jQuery.noConflict();
 
-$.extend(config, { 'isInitializing': true });
+$.extend(config, {
+    'isInitializing': true,
+    'package': {},
+    'built': {}
+});
 
 function buildDevelopers() {
-    if (!config['package']) return;
+    if ($.isEmptyObject(config['package']) || config['built']['developer']) return;
 
-    if ($('#code-javascript').is(':empty')) {
-        var jsSnippet = '$.ajax({\n' +
-                        '    dataType: "json",\n' +
-                        '    type: "GET",\n' +
-                        '    url: "' + config['ckanAPI'] + 'package_search",\n' +
-                        '    data: { "q": \'title:"' + config['package']['title'] + '"\' }\n' +
-                        '}).done(function(response) {\n' +
-                        '    console.log(response);\n' +
-                        '});';
-        $('#code-javascript').text(jsSnippet);
-    }
+    $('#code-javascript').text('$.ajax({\n' +
+                               '    dataType: "json",\n' +
+                               '    type: "GET",\n' +
+                               '    url: "' + config['ckanAPI'] + 'package_search",\n' +
+                               '    data: { "q": \'title:"' + config['package']['title'] + '"\' }\n' +
+                               '}).done(function(response) {\n' +
+                               '    console.log(response);\n' +
+                               '});');
 
-    if ($('#code-python').is(':empty')) {
-        var pySnippet = 'import requests\n' +
-                        'import json\n' +
-                        '\n' +
-                        'url = "' + config['ckanAPI'] + 'package_search"\n' +
-                        'response = requests.get(url, data={ "q": "title:\'' + config['package']['title'] + '\'" })\n' +
-                        'results = json.loads(response.content)\n' +
-                        'print(results)';
-        $('#code-python').text(pySnippet);
-    }
+    $('#code-python').text('import requests\n' +
+                           'import json\n' +
+                           '\n' +
+                           'url = "' + config['ckanAPI'] + 'package_search"\n' +
+                           'response = requests.get(url, data={ "q": "title:\'' + config['package']['title'] + '\'" })\n' +
+                           'results = json.loads(response.content)\n' +
+                           'print(results)');
+
+    config['built']['developer'] = true;
 }
 
 function buildDownloads() {
-    if (!config['package'] || !$('#table-resources tbody').is(':empty')) return;
+    if ($.isEmptyObject(config['package']) || config['built']['downloads']) return;
 
-    for (var i = 0; i < config['package']['resources'].length; i++) {
-        var resource = config['package']['resources'][i];
+    for (var i in config['package']['resources']) {
+        if (config['package']['resources'][i]['file_type'] == 'Preview data') continue;
 
-        if (resource['file_type'] == 'Preview resource') continue;
+        var resource = config['package']['resources'][i],
+            link = config['ckanURL'] + '/download_resource/' + resource['id'];
 
         if (resource['datastore_active']) {
             resource['format'] = '<select class="select-download-formats">' +
@@ -45,34 +46,36 @@ function buildDownloads() {
                                  '</select>';
         }
 
-        $('#table-resources tbody').append('<tr data-resource="' + resource['id'] + '" data-stored="' + resource['datastore_active'] + '">' +
+        $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
                                              '<td>' + resource['format'] + '</td>' +
                                              '<td>' + resource['name'] + '</td>' +
                                              '<td>' +
-                                               '<a href="#">Download <span class="sr-only">' + resource['name'] + '</span></a>' +
+                                               '<a href="' + link + '">Download <span class="sr-only">' + resource['name'] + '</span></a>' +
                                              '</td>' +
                                            '</tr>');
     }
 
     $('#table-resources tbody a').on('click', function(evt) {
         evt.preventDefault();
-        var link = config['ckanURL'] + '/download_resource/' + $(this).parents('tr').data('resource');
 
+        var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
             link += '?format=' + $(this).parents().eq(1).find('select').val()
         }
 
         window.open(link, '_blank');
     });
+
+    config['built']['downloads'] = true;
 }
 
 function buildExplore() {
-    if (!config['package']) return;
+    if ($.isEmptyObject(config['package']) || config['built']['explore']) return;
 
-    var dataset = config['package'];
-    switch (dataset['dataset_category']) {
+    switch (config['package']['dataset_category']) {
         case 'Table':
             $('#explore-esri').hide();
+
             getCKAN('resource_view_list', { 'id': config['package']['primary_resource']['id'] }, function(response) {
                 var results = response['result'],
                     viewURL = '#';
@@ -86,52 +89,65 @@ function buildExplore() {
                 }
 
                 $('#redirect-ckan').attr('href', viewURL);
+
+                config['built']['explore'] = true;
             });
             break;
         case 'Maps':
             $('#explore-ckan').hide();
             $('#redirect-esri').attr('href', config['package']['explore_url']);
+
+            config['built']['explore'] = true;
             break;
     }
 }
 
 function buildFeatures() {
-    if (!config['package'] || !$('#table-features tbody').is(':empty')) return;
+    if ($.isEmptyObject(config['package']) || config['built']['features']) return;
 
     getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource']['id'] }, function(response) {
         var fields = response['result']['fields'],
-            ele = '';
+            row = '';
 
         for (var i = 0; i < fields.length; i++) {
-            ele += '<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>';
+            row += '<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>';
         }
 
-        $('#table-features tbody').append(ele);
+        $('#table-features tbody').append(row);
+
+        config['built']['features'] = true;
     });
 }
 
 function buildPreview() {
-    if (!config['package'] || !$('#collapse-preview .col-md-12').is(':empty')) return;
-    var dataset = config['package'];
+    if ($.isEmptyObject(config['package']) || config['built']['preview']) return;
 
-    switch (dataset['dataset_category']) {
+    switch (config['package']['dataset_category']) {
         case 'Table':
-            getCKAN('datastore_search', { 'resource_id': dataset['primary_resource']['id'], 'limit': 3 }, function(response) {
-                var fields = response['result']['fields'],
-                    data = response['result']['records'];
-
-                var head = '<thead>',
+            getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource']['id'], 'limit': 3 }, function(response) {
+                var data = response['result']['records'],
+                    fields = response['result']['fields'],
+                    head = '<thead>',
                     body = '<tbody>';
 
                 for (var i = 0; i < data.length; i++) {
                     body += '<tr>';
                     for (var j in fields) {
-                        if (i == 0) head += '<th>' + fields[j]['id'] + '</th>';
+                        if (i == 0) {
+                            head += '<th>' + fields[j]['id'] + '</th>';
+                        }
+
                         body += '<td>' + data[i][fields[j]['id']] + '</td>';
                     }
+                    body += '</tr>';
                 }
 
-                $('#collapse-preview .col-md-12').append('<table class="table table-striped table-responsive">' + head + body + '</table>');
+                head += '</thead>';
+                body += '</tbody>';
+
+                $('#content-preview').append('<table class="table table-striped table-responsive">' + head + body + '</table>');
+
+                config['built']['preview'] = true;
             });
             break;
         case 'Maps':
@@ -147,7 +163,9 @@ function buildPreview() {
                         var w = $('#collapse-preview .col-md-12').width(),
                             h = w / 2;
 
-                        $('#collapse-preview .col-md-12').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+
+                        config['built']['preview'] = true;
                         break;
                     }
                 }
@@ -172,7 +190,7 @@ function buildDataset(response) {
     data['preview_resource'] = {};
 
     for (var i in data['resources']) {
-        if (!!data['resources'][i]['file_type']) {
+        if (data['resources'][i]['file_type'].length > 0) {
             switch (data['resources'][i]['file_type']) {
                 case 'Primary data':
                     data['primary_resource'] = data['resources'][i];
@@ -189,7 +207,7 @@ function buildDataset(response) {
         var field = $(this).data('field');
         data['image_url'] = data['image_url'] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
 
-        if (!!data[field]) {
+        if (data[field]) {
             switch(field) {
                 case 'image_url':
                     $(this).css('background-image', 'url("' + data[field] + '")');
