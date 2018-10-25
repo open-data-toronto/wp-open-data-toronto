@@ -93,7 +93,7 @@ function buildExplore() {
                 config['built']['explore'] = true;
             });
             break;
-        case 'Maps':
+        case 'Map':
             $('#explore-ckan').hide();
             $('#redirect-esri').attr('href', config['package']['explore_url']);
 
@@ -150,7 +150,7 @@ function buildPreview() {
                 config['built']['preview'] = true;
             });
             break;
-        case 'Maps':
+        case 'Map':
             var preview = !$.isEmptyObject(config['package']['preview_resource']) ? config['package']['preview_resource'] : config['package']['primary_resource'];
 
             getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
@@ -240,9 +240,9 @@ function buildDataset(response) {
         }
     });
 
-    if ((['Maps', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || data['is_visualizable'] == 'false') {
+    if ((['Map', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || data['is_visualizable'] == 'false') {
         $('#heading-preview, #heading-features, #heading-explore').hide();
-    } else if (data['dataset_category'] == 'Maps') {
+    } else if (data['dataset_category'] == 'Map') {
         $('#heading-features').hide();
     }
 
