@@ -157,7 +157,7 @@ function buildCatalogueSidebar(response) {
                 labelChecked = ' ';
 
             if (config['filters']['dropdowns'].indexOf(field['title']) !== -1) {         // Select2 dropdowns filters
-                if (selected.length > 0 && selected.indexOf(value['name']) !== -1) {
+                if (selected != null && selected.indexOf(value['name']) !== -1) {
                     checked += 'selected="selected" ';
                 }
 
@@ -166,7 +166,7 @@ function buildCatalogueSidebar(response) {
                       value['name'] +
                     '</option>');
             } else if (config['filters']['checkboxes'].indexOf(field['title']) !== -1) { // Checkboxes filters
-                if (selected.length > 0 && selected.indexOf(value['name']) !== -1) {
+                if (selected != null && selected.indexOf(value['name']) !== -1) {
                     checked += 'checked="true" ';
                     labelChecked += 'class="checkbox-checked" ';
                 }
