@@ -182,6 +182,7 @@ function buildUI() {
     $('#heading-preview').on('click', buildPreview);
 
     config['isInitializing'] = false;
+    $('.block-hidden').fadeIn(250);
 }
 
 function buildDataset(response) {
@@ -250,5 +251,6 @@ function buildDataset(response) {
 }
 
 function init(package_name) {
+    $('.block-hidden').hide();
     getCKAN('package_show', { 'id': package_name }, buildDataset);
 }

@@ -150,7 +150,7 @@ function buildCatalogueSidebar(response) {
             return b['count'] - a['count'];
         });
 
-        for (var i = 0; i < sidebar.length; i++) {
+        for (var i in sidebar) {
             var value = sidebar[i],
                 selected = state['filters'][field['title']],
                 checked = ' ',
@@ -213,6 +213,7 @@ var buildStaticUI = function() {
     $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
+    $('.block-hidden').fadeIn(250);
 }
 
 function buildDynamicUI() {
@@ -377,5 +378,6 @@ function parseParams() {
 }
 
 function init() {
+    $('.block-hidden').hide();
     loadCatalogue();
 }

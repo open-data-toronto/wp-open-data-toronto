@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row block-hidden">
         <div class="col-md-12">
           <!-- Banner -->
           <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>) !important">
@@ -27,8 +27,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <!-- Sidebar for Catalogue Page -->
+      <div class="row block-hidden">
         <div class="col-md-3">
           <?php include ('sidebar-catalogue.php'); ?>
         </div>
