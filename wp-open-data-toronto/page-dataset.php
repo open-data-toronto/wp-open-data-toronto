@@ -105,12 +105,7 @@
 
                       <div id="collapse-preview" class="collapse" role="tabpanel" aria-labelledby="heading-preview">
                         <div class="row">
-                          <div id="content-preview" class="col-md-12">
-                            <table class="table table-striped table-responsive" id="table-preview">
-                              <thead></thead>
-                              <tbody></tbody>
-                            </table>
-                          </div>
+                          <div id="content-preview" class="col-md-12"></div>
                         </div>
                       </div>
                     </div>
