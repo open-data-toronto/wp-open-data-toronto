@@ -41,6 +41,13 @@ function buildCatalogue(response) {
         return;
     }
 
+    var iconClassMap = {
+        'Document': 'fa-newspaper-o',
+        'Map': 'fa-map-o',
+        'Table': 'fa-area-chart',
+        'Website': 'fa-desktop'
+    }
+
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
@@ -72,7 +79,7 @@ function buildCatalogue(response) {
                       '<p>' +
                         '<span class="sr-only">Data Type: </span>' +
                         row['dataset_category'] + '&nbsp; ' +
-                        '<span class="fa fa-bar-chart" aria-hidden="true"></span>' +
+                        '<span class="fa ' + iconClassMap[row['dataset_category']] + '" aria-hidden="true"></span>' +
                       '</p>' +
                     '</div>' +
                   '</div>';
@@ -87,10 +94,11 @@ function buildCatalogue(response) {
 
         // Build the page buttons
         for (var i = 0; i < state['size']; i++) {
-            var pageNumber = i + 1 + '';
+            var pageNumber = i + 1 + '',
+                additionalClass = i == state['page'] ? ' active' : '';
 
             if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
-                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
+                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove' +  additionalClass + '">' +
                                                            '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page=' + i + '>' +
                                                               pageNumber +
                                                            '</a>' +
@@ -103,6 +111,15 @@ function buildCatalogue(response) {
                                                          '</li>');
             }
         }
+
+        $('#nav-catalogue .page-remove a').on('click', function(evt) {
+            evt.preventDefault();
+
+            state['page'] = $(this).data('page');
+            $(this).addClass('active');
+
+            loadCatalogue();
+        });
 
         $('#nav-catalogue').show();
     }
@@ -229,17 +246,6 @@ function buildDynamicUI() {
         default:
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
-
-    $('[data-page="' + state['page'] + '"]').parent('li').addClass('active');
-
-    $('#nav-catalogue .page-remove a').on('click', function(evt) {
-        evt.preventDefault();
-
-        state['page'] = $(this).data('page');
-        $(this).addClass('active');
-
-        loadCatalogue();
-    });
 
     $('.select-select2').on('change.select2', function() {
         var value = $(this).val();
