@@ -32,8 +32,24 @@ gulp.task("compressIMG", function () {
         .pipe(gulp.dest("img/compressed/"));
 });
 
-gulp.task("watcher", function () {
-    gulp.watch("./**", ["default"]);
+gulp.task("watch:css", function () {
+    gulp.watch(
+        ["*.css", "!*.min.css"],
+        ["minifyCSS"]);
 });
 
-gulp.task("default", ["minifyCSS", "minifyJS", "compressIMG"]);
+gulp.task("watch:js", function () {
+    gulp.watch(
+        ["js/*.js", "!js/*.min.js"],
+        ["minifyJS"]);
+});
+
+gulp.task("watch:img", function () {
+    gulp.watch(
+        ["img/*.png", "img/*.svg", "img/*.jpg", "img/*.jpeg"],
+        ["compressIMG"]);
+});
+
+gulp.task("build", ["minifyCSS", "minifyJS", "compressIMG"]);
+
+gulp.task("default", ["build", "watch:css", "watch:js", "watch:img"]);
