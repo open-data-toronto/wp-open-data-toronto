@@ -47,6 +47,8 @@
                     <dd data-field="dataset_category"></dd>
                     <dt>More information<span class="sr-only">: </span></dt>
                     <dd data-field="information_url"></dd>
+                    <dt>Tags<span class="sr-only">: </span></dt>
+                    <dd data-field="vocab_tags"></dd>
                   </dl>
                   <h2><span class="fa fa-user"></span>&nbsp; Data Owner</h2>
                   <dl>
@@ -57,15 +59,13 @@
                     <dt>Contact<span class="sr-only">: </span></dt>
                     <dd data-field="owner_email"></dd>
                   </dl>
-                  <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
+                  <!-- <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
                   <dl>
-                    <dt>Tags<span class="sr-only">: </span></dt>
-                    <dd data-field="tags"></dd>
                     <dt>Pageviews<span class="sr-only">: </span></dt>
                     <dd data-field="pageviews"></dd>
                     <dt>Downloads<span class="sr-only">: </span></dt>
                     <dd data-field="downloads"></dd>
-                  </dl>
+                  </dl> -->
                 </div>
               </div>
             </div>
@@ -160,7 +160,7 @@
                                 <tr>
                                   <th scope="col">Format</th>
                                   <th scope="col">File Name</th>
-                                  <th scope="col">Download</th>
+                                  <th scope="col">Get Data</th>
                                 </tr>
                               </thead>
                               <tbody></tbody>

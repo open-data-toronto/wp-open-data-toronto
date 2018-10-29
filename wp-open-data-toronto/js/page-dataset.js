@@ -36,7 +36,8 @@ function buildDownloads() {
         if (config['package']['resources'][i]['file_type'] == 'Preview data') continue;
 
         var resource = config['package']['resources'][i],
-            link = config['ckanURL'] + '/download_resource/' + resource['id'];
+            link = config['ckanURL'] + '/download_resource/' + resource['id'],
+            btnText = resource['format'].toLowerCase() == 'html' ? 'Visit' : 'Download';
 
         if (resource['datastore_active']) {
             resource['format'] = '<select class="select-download-formats">' +
@@ -50,7 +51,7 @@ function buildDownloads() {
                                              '<td>' + resource['format'] + '</td>' +
                                              '<td>' + resource['name'] + '</td>' +
                                              '<td>' +
-                                               '<a href="' + link + '">Download <span class="sr-only">' + resource['name'] + '</span></a>' +
+                                               '<a href="' + link + '">' + btnText +  ' <span class="sr-only">' + resource['name'] + '</span></a>' +
                                              '</td>' +
                                            '</tr>');
     }
