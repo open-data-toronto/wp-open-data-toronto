@@ -48,7 +48,7 @@
                     <dt>More information<span class="sr-only">: </span></dt>
                     <dd data-field="information_url"></dd>
                     <dt>Tags<span class="sr-only">: </span></dt>
-                    <dd data-field="vocab_tags"></dd>
+                    <dd data-field="tags"></dd>
                   </dl>
                   <h2><span class="fa fa-user"></span>&nbsp; Data Owner</h2>
                   <dl>
