@@ -229,6 +229,19 @@ var buildStaticUI = function() {
     $('#select-division, #select-vocab_tags').select2(config['select2']);
     $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
 
+    $('.select-select2').on('change.select2', function() {
+        var value = $(this).val();
+
+        if ($(this).is('#select-search')) {
+            state['search'] = value || [];
+        } else {
+            state['filters'][$(this).data('field')] = value;
+        }
+
+        state['page'] = 0;
+        loadCatalogue();
+    });
+
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
     $('.block-hidden').fadeIn(250);
 }
@@ -246,19 +259,6 @@ function buildDynamicUI() {
         default:
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
-
-    $('.select-select2').on('change.select2', function() {
-        var value = $(this).val();
-
-        if ($(this).is('#select-search')) {
-            state['search'] = value || [];
-        } else {
-            state['filters'][$(this).data('field')] = value;
-        }
-
-        state['page'] = 0;
-        loadCatalogue();
-    });
 
     $('.checkbox-filter input').on('click', function() {
         $(this).parent('label').toggleClass('checkbox-checked');
