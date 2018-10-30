@@ -3,7 +3,7 @@ var $ = jQuery.noConflict(),
         'filters': {},
         'search': [],
         'page': 0,
-        'size': 1
+        'size': 0
     };
 
 $.extend(config, {
@@ -276,8 +276,6 @@ function buildDynamicUI() {
 }
 
 function loadCatalogue() {
-    if (!config['isInitializing'] && (state['page'] < 0 || state['page'] >= state['size'])) return;
-
     var q = config['isInitializing'] ? parseParams() : parseFilters();
     var params = {
         'q': q,
