@@ -12,8 +12,8 @@ $.extend(config, {
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
     'filters': {
         'checkboxes': ['dataset_category', 'resource_formats'],
-        'dropdowns': ['owner_division', 'vocab_tags'],
-        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'vocab_tags']
+        'dropdowns': ['owner_division', 'tags'],
+        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'tags']
     },
     'select2': {
         'language': {
@@ -226,7 +226,7 @@ var buildStaticUI = function() {
         loadCatalogue();
     });
 
-    $('#select-division, #select-vocab_tags').select2(config['select2']);
+    $('#select-division, #select-tags').select2(config['select2']);
     $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
 
     $('.select-select2').on('change.select2', function() {
@@ -347,7 +347,7 @@ function parseFilters() {
         }
         tokens = tokens.map(function(x) { return '*' + x + '*' }).join(' AND ');
 
-        q.push('(excerpt: (' + tokens + ')) OR (title: (' + tokens + '))');
+        q.push('(excerpt:(' + tokens + ')) OR (name:(' + tokens + '))');
     }
 
     return q.join(' AND ');
