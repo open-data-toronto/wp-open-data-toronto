@@ -201,12 +201,9 @@ function buildCatalogueSidebar(response) {
 
     if (state['search'].length > 0) {
         for (var i in state['search']) {
-            var value = state['search'][i],
-                selectedValues = $('.filter-search select').val();
+            var value = state['search'][i];
 
-            if (selectedValues.indexOf(value) == -1) {
-                $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
-            }
+            $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
         }
     }
 
