@@ -73,7 +73,7 @@ function buildCatalogue(response) {
                     '<div class="col-md-4 text-right attributes">' +
                       '<p>' +
                         '<span class="sr-only">Last Updated: </span>' +
-                        getFullDate(row['published_date'].split('-')) + '&nbsp; ' +
+                        getFullDate(row['metadata_modified'].split('-')) + '&nbsp; ' +
                         '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
                       '</p>' +
                       '<p>' +
@@ -201,7 +201,8 @@ function buildCatalogueSidebar(response) {
 
     if (state['search'].length > 0) {
         for (var i in state['search']) {
-            var value = state['search'][i];
+            var value = state['search'][i],
+                selectedValues = $('.filter-search select').val();
 
             if (selectedValues.indexOf(value) == -1) {
                 $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
