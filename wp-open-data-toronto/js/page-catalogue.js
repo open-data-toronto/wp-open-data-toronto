@@ -126,7 +126,7 @@ function buildCatalogue(response) {
 }
 
 function buildCatalogueSidebar(response) {
-    $('.filter ul, .filter select').empty();
+    $('[data-type="filter"]').empty();
 
     var results = response['result'],
         data = {};
