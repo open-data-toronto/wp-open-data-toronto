@@ -77,11 +77,11 @@ function buildExplore() {
         case 'Table':
             $('#explore-esri').hide();
 
-            getCKAN('resource_view_list', { 'id': config['package']['primary_resource']['id'] }, function(response) {
+            getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
                 var results = response['result'],
                     viewURL = '#';
 
-                for (var i = 0; i < results.length; i++) {
+                for (var i in results) {
                     var view = results[i];
                     if (view['view_type'] == 'recline_view') {
                         viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
@@ -106,11 +106,11 @@ function buildExplore() {
 function buildFeatures() {
     if ($.isEmptyObject(config['package']) || config['built']['features']) return;
 
-    getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource']['id'] }, function(response) {
+    getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'] }, function(response) {
         var fields = response['result']['fields'],
             row = '';
 
-        for (var i = 0; i < fields.length; i++) {
+        for (var i in fields) {
             row += '<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>';
         }
 
@@ -125,13 +125,13 @@ function buildPreview(evt) {
 
     switch (config['package']['dataset_category']) {
         case 'Table':
-            getCKAN('datastore_search', { 'resource_id': config['package']['primary_resource']['id'], 'limit': 3 }, function(response) {
+            getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
                 var data = response['result']['records'],
                     fields = response['result']['fields'],
                     head = '<thead>',
                     body = '<tbody>';
 
-                for (var i = 0; i < data.length; i++) {
+                for (var i in data) {
                     body += '<tr>';
                     for (var j in fields) {
                         if (i == 0) {
@@ -152,12 +152,12 @@ function buildPreview(evt) {
             });
             break;
         case 'Map':
-            var preview = !$.isEmptyObject(config['package']['preview_resource']) ? config['package']['preview_resource'] : config['package']['primary_resource'];
+            var preview = config['package']['preview_resource'];
 
             getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
                 var results = response['result'];
 
-                for (var i = 0; i < results.length; i++) {
+                for (var i in results) {
                     var view = results[i];
                     if (view['view_type'] == 'geojson_view') {
                         var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
@@ -190,19 +190,12 @@ function buildUI() {
 
 function buildDataset(response) {
     var data = config['package'] = response['result'];
-    data['primary_resource'] = {};
     data['preview_resource'] = {};
 
     for (var i in data['resources']) {
-        if (data['resources'][i]['file_type'].length > 0) {
-            switch (data['resources'][i]['file_type']) {
-                case 'Primary data':
-                    data['primary_resource'] = data['resources'][i];
-                    break;
-                case 'Preview data':
-                    data['preview_resource'] = data['resources'][i];
-                    break;
-            }
+        if (data['resources'][i]['is_preview'] == 'true') {
+            data['preview_resource'] = data['resources'][i];
+            break;
         }
     }
 
@@ -220,13 +213,13 @@ function buildDataset(response) {
                     $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
                     break;
                 case 'tags':
-                    for (var i = 0; i < data[field].length; i++) {
+                    for (var i in data[field]) {
                         if (!$(this).is(':empty')) $(this).append(', ');
                         $(this).append('<a href="/catalogue?q=(tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
                     }
                     break;
                 case 'metadata_modified':
-                    var date = data['primary_resource']['last_modified'] || data[field];
+                    var date = data[field];
                     $(this).text(getFullDate(date.substring(0, 10).split('-')));
                     break
                 case 'published_date':

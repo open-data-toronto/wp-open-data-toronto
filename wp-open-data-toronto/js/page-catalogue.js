@@ -73,7 +73,7 @@ function buildCatalogue(response) {
                     '<div class="col-md-4 text-right attributes">' +
                       '<p>' +
                         '<span class="sr-only">Last Updated: </span>' +
-                        getFullDate(row['published_date'].split('-')) + '&nbsp; ' +
+                        getFullDate(row['metadata_modified'].split('-')) + '&nbsp; ' +
                         '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
                       '</p>' +
                       '<p>' +
