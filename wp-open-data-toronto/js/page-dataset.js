@@ -237,7 +237,7 @@ function buildDataset(response) {
         }
     });
 
-    if ((['Map', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || data['is_visualizable'] == 'false') {
+    if ((['Map', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || $.isEmptyObject(data['preview_resource'])) {
         $('#heading-preview, #heading-features, #heading-explore').hide();
     } else if (data['dataset_category'] == 'Map') {
         $('#heading-features').hide();
