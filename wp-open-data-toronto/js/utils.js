@@ -44,6 +44,6 @@ function getURLParam(name){
     if (results == null) {
         return null;
     } else {
-        return decodeURI(results[1]) || 0;
+        return decodeURI(results[1]);
     }
 }
