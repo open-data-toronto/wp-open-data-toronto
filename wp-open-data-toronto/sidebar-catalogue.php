@@ -30,5 +30,7 @@
     <ul data-type="filter"></ul>
   </div>
   <br/>
+
+  <button id="btn-filter-clear" type="button" class="btn btn-danger">Reset Filters</button>
 </div>
 <!-- End Sidebar -->

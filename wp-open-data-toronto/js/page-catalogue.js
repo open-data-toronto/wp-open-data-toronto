@@ -204,7 +204,7 @@ function buildCatalogueSidebar(response) {
             var value = state['search'][i],
                 selectedValues = $('.filter-search select').val();
 
-            if (selectedValues != null && selectedValues.indexOf(value) == -1) {
+            if (selectedValues == null || selectedValues.indexOf(value) == -1) {
                 $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
             }
         }
@@ -232,7 +232,7 @@ var buildStaticUI = function() {
     $('#select-division, #select-tags').select2(config['select2']);
     $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
 
-    $('.select-select2').on('change.select2', function() {
+    $('.select-select2').on('change.select2', function(evt) {
         var value = $(this).val();
 
         if ($(this).is('#select-search')) {
@@ -242,6 +242,19 @@ var buildStaticUI = function() {
         }
 
         state['page'] = 0;
+        loadCatalogue();
+    }).on('select2:unselect', function(evt) {
+        $(this).empty();
+    });
+
+    $('#btn-filter-clear').on('click', function() {
+        state = {
+            'filters': {},
+            'search': [],
+            'page': 0,
+            'size': 0
+        };
+
         loadCatalogue();
     });
 
@@ -279,7 +292,9 @@ function buildDynamicUI() {
 }
 
 function loadCatalogue() {
-    var q = config['isInitializing'] ? parseParams() : parseFilters();
+    if (config['isInitializing']) parseParams();
+
+    var q = parseFilters();
     var params = {
         'q': q,
         'rows': config['datasetsPerPage'],
@@ -380,8 +395,6 @@ function parseParams() {
                 break
         }
     }
-
-    return getURLParam('q') || '';
 }
 
 function init() {
