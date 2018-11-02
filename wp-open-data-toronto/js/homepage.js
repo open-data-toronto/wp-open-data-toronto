@@ -27,8 +27,6 @@ function init() {
 
     $('#search-dataset button').on('click', function() {
         var term = $('#search-dataset input').val();
-        if (!!term.length) {
-            window.location.href = '../catalogue?r=' + $('#search-dataset input').val();
-        }
+        window.location.href = '../catalogue?r=' + $('#search-dataset input').val();
     });
 }
