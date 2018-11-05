@@ -28,8 +28,46 @@
       </div>
 
       <div class="row block-hidden">
+        <div class="col-md-6 offset-md-3">
+          <div class="input-group" aria-label="Search the Open Data Catalogue">
+            <label for="search" class="sr-only">Search Dataset</label>
+            <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
+            <span class="input-group-btn">
+              <button id="btn-search" class="btn btn-secondary" type="submit">Search Datasets</button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row block-hidden">
         <div class="col-md-3">
-          <?php include ('sidebar-catalogue.php'); ?>
+          <div class="sidebar" style="border: 0" role="complementary">
+            <div class="filter filter-owner_division" aria-label="Filter datasets by division">
+              <h2>Tags</h2>
+              <select class="custom-select" id="select-division" data-type="filter" data-field="owner_division"></select>
+            </div>
+            <br/>
+
+            <div class="filter filter-tags" aria-label="Filter datasets by tags">
+              <h2>Tags</h2>
+              <select class="custom-select" id="select-tags" data-type="filter" data-field="tags"></select>
+            </div>
+            <br/>
+
+            <div class="filter filter-dataset_category" aria-label="Filter datasets by the category of dataset">
+              <h2>Dataset Type</h2>
+              <ul data-type="filter"></ul>
+            </div>
+
+            <div class="filter filter-resource_formats" aria-label="Filter datasets by the format of resources">
+              <h2>Formats</h2>
+              <ul data-type="filter"></ul>
+            </div>
+            <br/>
+
+            <button id="btn-filter-clear" type="button" class="btn btn-danger">Reset Filters</button>
+          </div>
+          <!-- End Sidebar -->
         </div>
 
         <div class="col-md-9">

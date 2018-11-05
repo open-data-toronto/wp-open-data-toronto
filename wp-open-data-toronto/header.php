@@ -17,9 +17,7 @@
     <?php wp_head(); ?>
 
     <link rel="stylesheet" href="/wp-content/themes/wp-open-data-toronto/fonts/font-awesome.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
 
     <script src="/wp-content/themes/wp-open-data-toronto/js/webtrends-infinity.load.js"></script>
