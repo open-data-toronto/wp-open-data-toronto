@@ -67,17 +67,17 @@ function buildCatalogue(response) {
                     '</div>' +
                     '<div class="col-md-4 text-right attributes">' +
                       '<p>' +
-                        '<span>Last Updated : </span>' +
+                        '<span class="dataset-meta-label">Last Updated: </span>' +
                         getFullDate(row['metadata_modified'].split('-')) + '&nbsp;' +
                         '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
                       '</p>' +
                       '<p>' +
-                        '<span>Division : </span>' +
+                        '<span class="dataset-meta-label">Division: </span>' +
                         row['owner_division'] + '&nbsp;' +
                         '<span class="fa fa fa-home" aria-hidden="true"></span>' +
                       '</p>' +
                       '<p>' +
-                        '<span>Data Type : </span>' +
+                        '<span class="dataset-meta-label">Data Type: </span>' +
                         row['dataset_category'] + '&nbsp;' +
                         '<span class="fa ' + iconClassMap[row['dataset_category']] + '" aria-hidden="true"></span>' +
                       '</p>' +

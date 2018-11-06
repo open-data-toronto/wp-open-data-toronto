@@ -1603,3 +1603,7 @@ table.download-table {
         font-weight: 500;
     }
 }
+
+.dataset-meta-label {
+    font-weight: bold !important ;
+}
