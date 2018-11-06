@@ -19,7 +19,7 @@
 function wp_bootstrap_starter_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'wp_bootstrap_starter_custom_header_args', array(
 		'default-image'          => '',
-		'default-text-color'     => 'fff',
+		'default-text-color'     => '000000',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
@@ -52,11 +52,11 @@ function wp_bootstrap_starter_header_style() {
 		// Has the text been hidden?
 		if ( ! display_header_text() ) :
 	?>
-		.site-title,
+		/*.site-title,
 		.site-description {
 			position: absolute;
 			clip: rect(1px, 1px, 1px, 1px);
-		}
+		}*/
 	<?php
 		// If the user has set a custom color for the text use that.
 		else :

@@ -28,7 +28,76 @@
       </div>
 
       <div class="row block-hidden">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-3">
+          <div class="sidebar" style="border: 0" role="complementary">
+            <div class="card">
+              <div class="card-header card-filters" role="tab" id="heading-dataset_category">
+                <h5 class="mb-0">
+                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-dataset_category" aria-expanded="true" aria-controls="collapse-dataset_category">
+                    Dataset Type
+                    <span class="accordion-arrow">
+                      <span class="fa fa-chevron-down"></span>
+                    </span>
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapse-dataset_category" class="collapse" role="tabpanel" aria-labelledby="heading-dataset_category">
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul data-type="filter" data-field="dataset_category"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header card-filters" role="tab" id="heading-owner_division">
+                <h5 class="mb-0">
+                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-owner_division" aria-expanded="true" aria-controls="collapse-owner_division">
+                    Divisions
+                    <span class="accordion-arrow">
+                      <span class="fa fa-chevron-down"></span>
+                    </span>
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapse-owner_division" class="collapse" role="tabpanel" aria-labelledby="heading-owner_division">
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul data-type="filter" data-field="owner_division"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header card-filters" role="tab" id="heading-resource_formats">
+                <h5 class="mb-0">
+                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-resource_formats" aria-expanded="true" aria-controls="collapse-resource_formats">
+                    Resource Formats
+                    <span class="accordion-arrow">
+                      <span class="fa fa-chevron-down"></span>
+                    </span>
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapse-resource_formats" class="collapse" role="tabpanel" aria-labelledby="heading-resource_formats">
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul data-type="filter" data-field="resource_formats"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Sidebar -->
+        </div>
+
+        <div class="col-md-9">
+          <!-- List of Datasets -->
           <div class="input-group" aria-label="Search the Open Data Catalogue">
             <label for="search" class="sr-only">Search Dataset</label>
             <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
@@ -36,42 +105,7 @@
               <button id="btn-search" class="btn btn-secondary" type="submit">Search Datasets</button>
             </span>
           </div>
-        </div>
-      </div>
 
-      <div class="row block-hidden">
-        <div class="col-md-3">
-          <div class="sidebar" style="border: 0" role="complementary">
-            <div class="filter filter-owner_division" aria-label="Filter datasets by division">
-              <h2>Tags</h2>
-              <select class="custom-select" id="select-division" data-type="filter" data-field="owner_division"></select>
-            </div>
-            <br/>
-
-            <div class="filter filter-tags" aria-label="Filter datasets by tags">
-              <h2>Tags</h2>
-              <select class="custom-select" id="select-tags" data-type="filter" data-field="tags"></select>
-            </div>
-            <br/>
-
-            <div class="filter filter-dataset_category" aria-label="Filter datasets by the category of dataset">
-              <h2>Dataset Type</h2>
-              <ul data-type="filter"></ul>
-            </div>
-
-            <div class="filter filter-resource_formats" aria-label="Filter datasets by the format of resources">
-              <h2>Formats</h2>
-              <ul data-type="filter"></ul>
-            </div>
-            <br/>
-
-            <button id="btn-filter-clear" type="button" class="btn btn-danger">Reset Filters</button>
-          </div>
-          <!-- End Sidebar -->
-        </div>
-
-        <div class="col-md-9">
-          <!-- List of Datasets -->
           <div class="table-list" aria-label="List of Datasets"></div>
           <nav id="nav-catalogue" aria-label="Page Navigation">
             <ul class="pagination pagination-sm">

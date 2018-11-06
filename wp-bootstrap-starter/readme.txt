@@ -4,7 +4,7 @@ Tags: blog, custom-menu, featured-images, threaded-comments, translation-ready, 
 Requires at least: 4.0
 Tested up to: 4.7
 
-Copyright (c) 2016 by Afterimage Designs (http://afterimagedesigns.com/)
+Copyright (c) 2016 by Afterimage Designs (https://afterimagedesigns.com/)
 This Theme is distributed under the terms of the GNU GPL.
 
 License: GNU General Public License v2.0
@@ -12,8 +12,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-The best WordPress starter theme based on the most powerful frameworks in the world: "_s" (by Automattic, the main people behind WordPress development), Twitter Bootstrap (the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web) and Font Awesome (or Fontawesome, a full suite of 675+ pictographic icons for easy scalable vector graphics on websites). This theme, like WordPress, is licensed under the GPL. You can use this theme as base for your next WordPress theme project and you are allowed to remove the link at the footer or do whatever you want. Your feedback on how we can continuously improve this WordPress Starter Theme Bootstrap will be highly appreciated. Page templates includes Right-sidebar (default page template), Left-Sidebar, Full-Width, Blank with container, Blank without container Page. Other features - Currently using Bootstrap v4.0.0-beta.2 , Widgetized footer area, WooCommerce ready, Compatible with Contact Form 7, Compatible with Visual Composer, Compatible with Elementor Page Builder. This theme will be an active project which we will update from time to time. Check this page regularly for the updates.
-
+The best WordPress starter theme based on the most powerful frameworks in the world:
+    “_s” – by Automattic, the main people behind WordPress development
+    Twitter Bootstrap – the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+    Font Awesome – a full suite of 675+ pictographic icons for easy scalable vector graphics on websites
 
 This theme, like WordPress, is licensed under the GPL. You can use this theme as base for your next WordPress theme project and you are allowed to remove the link at the footer or do whatever you want. Your feedback on how we can continuously improve this WordPress Starter Theme Bootstrap will be highly appreciated.
 
@@ -57,167 +59,6 @@ WP Bootstrap Starter includes support for Infinite Scroll in Jetpack.
 * Font Awesome icons, Copyright (C) Dave Gandy License: SIL Open Font License, version 1.1. - http://fontawesome.io/
 
 == Changelog ==
-= 3.1.0 - July 13, 2018 =
-* Fix the dropdown color in all of the theme optin under customizer -> Preset Styles -> Theme Option
-* Fix the size of the dropdown menu in all of the theme option
-* Fix the color of the logo in all of the theme option
-* Remove the border arround the footer widget
-
-= 3.0.19 - July 10, 2018 =
-* Change the protocol the of fontawesome to https
-
-= 3.0.18 - June 27, 2018 =
-* Adjust the theme-script.js to fix the layout of woocommerce checkout
-
-= 3.0.17 - June 27, 2018 =
-* Update fontawesome cdn to v5.1.0
-* Fix the woocommerce checkout page layout
-
-= 3.0.16 - June 7, 2018 =
-* Update bootstrap files to v4.1.1
-* Change the wrapper of the footer and footer widget to ".container" instead of ".container-fluid"
-
-= 3.0.15 - May 7, 2018 =
-* Remove the font awesome files
-* Enqueue the fontawesome CDN
-
-= 3.0.14 - May 2, 2018 =
-* Update woocommerce files
-
-= 3.0.13 - April 17, 2018 =
-* Update the bootstrap files
-* Fix the layout of the category widget to show the post count properly
-
-= 3.0.12 - April 11, 2018 =
-* Move the js file to the footer
-* Create minified js file
-* Fix the font color in the footer bar
-
-= 3.0.11 - March 14, 2018 =
-* Minor changes in the style.css to fix the visibility of the sub menu in other theme options
-
-= 3.0.10 - March 13, 2018 =
-* Change the navbar-toggler data-target attribute to #main-nav
-* Add Installation welcome message
-* Fix the font color of the submenu in mobile on hover
-* Fix the path of the customizer.js which cause an error in the theme customizer
-
-= 3.0.9 - February 27, 2018 =
-* Fix the color of mobile menu
-* Change the background of the sub menu in smaller screen from white to transparent
-
-= 3.0.8 - February 23, 2018 =
-* Add RTL support
-
-= 3.0.7 - January 22, 2018 =
-* Update Bootstrap 4 files
-
-= 3.0.6 - January 17, 2018 =
-* Remove the border in menu bar
-* Fix the default values in customizer
-* Upgrade popper.js
-* Fix popper.js related warnings in console
-* Integrate fontawesome 5
-* Remove the unnecessary styling in the typography preset
-
-= 3.0.5 - December 29, 2017 =
-* Remove the underline in all of the H tags
-* Fix the default wordpress gallery
-
-= 3.0.4 - November 27, 2017 =
-* Typography tweak
-
-= 3.0.3 - November 24, 2017 =
-* Fix the spacing of the page banner
-
-= 3.0.2 - November 20, 2017 =
-* Add the slide arrow in the header
-
-= 3.0.1 - November 17, 2017 =
-* Update the appearance the page banner
-* Fix the text color of the presets
-
-= 3.0.0 - November 3, 2017 =
-* Update the header code base on bootstrap v4.0.0-beta.2
-* Style the page base on v4.0.0-beta.2
-* Add new typography preset
-
-= 2.5.5 - October 27, 2017 =
-* Fix the font in the typography preset
-* Add new typography preset
-
-= 2.5.4 - October 20, 2017 =
-* Add new Preset
-* Upgrade the bootstrap 4 alpha to bootstrap 4 beta
-
-= 2.5.3 - October 18, 2017 =
-* Add new Preset
-* Fix the fonts in Poppins / Lora
-
-= 2.5.2 - August 31, 2017 =
-* Make the subheader visible to front page
-
-= 2.5.1 - August 29, 2017 =
-* Fix style of Poppins/Lora preset
-
-= 2.5.0 - August 23, 2017 =
-* Fix the H tag format of the  Montserrat / Merriweather preset
-
-= 2.4.9 - August 3, 2017 =
-* Remove the SASS directory since it contains developer file
-
-= 2.4.8 - August 3, 2017 =
-* Update the typography of Roboto / Roboto preset
-* Update the letter spacing of Roboto / Roboto preset
-
-= 2.4.7 - August 2, 2017 =
-* Fix the js error in shop page
-
-= 2.4.6 - August 1, 2017 =
-* Fix the Display Site Title and Tagline option in header
-
-= 2.4.5 - July 31, 2017 =
-* Update the letter spacing of Poppins / Poppins preset
-
-= 2.4.4 - July 26, 2017 =
-* Update the typography of Poppins / Poppins preset
-
-= 2.4.3 - July 25, 2017 =
-* Add Arbutu Slab / Open Sans Preset
-* Add Poppins / Poppins Preset
-* Add Roboto / Roboto Preset
-* Remove the pagination in the single attachment
-
-= 2.4.2 - July 24, 2017 =
-* Fix the fonts in the preset css
-
-= 2.4.1 - July 22, 2017 =
-* Add a 100% fullwidth class ".full-bleed-section"
-
-
-= 2.4.0 - July 21, 2017 =
-* Change the unit of the font from px to rem
-* Make the typography responsive
-
-= 2.3.9 - July 21, 2017 =
-* Re arrange the customizer
-* Remove the Banner Tagline color
-* Remove the Banner Title color
-
-= 2.3.8 - July 21, 2017 =
-* Add the wordpress core css - https://codex.wordpress.org/CSS
-* Update the template-tags.php to show only the date published
-
-= 2.3.7 - July 20, 2017 =
-* Change the arrangement of the customizer
-* Add minimum height on the header banner
-* Make the banner visible in after the theme installation
-
-= 2.3.6 - July 18, 2017 =
-* Change the arrangement of the customizer
-* Add Header Color, Banner Title Color, Banner Tagline Color and Display Header Banner to the customizer
-* Fix the errors found
-
 = 2.3.5 - July 17, 2017 =
 * Add preset style under customizer -> typography
 

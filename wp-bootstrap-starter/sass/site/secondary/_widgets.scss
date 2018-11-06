@@ -1,0 +1,16 @@
+.widget {
+	margin: 0 0 1.5em;
+
+	/* Make sure select elements fit in widgets. */
+	select {
+		max-width: 100%;
+	}
+}
+.widget_search .search-form input[type="submit"] {
+	display: none;
+}
+.nav > li > a:focus,
+.nav > li > a:hover {
+	background-color: #eee;
+	text-decoration: none;
+}

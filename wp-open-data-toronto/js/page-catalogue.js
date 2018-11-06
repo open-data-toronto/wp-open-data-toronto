@@ -9,11 +9,7 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': {
-        'checkboxes': ['dataset_category', 'resource_formats'],
-        'dropdowns': ['owner_division', 'tags'],
-        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'tags']
-    },
+    'filters': ['dataset_category', 'owner_division', 'resource_formats'],
     'select2': {
         'language': {
             'noResults': function() {
@@ -71,13 +67,18 @@ function buildCatalogue(response) {
                     '</div>' +
                     '<div class="col-md-4 text-right attributes">' +
                       '<p>' +
-                        '<span class="sr-only">Last Updated: </span>' +
-                        getFullDate(row['metadata_modified'].split('-')) + '&nbsp; ' +
+                        '<span>Last Updated : </span>' +
+                        getFullDate(row['metadata_modified'].split('-')) + '&nbsp;' +
                         '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
                       '</p>' +
                       '<p>' +
-                        '<span class="sr-only">Data Type: </span>' +
-                        row['dataset_category'] + '&nbsp; ' +
+                        '<span>Division : </span>' +
+                        row['owner_division'] + '&nbsp;' +
+                        '<span class="fa fa fa-home" aria-hidden="true"></span>' +
+                      '</p>' +
+                      '<p>' +
+                        '<span>Data Type : </span>' +
+                        row['dataset_category'] + '&nbsp;' +
                         '<span class="fa ' + iconClassMap[row['dataset_category']] + '" aria-hidden="true"></span>' +
                       '</p>' +
                     '</div>' +
@@ -166,41 +167,24 @@ function buildSidebar(response) {
             return b['count'] - a['count'];
         });
 
-        if (config['filters']['dropdowns'].indexOf(field['title']) !== -1) {
-            sidebar.unshift({
-                'name': ''
-            });
-        }
-
         for (var i in sidebar) {
             var value = sidebar[i],
                 selected = state['filters'][field['title']],
                 checked = ' ',
                 labelChecked = ' ';
 
-            if (config['filters']['dropdowns'].indexOf(field['title']) !== -1) {         // Select2 dropdowns filters
-                if (selected != null && selected.indexOf(value['name']) !== -1) {
-                    checked += 'selected="selected" ';
-                }
-
-                $('.filter-' + field['title'] + ' select').append(
-                    '<option' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' +
-                      value['name'] +
-                    '</option>');
-            } else if (config['filters']['checkboxes'].indexOf(field['title']) !== -1) { // Checkboxes filters
-                if (selected != null && selected.indexOf(value['name']) !== -1) {
-                    checked += 'checked="true" ';
-                    labelChecked += 'class="checkbox-checked" ';
-                }
-
-                $('.filter-' + field['title'] + ' ul').append(
-                    '<li class="checkbox checkbox-filter">' +
-                      '<label' + labelChecked + '>' +
-                        '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
-                          '&nbsp;<small>(' + value['count'] + ')</small>' +
-                      '</label>' +
-                    '</li>');
+            if (selected != null && selected.indexOf(value['name']) !== -1) {
+                checked += 'checked="true" ';
+                labelChecked += 'class="checkbox-checked" ';
             }
+
+            $('#collapse-' + field['title'] + ' ul').append(
+                '<li class="checkbox checkbox-filter">' +
+                  '<label' + labelChecked + '>' +
+                    '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
+                      '&nbsp;<small>(' + value['count'] + ')</small>' +
+                  '</label>' +
+                '</li>');
         }
     }
 
@@ -234,13 +218,6 @@ var buildStaticUI = function() {
         loadCatalogue();
     });
 
-    $('.filter select').on('change', function(evt) {
-        state['filters'][$(this).data('field')] = $(this).val().length ? [$(this).val()] : [];
-
-        state['page'] = 0;
-        loadCatalogue();
-    });
-
     $('#btn-search').on('click', function() {
         var value = $('#input-search').val();
         state['search'] = value.length ? [value] : []
@@ -257,17 +234,6 @@ var buildStaticUI = function() {
           state['page'] = 0;
           loadCatalogue();
       }
-    });
-
-    $('#btn-filter-clear').on('click', function() {
-        state = {
-            'filters': {},
-            'search': [],
-            'page': 0,
-            'size': 0
-        };
-
-        loadCatalogue();
     });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
@@ -288,7 +254,7 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $('.checkbox-filter input').on('click', function() {
+    $('[data-type="filter"] input').on('click', function() {
         $(this).parent('label').toggleClass('checkbox-checked');
 
         var field = $(this).data('field');
@@ -338,7 +304,7 @@ function loadSidebar(query) {
         'rows': 0,
         'facet': 'on',
         'facet.limit': -1,
-        'facet.field': JSON.stringify(config['filters']['filters'])
+        'facet.field': JSON.stringify(config['filters'])
     }
 
     getCKAN('package_search', params, buildSidebar);
@@ -351,19 +317,12 @@ function parseFilters() {
         if (state['filters'][field] == null || !state['filters'][field].length) continue;
 
         var filter = {};
-        if (config['filters']['checkboxes'].indexOf(field) !== -1) {            // Filter from checkboxes
-            var checks = [];
-            for (var idx in state['filters'][field]) {
-                checks.push('*' + state['filters'][field][idx] + '*');
-            }
-
-            filter[field] = [field + ':(' + checks.join(' OR ') + ')'];
-        } else if (config['filters']['dropdowns'].indexOf(field) !== -1) {      // Filter for CKAN field
-            filter[field] = [];
-            $.each(state['filters'][field], function(idx, val) {
-                filter[field].push(field + ':"' + val + '"');
-            });
+        var checks = [];
+        for (var idx in state['filters'][field]) {
+            checks.push('*' + state['filters'][field][idx] + '*');
         }
+
+        filter[field] = [field + ':(' + checks.join(' OR ') + ')'];
 
         for (var name in filter) {
             q.push('(' + filter[name].join(' OR ') + ')');
@@ -397,7 +356,7 @@ function parseParams() {
             case 'q':
                 value = value.split(' AND ').map(function(x) { return x.substring(1, x.length - 1).split(':'); });
                 $.each(value, function(idx, content) {
-                    if (config['filters']['filters'].indexOf(content[0]) !== -1) {
+                    if (config['filters'].indexOf(content[0]) !== -1) {
                         state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ');
                     }
                 });
