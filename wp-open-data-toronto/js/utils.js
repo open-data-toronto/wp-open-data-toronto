@@ -1,4 +1,18 @@
+// TODO: Define these with ENVIRONMENT_VARIABLES using NODE (or something)
 var $ = jQuery.noConflict();
+var env = (window.location.host.match(/\d/g) != null) ? parseInt(window.location.host.match(/\d/g).join('')) : 0;
+
+var ckan = [
+    'ckanadmin0.intra.dev-toronto.ca',                                          // dev
+    'ckanadmin1.intra.dev-toronto.ca',                                          // qa
+    '',                                                                         // pre-prod
+    ''                                                                          // prod
+]
+
+var config = {
+    'ckanAPI': 'https://' + ckan[env] + '/api/3/action/',
+    'ckanURL': 'https://' + ckan[env]
+}
 
 function getCKAN(endpoint, data, callback) {
     $.ajax({

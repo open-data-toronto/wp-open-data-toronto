@@ -1,5 +1,3 @@
-var $ = jQuery.noConflict();
-
 $.extend(config, {
     'isInitializing': true,
     'package': {},

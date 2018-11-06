@@ -1,5 +1,4 @@
-var $ = jQuery.noConflict(),
-    state = history.state || {
+var state = history.state || {
         'filters': {},
         'search': [],
         'page': 0,

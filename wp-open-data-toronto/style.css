@@ -294,25 +294,6 @@ a:link
                       border-left: 1px solid #ccc;
                     }
 
-/* Select.css Overrides */
-span.select2-selection.select2-selection--multiple {
-    border-radius: 0;
-    border-color: #cccccc !important;
-    box-shadow: 1px 1px 5px #ccc inset;
-}
-span.select2-dropdown.select2-dropdown--below {
-    border-radius: 0;
-    border: 1px solid #185688;
-}
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #185688 !important;
-    color: white;
-    font-weight: bold !important;
-}
-.filter.filter-division {
-    margin: 20px 0 20px 0;
-}
-
 /** Checkbox Styles **/
 .checkbox-filter input[type=checkbox] {
    position: absolute;

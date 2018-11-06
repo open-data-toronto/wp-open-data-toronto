@@ -15,19 +15,6 @@
     <title><?php echo get_bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
 
     <?php wp_head(); ?>
-
-    <link rel="stylesheet" href="/wp-content/themes/wp-open-data-toronto/fonts/font-awesome.min.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
-
-    <script src="/wp-content/themes/wp-open-data-toronto/js/webtrends-infinity.load.js"></script>
-
-    <?php if (in_array(basename(get_page_template()), ['homepage.php', 'page-catalogue.php', 'page-dataset.php'])): ?>
-      <script src="/wp-content/themes/wp-open-data-toronto/js/config.js"></script>
-      <script src="/wp-content/themes/wp-open-data-toronto/js/utils.js"></script>
-
-      <?php echo '<script src="/wp-content/themes/wp-open-data-toronto/js/' . str_replace('php', 'js', basename(get_page_template())) . '"></script>'; ?>
-    <?php endif; ?>
   </head>
 
   <body <?php body_class(); ?>>
