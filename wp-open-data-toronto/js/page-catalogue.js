@@ -51,11 +51,12 @@ function buildCatalogue(response) {
             formatEle += '<li class="file-format">' + formats[j] + '</li>';
         }
 
+
         // Build the dataset card with field values
         var ele = '<div class="row">' +
                     '<div class="col-md-8">' +
                       '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
-                      row['excerpt'] +
+                      '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                       '<div class="formats-available">' +
                         '<h3 class="sr-only">Formats Available for ' + row['title'] + '</h3>' +
                         '<ul class="tag-list">' + formatEle + '</ul>' +
