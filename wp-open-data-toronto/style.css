@@ -845,7 +845,7 @@ section#data-stories .jumbotron .heading{
 }
 .main-content ol li{
     list-style-type: decimal;
-    margin-left: 8px !imortant;
+    margin-left: 8px !important;
 }
 .main-content a {
     font-weight: bold;
