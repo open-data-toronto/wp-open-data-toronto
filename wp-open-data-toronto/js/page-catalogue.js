@@ -9,15 +9,7 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': ['dataset_category', 'owner_division', 'resource_formats'],
-    'select2': {
-        'language': {
-            'noResults': function() {
-                return 'Start typing search term...';
-            }
-        },
-        'width': '100%'
-    }
+    'filters': ['dataset_category', 'owner_division', 'resource_formats']
 });
 
 function buildCatalogue(response) {
@@ -219,21 +211,17 @@ var buildStaticUI = function() {
     });
 
     $('#btn-search').on('click', function() {
-        var value = $('#input-search').val();
-        state['search'] = value.length ? [value] : []
-
+        state['filter']['search'] = $('#input-search').val();
         state['page'] = 0;
         loadCatalogue();
     });
 
     $('#input-search').on('keyup', function(evt) {
-      if (evt.keyCode == 13) {
-          var value = $('#input-search').val();
-          state['search'] = value.length ? [value] : []
-
-          state['page'] = 0;
-          loadCatalogue();
-      }
+        if (evt.keyCode == 13) {
+            state['filter']['search'] = $('#input-search').val();
+            state['page'] = 0;
+            loadCatalogue();
+        }
     });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
@@ -272,78 +260,44 @@ function buildDynamicUI() {
 function loadCatalogue() {
     if (config['isInitializing']) parseParams();
 
-    var q = parseFilters();
     var params = {
-        'q': q,
+        'type': 'full',
+        'filters': state['filters'],
         'rows': config['datasetsPerPage'],
         'sort': 'name asc',
         'start': state['page'] * config['datasetsPerPage']
     }
-
+    //
     var urlParam = [];
     if (state['page'] != 0) {
         urlParam.push('n=' + state['page'])
     }
 
-    if (q.length > 0) {
-        urlParam.push('q=' + encodeURI(q));
-    }
+    // if (q.length > 0) {
+    //     urlParam.push('q=' + encodeURI(q));
+    // }
+    //
+    // if (state['search'].length > 0) {
+    //     urlParam.push('r=' + encodeURI(state['search'].join('+')));
+    // }
 
-    if (state['search'].length > 0) {
-        urlParam.push('r=' + encodeURI(state['search'].join('+')));
-    }
-
-    loadSidebar(q);
-    getCKAN('package_search', params, buildCatalogue);
+    loadSidebar();
+    getCKAN('catalogue_search', params, buildCatalogue);
     history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
 }
 
 function loadSidebar(query) {
     var params = {
-        'q': query,
-        'rows': 0,
-        'facet': 'on',
-        'facet.limit': -1,
-        'facet.field': JSON.stringify(config['filters'])
+        'type': 'facet',
+        'filters': state['filters'],
+        'facet_field': config['filters']
     }
 
-    getCKAN('package_search', params, buildSidebar);
-}
-
-function parseFilters() {
-    var q = [];
-
-    for (var field in state['filters']) {
-        if (state['filters'][field] == null || !state['filters'][field].length) continue;
-
-        var filter = {};
-        var checks = [];
-        for (var idx in state['filters'][field]) {
-            checks.push('*' + state['filters'][field][idx] + '*');
-        }
-
-        filter[field] = [field + ':(' + checks.join(' OR ') + ')'];
-
-        for (var name in filter) {
-            q.push('(' + filter[name].join(' OR ') + ')');
-        }
-    }
-
-    if (state['search'] != null && state['search'].length > 0) {
-        var tokens = [];
-        for (var i in state['search']) {
-            tokens = tokens.concat(state['search'][i].split(' '));
-        }
-        tokens = tokens.map(function(x) { return '*' + x + '*' }).join(' AND ');
-
-        q.push('(excerpt:(' + tokens + ')) OR (name:(' + tokens + '))');
-    }
-
-    return q.join(' AND ');
+    getCKAN('catalogue_search', params, buildSidebar);
 }
 
 function parseParams() {
-    var redirectFilters = ['n', 'q', 'r'];
+    var redirectFilters = ['n', 'q'];
 
     for (var i in redirectFilters) {
         var value = getURLParam(redirectFilters[i]);
@@ -361,9 +315,6 @@ function parseParams() {
                     }
                 });
                 break;
-            case 'r':
-                state['search'] = value.split('+');
-                break
         }
     }
 }
