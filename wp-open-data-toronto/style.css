@@ -697,7 +697,7 @@ footer#footer{
     font-weight: lighter
 }
 #content h2{
-    margin: 0 0 22px 0;
+    /* margin: 0 0 22px 0; */
 }
 #about p {
     padding-top: 8px;
@@ -1091,13 +1091,6 @@ table.border{
     margin:  -1px 0 0 0;
     transition: all .2s ease-in-out;
 }
-.table-list li:nth-child(even){
-    background: #f4f4f4;
-}
-.table-list li:hover{
-    transform: scale(1.02);
-    border: 1px solid #ccc;
-}
 .table-list{
     display: block;
     margin: 12px 0;
@@ -1141,70 +1134,20 @@ table.border{
     font-weight: 500;
     line-height: 23px;
 }
-.category-filter {margin-top: 22px;}
-ul.tag-list li {
+.category-filter {
+    margin-top: 22px;
+}
+
+.formats-available li {
     border: 0;
     display: inline-block;
-    font-size: 15px;
-    padding: 2px 7px;
-    margin: 0 3px 4px 0;
-    color: #ffffff;
-    background: #0e626b;
+    font-size: 0.8rem !important;
+    padding: 0.3em 0.5em;
+    margin: 0 0.5em 0em 0;
+    color: #F5F5F5;
     border-radius: 5px;
-}
-.table-list ul.tag-list li a:link,
-.table-list ul.tag-list li a:visited{
-    color: #ffffff;
-}
-ul.tag-list li:hover{
-    transform: none;
-    border: 0;
-}
-ul.tag-list li.autocad{
-    background-color: #1e617d;
-}
-ul.tag-list li.csv{
-    background-color: #1b6f3f;
-}
-ul.tag-list li.erdas-imagine{
-    background-color: #0c5688;
-}
-ul.tag-list li.esri-shapefile{
-    background-color: #025AA3;
-}
-ul.tag-list li.excel{
-    background-color: #34495e;
-}
-ul.tag-list li.geojson{
-    background-color: #a95f1d;
-}
-ul.tag-list li.google-spreadsheet{
-    background-color: #88170b;
-}
-ul.tag-list li.ivt{
-    background-color: #34495e;
-}
-ul.tag-list li.json{
-    background-color: #795332;
-}
-ul.tag-list li.multipatch{
-    background-color: #105a8a;
-}
-ul.tag-list li.sketchup{
-    background-color: #03632c;
-}
-ul.tag-list li.wgs84{
-    background-color: #035388;
-}
-ul.tag-list li.xml{
-    background-color: #9b59b6;
-}
-ul.tag-list li.pdf{
-    background-color: #222222;
-}
-.formats-available{
-    font-size: 10px;
-    margin: 12px 0;
+    background: #0e626b;
+
 }
 
 /**
