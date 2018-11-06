@@ -1,10 +1,10 @@
-/*!
+/*
 Theme Name: WP Bootstrap Starter
 Theme URI: https://afterimagedesigns.com/wp-bootstrap-starter/
 Author: Afterimage Designs
 Author URI: https://afterimagedesigns.com/
-Description:  The best WordPress starter theme based on the most powerful frameworks in the world: "_s" (by Automattic, the main people behind WordPress development), Twitter Bootstrap (the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web) and Font Awesome (or Fontawesome, a full suite of 675+ pictographic icons for easy scalable vector graphics on websites). This theme, like WordPress, is licensed under the GPL. You can use this theme as base for your next WordPress theme project and you are allowed to remove the link at the footer or do whatever you want. Your feedback on how we can continuously improve this WordPress Starter Theme Bootstrap will be highly appreciated. Page templates includes Right-sidebar (default page template), Left-Sidebar, Full-Width, Blank with container, Blank without container Page. Other features - Currently using Bootstrap v4.0.0-alpha.6, Widgetized footer area, WooCommerce ready, Compatible with Contact Form 7, Compatible with Visual Composer, Compatible with Elementor Page Builder. This theme will be an active project which we will update from time to time. Check this page regularly for the updates.
-Version: 2.3.5
+Description:  The best WordPress starter theme based on the most powerful frameworks in the world: "_s" (by Automattic, the main people behind WordPress development), Twitter Bootstrap (the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web) and Font Awesome (or Fontawesome, a full suite of 675+ pictographic icons for easy scalable vector graphics on websites). This theme, like WordPress, is licensed under the GPL. You can use this theme as base for your next WordPress theme project and you are allowed to remove the link at the footer or do whatever you want. Your feedback on how we can continuously improve this WordPress Starter Theme Bootstrap will be highly appreciated. Page templates includes Right-sidebar (default page template), Left-Sidebar, Full-Width, Blank with container, Blank without container Page. Other features - Currently using Bootstrap v4.0.0 , Widgetized footer area, WooCommerce ready, Compatible with Contact Form 7, Compatible with Visual Composer, Compatible with Elementor Page Builder. This theme will be an active project which we will update from time to time. Check this page regularly for the updates.
+Version: 3.1.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: wp-bootstrap-starter
@@ -34,27 +34,12 @@ Tags: blog, custom-menu, featured-images, threaded-comments, translation-ready, 
 # Woocommerce
 # Footer
 --------------------------------------------------------------*/
-
-input.nf-next, input.nf-previous {
-    padding: 10px 20px;
-    border: 0;
-    background: #025aa5;
-    color: #ffffff;
-    font-weight: bold;
-}
-.entry-content{
-padding: 20px 40px;
-border: 1px solid #f4f4f4;
-font-family: Roboto
-}
-
-
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
 body {
   margin: 0;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: auto;
 }
 
 article,
@@ -137,7 +122,7 @@ svg:not(:root) {
 }
 
 figure {
-  margin: 1em 40px;
+  margin: 1em 2.5rem;
 }
 
 hr {
@@ -227,10 +212,45 @@ th {
 --------------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
   clear: both;
+  color: #24292e;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 15px;
+}
+h1 {
+  font-size: 32px;
+  padding-bottom: 10px;
+}
+h2 {
+  font-size: 24px;
+  padding-bottom: 0.3em;
+  line-height: 1.25;
+}
+h3 {
+  font-size: 18px;
+  line-height: 25px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 20px;
+}
+h5 {
+  font-size: 14px;
+  line-height: 17.5px;
 }
 
 p {
   margin-bottom: 1.5em;
+}
+h1.entry-title {
+  font-size: 1.31rem;
+  border-bottom: 1px solid #eaecef;
+}
+h2.entry-title {
+  border-bottom: 1px solid #eaecef;
+}
+h3.widget-title {
+  font-size: 1.2rem;
 }
 
 /*--------------------------------------------------------------
@@ -265,61 +285,71 @@ table {
 # Navigation
 --------------------------------------------------------------*/
 header#masthead {
-  box-shadow: 0 0 2px -1px #333;
   margin-bottom: 0;
+  background-color: #563d7c ;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+  padding: .74rem 1rem;
 }
 
 .navbar-brand > a {
   color: rgba(0, 0, 0, 0.9);
-  font-size: 16px;
+  font-size: 1.1rem;
   outline: medium none;
   text-decoration: none;
+  color: #fff;
+  font-weight: 700;
 }
 
 .navbar-brand > a:visited, .navbar-brand > a:hover {
   text-decoration: none;
 }
 
-div#page-sub-header {
-  padding: 30px 0;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+#page-sub-header {
   position: relative;
-  background-color: #563d7c;
-  color: #cdbfe3;
-  padding: 4rem 15px;
+  padding-top: 5rem;
+  padding-bottom: 0;
   text-align: center;
-  font-size: 20px;
-  background-size: cover;
+  font-size: 1.25rem;
+  background-size: cover !important;
 }
 
-div#page-sub-header h1 {
-  margin-top: 0;
-  color: #fff;
-  margin-bottom: 10px;
+body:not(.theme-preset-active) #page-sub-header h1 {
+  line-height: 1.6;
+  font-size: 4rem;
+  color: #563e7c;
+  margin: 0 0 1rem;
+  border: 0;
+  padding: 0;
 }
 
-div#page-sub-header p {
+#page-sub-header p {
   margin-bottom: 0;
-  font-weight: 300;
   line-height: 1.4;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+body:not(.theme-preset-active) #page-sub-header p {
+color: #212529;
+}
+a.page-scroller {
+  color: #333;
+  font-size: 2.6rem;
+  display: inline-block;
+  margin-top: 2rem;
 }
 
 @media screen and (min-width: 768px) {
-  div#page-sub-header h1 {
-    font-size: 60px;
-    line-height: 1;
+  body:not(.theme-preset-active) #page-sub-header h1 {
+    font-size: 3.750rem;
   }
-
-  div#page-sub-header {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    text-align: left;
-    font-size: 24px;
+  body:not(.theme-preset-active) #page-sub-header {
+    font-size: 1.25rem;
   }
 }
 @media screen and (min-width: 992px) {
-  div#page-sub-header p {
-    max-width: 640px;
+  #page-sub-header p {
+    max-width: 43rem;
+    margin: 0 auto;
   }
 }
 /*--------------------------------------------------------------
@@ -333,13 +363,17 @@ div#page-sub-header p {
   padding-right: 0;
 }
 
-#masthead .navbar-nav > li > a {
-  color: #8e869d;
-  padding: 8px;
+body:not(.theme-preset-active) #masthead .navbar-nav > li > a {
+  color: #cdbfe3;
+  padding: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
-#masthead .navbar-nav > li > a:hover {
-  color: #292b2c;
+body:not(.theme-preset-active) #masthead .navbar-nav > li > a:hover,
+body:not(.theme-preset-active) #masthead .navbar-nav > li.current_page_item > a {
+  color: #fff;
+  font-weight: 600;
   /*background: #f9f9f9;*/
 }
 
@@ -365,22 +399,27 @@ div#page-sub-header p {
 
 .dropdown-item {
   line-height: 1.2;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding-bottom: 0.313rem;
+  padding-top: 0.313rem;
 }
 
 .dropdown-menu {
-  min-width: 200px;
+  min-width: 12.500rem;
 }
 
 .dropdown .open .dropdown-menu {
   display: block;
-  left: 196px;
+  left: 12.250em;
   top: 0;
 }
 
 .dropdown-menu .dropdown-item {
   white-space: normal;
+  background: transparent;
+  line-height: 1.6;
+}
+.dropdown-menu .dropdown-item:hover {
+  background: transparent;
 }
 
 @media screen and (min-width: 37.5em) {
@@ -390,14 +429,14 @@ div#page-sub-header p {
 }
 @media screen and (min-width: 769px) {
   .dropdown-menu li > .dropdown-menu {
-    right: -158px;
-    top: 22px;
+    right: -9.875rem;
+    top: 1.375rem;
   }
 }
 @media screen and (max-width: 991px) {
-  .dropdown-menu {
+  .navbar-nav .dropdown-menu {
     border: medium none;
-    margin-left: 20px;
+    margin-left: 1.250rem;
     padding: 0;
   }
 
@@ -406,8 +445,8 @@ div#page-sub-header p {
   }
 
   #masthead .navbar-nav > li > a {
-    padding-bottom: 10px;
-    padding-top: 5px;
+    padding-bottom: 0.625rem;
+    padding-top: 0.313rem;
   }
 
   .navbar-light .navbar-toggler {
@@ -436,17 +475,20 @@ div#page-sub-header p {
   text-align: right;
   width: 50%;
 }
+.comment-content.card-block {
+  padding: 20px;
+}
 
 .navigation.post-navigation {
-  padding-top: 30px;
+  padding-top: 1.875rem;
 }
 
 .post-navigation .nav-previous a,
 .post-navigation .nav-next a {
   border: 1px solid #ddd;
-  border-radius: 15px;
+  border-radius: 0.938rem;
   display: inline-block;
-  padding: 5px 14px;
+  padding: 0.313rem 0.875rem;
   text-decoration: none;
 }
 
@@ -487,11 +529,11 @@ div#page-sub-header p {
   font-size: 0.875rem;
   font-weight: bold;
   height: auto;
-  left: 5px;
+  left: 0.313rem;
   line-height: normal;
-  padding: 15px 23px 14px;
+  padding: 0.938rem 1.438rem 0.875rem;
   text-decoration: none;
-  top: 5px;
+  top: 0.313rem;
   width: auto;
   z-index: 100000;
   /* Above WP toolbar. */
@@ -522,6 +564,38 @@ div#page-sub-header p {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+a img.alignright {
+  float: right;
+  margin: 0.313rem 0 1.25rem 1.25rem;
+}
+
+a img.alignnone {
+  margin: 0.313rem 1.25rem 1.25rem 0;
+}
+
+a img.alignleft {
+  float: left;
+  margin: 0.313rem 1.25rem 1.25rem 0;
+}
+
+a img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wp-caption.alignnone {
+  margin: 0.313rem 1.25rem 1.25rem 0;
+}
+
+.wp-caption.alignleft {
+  margin: 0.313rem 1.25rem 1.25rem 0;
+}
+
+.wp-caption.alignright {
+  margin: 0.313rem 0 1.25rem 1.25rem;
 }
 
 /*--------------------------------------------------------------
@@ -558,6 +632,7 @@ div#page-sub-header p {
 --------------------------------------------------------------*/
 .widget {
   margin: 0 0 1.5em;
+  font-size: 0.875rem;
   /* Make sure select elements fit in widgets. */
 }
 .widget select {
@@ -573,6 +648,13 @@ div#page-sub-header p {
   background-color: #eee;
   text-decoration: none;
 }
+.half-rule {
+  width: 6rem;
+  margin: 2.5rem 0;
+}
+.widget_categories .nav-link {
+  display: inline-block;
+}
 
 /*--------------------------------------------------------------
 # Content
@@ -581,17 +663,18 @@ div#page-sub-header p {
 ## Posts and pages
 --------------------------------------------------------------*/
 #content.site-content {
-  padding-bottom: 60px;
-  padding-top: 66px;
+  padding-bottom: 3.75rem;
+  padding-top: 4.125rem;
 }
 
 .sticky .entry-title::before {
   content: '\f08d';
-  font-family: fontawesome;
-  font-size: 25px;
-  left: -40px;
+  font-family: "Font Awesome\ 5 Free";
+  font-size: 1.563rem;
+  left: -2.5rem;
   position: absolute;
-  top: 6px;
+  top: 0.375rem;
+  font-weight: 900;
 }
 
 .sticky .entry-title {
@@ -643,7 +726,7 @@ div#page-sub-header p {
 }
 
 .comment-body .pull-left {
-  padding-right: 10px;
+  padding-right: 0.625rem;
 }
 
 .comment-list .comment {
@@ -655,12 +738,12 @@ div#page-sub-header p {
 }
 
 .comments-title {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .comment-list .pingback {
   border-top: 1px solid rgba(0, 0, 0, 0.125);
-  padding: 9px 0;
+  padding: 0.563rem 0;
 }
 
 .comment-list .pingback:first-child {
@@ -705,16 +788,25 @@ object {
 ## Captions
 --------------------------------------------------------------*/
 .wp-caption {
-  margin-bottom: 1.5em;
-  max-width: 100%;
+  background: #f1f1f1 none repeat scroll 0 0;
+  border: 1px solid #f0f0f0;
+  max-width: 96%;
+  padding: 0.313rem 0.313rem 0;
+  text-align: center;
 }
 .wp-caption img[class*="wp-image-"] {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  border: 0 none;
+  height: auto;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  width: auto;
 }
 .wp-caption .wp-caption-text {
-  margin: 0.8075em 0;
+  font-size: 0.688rem;
+  line-height: 1.063rem;
+  margin: 0;
+  padding: 0.625rem;
 }
 
 .wp-caption-text {
@@ -770,11 +862,11 @@ object {
 ## Woocommerce
 --------------------------------------------------------------*/
 .woocommerce-cart-form .shop_table .coupon .input-text {
-  width: 133px !important;
+  width: 8.313rem !important;
 }
 
 .variations_form .variations .value > select {
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 .woocommerce-MyAccount-content .col-1,
@@ -818,14 +910,17 @@ object {
 # Footer
 --------------------------------------------------------------*/
 footer#colophon {
-  background: #2a2730 none repeat scroll 0 0;
-  color: #99979c;
-  padding: 20px 0;
-  text-align: center;
+  font-size: 85%;
 }
-
+body:not(.theme-preset-active) footer#colophon {
+  color: #99979c;
+  background-color: #f7f7f7;
+}
+.navbar-dark .site-info {
+  color: #fff;
+}
 .copyright {
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-bottom: 0;
   text-align: center;
 }
@@ -836,7 +931,61 @@ footer#colophon {
 
 @media screen and (max-width: 767px) {
   #masthead .navbar-nav > li > a {
-    padding-bottom: 15px;
-    padding-top: 15px;
+    padding-bottom: 0.938rem;
+    padding-top: 0.938rem;
+  }
+}
+/*--------------------------------------------------------------
+# Media Query
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Notebook
+--------------------------------------------------------------*/
+@media only screen and (max-width: 1280px) {
+  html {
+    font-size: 95%;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .navbar-dark .dropdown-item {
+    color: #fff;
+  }
+  .navbar-nav .dropdown-menu {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+  }
+}
+/*--------------------------------------------------------------
+## Netbook
+--------------------------------------------------------------*/
+@media only screen and (max-width: 1024px) {
+  html {
+    font-size: 90%;
+  }
+}
+/*--------------------------------------------------------------
+## iPad
+--------------------------------------------------------------*/
+@media only screen and (max-width: 960px) {
+  html {
+    font-size: 85%;
+  }
+}
+/*--------------------------------------------------------------
+## iPad
+--------------------------------------------------------------*/
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 80%;
+  }
+}
+/*--------------------------------------------------------------
+## iPad
+--------------------------------------------------------------*/
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 75%;
   }
 }

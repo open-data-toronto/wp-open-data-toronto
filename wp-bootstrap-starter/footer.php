@@ -15,12 +15,12 @@
 		</div><!-- .container -->
 	</div><!-- #content -->
     <?php get_template_part( 'footer-widget' ); ?>
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="container">
+	<footer id="colophon" class="site-footer <?php echo wp_bootstrap_starter_bg_class(); ?>" role="contentinfo">
+		<div class="container pt-3 pb-3">
             <div class="site-info">
                 &copy; <?php echo date('Y'); ?> <?php echo '<a href="'.home_url().'">'.get_bloginfo('name').'</a>'; ?>
                 <span class="sep"> | </span>
-                <a class="credits" href="https://afterimagedesigns.com/" target="_blank" title="Wordpress Technical Support" alt="Wordpress Technical Support"><?php echo esc_html__('Wordpress Technical Support','wp-bootstrap-starter'); ?></a>
+                <a class="credits" href="https://afterimagedesigns.com/wp-bootstrap-starter/" target="_blank" title="Wordpress Technical Support" alt="Bootstrap Wordpress Theme"><?php echo esc_html__('Bootstrap Wordpress Theme','wp-bootstrap-starter'); ?></a>
 
             </div><!-- close .site-info -->
 		</div>
