@@ -48,7 +48,7 @@ function buildCatalogue(response) {
             formatEle = '';
 
         for (var j = 0; j < formats.length; j++) {
-            formatEle += '<li class=' + formats[j].toLowerCase() + '>' + formats[j] + '</li>';
+            formatEle += '<li class="file-format">' + formats[j] + '</li>';
         }
 
         // Build the dataset card with field values
