@@ -105,7 +105,7 @@
               <button id="btn-search" class="btn btn-secondary" type="submit">Search Datasets</button>
             </span>
           </div>
-
+          <div class="search-results" aria-label="Search Results"></div>
           <div class="table-list" aria-label="List of Datasets"></div>
           <nav id="nav-catalogue" aria-label="Page Navigation">
             <ul class="pagination pagination-sm">

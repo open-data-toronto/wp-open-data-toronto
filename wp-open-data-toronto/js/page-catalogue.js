@@ -26,6 +26,10 @@ function buildCatalogue(response) {
 
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
+    
+    $('.search-results').replaceWith(
+        `<p class="lead" id="search-result-text">` + data["count"] + ` datasets found</p>`
+    );
 
     if (data['results'].length == 0) {
         $('.table-list').append('<div class="row">' +
