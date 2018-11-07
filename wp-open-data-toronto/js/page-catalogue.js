@@ -181,7 +181,7 @@ function buildSidebar(response) {
                     <input type="checkbox"` + checked + `data-field="` + field['title'] + `" value="` + value['name'] + `">` + `&nbsp;` + value['name'] +
                       `&nbsp;<small>(` + value['count'] + `)</small> 
                   </label> 
-                </li>)`);
+                </li>`);
         }
     }
 
