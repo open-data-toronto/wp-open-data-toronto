@@ -19,7 +19,7 @@ function buildCatalogue(response) {
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
-    $('#results-count').replaceWith(
+    $('#results-count').html(
         `<span>` + data["count"] + ` datasets found</span>`
     );
 
@@ -219,6 +219,8 @@ var buildStaticUI = function() {
         }
     });
 
+    $('#sort-results-by').on('change', loadCatalogue);
+
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
     $('.block-hidden').fadeIn(250);
 }
@@ -258,7 +260,7 @@ function loadCatalogue() {
     var params = $.extend(true, {
         'type': 'full',
         'rows': config['datasetsPerPage'],
-        'sort': 'name asc',
+        'sort': $('#sort-results-by').val(),
         'start': state['page'] * config['datasetsPerPage']
     }, state['filters']);
 

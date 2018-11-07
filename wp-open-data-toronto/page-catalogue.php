@@ -117,9 +117,9 @@
                         <label for="sort-results-by" class="col-sm-5 text-right col-form-label">Order by:</label>
                         <div class="col-sm-7">
                           <select class="form-control" id="sort-results-by">
+                          <option value="metadata_modified desc">Last Updated</option>
                             <option value="relevance asc">Relevance</option>
-                            <option value="title asc">Name</option>
-                            <option value="metadata_modified asc">Last Updated</option>
+                            <option value="name asc">Name</option>
                           </select>
                         </div>
                       </div>
