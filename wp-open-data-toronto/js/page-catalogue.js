@@ -66,17 +66,14 @@ function buildCatalogue(response) {
                       <p> 
                         <span class="dataset-meta-label">Updated: </span>` +
                         getFullDate(row['metadata_modified'].split('-')) + `&nbsp; 
-                        <span class="fa fa-clock-o" aria-hidden="true"></span> 
                       </p> 
                       <p> 
                         <span class="dataset-meta-label">Division: </span>` +
                         row['owner_division'] + `&nbsp; 
-                        <span class="fa fa fa-home" aria-hidden="true"></span> 
                       </p> 
                       <p>
                         <span class="dataset-meta-label">Type: </span>` +
                         row['dataset_category'] + `&nbsp; 
-                        <span class="fa `  + iconClassMap[row['dataset_category']] + `" aria-hidden="true"></span> 
                       </p> 
                     </div> 
                   </div>`;
