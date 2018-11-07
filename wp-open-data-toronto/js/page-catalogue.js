@@ -215,7 +215,10 @@ var buildStaticUI = function() {
         }
     });
 
-    $('#sort-results-by').on('change', loadCatalogue);
+    $('#sort-results-by').on('change', function() {
+        state['page'] = 0;
+        loadCatalogue();
+    });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
     $('.block-hidden').fadeIn(250);
