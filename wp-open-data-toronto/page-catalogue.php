@@ -1,6 +1,6 @@
-<?php  /* Template Name: Catalogue Page */ ?>
+<?php /* Template Name: Catalogue Page */?>
 
-<?php get_header(); ?>
+<?php get_header();?>
 
   <section class="content-area">
     <div class="container">
@@ -9,7 +9,7 @@
           <!-- Breadcrumbs -->
           <nav class="breadcrumb" aria-label="breadcrumbs">
             <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
-            <a class="breadcrumb-item"><?php the_title(); ?></a>
+            <a class="breadcrumb-item"><?php the_title();?></a>
           </nav>
           <!-- End breadcrumbs -->
         </div>
@@ -18,9 +18,9 @@
       <div class="row block-hidden">
         <div class="col-md-12">
           <!-- Banner -->
-          <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>) !important">
+          <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'thumbnail'); ?>) !important">
             <div class="background">
-              <h1><?php the_title(); ?></h1>
+              <h1><?php the_title();?></h1>
             </div>
           </div>
           <!-- End Banner -->
