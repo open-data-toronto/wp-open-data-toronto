@@ -64,7 +64,7 @@ function buildCatalogue(response) {
                     '</div>' +
                     '<div class="col-md-4 text-right attributes">' +
                       '<p>' +
-                        '<span class="dataset-meta-label">Last Updated: </span>' +
+                        '<span class="dataset-meta-label">Updated: </span>' +
                         getFullDate(row['metadata_modified'].split('-')) + '&nbsp;' +
                         '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
                       '</p>' +
