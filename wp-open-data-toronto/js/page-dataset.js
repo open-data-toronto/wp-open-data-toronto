@@ -219,9 +219,6 @@ function buildDataset(response) {
                 case 'metadata_modified':
 <<<<<<< HEAD
                     var date = data[field];
-=======
-                    var date = data['metadata_modified'] || data[field];
->>>>>>> master
                     $(this).text(getFullDate(date.substring(0, 10).split('-')));
                     break
                 case 'published_date':
