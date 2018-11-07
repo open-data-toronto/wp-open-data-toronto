@@ -28,7 +28,7 @@
       </div>
 
       <div class="row block-hidden">
-        <div class="col-md-3">
+        <div class="col-md-3"  id="filter-sidebar">
           <div class="sidebar" style="border: 0" role="complementary">
             <div class="card">
               <div class="card-header card-filters" role="tab" id="heading-dataset_category">
@@ -96,17 +96,40 @@
           <!-- End Sidebar -->
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9" id="data-catalogue">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="input-group" aria-label="Search the Open Data Catalogue" id="dataset-search-box">
+                <label for="search" class="sr-only">Search Dataset</label>
+                <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
+                <span class="input-group-btn">
+                  <button id="btn-search" class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            </div>
+            <div class="row">
+                  <div class="col-md-8 search-results-info">
+                    <div id="results-count" aria-label="Number of dataset search results"></div>
+                  </div>
+                  <div class="col-md-4 search-results-info">
+                    <form>
+                      <div class="form-group row">
+                        <label for="sort-results-by" class="col-sm-5 col-form-label"><span>Sort by:</span></label>
+                        <div class="col-sm-7">
+                          <select class="form-control" id="sort-results-by">
+                            <option>Relevance</option>
+                            <option>Name</option>
+                            <option>Last Updated</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+            </div>
+
           <!-- List of Datasets -->
-          <div class="input-group" aria-label="Search the Open Data Catalogue">
-            <label for="search" class="sr-only">Search Dataset</label>
-            <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
-            <span class="input-group-btn">
-              <button id="btn-search" class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
-            </span>
-          </div>
-          <div class="search-results" aria-label="Search Results"></div>
-          <div class="table-list" aria-label="List of Datasets"></div>
+            <div class="row table-list" aria-label="List of Datasets"></div>
+          <div class="row">
           <nav id="nav-catalogue" aria-label="Page Navigation">
             <ul class="pagination pagination-sm">
               <li class="page-item page-keep">
@@ -123,6 +146,7 @@
               </li>
             </ul>
           </nav>
+          </div>
         </div>
       </div>
     </div>

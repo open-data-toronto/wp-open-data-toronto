@@ -1147,7 +1147,16 @@ table.border{
     color: white;
     border-radius: 5px;
     background: #0e626b;
+}
 
+#dataset-search-box{
+    margin-bottom: 2rem;
+}
+
+.search-results-info {
+    font-weight: bold;
+    padding: 0 !important;
+    height: 100% !important;
 }
 
 /**
