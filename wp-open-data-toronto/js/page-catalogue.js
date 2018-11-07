@@ -18,16 +18,16 @@ function buildCatalogue(response) {
 
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
-    
+
     $('#results-count').replaceWith(
         `<span>` + data["count"] + ` datasets found</span>`
     );
 
     if (data['results'].length == 0) {
-        $('.table-list').append(`<div class="row"> 
-                                  <div class="col-md-12"> 
-                                    <h2>No datasets found </h2> 
-                                  </div> 
+        $('.table-list').append(`<div class="row">
+                                  <div class="col-md-12">
+                                    <h2>No datasets found </h2>
+                                  </div>
                                 </div>`);
         return;
     }
@@ -51,34 +51,33 @@ function buildCatalogue(response) {
             formatEle += '<li class="file-format">' + formats[j] + '</li>';
         }
 
-
         // Build the dataset card with field values
-        var ele = `<div class="dataset row"> 
+        var ele = `<div class="dataset row">
                     <div class="col-md-8 half">
-                      <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2> 
-                      <p class="dataset-excerpt"> `+ row['excerpt'] + `</p> 
-                      <div class="formats-available"> 
-                        <h3 class="sr-only">Formats Available for`  + row['title'] + `</h3> 
-                        <ul class="tag-list">` + formatEle + `</ul> 
-                      </div> 
-                    </div> 
-                    <div class="col-md-4 text-right attributes half"> 
-                      <p> 
-                        <span class="dataset-meta-label">Updated: </span>` +
-                        getFullDate(row['metadata_modified'].split('-')) + `&nbsp; 
-                        <span class="fa fa-clock-o" aria-hidden="true"></span> 
-                      </p> 
-                      <p> 
-                        <span class="dataset-meta-label">Division: </span>` +
-                        row['owner_division'] + `&nbsp; 
-                        <span class="fa fa fa-home" aria-hidden="true"></span> 
-                      </p> 
+                      <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
+                      <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                      <div class="formats-available">
+                        <h3 class="sr-only">Formats Available for`  + row['title'] + `</h3>
+                        <ul class="tag-list">` + formatEle + `</ul>
+                      </div>
+                    </div>
+                    <div class="col-md-4 text-right attributes half">
                       <p>
-                        <span class="dataset-meta-label">Data Type: </span>` +
-                        row['dataset_category'] + `&nbsp; 
-                        <span class="fa`  + iconClassMap[row['dataset_category']] + `" aria-hidden="true"></span> 
-                      </p> 
-                    </div> 
+                        <span class="dataset-meta-label">Updated: </span>` +
+                        getFullDate(row['metadata_modified'].split('-')) + `&nbsp;
+                        <span class="fa fa-clock-o" aria-hidden="true"></span>
+                      </p>
+                      <p>
+                        <span class="dataset-meta-label">Division: </span>` +
+                        row['owner_division'] + `&nbsp;
+                        <span class="fa fa fa-home" aria-hidden="true"></span>
+                      </p>
+                      <p>
+                        <span class="dataset-meta-label">Type: </span>` +
+                        row['dataset_category'] + `&nbsp;
+                        <span class="fa `  + iconClassMap[row['dataset_category']] + `" aria-hidden="true"></span>
+                      </p>
+                    </div>
                   </div>`;
 
         $('.table-list').append(ele);
@@ -95,16 +94,16 @@ function buildCatalogue(response) {
                 additionalClass = i == state['page'] ? ' active' : '';
 
             if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
-                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove` +  additionalClass + `"> 
+                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove` +  additionalClass + `">
                                                            <a class="page-link" href="#" aria-label="Go to page`  + pageNumber + `" data-page=` + i + `>` +
                                                               pageNumber +
-                                                           `</a> 
+                                                           `</a>
                                                          </li>`);
             } else if (Math.abs(state['page'] - i) == 3) {
-                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove disabled"> 
-                                                           <a class="page-link" href="#" aria-label="..."> 
-                                                              ... 
-                                                           </a> 
+                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove disabled">
+                                                           <a class="page-link" href="#" aria-label="...">
+                                                              ...
+                                                           </a>
                                                          </li>`);
             }
         }
@@ -176,11 +175,11 @@ function buildSidebar(response) {
             }
 
             $('#collapse-' + field['title'] + ' ul').append(
-                `<li class="checkbox checkbox-filter"> 
-                  <label` + labelChecked + `> 
+                `<li class="checkbox checkbox-filter">
+                  <label` + labelChecked + `>
                     <input type="checkbox"` + checked + `data-field="` + field['title'] + `" value="` + value['name'] + `">` + `&nbsp;` + value['name'] +
-                      `&nbsp;<small>(` + value['count'] + `)</small> 
-                  </label> 
+                      `&nbsp;<small>(` + value['count'] + `)</small>
+                  </label>
                 </li>`);
         }
     }

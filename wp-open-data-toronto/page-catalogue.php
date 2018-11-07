@@ -34,7 +34,7 @@
               <div class="card-header card-filters" role="tab" id="heading-dataset_category">
                 <h5 class="mb-0">
                   <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-dataset_category" aria-expanded="true" aria-controls="collapse-dataset_category">
-                    Dataset Type
+                    Type
                     <span class="accordion-arrow">
                       <span class="fa fa-chevron-down"></span>
                     </span>
