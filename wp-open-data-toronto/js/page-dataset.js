@@ -226,7 +226,7 @@ function buildDataset(response) {
                     }
                     break;
                 case 'metadata_modified':
-                    var date = data['primary_resource']['last_modified'] || data[field];
+                    var date = data['metadata_modified'] || data[field];
                     $(this).text(getFullDate(date.substring(0, 10).split('-')));
                     break
                 case 'published_date':
