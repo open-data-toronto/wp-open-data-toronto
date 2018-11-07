@@ -98,8 +98,8 @@
 
         <div class="col-md-9" id="data-catalogue">
           <div class="container-fluid">
-            <div class="row">
-              <div class="input-group" aria-label="Search the Open Data Catalogue" id="dataset-search-box">
+            <div class="row" id="dataset-search-box">
+              <div class="input-group" aria-label="Search the Open Data Catalogue">
                 <label for="search" class="sr-only">Search Dataset</label>
                 <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
                 <span class="input-group-btn">
@@ -107,11 +107,11 @@
                 </span>
               </div>
             </div>
-            <div class="row">
-                  <div class="col-md-8 search-results-info">
+            <div class="row"  id="dataset-search-results">
+                  <div class="col-md-8 info count">
                     <div id="results-count" aria-label="Number of dataset search results"></div>
                   </div>
-                  <div class="col-md-4 search-results-info">
+                  <div class="col-md-4 info sort">
                     <form>
                       <div class="form-group row">
                         <label for="sort-results-by" class="col-sm-5 col-form-label"><span>Sort by:</span></label>

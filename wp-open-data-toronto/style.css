@@ -1084,15 +1084,15 @@ table.border{
     background-size: cover;
     background-position: 50% 50%;
 }
-.table-list .row {
-    border: 1px solid #ccc;
+.table-list .dataset {
+    border-bottom: 1px solid #ccc;
     background: #ffffff;
     padding: 8px 12px;
-    margin:  -1px 0 0 0;
     transition: all .2s ease-in-out;
 }
 .table-list{
     display: block;
+    border-top: 1px solid #ccc;
     margin-bottom: 1em;
 }
 .table-list h2 a:visited,
@@ -1149,14 +1149,18 @@ table.border{
     background: #0e626b;
 }
 
-#dataset-search-box{
-    margin-bottom: 2rem;
+#dataset-search-results .info {
+    font-weight: bold;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
-.search-results-info {
-    font-weight: bold;
-    padding: 0 !important;
-    height: 100% !important;
+#dataset-search-results .info.count{
+    margin-top: calc(.5rem - 1px * 2) ;
+}
+
+#dataset-search-box{
+    margin-bottom: 1.5em;
 }
 
 /**

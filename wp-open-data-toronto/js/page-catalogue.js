@@ -53,7 +53,7 @@ function buildCatalogue(response) {
 
 
         // Build the dataset card with field values
-        var ele = '<div class="row">' +
+        var ele = '<div class="dataset row">' +
                     '<div class="col-md-8">' +
                       '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
                       '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
