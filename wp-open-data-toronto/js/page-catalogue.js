@@ -1,6 +1,5 @@
 var state = history.state || {
         'filters': {},
-        'search': [],
         'page': 0,
         'size': 0
     };
@@ -179,7 +178,9 @@ function buildSidebar(response) {
         }
     }
 
-    //TODO: FILL search
+    if (state['filters']['search'] != null) {
+        $('#input-search').val(state['filters']['search']);
+    }
 
     if (config['isInitializing']) buildStaticUI();
     buildDynamicUI();
@@ -250,7 +251,18 @@ function buildDynamicUI() {
 }
 
 function loadCatalogue() {
-    if (config['isInitializing']) parseParams();
+    if (config['isInitializing']) {
+        var params = window.location.search.slice(1).split('&');
+        for (var i in params) {
+            var filter = params[i].split('=');
+            if (filter[0] == 'n') {
+                state['page'] = parseInt(filter[1]);
+            } else if (filter[0].length > 0) {
+                var content = decodeURIComponent(filter[1]);
+                state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content : content.split('+');
+            }
+        }
+    }
 
     var params = $.extend(true, {
         'type': 'full',
@@ -260,17 +272,19 @@ function loadCatalogue() {
     }, state['filters']);
 
     var urlParam = [];
+    for (var i in state['filters']) {
+        var filter = state['filters'][i];
+
+        if (filter.constructor === Array && filter.length > 0) {
+            urlParam.push(i + '=' + encodeURIComponent(filter.join('+')));
+        } else if (typeof filter == 'string') {
+            urlParam.push(i + '=' + encodeURIComponent(filter));
+        }
+    }
+
     if (state['page'] != 0) {
         urlParam.push('n=' + state['page'])
     }
-
-    // if (q.length > 0) {
-    //     urlParam.push('q=' + encodeURI(q));
-    // }
-    //
-    // if (state['search'].length > 0) {
-    //     urlParam.push('r=' + encodeURI(state['search'].join('+')));
-    // }
 
     loadSidebar();
     getCKAN('catalogue_search', params, buildCatalogue);
@@ -285,29 +299,6 @@ function loadSidebar(query) {
     }, state['filters']);
 
     getCKAN('catalogue_search', params, buildSidebar);
-}
-
-function parseParams() {
-    var redirectFilters = ['n', 'q'];
-
-    for (var i in redirectFilters) {
-        var value = getURLParam(redirectFilters[i]);
-        if (value == null) continue;
-
-        switch (redirectFilters[i]) {
-            case 'n':
-                state['page'] = parseInt(value);
-                break;
-            case 'q':
-                value = value.split(' AND ').map(function(x) { return x.substring(1, x.length - 1).split(':'); });
-                $.each(value, function(idx, content) {
-                    if (config['filters'].indexOf(content[0]) !== -1) {
-                        state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ');
-                    }
-                });
-                break;
-        }
-    }
 }
 
 function init() {
