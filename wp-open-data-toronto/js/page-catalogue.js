@@ -48,37 +48,32 @@ function buildCatalogue(response) {
             formatEle = '';
 
         for (var j = 0; j < formats.length; j++) {
-            formatEle += '<li class="file-format">' + formats[j] + '</li>';
+            formatEle += '<span class="badge badge-secondary">' + formats[j] + '</span> ';
         }
 
         // Build the dataset card with field values
-        var ele = `<div class="dataset row">
-                    <div class="col-md-8 half">
-                      <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
-                      <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
-                      <div class="formats-available">
-                        <h3 class="sr-only">Formats Available for`  + row['title'] + `</h3>
-                        <ul class="tag-list">` + formatEle + `</ul>
-                      </div>
+        var ele = `
+                <div class="dataset row">
+                    <div class="row">
+                        <div class="col-md-12">
+                        <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
+                        </div>
                     </div>
-                    <div class="col-md-4 text-right attributes half">
-                      <p>
-                        <span class="dataset-meta-label">Updated: </span>` +
-                        getFullDate(row['metadata_modified'].split('-')) + `&nbsp;
-                        <span class="fa fa-clock-o" aria-hidden="true"></span>
-                      </p>
-                      <p>
-                        <span class="dataset-meta-label">Division: </span>` +
-                        row['owner_division'] + `&nbsp;
-                        <span class="fa fa fa-home" aria-hidden="true"></span>
-                      </p>
-                      <p>
-                        <span class="dataset-meta-label">Type: </span>` +
-                        row['dataset_category'] + `&nbsp;
-                        <span class="fa `  + iconClassMap[row['dataset_category']] + `" aria-hidden="true"></span>
-                      </p>
+                    <div class="row">
+                        <div class="col-md-8 half">
+                            <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                        </div>
+                        <div class="col-md-4 text-left attributes half">
+                            <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
+                            <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
+                            <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
+                        </div>
                     </div>
-                  </div>`;
+                    <div class="row">
+                        <div class="col-md-12 formats-available">
+                        <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3>` + formatEle + `
+                    </div>
+                </div>`;
 
         $('.table-list').append(ele);
     }

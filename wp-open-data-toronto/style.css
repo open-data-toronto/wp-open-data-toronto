@@ -1086,7 +1086,7 @@ table.border{
 }
 .table-list .dataset {
     border-bottom: 1px solid #ccc;
-    padding:0.5em 0;
+    padding:1em 0;
     margin-right: 0;
     margin-left: 0;
 }
@@ -1112,9 +1112,7 @@ table.border{
 .table-list h2 a:hover{
     text-decoration: underline !important;
 }
-.table-list h2 {
-    padding: 12px 0 0 0;
-}
+
 .table-list li h3 {
     font-size: 18px;
     margin: 12px 0 12px 0;
@@ -1128,11 +1126,8 @@ table.border{
     line-height: 20px;
     padding: 10px 0
 }
-.attributes p {
+.attributes {
     font-size: 11px !important;
-    padding: 17px 0 0 0;
-    line-height: 12px;
-    margin-bottom: -6px;
 }
 .category-filter li, .format-filter li, .division-filter li{
     margin: 0;
@@ -1142,7 +1137,15 @@ table.border{
 .category-filter {
     margin-top: 22px;
 }
+.dataset.row .row{
+    width: 100% ;
+}
 
+.dataset-meta-label {
+    font-weight: bold !important ;
+    padding-top: 10px;
+}
+/* 
 .formats-available li {
     border: 0;
     display: inline-block;
@@ -1151,6 +1154,12 @@ table.border{
     margin: 0 0.5em 0em 0;
     color: white;
     border-radius: 5px;
+    background: #0e626b;
+} */
+
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
     background: #0e626b;
 }
 
@@ -1563,8 +1572,4 @@ table.download-table {
         background: #fbfbfb;
         font-weight: 500;
     }
-}
-
-.dataset-meta-label {
-    font-weight: bold !important ;
 }
