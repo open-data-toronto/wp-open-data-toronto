@@ -43,35 +43,42 @@ function buildCatalogue(response) {
         var row = data['results'][i];
 
         // Build the format tags
-        var formats = row['resource_formats'].split(' '),
-            formatEle = '';
+        var tags = row['tags'],
+            tagEle = '';
 
-        for (var j = 0; j < formats.length; j++) {
-            formatEle += '<span class="badge badge-secondary">' + formats[j] + '</span> ';
+        for (var j = 0; j < tags.length; j++) {
+            tagEle += '<span class="badge badge-secondary">' + tags[j]["display_name"] + '</span> ';
         }
 
         // Build the dataset card with field values
         var ele = `
                 <div class="dataset row">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
-                        </div>
+                    <div class="col-md-12">
+                    <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8 half">
-                            <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                        <div class="col-md-9 dataset-info">
+                                <div>
+                                    <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                                </div>
+                                <div class="formats-available">
+                                    <h3 class="sr-only">Formats available for: `  + row['title'] + `</h3>` + tagEle + `
+                                </div>
                         </div>
-                        <div class="col-md-4 text-left attributes half">
+                        <div class="col-md-3 text-left attributes">
                             <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
                             <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
-                            <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
+                            <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>`
+
+                            if (row['resource_formats'].length > 0) {
+                                ele += `
+                                <div>
+                                    <h3 class="sr-only">Formats available for: `  + row['title'] + `</h3>
+                                    <div class="dataset-meta-label">Formats</div>
+                                    ` + row['resource_formats'] + `
+                                </div>`
+                            }
+                            ele += `
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 formats-available">
-                        <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3>` + formatEle + `
-                    </div>
                 </div>`;
 
         $('.table-list').append(ele);
