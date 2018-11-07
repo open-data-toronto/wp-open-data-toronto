@@ -1093,7 +1093,7 @@ table.border{
 }
 .table-list{
     display: block;
-    margin: 12px 0;
+    margin-bottom: 1em;
 }
 .table-list h2 a:visited,
 .table-list h2 a:link{
