@@ -217,7 +217,6 @@ function buildDataset(response) {
                     }
                     break;
                 case 'metadata_modified':
-<<<<<<< HEAD
                     var date = data[field];
                     $(this).text(getFullDate(date.substring(0, 10).split('-')));
                     break
