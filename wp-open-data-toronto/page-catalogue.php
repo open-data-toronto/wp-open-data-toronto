@@ -1,6 +1,6 @@
-<?php  /* Template Name: Catalogue Page */ ?>
+<?php /* Template Name: Catalogue Page */?>
 
-<?php get_header(); ?>
+<?php get_header();?>
 
   <section class="content-area">
     <div class="container">
@@ -9,7 +9,7 @@
           <!-- Breadcrumbs -->
           <nav class="breadcrumb" aria-label="breadcrumbs">
             <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
-            <a class="breadcrumb-item"><?php the_title(); ?></a>
+            <a class="breadcrumb-item"><?php the_title();?></a>
           </nav>
           <!-- End breadcrumbs -->
         </div>
@@ -18,9 +18,9 @@
       <div class="row block-hidden">
         <div class="col-md-12">
           <!-- Banner -->
-          <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>) !important">
+          <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'thumbnail'); ?>) !important">
             <div class="background">
-              <h1><?php the_title(); ?></h1>
+              <h1><?php the_title();?></h1>
             </div>
           </div>
           <!-- End Banner -->
@@ -28,7 +28,7 @@
       </div>
 
       <div class="row block-hidden">
-        <div class="col-md-3">
+        <div class="col-md-3"  id="filter-sidebar">
           <div class="sidebar" style="border: 0" role="complementary">
             <div class="card">
               <div class="card-header card-filters" role="tab" id="heading-dataset_category">
@@ -96,17 +96,40 @@
           <!-- End Sidebar -->
         </div>
 
-        <div class="col-md-9">
-          <!-- List of Datasets -->
-          <div class="input-group" aria-label="Search the Open Data Catalogue">
-            <label for="search" class="sr-only">Search Dataset</label>
-            <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
-            <span class="input-group-btn">
-              <button id="btn-search" class="btn btn-secondary" type="submit">Search Datasets</button>
-            </span>
-          </div>
+        <div class="col-md-9" id="data-catalogue">
+          <div class="container-fluid">
+            <div class="row" id="dataset-search-box">
+              <div class="input-group" aria-label="Search the Open Data Catalogue">
+                <label for="search" class="sr-only">Search Dataset</label>
+                <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
+                <span class="input-group-btn">
+                  <button id="btn-search" class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            </div>
+            <div class="row"  id="dataset-search-results">
+                  <div class="col-md-8 info count">
+                    <div id="results-count" aria-label="Number of dataset search results"></div>
+                  </div>
+                  <div class="col-md-4 info sort">
+                    <form>
+                      <div class="form-group row">
+                        <label for="sort-results-by" class="col-sm-5 text-right col-form-label">Order by:</label>
+                        <div class="col-sm-7">
+                          <select class="form-control" id="sort-results-by">
+                            <option>Relevance</option>
+                            <option>Name</option>
+                            <option>Last Updated</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+            </div>
 
-          <div class="table-list" aria-label="List of Datasets"></div>
+          <!-- List of Datasets -->
+            <div class="row table-list" aria-label="List of Datasets"></div>
+          <div class="row">
           <nav id="nav-catalogue" aria-label="Page Navigation">
             <ul class="pagination pagination-sm">
               <li class="page-item page-keep">
@@ -123,6 +146,7 @@
               </li>
             </ul>
           </nav>
+          </div>
         </div>
       </div>
     </div>
