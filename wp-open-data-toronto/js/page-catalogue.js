@@ -265,7 +265,7 @@ function loadCatalogue() {
         'type': 'full',
         'filters': state['filters'],
         'rows': config['datasetsPerPage'],
-        'sort': 'name asc',
+        'sort': $("#sort-results-by").val(),
         'start': state['page'] * config['datasetsPerPage']
     }
     //
