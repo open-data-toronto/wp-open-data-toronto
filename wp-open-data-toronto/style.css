@@ -1087,12 +1087,15 @@ table.border{
 .table-list .dataset {
     border-bottom: 1px solid #ccc;
     background: #ffffff;
-    padding: 8px 12px;
+    padding:0.5em 0em;
     transition: all .2s ease-in-out;
+    margin-right: 0em;
+    margin-left: 0em;
 }
 .table-list{
     display: block;
-    border-top: 1px solid #ccc;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
     margin-bottom: 1em;
 }
 .table-list h2 a:visited,
