@@ -114,7 +114,7 @@
                   <div class="col-md-4 info sort">
                     <form>
                       <div class="form-group row">
-                        <label for="sort-results-by" class="col-sm-5 col-form-label"><span>Sort by:</span></label>
+                        <label for="sort-results-by" class="col-sm-5 text-right col-form-label">Order by:</label>
                         <div class="col-sm-7">
                           <select class="form-control" id="sort-results-by">
                             <option>Relevance</option>
