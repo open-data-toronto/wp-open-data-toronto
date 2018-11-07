@@ -54,7 +54,7 @@ function buildCatalogue(response) {
 
         // Build the dataset card with field values
         var ele = '<div class="dataset row">' +
-                    '<div class="col-md-8">' +
+                    '<div class="col-md-8 half">' +
                       '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
                       '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                       '<div class="formats-available">' +
@@ -62,7 +62,7 @@ function buildCatalogue(response) {
                         '<ul class="tag-list">' + formatEle + '</ul>' +
                       '</div>' +
                     '</div>' +
-                    '<div class="col-md-4 text-right attributes">' +
+                    '<div class="col-md-4 text-right attributes half">' +
                       '<p>' +
                         '<span class="dataset-meta-label">Updated: </span>' +
                         getFullDate(row['metadata_modified'].split('-')) + '&nbsp;' +

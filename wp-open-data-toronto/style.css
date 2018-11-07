@@ -1090,6 +1090,10 @@ table.border{
     margin-right: 0;
     margin-left: 0;
 }
+.table-list .dataset .half{
+    padding-right: 0.8em;
+    padding-left: 0.8em;
+}
 .table-list{
     display: block;
     border-top: 2px solid #ccc;
