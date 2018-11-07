@@ -102,8 +102,8 @@ function buildCatalogue(response) {
                                                          </li>`);
             } else if (Math.abs(state['page'] - i) == 3) {
                 $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove disabled"> 
-                                                           '<a class="page-link" href="#" aria-label="..."> 
-                                                              '... 
+                                                           <a class="page-link" href="#" aria-label="..."> 
+                                                              ... 
                                                            </a> 
                                                          </li>`);
             }
