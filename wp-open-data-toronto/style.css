@@ -1086,9 +1086,9 @@ table.border{
 }
 .table-list .dataset {
     border-bottom: 1px solid #ccc;
-    padding:0.5em 0em;
-    margin-right: 0em;
-    margin-left: 0em;
+    padding:0.5em 0;
+    margin-right: 0;
+    margin-left: 0;
 }
 .table-list{
     display: block;
