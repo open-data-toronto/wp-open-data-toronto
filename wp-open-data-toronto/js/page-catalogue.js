@@ -180,16 +180,7 @@ function buildSidebar(response) {
         }
     }
 
-    if (state['search'].length > 0) {
-        for (var i in state['search']) {
-            var value = state['search'][i],
-                selectedValues = $('.filter-search select').val();
-
-            if (selectedValues == null || selectedValues.indexOf(value) == -1) {
-                $('#input-search').val(value);
-            }
-        }
-    }
+    //TODO: FILL search
 
     if (config['isInitializing']) buildStaticUI();
     buildDynamicUI();
@@ -211,14 +202,14 @@ var buildStaticUI = function() {
     });
 
     $('#btn-search').on('click', function() {
-        state['filter']['search'] = $('#input-search').val();
+        state['filters']['search'] = $('#input-search').val();
         state['page'] = 0;
         loadCatalogue();
     });
 
     $('#input-search').on('keyup', function(evt) {
         if (evt.keyCode == 13) {
-            state['filter']['search'] = $('#input-search').val();
+            state['filters']['search'] = $('#input-search').val();
             state['page'] = 0;
             loadCatalogue();
         }
@@ -260,14 +251,13 @@ function buildDynamicUI() {
 function loadCatalogue() {
     if (config['isInitializing']) parseParams();
 
-    var params = {
+    var params = $.extend(true, {
         'type': 'full',
-        'filters': state['filters'],
         'rows': config['datasetsPerPage'],
         'sort': 'name asc',
         'start': state['page'] * config['datasetsPerPage']
-    }
-    //
+    }, state['filters']);
+
     var urlParam = [];
     if (state['page'] != 0) {
         urlParam.push('n=' + state['page'])
@@ -287,11 +277,11 @@ function loadCatalogue() {
 }
 
 function loadSidebar(query) {
-    var params = {
+    var params = $.extend(true, {
         'type': 'facet',
-        'filters': state['filters'],
+        'rows': config['datasetsPerPage'],
         'facet_field': config['filters']
-    }
+    }, state['filters']);
 
     getCKAN('catalogue_search', params, buildSidebar);
 }
