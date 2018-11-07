@@ -74,7 +74,7 @@ function buildCatalogue(response) {
                         <span class="fa fa fa-home" aria-hidden="true"></span> 
                       </p> 
                       <p>
-                        '<span class="dataset-meta-label">Data Type: </span>` +
+                        <span class="dataset-meta-label">Data Type: </span>` +
                         row['dataset_category'] + `&nbsp; 
                         <span class="fa`  + iconClassMap[row['dataset_category']] + `" aria-hidden="true"></span> 
                       </p> 
