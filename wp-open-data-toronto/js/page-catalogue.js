@@ -125,8 +125,7 @@ function buildCatalogue(response) {
 function buildSidebar(response) {
     $('[data-type="filter"]').empty();
 
-    var results = response['result'],
-        data = {};
+    var results = response['result'];
 
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
