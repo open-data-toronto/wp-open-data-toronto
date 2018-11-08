@@ -4,6 +4,8 @@ var state = history.state || {
         'size': 0
     };
 
+var showMoreAt = 6;
+
 $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
@@ -60,8 +62,8 @@ function buildCatalogue(response) {
                                 <div>
                                     <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
                                 </div>
-                                <div class="formats-available">
-                                    <h3 class="sr-only">Formats available for: `  + row['title'] + `</h3>` + tagEle + `
+                                <div>
+                                    <h3 class="sr-only">Tags available for: `  + row['title'] + `</h3>` + tagEle + `
                                 </div>
                         </div>
                         <div class="col-md-3 text-left attributes">
@@ -123,14 +125,14 @@ function buildCatalogue(response) {
 }
 
 function buildSidebar(response) {
-    $('[data-type="filter"]').empty();
+    $('[data-type="filter"] .filter-value').remove();
 
-    var results = response['result'];
-    
+    var results = response['result'];    
+
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
             sidebar = {};
-
+            
         for (var j in field['items']) {
             var item = field['items'][j];
 
@@ -158,31 +160,42 @@ function buildSidebar(response) {
         sidebar =  Object.keys(sidebar).map(function(x) { return sidebar[x] });
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
-                return a['name'] < b['name'] ? -1 : 1;
+                return a['name'] < b['name'] ? 1 : -1;
             }
-            return b['count'] - a['count'];
+            return a['count'] - b['count'];
         });
 
         for (var i in sidebar) {
             var value = sidebar[i],
                 selected = state['filters'][field['title']],
                 checked = ' ',
-                labelChecked = ' ';
+                labelChecked = ' '
+                closeIcon = ' ';
 
             if (selected != null && selected.indexOf(value['name']) !== -1) {
                 checked += 'checked="true" ';
-                labelChecked += 'class="checkbox-checked" ';
+                labelChecked += 'class="checkbox-checked" '
+                closeIcon += '<span class="float-right"><i class="fa fa-times"></i></span>';
             }
 
-            $('#collapse-' + field['title'] + ' ul').append(
-                `<li class="checkbox checkbox-filter">
+            $('#' + field['title'] + '-values').prepend(
+                `<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">
                   <label` + labelChecked + `>
-                    <input type="checkbox"` + checked + `data-field="` + field['title'] + `" value="` + value['name'] + `">` + `&nbsp;` + value['name'] +
-                      `&nbsp;<small>(` + value['count'] + `)</small>
+                    <input type="checkbox"` + checked + `data-field="` + field['title'] + `" value="` + value['name'] + `">` + value['name'] +
+                      `&nbsp;<span class="badge">` + value['count'] + `</span>` + closeIcon + `
                   </label>
                 </li>`);
         }
+        var valuesLength = $('#' + field['title'] + '-values li').length ;
+        if (valuesLength > showMoreAt){
+            $('#' + field['title'] + '-values li.filter-value:nth-child(n+' + showMoreAt +')').toggleClass('sr-only');
+            $('#' + field['title'] + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
+            $('#' + field['title'] + '-values li.show-more').show();
+        } else {
+            $('#' + field['title'] + '-values li.show-more').hide();
+        }
     }
+    
 
     if (state['filters']['search'] != null) {
         $('#input-search').val(state['filters']['search']);
@@ -224,6 +237,23 @@ var buildStaticUI = function() {
     $('#sort-results-by').on('change', function() {
         state['page'] = 0;
         loadCatalogue();
+    });
+
+    $('.show-more').on('click', function(){
+        var name = $(this).data("field") ;
+        if ($('#' + name + '-values li').length > showMoreAt){
+            $('#' + name + '-values li.filter-value:nth-child(n+' + showMoreAt +')').toggleClass('sr-only');
+            var valuesLength = $('#' + name + '-values li').length ;
+            var hiddenValuesLength = $('#' + name + '-values li.sr-only').length ;
+            if(hiddenValuesLength === 0 ){
+                $('#' + name + '-values li.show-more label').html('[-] Show Less');
+            } else {
+                $('#' + name + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
+            }
+            $('#' + name + '-values li.show-more').show();
+        } else {
+            $('#' + name + '-values li.show-more').hide();
+        }
     });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events

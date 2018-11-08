@@ -28,70 +28,36 @@
       </div>
 
       <div class="row block-hidden">
-        <div class="col-md-3"  id="filter-sidebar">
-          <div class="sidebar" style="border: 0" role="complementary">
-            <div class="card">
-              <div class="card-header card-filters" role="tab" id="heading-dataset_category">
-                <h5 class="mb-0">
-                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-dataset_category" aria-expanded="true" aria-controls="collapse-dataset_category">
-                    Type
-                    <span class="accordion-arrow">
-                      <span class="fa fa-chevron-down"></span>
-                    </span>
-                  </a>
-                </h5>
+          <div class="col-md-3"  id="filter-sidebar">
+          <div class="sidebar-filters">
+            <div class="card" id="dataset_category-filter">
+              <div class="card-header filter-heading">
+                <h5>Type</h5>
               </div>
-
-              <div id="collapse-dataset_category" class="collapse" role="tabpanel" aria-labelledby="heading-dataset_category">
-                <div class="row">
-                  <div class="col-md-12">
-                    <ul data-type="filter" data-field="dataset_category"></ul>
-                  </div>
-                </div>
-              </div>
+              <ul data-type="filter" data-field="dataset_category" class="list-group list-group-flush" id="dataset_category-values">
+              <li class="show-more list-group-item list-group-item-action" data-field="dataset_category"><label></label></li>
+              </ul>
             </div>
 
-            <div class="card">
-              <div class="card-header card-filters" role="tab" id="heading-owner_division">
-                <h5 class="mb-0">
-                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-owner_division" aria-expanded="true" aria-controls="collapse-owner_division">
-                    Divisions
-                    <span class="accordion-arrow">
-                      <span class="fa fa-chevron-down"></span>
-                    </span>
-                  </a>
-                </h5>
+            <div class="card" id="owner_division-filter">
+              <div class="card-header filter-heading">
+                <h5>Divisions</h5>
               </div>
+              <ul data-type="filter" data-field="owner_division" class="list-group list-group-flush" id="owner_division-values">
+              <li class="show-more list-group-item list-group-item-action" data-field="owner_division"><label></label></li>
 
-              <div id="collapse-owner_division" class="collapse" role="tabpanel" aria-labelledby="heading-owner_division">
-                <div class="row">
-                  <div class="col-md-12">
-                    <ul data-type="filter" data-field="owner_division"></ul>
-                  </div>
-                </div>
-              </div>
+              </ul>
             </div>
 
-            <div class="card">
-              <div class="card-header card-filters" role="tab" id="heading-resource_formats">
-                <h5 class="mb-0">
-                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-resource_formats" aria-expanded="true" aria-controls="collapse-resource_formats">
-                    Resource Formats
-                    <span class="accordion-arrow">
-                      <span class="fa fa-chevron-down"></span>
-                    </span>
-                  </a>
-                </h5>
+            <div class="card" id="resource_formats-filter">
+              <div class="card-header filter-heading">
+                <h5>Resource Formats</h5>
               </div>
-
-              <div id="collapse-resource_formats" class="collapse" role="tabpanel" aria-labelledby="heading-resource_formats">
-                <div class="row">
-                  <div class="col-md-12">
-                    <ul data-type="filter" data-field="resource_formats"></ul>
-                  </div>
-                </div>
-              </div>
+              <ul data-type="filter" data-field="resource_formats" class="list-group list-group-flush" id="resource_formats-values">
+                <li class="show-more list-group-item list-group-item-action" data-field="resource_formats"><label></label></li>
+              </ul>
             </div>
+
           </div>
           <!-- End Sidebar -->
         </div>
