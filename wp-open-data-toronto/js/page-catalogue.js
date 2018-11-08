@@ -46,7 +46,7 @@ function buildCatalogue(response) {
                         <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
                     </div>
                     <div class="col-md-4 text-left attributes half">
-                        <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
+                        <div><div class="dataset-meta-label">Last Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
                         <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
                         <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>`
 
@@ -65,7 +65,7 @@ function buildCatalogue(response) {
             </div>`
             
         $('.table-list').append(datasetMetadata);
-    }
+    }   
 
     // Build the catalogue page navigation
     // This needs to be built on every catalogue refresh because total number of pages changes based on searches and filters
