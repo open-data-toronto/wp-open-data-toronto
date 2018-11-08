@@ -268,18 +268,31 @@ function loadCatalogue() {
         }
     }
 
-    var params = $.extend(true, {
+    getCKAN('catalogue_search', $.extend(true, {
         'type': 'full',
         'rows': config['datasetsPerPage'],
         'sort': $('#sort-results-by').val(),
         'start': state['page'] * config['datasetsPerPage']
-    }, state['filters']);
+    }, state['filters']), buildCatalogue);
 
+    getCKAN('catalogue_search', $.extend(true, {
+        'type': 'facet',
+        'rows': config['datasetsPerPage'],
+        'facet_field': config['filters']
+    }, state['filters']), buildSidebar);
+
+    updateURL();
+}
+
+function updateURL() {
     var urlParam = [];
+
     for (var i in state['filters']) {
+        if (state['filters'][i].length <= 0) continue;
+
         var filter = state['filters'][i];
 
-        if (filter.constructor === Array && filter.length > 0) {
+        if (filter.constructor === Array) {
             urlParam.push(i + '=' + encodeURIComponent(filter.join('+')));
         } else if (typeof filter == 'string') {
             urlParam.push(i + '=' + encodeURIComponent(filter));
@@ -287,22 +300,10 @@ function loadCatalogue() {
     }
 
     if (state['page'] != 0) {
-        urlParam.push('n=' + state['page'])
+        urlParam.push('n=' + state['page']);
     }
 
-    loadSidebar();
-    getCKAN('catalogue_search', params, buildCatalogue);
     history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
-}
-
-function loadSidebar(query) {
-    var params = $.extend(true, {
-        'type': 'facet',
-        'rows': config['datasetsPerPage'],
-        'facet_field': config['filters']
-    }, state['filters']);
-
-    getCKAN('catalogue_search', params, buildSidebar);
 }
 
 function init() {
