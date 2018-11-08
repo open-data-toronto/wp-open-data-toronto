@@ -34,11 +34,11 @@ function buildCatalogue(response) {
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
-        $('.table-list').append(`
+        var datasetMetadata = `
             <div class="dataset row">
                 <div class="row">
                     <div class="col-md-12">
-                    <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
+                        <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
                     </div>
                 </div>
                 <div class="row">
@@ -48,14 +48,23 @@ function buildCatalogue(response) {
                     <div class="col-md-4 text-left attributes half">
                         <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
                         <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
-                        <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
-                    </div>
+                        <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>`
+
+        if (row['formats'].length > 0) {
+                datasetMetadata += `
+                        <div><div class="dataset-meta-label">Format</div>` + row['formats'].join(' ') + `</div>`
+        }
+
+        datasetMetadata += `
+        </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 formats-available">
-                    <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
+                    <h3 class="sr-only">Category available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
                 </div>
-            </div>`);
+            </div>`
+            
+        $('.table-list').append(datasetMetadata);
     }
 
     // Build the catalogue page navigation
