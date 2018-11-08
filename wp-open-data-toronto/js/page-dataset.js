@@ -194,7 +194,7 @@ function buildDataset(response) {
     data['preview_resource'] = {};
 
     for (var i in data['resources']) {
-        if (data['is_visualizable'] && data['resources'][i]['file_type'].length > 0) {
+        if (data['is_visualizable'] && data['resources'][i]['file_type']) {
             switch (data['resources'][i]['file_type']) {
                 case 'Primary data':
                     data['primary_resource'] = data['resources'][i];
