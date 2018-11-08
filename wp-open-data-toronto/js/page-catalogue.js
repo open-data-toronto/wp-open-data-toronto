@@ -42,10 +42,10 @@ function buildCatalogue(response) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8 half">
+                    <div class="col-md-9">
                         <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
                     </div>
-                    <div class="col-md-4 text-left attributes half">
+                    <div class="col-md-3 text-left attributes">
                         <div><div class="dataset-meta-label">Last Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
                         <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
                         <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>`
