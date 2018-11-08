@@ -1,8 +1,8 @@
 var state = history.state || {
-        'filters': {},
-        'page': 0,
-        'size': 0
-    };
+    'filters': {},
+    'page': 0,
+    'size': 0
+};
 
 $.extend(config, {
     'isInitializing': true,
@@ -18,9 +18,7 @@ function buildCatalogue(response) {
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
-    $('#results-count').html(
-        `<span>` + data["count"] + ` datasets found</span>`
-    );
+    $('#results-count').html(`<span>` + data["count"] + ` datasets found</span>`);
 
     if (data['results'].length == 0) {
         $('.table-list').append(`<div class="row">
@@ -31,42 +29,31 @@ function buildCatalogue(response) {
         return;
     }
 
-    var iconClassMap = {
-        'Document': 'fa-newspaper-o',
-        'Map': 'fa-map-o',
-        'Table': 'fa-area-chart',
-        'Website': 'fa-desktop'
-    }
-
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
-
-        // Build the dataset card with field values
-        var ele = `
-        <div class="dataset row">
-            <div class="row">
-                <div class="col-md-12">
-                <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
+        $('.table-list').append(`
+            <div class="dataset row">
+                <div class="row">
+                    <div class="col-md-12">
+                    <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 half">
-                    <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                <div class="row">
+                    <div class="col-md-8 half">
+                        <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                    </div>
+                    <div class="col-md-4 text-left attributes half">
+                        <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
+                        <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
+                        <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
+                    </div>
                 </div>
-                <div class="col-md-4 text-left attributes half">
-                    <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
-                    <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
-                    <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
+                <div class="row">
+                    <div class="col-md-12 formats-available">
+                    <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 formats-available">
-                <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
-            </div>
-        </div>`;
-
-        $('.table-list').append(ele);
+            </div>`);
     }
 
     // Build the catalogue page navigation
@@ -76,11 +63,10 @@ function buildCatalogue(response) {
 
         // Build the page buttons
         for (var i = 0; i < state['size']; i++) {
-            var pageNumber = i + 1 + '',
-                additionalClass = i == state['page'] ? ' active' : '';
+            var pageNumber = i + 1 + '';
 
             if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
-                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove` +  additionalClass + `">
+                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove">
                                                            <a class="page-link" href="#" aria-label="Go to page`  + pageNumber + `" data-page=` + i + `>` +
                                                               pageNumber +
                                                            `</a>
@@ -92,11 +78,11 @@ function buildCatalogue(response) {
                                                            </a>
                                                          </li>`);
             }
+
+            if (i == state['page']) $('.page-link[data-page=' + i + ']').parent('li').addClass('active');
         }
 
         $('#nav-catalogue .page-remove a').on('click', function(evt) {
-            evt.preventDefault();
-
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
