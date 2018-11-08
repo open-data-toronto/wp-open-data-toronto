@@ -42,14 +42,6 @@ function buildCatalogue(response) {
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
 
-        // Build the format tags
-        var formats = row['formats'],
-            formatEle = '';
-
-        for (var j = 0; j < formats.length; j++) {
-            formatEle += '<span class="badge badge-secondary">' + formats[j] + '</span> ';
-        }
-
         // Build the dataset card with field values
         var ele = `
         <div class="dataset row">
@@ -70,7 +62,7 @@ function buildCatalogue(response) {
             </div>
             <div class="row">
                 <div class="col-md-12 formats-available">
-                <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3>` + formatEle + `
+                <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
             </div>
         </div>`;
 
