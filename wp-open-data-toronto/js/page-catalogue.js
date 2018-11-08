@@ -1,8 +1,8 @@
 var state = history.state || {
-        'filters': {},
-        'page': 0,
-        'size': 0
-    };
+    'filters': {},
+    'page': 0,
+    'size': 0
+};
 
 var showMoreAt = 6;
 
@@ -10,7 +10,7 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': ['dataset_category', 'owner_division', 'resource_formats']
+    'filters': ['dataset_category', 'owner_division', 'vocab_formats']
 });
 
 function buildCatalogue(response) {
@@ -20,9 +20,7 @@ function buildCatalogue(response) {
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
-    $('#results-count').html(
-        `<span>` + data["count"] + ` datasets found</span>`
-    );
+    $('#results-count').html(`<span>` + data["count"] + ` datasets found</span>`);
 
     if (data['results'].length == 0) {
         $('.table-list').append(`<div class="row">
@@ -33,57 +31,31 @@ function buildCatalogue(response) {
         return;
     }
 
-    var iconClassMap = {
-        'Document': 'fa-newspaper-o',
-        'Map': 'fa-map-o',
-        'Table': 'fa-area-chart',
-        'Website': 'fa-desktop'
-    }
-
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
-
-        // Build the format tags
-        var tags = row['tags'],
-            tagEle = '';
-
-        for (var j = 0; j < tags.length; j++) {
-            tagEle += '<span class="badge badge-secondary">' + tags[j]["display_name"] + '</span> ';
-        }
-
-        // Build the dataset card with field values
-        var ele = `
-                <div class="dataset row">
+        $('.table-list').append(`
+            <div class="dataset row">
+                <div class="row">
                     <div class="col-md-12">
                     <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
                     </div>
-                        <div class="col-md-9 dataset-info">
-                                <div>
-                                    <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
-                                </div>
-                                <div>
-                                    <h3 class="sr-only">Tags available for: `  + row['title'] + `</h3>` + tagEle + `
-                                </div>
-                        </div>
-                        <div class="col-md-3 text-left attributes">
-                            <div><div class="dataset-meta-label">Last Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
-                            <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
-                            <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>`
-
-                            if (row['resource_formats'].length > 0) {
-                                ele += `
-                                <div>
-                                    <h3 class="sr-only">Formats available for: `  + row['title'] + `</h3>
-                                    <div class="dataset-meta-label">Formats</div>
-                                    ` + row['resource_formats'] + `
-                                </div>`
-                            }
-                            ele += `
-                        </div>
-                </div>`;
-
-        $('.table-list').append(ele);
+                </div>
+                <div class="row">
+                    <div class="col-md-8 half">
+                        <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                    </div>
+                    <div class="col-md-4 text-left attributes half">
+                        <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
+                        <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
+                        <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 formats-available">
+                    <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
+                </div>
+            </div>`);
     }
 
     // Build the catalogue page navigation
@@ -93,11 +65,10 @@ function buildCatalogue(response) {
 
         // Build the page buttons
         for (var i = 0; i < state['size']; i++) {
-            var pageNumber = i + 1 + '',
-                additionalClass = i == state['page'] ? ' active' : '';
+            var pageNumber = i + 1 + '';
 
             if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
-                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove` +  additionalClass + `">
+                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove">
                                                            <a class="page-link" href="#" aria-label="Go to page`  + pageNumber + `" data-page=` + i + `>` +
                                                               pageNumber +
                                                            `</a>
@@ -109,11 +80,11 @@ function buildCatalogue(response) {
                                                            </a>
                                                          </li>`);
             }
+
+            if (i == state['page']) $('.page-link[data-page=' + i + ']').parent('li').addClass('active');
         }
 
         $('#nav-catalogue .page-remove a').on('click', function(evt) {
-            evt.preventDefault();
-
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
@@ -131,33 +102,8 @@ function buildSidebar(response) {
 
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
-            sidebar = {};
-            
-        for (var j in field['items']) {
-            var item = field['items'][j];
+            sidebar = field['items'];
 
-            if (['resource_formats'].indexOf(field['title']) !== -1) {
-                var splits = item['name'].split(' ');
-
-                for (var k in splits) {
-                    if (sidebar[splits[k]] === undefined) {
-                        sidebar[splits[k]] = {
-                            'count': item['count'],
-                            'name': splits[k]
-                        };
-                    } else {
-                        sidebar[splits[k]]['count'] += item['count'];
-                    }
-                }
-            } else {
-                sidebar[item['name']] = {
-                    'count': item['count'],
-                    'name': item['name']
-                };
-            }
-        }
-
-        sidebar =  Object.keys(sidebar).map(function(x) { return sidebar[x] });
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? 1 : -1;
@@ -221,14 +167,18 @@ var buildStaticUI = function() {
     });
 
     $('#btn-search').on('click', function() {
+        state['filters'] = {};
         state['filters']['search'] = $('#input-search').val();
+
         state['page'] = 0;
         loadCatalogue();
     });
 
     $('#input-search').on('keyup', function(evt) {
         if (evt.keyCode == 13) {
+            state['filters'] = {};
             state['filters']['search'] = $('#input-search').val();
+
             state['page'] = 0;
             loadCatalogue();
         }
@@ -303,18 +253,31 @@ function loadCatalogue() {
         }
     }
 
-    var params = $.extend(true, {
+    getCKAN('catalogue_search', $.extend(true, {
         'type': 'full',
         'rows': config['datasetsPerPage'],
         'sort': $('#sort-results-by').val(),
         'start': state['page'] * config['datasetsPerPage']
-    }, state['filters']);
+    }, state['filters']), buildCatalogue);
 
+    getCKAN('catalogue_search', $.extend(true, {
+        'type': 'facet',
+        'rows': config['datasetsPerPage'],
+        'facet_field': config['filters']
+    }, state['filters']), buildSidebar);
+
+    updateURL();
+}
+
+function updateURL() {
     var urlParam = [];
+
     for (var i in state['filters']) {
+        if (state['filters'][i].length <= 0) continue;
+
         var filter = state['filters'][i];
 
-        if (filter.constructor === Array && filter.length > 0) {
+        if (filter.constructor === Array) {
             urlParam.push(i + '=' + encodeURIComponent(filter.join('+')));
         } else if (typeof filter == 'string') {
             urlParam.push(i + '=' + encodeURIComponent(filter));
@@ -322,22 +285,10 @@ function loadCatalogue() {
     }
 
     if (state['page'] != 0) {
-        urlParam.push('n=' + state['page'])
+        urlParam.push('n=' + state['page']);
     }
 
-    loadSidebar();
-    getCKAN('catalogue_search', params, buildCatalogue);
     history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
-}
-
-function loadSidebar(query) {
-    var params = $.extend(true, {
-        'type': 'facet',
-        'rows': config['datasetsPerPage'],
-        'facet_field': config['filters']
-    }, state['filters']);
-
-    getCKAN('catalogue_search', params, buildSidebar);
 }
 
 function init() {
