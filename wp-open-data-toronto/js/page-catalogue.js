@@ -202,14 +202,18 @@ var buildStaticUI = function() {
     });
 
     $('#btn-search').on('click', function() {
+        state['filters'] = {};
         state['filters']['search'] = $('#input-search').val();
+
         state['page'] = 0;
         loadCatalogue();
     });
 
     $('#input-search').on('keyup', function(evt) {
         if (evt.keyCode == 13) {
+            state['filters'] = {};
             state['filters']['search'] = $('#input-search').val();
+
             state['page'] = 0;
             loadCatalogue();
         }
