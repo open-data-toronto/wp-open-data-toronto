@@ -8,7 +8,7 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': ['dataset_category', 'owner_division', 'resource_formats']
+    'filters': ['dataset_category', 'owner_division', 'vocab_formats']
 });
 
 function buildCatalogue(response) {
@@ -43,7 +43,7 @@ function buildCatalogue(response) {
         var row = data['results'][i];
 
         // Build the format tags
-        var formats = row['resource_formats'].split(' '),
+        var formats = row['formats'],
             formatEle = '';
 
         for (var j = 0; j < formats.length; j++) {
@@ -52,27 +52,27 @@ function buildCatalogue(response) {
 
         // Build the dataset card with field values
         var ele = `
-                <div class="dataset row">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8 half">
-                            <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
-                        </div>
-                        <div class="col-md-4 text-left attributes half">
-                            <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
-                            <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
-                            <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 formats-available">
-                        <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3>` + formatEle + `
-                    </div>
-                </div>`;
+        <div class="dataset row">
+            <div class="row">
+                <div class="col-md-12">
+                <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 half">
+                    <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
+                </div>
+                <div class="col-md-4 text-left attributes half">
+                    <div><div class="dataset-meta-label">Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
+                    <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
+                    <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 formats-available">
+                <h3 class="sr-only">Formats Available for: `  + row['title'] + `</h3>` + formatEle + `
+            </div>
+        </div>`;
 
         $('.table-list').append(ele);
     }
@@ -123,33 +123,8 @@ function buildSidebar(response) {
 
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
-            sidebar = {};
+            sidebar = field['items'];
 
-        for (var j in field['items']) {
-            var item = field['items'][j];
-
-            if (['resource_formats'].indexOf(field['title']) !== -1) {
-                var splits = item['name'].split(' ');
-
-                for (var k in splits) {
-                    if (sidebar[splits[k]] === undefined) {
-                        sidebar[splits[k]] = {
-                            'count': item['count'],
-                            'name': splits[k]
-                        };
-                    } else {
-                        sidebar[splits[k]]['count'] += item['count'];
-                    }
-                }
-            } else {
-                sidebar[item['name']] = {
-                    'count': item['count'],
-                    'name': item['name']
-                };
-            }
-        }
-
-        sidebar =  Object.keys(sidebar).map(function(x) { return sidebar[x] });
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? -1 : 1;

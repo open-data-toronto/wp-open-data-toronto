@@ -73,9 +73,9 @@
             </div>
 
             <div class="card">
-              <div class="card-header card-filters" role="tab" id="heading-resource_formats">
+              <div class="card-header card-filters" role="tab" id="heading-vocab_formats">
                 <h5 class="mb-0">
-                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-resource_formats" aria-expanded="true" aria-controls="collapse-resource_formats">
+                  <a class="collapsed" data-toggle="collapse" data-parent=".sidebar" href="#collapse-vocab_formats" aria-expanded="true" aria-controls="collapse-vocab_formats">
                     Resource Formats
                     <span class="accordion-arrow">
                       <span class="fa fa-chevron-down"></span>
@@ -84,10 +84,10 @@
                 </h5>
               </div>
 
-              <div id="collapse-resource_formats" class="collapse" role="tabpanel" aria-labelledby="heading-resource_formats">
+              <div id="collapse-vocab_formats" class="collapse" role="tabpanel" aria-labelledby="heading-vocab_formats">
                 <div class="row">
                   <div class="col-md-12">
-                    <ul data-type="filter" data-field="resource_formats"></ul>
+                    <ul data-type="filter" data-field="vocab_formats"></ul>
                   </div>
                 </div>
               </div>
