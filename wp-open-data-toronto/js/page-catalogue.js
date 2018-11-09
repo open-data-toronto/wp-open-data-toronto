@@ -20,7 +20,6 @@ function buildCatalogue(response) {
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
-    $('#results-count').html(`<span>` + data["count"] + ` datasets found</span>`);
 
     if (data['results'].length == 0) {
         $('.table-list').append(`<div class="row">
@@ -29,6 +28,17 @@ function buildCatalogue(response) {
                                   </div>
                                 </div>`);
         return;
+    } else {
+        if (data['results'].length == 1) {
+            var foundPhrase = ' dataset found ';
+        } else {
+            var foundPhrase = ' datasets found ';
+            if (typeof state['filters']['search'] === undefined || state['filters']['search'] == null || state['filters']['search'] === "") {
+                $('#results-count').html(`<span>` + data["count"] + foundPhrase +`</span>`);
+            } else {
+                $('#results-count').html(`<span>` + data["count"] + foundPhrase +`for "` + state['filters']['search'] + `"</span>`);
+            }
+        }
     }
 
     // Iterrates over each of the results and build the HTML for each of the dataset
