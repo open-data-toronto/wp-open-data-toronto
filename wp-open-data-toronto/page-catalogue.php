@@ -55,7 +55,7 @@
 
                       <div class="card" id="vocab_formats-filter">
                           <div class="card-header filter-heading">
-                              <h5>File Format</h5>
+                              <h5>Format</h5>
                           </div>
                           <ul data-type="filter" data-field="vocab_formats" class="list-group list-group-flush" id="vocab_formats-values">
                               <li class="show-more list-group-item list-group-item-action" data-field="vocab_formats"><label></label></li>
