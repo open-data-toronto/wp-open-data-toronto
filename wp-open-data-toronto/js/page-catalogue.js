@@ -10,7 +10,7 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': ['dataset_category', 'owner_division', 'vocab_formats']
+    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic']
 });
 
 function buildCatalogue(response) {

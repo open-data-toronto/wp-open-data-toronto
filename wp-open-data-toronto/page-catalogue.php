@@ -43,13 +43,21 @@
                           </ul>
                       </div>
 
+                      <div class="card" id="topic-filter">
+                          <div class="card-header filter-heading">
+                              <h5>Topic</h5>
+                          </div>
+                          <ul data-type="filter" data-field="topic" class="list-group list-group-flush" id="topic-values">
+                              <li class="show-more list-group-item list-group-item-action" data-field="topic"><label></label></li>
+                          </ul>
+                      </div>
+
                       <div class="card" id="owner_division-filter">
                           <div class="card-header filter-heading">
                               <h5>Division</h5>
                           </div>
                           <ul data-type="filter" data-field="owner_division" class="list-group list-group-flush" id="owner_division-values">
                               <li class="show-more list-group-item list-group-item-action" data-field="owner_division"><label></label></li>
-
                           </ul>
                       </div>
 
