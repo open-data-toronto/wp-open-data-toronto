@@ -19,12 +19,12 @@ function buildCatalogue(response) {
 
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
-
-
+    
     if (data['results'].length == 0) {
         $('.table-list').append(`<div class="row">
-                                  <div class="col-md-12">
-                                    <h2>No datasets found </h2>
+                                  <div class="col-md-12 not-found">
+                                    <h2>No datasets found for "` + state['filters']['search'] + `"</h2>` + `
+                                    <p>Please try again or <a href="#">request a dataset</a></p>
                                   </div>
                                 </div>`);
         return;
