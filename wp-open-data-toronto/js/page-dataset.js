@@ -237,9 +237,9 @@ function buildDataset(response) {
     });
 
     if ((['Map', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || $.isEmptyObject(data['preview_resource'])) {
-        $('#heading-preview, #heading-features, #heading-explore').hide();
+        $('#heading-preview, #heading-features, #heading-explore').parent('.card').remove();
     } else if (data['dataset_category'] == 'Map') {
-        $('#heading-features').hide();
+        $('#heading-features').parent('.card').remove();
     }
 
     buildUI();
