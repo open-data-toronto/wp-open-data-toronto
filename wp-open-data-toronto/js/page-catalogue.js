@@ -10,7 +10,7 @@ $.extend(config, {
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
     'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic'],
-    'filterSize': 5
+    'filterSize': 6                                                             // Number of filters shown plus 1 (+1 due to the show more/less li)
 });
 
 function buildCatalogue(response) {
@@ -147,9 +147,9 @@ function buildSidebar(response) {
         }
 
         var numFilters = sidebarEle.find('li').length;
-        if (numFilters >= config['filterSize']){
-            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize'] + 1) + ')').toggleClass('sr-only');
-            showMoreButton.find('label').html('[+] ' + (numFilters - 5) + ' more');
+        if (numFilters > config['filterSize']){
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
+            showMoreButton.find('label').html('[+] ' + (numFilters - config['filterSize']) + ' more');
             showMoreButton.show();
         } else {
             showMoreButton.hide();
@@ -209,21 +209,10 @@ var buildStaticUI = function() {
     $('.show-more').on('mouseenter mouseleave', function () {
         $(this).find('label').toggleClass('on-hover');
     }).on('click', function() {
-        // console.log($(this).)
-        // var name = $(this).data('field') ;
-        // if ($('#' + name + '-values li').length > showMoreAt){
-        //     $('#' + name + '-values li.filter-value:nth-child(n+' + showMoreAt +')').toggleClass('sr-only');
-        //     var valuesLength = $('#' + name + '-values li').length ;
-        //     var hiddenValuesLength = $('#' + name + '-values li.sr-only').length ;
-        //     if(hiddenValuesLength === 0 ){
-        //         $('#' + name + '-values li.show-more label').html('[-] Show less');
-        //     } else {
-        //         $('#' + name + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
-        //     }
-        //     $('#' + name + '-values li.show-more').show();
-        // } else {
-        //     $('#' + name + '-values li.show-more').hide();
-        // }
+        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('sr-only');
+
+        var labelText = $(this).siblings('li.sr-only').length ? '[+] ' + ($(this).siblings('li').length - config['filterSize']) + ' more' : '[-] Show less';
+        $(this).find('label').html(labelText);
     });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
@@ -263,11 +252,14 @@ function loadCatalogue() {
     if (config['isInitializing']) {
         var params = window.location.search.slice(1).split('&');
         for (var i in params) {
-            var filter = params[i].split('=');
+            var filter = params[i].split('='),
+                content = decodeURIComponent(filter[1]);
+
             if (filter[0] == 'n') {
-                state['page'] = parseInt(filter[1]);
+                state['page'] = parseInt(content);
+            } else if (filter[0] == 'sort') {
+                state['sort'] = content;
             } else if (filter[0].length > 0) {
-                var content = decodeURIComponent(filter[1]);
                 state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content : content.split('+');
             }
         }
@@ -306,6 +298,10 @@ function updateURL() {
 
     if (state['page'] != 0) {
         urlParam.push('n=' + state['page']);
+    }
+
+    if (state['sort'] != 'metadata_modified desc') {
+        urlParam.push('sort=' + state['sort']);
     }
 
     history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
