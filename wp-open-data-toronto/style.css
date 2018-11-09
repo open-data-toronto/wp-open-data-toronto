@@ -967,7 +967,6 @@ text-shadow: none !important
 9. Catalogue Page Template
 **/
 .sidebar-filters .card {
-    border-radius: 0 !important;
     margin-bottom: 1.25rem;
 }
 
@@ -991,6 +990,15 @@ text-shadow: none !important
 .sidebar-filters .show-more{
     text-align: center;
     background: #F5F5F5;
+}
+
+.filter-value .checkbox-checked{
+    background: #666666;
+    color: white !important;
+}
+
+.checkbox-checked span.badge{
+    display: none;
 }
 
 .sidebar-filters .show-more label{
