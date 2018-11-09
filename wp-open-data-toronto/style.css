@@ -976,6 +976,10 @@ text-shadow: none !important
     border-bottom: 0;
 }
 
+.sidebar-filters .filter-heading h5{
+    font-weight: bold !important;
+}
+
 .sidebar-filters li{
     padding: 0 !important;
 }
