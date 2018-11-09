@@ -5,13 +5,12 @@ var state = history.state || {
     'sort': 'metadata_modified desc'
 };
 
-var showMoreAt = 6;
-
 $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic']
+    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic'],
+    'filterSize': 5
 });
 
 function buildCatalogue(response) {
@@ -42,30 +41,30 @@ function buildCatalogue(response) {
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
-        var datasetMetadata =
-                '<div class="dataset row">' +
-                    '<div class="row">' +
-                        '<div class="col-md-12">' +
-                            '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="row">' +
-                        '<div class="col-md-9">' +
-                            '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
-                        '</div>' +
-                        '<div class="col-md-3 text-left attributes">' +
-                            '<div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) +
-                            '<div class="dataset-meta-label">Division</div>' + row['owner_division'] +
-                            '<div class="dataset-meta-label">Type</div>' + row['dataset_category'] +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="row">' +
-                        '<div class="col-md-12 formats-available">' +
-                        '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
-                    '</div>' +
-                '</div>';
 
-        $('.table-list').append(datasetMetadata);
+        $('.table-list').append(
+            '<div class="dataset row">' +
+                '<div class="row">' +
+                    '<div class="col-md-12">' +
+                        '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="col-md-9">' +
+                        '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
+                    '</div>' +
+                    '<div class="col-md-3 text-left attributes">' +
+                        '<div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) +
+                        '<div class="dataset-meta-label">Division</div>' + row['owner_division'] +
+                        '<div class="dataset-meta-label">Type</div>' + row['dataset_category'] +
+                    '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="col-md-12 formats-available">' +
+                    '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
+                '</div>' +
+            '</div>');
+
         if (row['formats'].length > 0) {
             $('.table-list attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' '));
         }
@@ -94,7 +93,9 @@ function buildCatalogue(response) {
                                                          '</li>');
             }
 
-            if (i == state['page']) $('.page-link[data-page=' + i + ']').parent('li').addClass('active');
+            if (i == state['page']) {
+                $('.page-link[data-page=' + i + ']').parent('li').addClass('active');
+            }
         }
 
         $('#nav-catalogue .page-remove a').on('click', function(evt) {
@@ -124,38 +125,39 @@ function buildSidebar(response) {
             return a['count'] - b['count'];
         });
 
+        var sidebarEle = $('#' + field['title'] + '-values'),
+            showMoreButton = sidebarEle.find('li.show-more');
+
         for (var i in sidebar) {
             var value = sidebar[i],
-                selected = state['filters'][field['title']],
-                checked = ' ',
-                labelChecked = ' '
-                closeIcon = ' ';
+                selected = state['filters'][field['title']];
 
-            if (selected != null && selected.indexOf(value['name']) !== -1) {
-                checked += 'checked="true" ';
-                labelChecked += 'class="checkbox-checked" '
-                closeIcon += '<span class="float-right"><i class="fa fa-times"></i></span>';
-            }
-
-            $('#' + field['title'] + '-values').prepend(
+            sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
-                  '<label' + labelChecked + '>' +
-                    '<span><input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + value['name'] + '</span>' +
-                    '<span class="badge float-right">' + value['count'] + '</span>' + closeIcon +
+                  '<label>' +
+                    '<span><input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + value['name'] + '</span>' +
+                    '<span class="badge float-right">' + value['count'] + '</span>' +
                   '</label>' +
                 '</li>');
+
+            if (selected != null && selected.indexOf(value['name']) !== -1) {
+                $('input[value="' + value['name'] + '"]').prop('checked', true);
+                $('input[value="' + value['name'] + '"]').closest('label').addClass('checkbox-checked').append('<span class="float-right"><i class="fa fa-times"></i></span>');
+            }
         }
-        var valuesLength = $('#' + field['title'] + '-values li').length ;
-        if (valuesLength > showMoreAt){
-            $('#' + field['title'] + '-values li.filter-value:nth-child(n+' + showMoreAt +')').toggleClass('sr-only');
-            $('#' + field['title'] + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
-            $('#' + field['title'] + '-values li.show-more').show();
+
+        var numFilters = sidebarEle.find('li').length;
+        if (numFilters >= config['filterSize']){
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize'] + 1) + ')').toggleClass('sr-only');
+            showMoreButton.find('label').html('[+] ' + (numFilters - 5) + ' more');
+            showMoreButton.show();
         } else {
-            $('#' + field['title'] + '-values li.show-more').hide();
+            showMoreButton.hide();
         }
     }
 
 
+    $('#sort-results-by').val(state['sort']);
     if (state['filters']['search'] != null) {
         $('#input-search').val(state['filters']['search']);
     }
@@ -198,32 +200,30 @@ var buildStaticUI = function() {
     });
 
     $('#sort-results-by').on('change', function() {
+        state['sort'] = $(this).val();
+
         state['page'] = 0;
         loadCatalogue();
     });
 
-    $('.show-more').hover(
-        function () {
-            $('#' + $(this).data("field") + '-values .show-more label').toggleClass("on-hover");
-        }, function () {
-            $('#' + $(this).data("field") + '-values .show-more label').toggleClass("on-hover");
-        });
-
-    $('.show-more').on('click', function(){
-        var name = $(this).data("field") ;
-        if ($('#' + name + '-values li').length > showMoreAt){
-            $('#' + name + '-values li.filter-value:nth-child(n+' + showMoreAt +')').toggleClass('sr-only');
-            var valuesLength = $('#' + name + '-values li').length ;
-            var hiddenValuesLength = $('#' + name + '-values li.sr-only').length ;
-            if(hiddenValuesLength === 0 ){
-                $('#' + name + '-values li.show-more label').html('[-] Show less');
-            } else {
-                $('#' + name + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
-            }
-            $('#' + name + '-values li.show-more').show();
-        } else {
-            $('#' + name + '-values li.show-more').hide();
-        }
+    $('.show-more').on('mouseenter mouseleave', function () {
+        $(this).find('label').toggleClass('on-hover');
+    }).on('click', function() {
+        // console.log($(this).)
+        // var name = $(this).data('field') ;
+        // if ($('#' + name + '-values li').length > showMoreAt){
+        //     $('#' + name + '-values li.filter-value:nth-child(n+' + showMoreAt +')').toggleClass('sr-only');
+        //     var valuesLength = $('#' + name + '-values li').length ;
+        //     var hiddenValuesLength = $('#' + name + '-values li.sr-only').length ;
+        //     if(hiddenValuesLength === 0 ){
+        //         $('#' + name + '-values li.show-more label').html('[-] Show less');
+        //     } else {
+        //         $('#' + name + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
+        //     }
+        //     $('#' + name + '-values li.show-more').show();
+        // } else {
+        //     $('#' + name + '-values li.show-more').hide();
+        // }
     });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
