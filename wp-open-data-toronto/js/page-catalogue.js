@@ -30,15 +30,17 @@ function buildCatalogue(response) {
                                 '</div>');
         return;
     } else {
+
         if (data['results'].length == 1) {
             var foundPhrase = ' dataset found ';
         } else {
             var foundPhrase = ' datasets found ';
-            if (typeof state['filters']['search'] === undefined || state['filters']['search'] == null || state['filters']['search'] === "") {
-                $('#results-count').html('<span>' + data["count"] + foundPhrase +'</span>');
-            } else {
-                $('#results-count').html('<span>' + data["count"] + foundPhrase +'for "' + state['filters']['search'] + '"</span>');
-            }
+        }
+
+        if (typeof state['filters']['search'] === undefined || state['filters']['search'] == null || state['filters']['search'] === "") {
+            $('#results-count').html('<span>' + data["count"] + foundPhrase + '</span>');
+        } else {
+            $('#results-count').html('<span>' + data["count"] + foundPhrase + 'for "' + state['filters']['search'] + '"</span>');
         }
     }
 
