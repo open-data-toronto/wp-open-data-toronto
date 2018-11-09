@@ -33,7 +33,7 @@
           <div class="row block-hidden">
               <!-- Sidebar -->
               <div class="col-md-3" id="filter-sidebar">
-                  <div class="sidebar-filters">
+                  <div class="dataset-sidebar">
                       <div class="card" id="dataset_category-filter">
                           <div class="card-header filter-heading">
                               <h5>Type</h5>
