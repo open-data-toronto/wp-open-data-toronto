@@ -30,18 +30,13 @@ function buildCatalogue(response) {
                                 '</div>');
         return;
     } else {
+        var foundPhrase = data['results'].length == 1 ? data['count'] + ' dataset found ' : data['count'] + ' datasets found ';
 
-        if (data['results'].length == 1) {
-            var foundPhrase = ' dataset found ';
-        } else {
-            var foundPhrase = ' datasets found ';
+        if (state['filters']['search'] != null && state['filters']['search'].length) {
+            foundPhrase += 'for "' + state['filters']['search'] + '"';
         }
 
-        if (typeof state['filters']['search'] === undefined || state['filters']['search'] == null || state['filters']['search'] === "") {
-            $('#results-count').html('<span>' + data["count"] + foundPhrase + '</span>');
-        } else {
-            $('#results-count').html('<span>' + data["count"] + foundPhrase + 'for "' + state['filters']['search'] + '"</span>');
-        }
+        $('#results-count').html('<span>' + foundPhrase + '</span>');
     }
 
     // Iterrates over each of the results and build the HTML for each of the dataset
@@ -59,25 +54,21 @@ function buildCatalogue(response) {
                             '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                         '</div>' +
                         '<div class="col-md-3 text-left attributes">' +
-                            '<div><div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) + '</div>' +
-                            '<div><div class="dataset-meta-label">Division</div>' + row['owner_division'] + '</div>' +
-                            '<div><div class="dataset-meta-label">Type</div>' + row['dataset_category'] + '</div>';
-
-        if (row['formats'].length > 0) {
-                datasetMetadata +=
-                            '<div><div class="dataset-meta-label">Formats</div>' + row['formats'].join(' ') + '</div>'
-        }
-
-        datasetMetadata +=
-            '</div>' +
+                            '<div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) +
+                            '<div class="dataset-meta-label">Division</div>' + row['owner_division'] +
+                            '<div class="dataset-meta-label">Type</div>' + row['dataset_category'] +
+                        '</div>' +
                     '</div>' +
                     '<div class="row">' +
                         '<div class="col-md-12 formats-available">' +
                         '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
                     '</div>' +
-                '</div>'
+                '</div>';
 
         $('.table-list').append(datasetMetadata);
+        if (row['formats'].length > 0) {
+            $('.table-list attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' '));
+        }
     }
 
     // Build the catalogue page navigation
