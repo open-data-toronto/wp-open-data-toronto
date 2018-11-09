@@ -1022,6 +1022,12 @@ text-shadow: none !important
     transform: translateY(-50%);
 }
 
+.show-more .on-hover{
+    color: #F5F5F5;
+    background: #666666;
+    border-radius: inherit !important;
+}
+
 .data-type-filter ul li {
     padding: 0;
     margin: 0;

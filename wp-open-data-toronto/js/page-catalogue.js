@@ -208,6 +208,13 @@ var buildStaticUI = function() {
         loadCatalogue();
     });
 
+    $('.show-more').hover(
+        function () {
+            $('#' + $(this).data("field") + '-values .show-more label').toggleClass("on-hover");
+        }, function () {
+            $('#' + $(this).data("field") + '-values .show-more label').toggleClass("on-hover");
+        });
+
     $('.show-more').on('click', function(){
         var name = $(this).data("field") ;
         if ($('#' + name + '-values li').length > showMoreAt){
