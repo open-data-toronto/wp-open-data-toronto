@@ -993,7 +993,9 @@ text-shadow: none !important
     padding: 0 !important;
 }
 
-
+.not-found {
+    padding: 1em;
+}
 
 .filter-value label .badge{
     background: #666666;
