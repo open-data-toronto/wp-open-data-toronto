@@ -52,7 +52,7 @@ function buildCatalogue(response) {
 
         if (row['formats'].length > 0) {
                 datasetMetadata += `
-                        <div><div class="dataset-meta-label">Format</div>` + row['formats'].join(' ') + `</div>`
+                        <div><div class="dataset-meta-label">Formats</div>` + row['formats'].join(' ') + `</div>`
         }
 
         datasetMetadata += `
