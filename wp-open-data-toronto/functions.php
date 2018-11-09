@@ -39,6 +39,8 @@ function theme_enqueue_scripts() {
         wp_enqueue_script( 'ckan_page', $script_path . str_replace('php', 'js', $page_name), array('ckan_base') );
     endif;
 
+    wp_register_script( 'popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' );
+
     wp_register_script( 'showdown', 'https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js' );
     wp_enqueue_script( 'showdown' );
 }
