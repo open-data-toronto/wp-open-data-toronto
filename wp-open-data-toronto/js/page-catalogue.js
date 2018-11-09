@@ -205,7 +205,7 @@ var buildStaticUI = function() {
             var valuesLength = $('#' + name + '-values li').length ;
             var hiddenValuesLength = $('#' + name + '-values li.sr-only').length ;
             if(hiddenValuesLength === 0 ){
-                $('#' + name + '-values li.show-more label').html('[-] Show Less');
+                $('#' + name + '-values li.show-more label').html('[-] Show less');
             } else {
                 $('#' + name + '-values li.show-more label').html('[+] ' + (valuesLength - 5) + ' more');
             }
