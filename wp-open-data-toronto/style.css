@@ -36,8 +36,6 @@ Version:         1.2.0
 /* Migration */
 header#masthead{background: 0;}ul.status{padding:0;margin:15px 0 25px 0;list-style:none}ul.status li{padding:0;margin:0;list-style:none}
 
-.card-filters {
-  padding: 5px !important;
 }
 
 .progress-circle {
