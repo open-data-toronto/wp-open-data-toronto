@@ -1,7 +1,8 @@
 var state = history.state || {
     'filters': {},
     'page': 0,
-    'size': 0
+    'size': 0,
+    'sort': 'metadata_modified desc'
 };
 
 var showMoreAt = 6;
@@ -19,11 +20,11 @@ function buildCatalogue(response) {
 
     var data = response['result'];
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
-    
+
     if (data['results'].length == 0) {
         $('.table-list').append('<div class="row">' +
                                   '<div class="col-md-12 not-found">' +
-                                    '<h2>No datasets found for "' + state['filters']['search'] + '"</h2>' + 
+                                    '<h2>No datasets found for "' + state['filters']['search'] + '"</h2>' +
                                     '<p>Please try again or <a href="#">request a dataset</a></p>' +
                                   '</div>' +
                                 '</div>');
@@ -44,7 +45,7 @@ function buildCatalogue(response) {
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
-        var datasetMetadata = 
+        var datasetMetadata =
                 '<div class="dataset row">' +
                     '<div class="row">' +
                         '<div class="col-md-12">' +
@@ -61,11 +62,11 @@ function buildCatalogue(response) {
                             '<div><div class="dataset-meta-label">Type</div>' + row['dataset_category'] + '</div>';
 
         if (row['formats'].length > 0) {
-                datasetMetadata += 
+                datasetMetadata +=
                             '<div><div class="dataset-meta-label">Formats</div>' + row['formats'].join(' ') + '</div>'
         }
 
-        datasetMetadata += 
+        datasetMetadata +=
             '</div>' +
                     '</div>' +
                     '<div class="row">' +
@@ -73,9 +74,9 @@ function buildCatalogue(response) {
                         '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
                     '</div>' +
                 '</div>'
-            
+
         $('.table-list').append(datasetMetadata);
-    }   
+    }
 
     // Build the catalogue page navigation
     // This needs to be built on every catalogue refresh because total number of pages changes based on searches and filters
@@ -117,7 +118,7 @@ function buildCatalogue(response) {
 function buildSidebar(response) {
     $('[data-type="filter"] .filter-value').remove();
 
-    var results = response['result'];    
+    var results = response['result'];
 
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
@@ -160,7 +161,7 @@ function buildSidebar(response) {
             $('#' + field['title'] + '-values li.show-more').hide();
         }
     }
-    
+
 
     if (state['filters']['search'] != null) {
         $('#input-search').val(state['filters']['search']);
@@ -282,7 +283,7 @@ function loadCatalogue() {
     getCKAN('catalogue_search', $.extend(true, {
         'type': 'full',
         'rows': config['datasetsPerPage'],
-        'sort': $('#sort-results-by').val(),
+        'sort': state['sort'],
         'start': state['page'] * config['datasetsPerPage']
     }, state['filters']), buildCatalogue);
 
