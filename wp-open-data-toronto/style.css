@@ -962,6 +962,9 @@ border: 1px solid #ddd;
 color:#222222 !important;
 text-shadow: none !important
 }
+/**
+START OF CARLOS CHANGES (I think)
+**/
 
 /**
 9. Catalogue Page Template
@@ -1028,6 +1031,11 @@ text-shadow: none !important
     background: #666666;
     border-radius: inherit !important;
 }
+
+
+/**
+END OF CARLOS CHANGES
+**/
 
 .data-type-filter ul li {
     padding: 0;
