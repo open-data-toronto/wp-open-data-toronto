@@ -21,10 +21,10 @@ function buildCatalogue(response) {
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
     if (data['results'].length == 0) {
+        $('#results-count').html('<span>No datasets found for "' + state['filters']['search'] + '"</span>');
         $('.table-list').append('<div class="row">' +
                                   '<div class="col-md-12 not-found">' +
-                                    '<h2>No datasets found for "' + state['filters']['search'] + '"</h2>' +
-                                    '<p>Please try again or <a href="#">request a dataset</a></p>' +
+                                    '<p>Please try again or <a href="mailto:opendata@toronto.ca">request a dataset</a></p>' +
                                   '</div>' +
                                 '</div>');
         return;
@@ -116,7 +116,7 @@ function buildSidebar(response) {
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
             sidebar = field['items'];
-
+        
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? 1 : -1;
@@ -161,6 +161,15 @@ function buildSidebar(response) {
                 $('input[value="' + value['name'] + '"]').closest('label').addClass('checkbox-checked').append('<span class="float-right"><i class="fa fa-times"></i></span>');
             }
         }
+
+        if (sidebar.length === 0){
+            $('#' + field['title'] + '-values').prepend(
+                '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
+                  '<label>' +
+                    '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h5').text().toLowerCase() + 's for this search' + '</span>' +
+                  '</label>' +
+                '</li>')
+        };
 
         var numFilters = sidebarEle.find('li').length;
         if (numFilters > config['filterSize']){
