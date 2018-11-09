@@ -113,7 +113,6 @@ function buildSidebar(response) {
     $('[data-type="filter"] .filter-value').remove();
 
     var results = response['result'];
-
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
             sidebar = field['items'];
@@ -130,15 +129,32 @@ function buildSidebar(response) {
 
         for (var i in sidebar) {
             var value = sidebar[i],
-                selected = state['filters'][field['title']];
+                selected = state['filters'][field['title']],
+                tokens = value['name'].split(' ');
+
+            while (tokens.join(' ').length > 30) {
+                tokens.pop();
+            }
+
+            var formattedName = tokens.join(' ').replace(/[^a-z\d]*$/gi, '');
+            if (formattedName != value['name']) {
+                formattedName += '<small> ...</small>';
+            }
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
-                  '<label>' +
-                    '<span><input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + value['name'] + '</span>' +
+                  '<label data-trigger="hover" data-placement="right" title="' + value['name'] + '">' +
+                    '<span>' +
+                      '<input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + formattedName +
+                    '</span>' +
                     '<span class="badge float-right">' + value['count'] + '</span>' +
                   '</label>' +
                 '</li>');
+
+            if (formattedName != value['name']) {
+                console.log(sidebarEle.find('label[title="' + value['name'] + '"]'))
+                sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
+            }
 
             if (selected != null && selected.indexOf(value['name']) !== -1) {
                 $('input[value="' + value['name'] + '"]').prop('checked', true);
@@ -161,6 +177,8 @@ function buildSidebar(response) {
     if (state['filters']['search'] != null) {
         $('#input-search').val(state['filters']['search']);
     }
+
+    $('[data-toggle="tooltip"]').tooltip();
 
     if (config['isInitializing']) buildStaticUI();
     buildDynamicUI();
