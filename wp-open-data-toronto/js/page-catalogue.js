@@ -145,7 +145,7 @@ function buildSidebar(response) {
 
             $('#' + field['title'] + '-values').prepend(
                 '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
-                  '<label + labelChecked + >' +
+                  '<label' + labelChecked + '>' +
                     '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + value['name'] +
                       '&nbsp;<span class="badge">' + value['count'] + '</span>' + closeIcon +
                   '</label>' +
