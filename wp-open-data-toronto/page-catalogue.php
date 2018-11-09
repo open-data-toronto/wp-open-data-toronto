@@ -31,7 +31,7 @@
           </div>
 
           <div class="row block-hidden">
-              <!-- Begin Sidebar -->
+              <!-- Sidebar -->
               <div class="col-md-3" id="filter-sidebar">
                   <div class="sidebar-filters">
                       <div class="card" id="dataset_category-filter">
@@ -66,7 +66,7 @@
               <!-- End Sidebar -->
               <div class="col-md-9" id="data-catalogue">
                   <div class="container-fluid">
-                      <!-- Begin Dataset Search Area -->
+                      <!-- Dataset Search Area -->
                       <div class="row" id="dataset-search-box">
                           <div class="input-group" aria-label="Search the Open Data Catalogue">
                               <label for="search" class="sr-only">Search Dataset</label>
@@ -97,7 +97,7 @@
                       </div>
                       <!-- End Dataset Search Area -->
 
-                      <!-- List of Datasets -->
+                      <!-- Datasets -->
                       <div class="row table-list" aria-label="List of Datasets"></div>
                       <div class="row">
                           <nav id="nav-catalogue" aria-label="Page Navigation">
