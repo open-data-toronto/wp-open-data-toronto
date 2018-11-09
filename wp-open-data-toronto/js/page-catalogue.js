@@ -21,12 +21,12 @@ function buildCatalogue(response) {
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
     
     if (data['results'].length == 0) {
-        $('.table-list').append(`<div class="row">
-                                  <div class="col-md-12 not-found">
-                                    <h2>No datasets found for "` + state['filters']['search'] + `"</h2>` + `
-                                    <p>Please try again or <a href="#">request a dataset</a></p>
-                                  </div>
-                                </div>`);
+        $('.table-list').append('<div class="row">' +
+                                  '<div class="col-md-12 not-found">' +
+                                    '<h2>No datasets found for "' + state['filters']['search'] + '"</h2>' + 
+                                    '<p>Please try again or <a href="#">request a dataset</a></p>' +
+                                  '</div>' +
+                                '</div>');
         return;
     } else {
         if (data['results'].length == 1) {
@@ -34,9 +34,9 @@ function buildCatalogue(response) {
         } else {
             var foundPhrase = ' datasets found ';
             if (typeof state['filters']['search'] === undefined || state['filters']['search'] == null || state['filters']['search'] === "") {
-                $('#results-count').html(`<span>` + data["count"] + foundPhrase +`</span>`);
+                $('#results-count').html('<span>' + data["count"] + foundPhrase +'</span>');
             } else {
-                $('#results-count').html(`<span>` + data["count"] + foundPhrase +`for "` + state['filters']['search'] + `"</span>`);
+                $('#results-count').html('<span>' + data["count"] + foundPhrase +'for "' + state['filters']['search'] + '"</span>');
             }
         }
     }
@@ -44,35 +44,35 @@ function buildCatalogue(response) {
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
-        var datasetMetadata = `
-            <div class="dataset row">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2><a href="/package/` + row['name'] + `">` + row['title'] + `</a></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-9">
-                        <p class="dataset-excerpt"> `+ row['excerpt'] + `</p>
-                    </div>
-                    <div class="col-md-3 text-left attributes">
-                        <div><div class="dataset-meta-label">Last Updated</div>` + getFullDate(row['metadata_modified'].split('-')) + `</div>
-                        <div><div class="dataset-meta-label">Division</div>` + row['owner_division'] + `</div>
-                        <div><div class="dataset-meta-label">Type</div>` + row['dataset_category'] + `</div>`
+        var datasetMetadata = 
+                '<div class="dataset row">' +
+                    '<div class="row">' +
+                        '<div class="col-md-12">' +
+                            '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="row">' +
+                        '<div class="col-md-9">' +
+                            '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
+                        '</div>' +
+                        '<div class="col-md-3 text-left attributes">' +
+                            '<div><div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) + '</div>' +
+                            '<div><div class="dataset-meta-label">Division</div>' + row['owner_division'] + '</div>' +
+                            '<div><div class="dataset-meta-label">Type</div>' + row['dataset_category'] + '</div>';
 
         if (row['formats'].length > 0) {
-                datasetMetadata += `
-                        <div><div class="dataset-meta-label">Formats</div>` + row['formats'].join(' ') + `</div>`
+                datasetMetadata += 
+                            '<div><div class="dataset-meta-label">Formats</div>' + row['formats'].join(' ') + '</div>'
         }
 
-        datasetMetadata += `
-        </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 formats-available">
-                    <h3 class="sr-only">Category available for: `  + row['title'] + `</h3><span class="badge badge-secondary">` + row['topic'] + `</span>
-                </div>
-            </div>`
+        datasetMetadata += 
+            '</div>' +
+                    '</div>' +
+                    '<div class="row">' +
+                        '<div class="col-md-12 formats-available">' +
+                        '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
+                    '</div>' +
+                '</div>'
             
         $('.table-list').append(datasetMetadata);
     }   
@@ -87,17 +87,17 @@ function buildCatalogue(response) {
             var pageNumber = i + 1 + '';
 
             if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
-                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove">
-                                                           <a class="page-link" href="#" aria-label="Go to page`  + pageNumber + `" data-page=` + i + `>` +
+                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
+                                                           '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page= '+ i + '>' +
                                                               pageNumber +
-                                                           `</a>
-                                                         </li>`);
+                                                           '</a>' +
+                                                         '</li>');
             } else if (Math.abs(state['page'] - i) == 3) {
-                $('#nav-catalogue li:last-child').before(`<li class="page-item page-remove disabled">
-                                                           <a class="page-link" href="#" aria-label="...">
-                                                              ...
-                                                           </a>
-                                                         </li>`);
+                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove disabled">' +
+                                                           '<a class="page-link" href="#" aria-label="...">' +
+                                                              '...' +
+                                                           '</a>' +
+                                                         '</li>');
             }
 
             if (i == state['page']) $('.page-link[data-page=' + i + ']').parent('li').addClass('active');
@@ -144,12 +144,12 @@ function buildSidebar(response) {
             }
 
             $('#' + field['title'] + '-values').prepend(
-                `<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">
-                  <label` + labelChecked + `>
-                    <input type="checkbox"` + checked + `data-field="` + field['title'] + `" value="` + value['name'] + `">` + value['name'] +
-                      `&nbsp;<span class="badge">` + value['count'] + `</span>` + closeIcon + `
-                  </label>
-                </li>`);
+                '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
+                  '<label + labelChecked + >' +
+                    '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + value['name'] +
+                      '&nbsp;<span class="badge">' + value['count'] + '</span>' + closeIcon +
+                  '</label>' +
+                '</li>');
         }
         var valuesLength = $('#' + field['title'] + '-values li').length ;
         if (valuesLength > showMoreAt){
@@ -243,13 +243,13 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $(`[data-type="filter"] input`).on('click', function() {
+    $('[data-type="filter"] input').on('click', function() {
         $(this).parent('label').toggleClass('checkbox-checked');
 
         var field = $(this).data('field');
         state['filters'][field] = [];
 
-        $.each($(`[data-field="` + field + `"]:checked`), function(idx, element) {
+        $.each($('[data-field="' + field + '"]:checked'), function(idx, element) {
             state['filters'][field].push($(element).val());
         });
 
