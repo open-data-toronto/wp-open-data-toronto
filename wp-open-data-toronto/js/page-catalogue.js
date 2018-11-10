@@ -43,7 +43,7 @@ function buildCatalogue(response) {
         var row = data['results'][i];
 
         $('.table-list').append(
-            '<div class="dataset row">' +
+            '<div class="dataset row" id ="' + row['id'] + '">' +
                 '<div class="row">' +
                     '<div class="col-md-12">' +
                         '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
@@ -66,7 +66,7 @@ function buildCatalogue(response) {
             '</div>');
 
         if (row['formats'].length > 0) {
-            $('.table-list attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' '));
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' '));
         }
     }
 
