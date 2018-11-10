@@ -335,7 +335,6 @@ ul.pagination li{
   margin: 0;
 }
 ul.pagination li a{
-    background: #f4f4f4;
     font-size: 16px !important;
     line-height: 20px;
 }
@@ -344,14 +343,14 @@ ul.pagination a:visited{
   font-weight: 500;
   font-family: 'Roboto';
   color: #175787;
-  height: 30px
 }
+
 ul.pagination a:hover{
   font-weight: 500;
   font-family: 'Roboto';
   color: #fff;
   background: #175787;
-  border: 1px solid #175787
+  border: 1px solid #175787;
 }
 
 a.navbar-brand {
@@ -474,11 +473,9 @@ button.btn{
     border: 0;
     background: #0e626b;
     color: #fff;
-    border-radius: 0;
     font-weight: bold;
 }
 .btn{
-    border-radius: 0px;
 }
 a.btn.btn-md {
     color: #ffffff;
