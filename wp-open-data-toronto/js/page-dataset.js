@@ -35,7 +35,7 @@ function buildDownloads() {
 
         var resource = config['package']['resources'][i],
             link = config['ckanURL'] + '/download_resource/' + resource['id'],
-            btnText = resource['format'].toLowerCase() == 'html' ? '<span class="fa fa-desktop"></span>' : '<span class="fa fa-download"></span>';
+            btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
 
         if (resource['datastore_active']) {
             resource['format'] = '<select class="select-download-formats">' +
