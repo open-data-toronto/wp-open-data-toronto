@@ -116,7 +116,7 @@ function buildSidebar(response) {
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
             sidebar = field['items'];
-        
+
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? 1 : -1;
@@ -152,7 +152,6 @@ function buildSidebar(response) {
                 '</li>');
 
             if (formattedName != value['name']) {
-                console.log(sidebarEle.find('label[title="' + value['name'] + '"]'))
                 sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
             }
 
