@@ -344,7 +344,6 @@ ul.pagination a:visited{
   font-weight: 500;
   font-family: 'Roboto';
   color: #175787;
-  border-radius: 0;
   height: 30px
 }
 ul.pagination a:hover{
