@@ -10,7 +10,7 @@ $.extend(config, {
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
     'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic'],
-    'filterSize': 6                                                             // Number of filters shown plus 1 (+1 due to the show more/less li)
+    'filterSize': 5                                                             // Number of filters shown plus 1 (+1 due to the show more/less li)
 });
 
 function buildCatalogue(response) {
@@ -170,7 +170,7 @@ function buildSidebar(response) {
                 '</li>')
         };
 
-        var numFilters = sidebarEle.find('li').length;
+        var numFilters = sidebarEle.find('li').length - 1;                      // Subtract 1 due to the show more/less button
         if (numFilters > config['filterSize']){
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
             showMoreButton.find('label').html('[+] ' + (numFilters - config['filterSize']) + ' more');
