@@ -10,7 +10,6 @@
           </div>
           <div class="row">
             <div class="col-md-6 offset-md-3">
-                <!-- Start Dataset Search TO DO MAKE THIS WORK-->
               <div class="dataset-filter" id="search-dataset" aria-label="Search the Open Data Catalogue">
                 <div class="input-group">
                   <label for="search" class="sr-only">Search Dataset</label>

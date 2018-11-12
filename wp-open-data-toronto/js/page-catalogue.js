@@ -1,28 +1,16 @@
-var $ = jQuery.noConflict(),
-    state = history.state || {
-        'filters': {},
-        'search': [],
-        'page': 0,
-        'size': 0
-    };
+var state = history.state || {
+    'filters': {},
+    'page': 0,
+    'size': 0,
+    'sort': 'metadata_modified desc'
+};
 
 $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,                                                        // Total number of pages within the catalogue
     'datasetsPerPage': 10,                                                      // Number of datasets to display per page
-    'filters': {
-        'checkboxes': ['dataset_category', 'resource_formats'],
-        'dropdowns': ['owner_division', 'tags'],
-        'filters': ['dataset_category', 'owner_division', 'resource_formats', 'tags']
-    },
-    'select2': {
-        'language': {
-            'noResults': function() {
-                return 'Start typing search term...';
-            }
-        },
-        'width': '100%'
-    }
+    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic'],
+    'filterSize': 5                                                             // Number of filters shown plus 1 (+1 due to the show more/less li)
 });
 
 function buildCatalogue(response) {
@@ -33,58 +21,53 @@ function buildCatalogue(response) {
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
     if (data['results'].length == 0) {
+        $('#results-count').html('<span>No datasets found for "' + state['filters']['search'] + '"</span>');
         $('.table-list').append('<div class="row">' +
-                                  '<div class="col-md-12">' +
-                                    '<h2>No datasets found </h2>' +
+                                  '<div class="col-md-12 not-found">' +
+                                    '<p>Please try again or <a href="mailto:opendata@toronto.ca">request a dataset</a></p>' +
                                   '</div>' +
                                 '</div>');
         return;
-    }
+    } else {
+        var foundPhrase = data['results'].length == 1 ? data['count'] + ' dataset found ' : data['count'] + ' datasets found ';
 
-    var iconClassMap = {
-        'Document': 'fa-newspaper-o',
-        'Map': 'fa-map-o',
-        'Table': 'fa-area-chart',
-        'Website': 'fa-desktop'
+        if (state['filters']['search'] != null && state['filters']['search'].length) {
+            foundPhrase += 'for "' + state['filters']['search'] + '"';
+        }
+
+        $('#results-count').html('<span>' + foundPhrase + '</span>');
     }
 
     // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
 
-        // Build the format tags
-        var formats = row['resource_formats'].split(' '),
-            formatEle = '';
+        $('.table-list').append(
+            '<div class="dataset row" id ="' + row['id'] + '">' +
+                '<div class="row">' +
+                    '<div class="col-md-12">' +
+                        '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="col-md-9">' +
+                        '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
+                    '</div>' +
+                    '<div class="col-md-3 text-left attributes">' +
+                        '<div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) +
+                        '<div class="dataset-meta-label">Division</div>' + row['owner_division'] +
+                        '<div class="dataset-meta-label">Type</div>' + row['dataset_category'] +
+                    '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="col-md-12 formats-available">' +
+                    '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
+                '</div>' +
+            '</div>');
 
-        for (var j = 0; j < formats.length; j++) {
-            formatEle += '<li class=' + formats[j].toLowerCase() + '>' + formats[j] + '</li>';
+        if (row['formats'].length > 0) {
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' '));
         }
-
-        // Build the dataset card with field values
-        var ele = '<div class="row">' +
-                    '<div class="col-md-8">' +
-                      '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
-                      row['excerpt'] +
-                      '<div class="formats-available">' +
-                        '<h3 class="sr-only">Formats Available for ' + row['title'] + '</h3>' +
-                        '<ul class="tag-list">' + formatEle + '</ul>' +
-                      '</div>' +
-                    '</div>' +
-                    '<div class="col-md-4 text-right attributes">' +
-                      '<p>' +
-                        '<span class="sr-only">Last Updated: </span>' +
-                        getFullDate(row['metadata_modified'].split('-')) + '&nbsp; ' +
-                        '<span class="fa fa-clock-o" aria-hidden="true"></span>' +
-                      '</p>' +
-                      '<p>' +
-                        '<span class="sr-only">Data Type: </span>' +
-                        row['dataset_category'] + '&nbsp; ' +
-                        '<span class="fa ' + iconClassMap[row['dataset_category']] + '" aria-hidden="true"></span>' +
-                      '</p>' +
-                    '</div>' +
-                  '</div>';
-
-        $('.table-list').append(ele);
     }
 
     // Build the catalogue page navigation
@@ -94,12 +77,11 @@ function buildCatalogue(response) {
 
         // Build the page buttons
         for (var i = 0; i < state['size']; i++) {
-            var pageNumber = i + 1 + '',
-                additionalClass = i == state['page'] ? ' active' : '';
+            var pageNumber = i + 1 + '';
 
             if (i == 0 || i == (state['size'] - 1) || Math.abs(state['page'] - i) <= 2) {
-                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove' +  additionalClass + '">' +
-                                                           '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page=' + i + '>' +
+                $('#nav-catalogue li:last-child').before('<li class="page-item page-remove">' +
+                                                           '<a class="page-link" href="#" aria-label="Go to page ' + pageNumber + '" data-page= '+ i + '>' +
                                                               pageNumber +
                                                            '</a>' +
                                                          '</li>');
@@ -110,11 +92,13 @@ function buildCatalogue(response) {
                                                            '</a>' +
                                                          '</li>');
             }
+
+            if (i == state['page']) {
+                $('.page-link[data-page=' + i + ']').parent('li').addClass('active');
+            }
         }
 
         $('#nav-catalogue .page-remove a').on('click', function(evt) {
-            evt.preventDefault();
-
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
@@ -125,90 +109,84 @@ function buildCatalogue(response) {
     }
 }
 
-function buildCatalogueSidebar(response) {
-    $('[data-type="filter"]').empty();
+function buildSidebar(response) {
+    $('[data-type="filter"] .filter-value').remove();
 
-    var results = response['result'],
-        data = {};
-
+    var results = response['result'];
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
-            sidebar = {};
+            sidebar = field['items'];
 
-        for (var j in field['items']) {
-            var item = field['items'][j];
-
-            if (['resource_formats'].indexOf(field['title']) !== -1) {
-                var splits = item['name'].split(' ');
-
-                for (var k in splits) {
-                    if (sidebar[splits[k]] === undefined) {
-                        sidebar[splits[k]] = {
-                            'count': item['count'],
-                            'name': splits[k]
-                        };
-                    } else {
-                        sidebar[splits[k]]['count'] += item['count'];
-                    }
-                }
-            } else {
-                sidebar[item['name']] = {
-                    'count': item['count'],
-                    'name': item['name']
-                };
-            }
-        }
-
-        sidebar =  Object.keys(sidebar).map(function(x) { return sidebar[x] });
         sidebar.sort(function(a, b) {
             if (b['count'] == a['count']) {
-                return a['name'] < b['name'] ? -1 : 1;
+                return a['name'] < b['name'] ? 1 : -1;
             }
-            return b['count'] - a['count'];
+            return a['count'] - b['count'];
         });
+
+        var sidebarEle = $('#' + field['title'] + '-values'),
+            showMoreButton = sidebarEle.find('li.show-more');
 
         for (var i in sidebar) {
             var value = sidebar[i],
                 selected = state['filters'][field['title']],
-                checked = ' ',
-                labelChecked = ' ';
+                tokens = value['name'].split(' ');
 
-            if (config['filters']['dropdowns'].indexOf(field['title']) !== -1) {         // Select2 dropdowns filters
-                if (selected != null && selected.indexOf(value['name']) !== -1) {
-                    checked += 'selected="selected" ';
-                }
-
-                $('.filter-' + field['title'] + ' select').append(
-                    '<option' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' +
-                      value['name'] +
-                    '</option>');
-            } else if (config['filters']['checkboxes'].indexOf(field['title']) !== -1) { // Checkboxes filters
-                if (selected != null && selected.indexOf(value['name']) !== -1) {
-                    checked += 'checked="true" ';
-                    labelChecked += 'class="checkbox-checked" ';
-                }
-
-                $('.filter-' + field['title'] + ' ul').append(
-                    '<li class="checkbox checkbox-filter">' +
-                      '<label' + labelChecked + '>' +
-                        '<input type="checkbox"' + checked + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + '&nbsp;' + value['name'] +
-                          '&nbsp;<small>(' + value['count'] + ')</small>' +
-                      '</label>' +
-                    '</li>');
+            while (tokens.join(' ').length > 30) {
+                tokens.pop();
             }
+
+            var formattedName = tokens.join(' ').replace(/[^a-z\d]*$/gi, '');
+            if (formattedName != value['name']) {
+                formattedName += '<small> ...</small>';
+            }
+
+            sidebarEle.prepend(
+                '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
+                  '<label data-trigger="hover" data-placement="right" title="' + value['name'] + '">' +
+                    '<span>' +
+                      '<input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + formattedName +
+                    '</span>' +
+                    '<span class="badge float-right">' + value['count'] + '</span>' +
+                  '</label>' +
+                '</li>');
+
+            if (formattedName != value['name']) {
+                sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
+            }
+
+            if (selected != null && selected.indexOf(value['name']) !== -1) {
+                $('input[value="' + value['name'] + '"]').prop('checked', true);
+                $('input[value="' + value['name'] + '"]').closest('label').addClass('checkbox-checked').append('<span class="float-right"><i class="fa fa-times"></i></span>');
+            }
+        }
+
+        if (sidebar.length === 0){
+            $('#' + field['title'] + '-values').prepend(
+                '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
+                  '<label>' +
+                    '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h5').text().toLowerCase() + 's for this search' + '</span>' +
+                  '</label>' +
+                '</li>')
+        };
+
+        var numFilters = sidebarEle.find('li').length - 1;                      // Subtract 1 due to the show more/less button
+        if (numFilters > config['filterSize']){
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
+            showMoreButton.find('label').html('[+] ' + (numFilters - config['filterSize']) + ' more');
+            showMoreButton.show();
+        } else {
+            showMoreButton.hide();
         }
     }
 
-    if (state['search'].length > 0) {
-        for (var i in state['search']) {
-            var value = state['search'][i],
-                selectedValues = $('.filter-search select').val();
 
-            if (selectedValues == null || selectedValues.indexOf(value) == -1) {
-                $('.filter-search select').prepend('<option selected="selected" value="' + value + '">' + value + '</option>');
-            }
-        }
+    $('#sort-results-by').val(state['sort']);
+    if (state['filters']['search'] != null) {
+        $('#input-search').val(state['filters']['search']);
     }
+
+    $('[data-toggle="tooltip"]').tooltip();
 
     if (config['isInitializing']) buildStaticUI();
     buildDynamicUI();
@@ -229,33 +207,38 @@ var buildStaticUI = function() {
         loadCatalogue();
     });
 
-    $('#select-division, #select-tags').select2(config['select2']);
-    $('#select-search').select2($.extend({}, config['select2'], { 'tags': true }));
-
-    $('.select-select2').on('change.select2', function(evt) {
-        var value = $(this).val();
-
-        if ($(this).is('#select-search')) {
-            state['search'] = value || [];
-        } else {
-            state['filters'][$(this).data('field')] = value;
-        }
+    $('#btn-search').on('click', function() {
+        state['filters'] = {};
+        state['filters']['search'] = $('#input-search').val();
 
         state['page'] = 0;
         loadCatalogue();
-    }).on('select2:unselect', function(evt) {
-        $(this).empty();
     });
 
-    $('#btn-filter-clear').on('click', function() {
-        state = {
-            'filters': {},
-            'search': [],
-            'page': 0,
-            'size': 0
-        };
+    $('#input-search').on('keyup', function(evt) {
+        if (evt.keyCode == 13) {
+            state['filters'] = {};
+            state['filters']['search'] = $('#input-search').val();
 
+            state['page'] = 0;
+            loadCatalogue();
+        }
+    });
+
+    $('#sort-results-by').on('change', function() {
+        state['sort'] = $(this).val();
+
+        state['page'] = 0;
         loadCatalogue();
+    });
+
+    $('.show-more').on('mouseenter mouseleave', function () {
+        $(this).find('label').toggleClass('on-hover');
+    }).on('click', function() {
+        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('sr-only');
+
+        var labelText = $(this).siblings('li.sr-only').length ? '[+] ' + ($(this).siblings('li').length - config['filterSize']) + ' more' : '[-] Show less';
+        $(this).find('label').html(labelText);
     });
 
     config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
@@ -276,7 +259,7 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $('.checkbox-filter input').on('click', function() {
+    $('[data-type="filter"] input').on('click', function() {
         $(this).parent('label').toggleClass('checkbox-checked');
 
         var field = $(this).data('field');
@@ -292,109 +275,62 @@ function buildDynamicUI() {
 }
 
 function loadCatalogue() {
-    if (config['isInitializing']) parseParams();
+    if (config['isInitializing']) {
+        var params = window.location.search.slice(1).split('&');
+        for (var i in params) {
+            var filter = params[i].split('='),
+                content = decodeURIComponent(filter[1]);
 
-    var q = parseFilters();
-    var params = {
-        'q': q,
-        'rows': config['datasetsPerPage'],
-        'sort': 'name asc',
-        'start': state['page'] * config['datasetsPerPage']
-    }
-
-    var urlParam = [];
-    if (state['page'] != 0) {
-        urlParam.push('n=' + state['page'])
-    }
-
-    if (q.length > 0) {
-        urlParam.push('q=' + encodeURI(q));
-    }
-
-    if (state['search'].length > 0) {
-        urlParam.push('r=' + encodeURI(state['search'].join('+')));
-    }
-
-    loadCatalogueSidebar(q);
-    getCKAN('package_search', params, buildCatalogue);
-    history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
-}
-
-function loadCatalogueSidebar(query) {
-    var params = {
-        'q': query,
-        'rows': 0,
-        'facet': 'on',
-        'facet.limit': -1,
-        'facet.field': JSON.stringify(config['filters']['filters'])
-    }
-
-    getCKAN('package_search', params, buildCatalogueSidebar);
-}
-
-function parseFilters() {
-    var q = [];
-
-    for (var field in state['filters']) {
-        if (state['filters'][field] == null || !state['filters'][field].length) continue;
-
-        var filter = {};
-        if (config['filters']['checkboxes'].indexOf(field) !== -1) {            // Filter from checkboxes
-            var checks = [];
-            for (var idx in state['filters'][field]) {
-                checks.push('*' + state['filters'][field][idx] + '*');
+            if (filter[0] == 'n') {
+                state['page'] = parseInt(content);
+            } else if (filter[0] == 'sort') {
+                state['sort'] = content;
+            } else if (filter[0].length > 0) {
+                state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content : content.split('+');
             }
-
-            filter[field] = [field + ':(' + checks.join(' OR ') + ')'];
-        } else if (config['filters']['dropdowns'].indexOf(field) !== -1) {      // Filter for CKAN field
-            filter[field] = [];
-            $.each(state['filters'][field], function(idx, val) {
-                filter[field].push(field + ':"' + val + '"');
-            });
-        }
-
-        for (var name in filter) {
-            q.push('(' + filter[name].join(' OR ') + ')');
         }
     }
 
-    if (state['search'] != null && state['search'].length > 0) {
-        var tokens = [];
-        for (var i in state['search']) {
-            tokens = tokens.concat(state['search'][i].split(' '));
-        }
-        tokens = tokens.map(function(x) { return '*' + x + '*' }).join(' AND ');
+    getCKAN('catalogue_search', $.extend(true, {
+        'type': 'full',
+        'rows': config['datasetsPerPage'],
+        'sort': state['sort'],
+        'start': state['page'] * config['datasetsPerPage']
+    }, state['filters']), buildCatalogue);
 
-        q.push('(excerpt:(' + tokens + ')) OR (name:(' + tokens + '))');
-    }
+    getCKAN('catalogue_search', $.extend(true, {
+        'type': 'facet',
+        'rows': config['datasetsPerPage'],
+        'facet_field': config['filters']
+    }, state['filters']), buildSidebar);
 
-    return q.join(' AND ');
+    updateURL();
 }
 
-function parseParams() {
-    var redirectFilters = ['n', 'q', 'r'];
+function updateURL() {
+    var urlParam = [];
 
-    for (var i in redirectFilters) {
-        var value = getURLParam(redirectFilters[i]);
-        if (value == null) continue;
+    for (var i in state['filters']) {
+        if (state['filters'][i].length <= 0) continue;
 
-        switch (redirectFilters[i]) {
-            case 'n':
-                state['page'] = parseInt(value);
-                break;
-            case 'q':
-                value = value.split(' AND ').map(function(x) { return x.substring(1, x.length - 1).split(':'); });
-                $.each(value, function(idx, content) {
-                    if (config['filters']['filters'].indexOf(content[0]) !== -1) {
-                        state['filters'][content[0]] = content[1].replace(/[*/(/)""]/g, '').split(' OR ');
-                    }
-                });
-                break;
-            case 'r':
-                state['search'] = value.split('+');
-                break
+        var filter = state['filters'][i];
+
+        if (filter.constructor === Array) {
+            urlParam.push(i + '=' + encodeURIComponent(filter.join('+')));
+        } else if (typeof filter == 'string') {
+            urlParam.push(i + '=' + encodeURIComponent(filter));
         }
     }
+
+    if (state['page'] != 0) {
+        urlParam.push('n=' + state['page']);
+    }
+
+    if (state['sort'] != 'metadata_modified desc') {
+        urlParam.push('sort=' + state['sort']);
+    }
+
+    history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
 }
 
 function init() {

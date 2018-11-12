@@ -36,6 +36,14 @@ Version:         1.2.0
 /* Migration */
 header#masthead{background: 0;}ul.status{padding:0;margin:15px 0 25px 0;list-style:none}ul.status li{padding:0;margin:0;list-style:none}
 
+:root {
+    --brandPrimary: #1594a3;
+    --brandSecondary: #1534a3;
+    --brandAccent: #ABC249;
+    --brandLightGray: #F5F5F5;
+    --brandDarkGray: #212121;
+}
+
 .progress-circle {
   width: 150px;
   height: 150px;
@@ -294,43 +302,17 @@ a:link
                       border-left: 1px solid #ccc;
                     }
 
-/* Select.css Overrides */
-span.select2-selection.select2-selection--multiple {
-    border-radius: 0;
-    border-color: #cccccc !important;
-    box-shadow: 1px 1px 5px #ccc inset;
-}
-span.select2-dropdown.select2-dropdown--below {
-    border-radius: 0;
-    border: 1px solid #185688;
-}
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #185688 !important;
-    color: white;
-    font-weight: bold !important;
-}
-.filter.filter-division {
-    margin: 20px 0 20px 0;
-}
-
 /** Checkbox Styles **/
 .checkbox-filter input[type=checkbox] {
    position: absolute;
    top: -9999px;
    left: -9999px;
 }
-.checkbox-filter label:before {
-    width: 20px;
-    height: 30px;
-    content: '\25b6';
-    color: #cacaca;
-}
 .checkbox-filter label {
     color: #6d6d6d;
 }
 .checkbox-filter label:hover {
     color: #185688;
-    font-weight: bold;
 }
 .checkbox-filter label:hover::before{
     color: #185688;
@@ -353,7 +335,6 @@ ul.pagination li{
   margin: 0;
 }
 ul.pagination li a{
-    background: #f4f4f4;
     font-size: 16px !important;
     line-height: 20px;
 }
@@ -362,15 +343,14 @@ ul.pagination a:visited{
   font-weight: 500;
   font-family: 'Roboto';
   color: #175787;
-  border-radius: 0;
-  height: 30px
 }
+
 ul.pagination a:hover{
   font-weight: 500;
   font-family: 'Roboto';
   color: #fff;
   background: #175787;
-  border: 1px solid #175787
+  border: 1px solid #175787;
 }
 
 a.navbar-brand {
@@ -493,11 +473,9 @@ button.btn{
     border: 0;
     background: #0e626b;
     color: #fff;
-    border-radius: 0;
     font-weight: bold;
 }
 .btn{
-    border-radius: 0px;
 }
 a.btn.btn-md {
     color: #ffffff;
@@ -555,21 +533,21 @@ a.btn.btn-md {
     padding: 0;
     height: 20rem;
 }
-.card-header {
+/* .card-header {
     padding: 0;
     margin-bottom: 0;
     background: #fff;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-}
-.card{
+} */
+/* .card{
     border: 0;
     border-radius: none;
     }
 .card h4 a {
     display: block;
     padding: 15px;
-}
+} */
 .page-content .large.heading {
 font-size: 218px;
 text-align: center;
@@ -712,7 +690,7 @@ footer#footer{
     font-weight: lighter
 }
 #content h2{
-    margin: 0 0 22px 0;
+    /* margin: 0 0 22px 0; */
 }
 #about p {
     padding-top: 8px;
@@ -860,7 +838,7 @@ section#data-stories .jumbotron .heading{
 }
 .main-content ol li{
     list-style-type: decimal;
-    margin-left: 8px !imortant;
+    margin-left: 8px !important;
 }
 .main-content a {
     font-weight: bold;
@@ -980,15 +958,81 @@ border: 1px solid #ddd;
 color:#222222 !important;
 text-shadow: none !important
 }
+/**
+START OF CARLOS CHANGES (I think)
+**/
 
 /**
 9. Catalogue Page Template
 **/
-a.dataset-tags{
-    padding: 0;
-    margin: 0;
-    display: inline-block;
+.dataset-sidebar .card {
+    margin-bottom: 1.25rem;
 }
+
+.dataset-sidebar .filter-heading{
+    background: #f5f5f5;
+    padding: .75rem !important;
+    border-bottom: 0;
+}
+
+.dataset-sidebar .filter-heading h5{
+    font-weight: bold !important;
+}
+
+.dataset-sidebar li{
+    padding: 0 !important;
+}
+
+.dataset-sidebar label,
+.dataset-sidebar dl{
+    padding: .5rem .8rem;
+    margin: 0;
+    width: 100%;
+    font-size: .8rem !important;
+}
+
+.dataset-sidebar .show-more{
+    text-align: center;
+    background: #F5F5F5;
+}
+
+.filter-value .checkbox-checked{
+    background: #666666;
+    color: #F5F5F5 !important;
+}
+
+.checkbox-checked span.badge{
+    display: none;
+}
+
+.dataset-sidebar .show-more label{
+    padding: 0 !important;
+}
+
+.not-found {
+    padding: 1em;
+}
+
+.filter-value label .badge{
+    background: #666666;
+    position: absolute;
+    top: 50%;
+    margin: 0rem .8rem;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.show-more .on-hover{
+    color: #F5F5F5;
+    background: #666666;
+    border-radius: inherit !important;
+}
+
+
+/**
+END OF CARLOS CHANGES
+**/
+
 .data-type-filter ul li {
     padding: 0;
     margin: 0;
@@ -997,7 +1041,7 @@ a.dataset-tags{
     line-height: 22px;
 }
 .data-type-filter h2{
-margin-top: 40px;
+    margin-top: 40px;
 }
 a.dataset-tags:after{
     content: ', ';
@@ -1099,23 +1143,18 @@ table.border{
     background-size: cover;
     background-position: 50% 50%;
 }
-.table-list .row {
-    border: 1px solid #ccc;
-    background: #ffffff;
-    padding: 8px 12px;
-    margin:  -1px 0 0 0;
-    transition: all .2s ease-in-out;
+.table-list .dataset {
+    border-bottom: 1px solid #ccc;
+    padding:1em 0;
+    margin-right: 0;
+    margin-left: 0;
 }
-.table-list li:nth-child(even){
-    background: #f4f4f4;
-}
-.table-list li:hover{
-    transform: scale(1.02);
-    border: 1px solid #ccc;
-}
+
 .table-list{
     display: block;
-    margin: 12px 0;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 1em;
 }
 .table-list h2 a:visited,
 .table-list h2 a:link{
@@ -1129,13 +1168,7 @@ table.border{
 .table-list h2 a:hover{
     text-decoration: underline !important;
 }
-.table-list h2 {
-    padding: 12px 0 0 0;
-}
-.table-list li h3 {
-    font-size: 18px;
-    margin: 12px 0 12px 0;
-}
+
 .table-list a h3 {
     color: #155687;
     font-weight: 500;
@@ -1145,81 +1178,47 @@ table.border{
     line-height: 20px;
     padding: 10px 0
 }
-.attributes p {
+.attributes {
     font-size: 11px !important;
-    padding: 17px 0 0 0;
-    line-height: 12px;
-    margin-bottom: -6px;
 }
 .category-filter li, .format-filter li, .division-filter li{
     margin: 0;
     font-weight: 500;
     line-height: 23px;
 }
-.category-filter {margin-top: 22px;}
-ul.tag-list li {
-    border: 0;
-    display: inline-block;
-    font-size: 15px;
-    padding: 2px 7px;
-    margin: 0 3px 4px 0;
-    color: #ffffff;
+.category-filter {
+    margin-top: 22px;
+}
+.dataset.row .row{
+    width: 100% ;
+}
+
+.dataset-meta-label {
+    font-weight: bold !important ;
+    padding-top: 10px;
+}
+
+.dataset-info {
+    display: grid;
+}
+
+.badge-secondary {
+    color: #fff;
     background: #0e626b;
-    border-radius: 5px;
 }
-.table-list ul.tag-list li a:link,
-.table-list ul.tag-list li a:visited{
-    color: #ffffff;
+
+#dataset-search-results .info {
+    font-weight: bold;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
-ul.tag-list li:hover{
-    transform: none;
-    border: 0;
+
+#dataset-search-results .info.count{
+    margin-top: calc(.5rem - 1px * 2) ;
 }
-ul.tag-list li.autocad{
-    background-color: #1e617d;
-}
-ul.tag-list li.csv{
-    background-color: #1b6f3f;
-}
-ul.tag-list li.erdas-imagine{
-    background-color: #0c5688;
-}
-ul.tag-list li.esri-shapefile{
-    background-color: #025AA3;
-}
-ul.tag-list li.excel{
-    background-color: #34495e;
-}
-ul.tag-list li.geojson{
-    background-color: #a95f1d;
-}
-ul.tag-list li.google-spreadsheet{
-    background-color: #88170b;
-}
-ul.tag-list li.ivt{
-    background-color: #34495e;
-}
-ul.tag-list li.json{
-    background-color: #795332;
-}
-ul.tag-list li.multipatch{
-    background-color: #105a8a;
-}
-ul.tag-list li.sketchup{
-    background-color: #03632c;
-}
-ul.tag-list li.wgs84{
-    background-color: #035388;
-}
-ul.tag-list li.xml{
-    background-color: #9b59b6;
-}
-ul.tag-list li.pdf{
-    background-color: #222222;
-}
-.formats-available{
-    font-size: 10px;
-    margin: 12px 0;
+
+#dataset-search-box{
+    margin-bottom: 1.5em;
 }
 
 /**
@@ -1383,7 +1382,7 @@ ul.post-list li {
 .dataTables_scrollBody {
     border-right: 1px solid #ddd;
 }
-.card-header:first-child {
+/* .card-header:first-child {
     border-radius: 0;
 }
 .card-header h4 a{
@@ -1393,7 +1392,7 @@ ul.post-list li {
 .card-header h4 a.collapsed{
    background: #fff !important;
    color: #165788;
-}
+} */
 h4.card-title {
     font-size: 20px;
 }

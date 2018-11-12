@@ -28,29 +28,38 @@
       <section class="complete-post-list" aria-label="List of Datasets">
         <div class="row block-hidden">
           <!-- Dataset Sidebar -->
-          <div class="col-md-3">
+          <div class="col-md-3 dataset-sidebar">
             <div class="about-dataset">
-              <div class="row">
-                <div class="col-sm-12">
-                  <h2><span class="fa fa-database"></span>&nbsp; About this Dataset</h2>
-                  <dl>
-                    <dt>Last updated<span class="sr-only">: </span></dt>
-                    <dd data-field="metadata_modified"></dd>
-                    <dt>Published on<span class="sr-only">: </span></dt>
-                    <dd data-field="published_date"></dd>
-                    <dt>Refreshed<span class="sr-only">: </span></dt>
-                    <dd data-field="refresh_rate"></dd>
-                  </dl>
-                  <h2><span class="fa fa-table"></span>&nbsp; Data Attributes</h2>
-                  <dl>
-                    <dt>Data type<span class="sr-only">: </span></dt>
-                    <dd data-field="dataset_category"></dd>
-                    <dt>More information<span class="sr-only">: </span></dt>
-                    <dd data-field="information_url"></dd>
-                    <dt>Tags<span class="sr-only">: </span></dt>
-                    <dd data-field="tags"></dd>
-                  </dl>
-                  <h2><span class="fa fa-user"></span>&nbsp; Data Owner</h2>
+              <div class="card">
+                <div class="card-header filter-heading">
+                  <h5><i class="fa fa-database"></i>&nbsp; About this Dataset</h5>
+                </div>
+                <dl>
+                  <dt>Last updated<span class="sr-only">: </span></dt>
+                  <dd data-field="metadata_modified"></dd>
+                  <dt>Published on<span class="sr-only">: </span></dt>
+                  <dd data-field="published_date"></dd>
+                  <dt>Refreshed<span class="sr-only">: </span></dt>
+                  <dd data-field="refresh_rate"></dd>
+                </dl>
+              </div>
+              <div class="card">
+                <div class="card-header filter-heading">
+                  <h5><i class="fa fa-table"></i>&nbsp; Data Attributes</h5>
+                </div>
+                <dl>
+                  <dt>Data type<span class="sr-only">: </span></dt>
+                  <dd data-field="dataset_category"></dd>
+                  <dt>More information<span class="sr-only">: </span></dt>
+                  <dd data-field="information_url"></dd>
+                  <dt>Tags<span class="sr-only">: </span></dt>
+                  <dd data-field="tags"></dd>
+                </dl>
+              </div>
+              <div class="card">
+                <div class="card-header filter-heading">
+                  <h5><i class="fa fa-user"></i>&nbsp; Data Owner</h5>
+                </div>
                   <dl>
                     <dt>Owner type<span class="sr-only">: </span></dt>
                     <dd data-field="owner_type"></dd>
@@ -59,6 +68,7 @@
                     <dt>Contact<span class="sr-only">: </span></dt>
                     <dd data-field="owner_email"></dd>
                   </dl>
+                </div>
                   <!-- <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
                   <dl>
                     <dt>Pageviews<span class="sr-only">: </span></dt>
@@ -66,8 +76,6 @@
                     <dt>Downloads<span class="sr-only">: </span></dt>
                     <dd data-field="downloads"></dd>
                   </dl> -->
-                </div>
-              </div>
             </div>
           </div>
 
