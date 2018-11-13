@@ -239,12 +239,6 @@
                                 <dd data-field="id"></dd>
                               </dl>
                             </div>
-                            <div class="col-md-6">
-                              <dl>
-                                <dt>Revision ID</dt>
-                                <dd data-field="revision_id"></dd>
-                              </dl>
-                            </div>
                           </div>
                           <br/>
                           <p>See <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for full list of API endpoints.</p>
