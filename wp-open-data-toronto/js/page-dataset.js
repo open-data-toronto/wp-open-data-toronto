@@ -183,7 +183,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    $('.card-header:visible:first a').click();
+    $('#accordion .card-header:visible:first a').click();
 }
 
 function buildDataset(response) {
