@@ -46,11 +46,11 @@ function buildDownloads() {
         }
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
-                                             '<td>' + resource['format'] + '</td>' +
-                                             '<td>' + resource['name'] + '</td>' +
-                                             '<td>' +
+                                            '<td>' + resource['name'] + '</td>' +
+                                            '<td>' + resource['format'] + '</td>' +
+                                            '<td>' +
                                                '<a href="' + link + '">' + btnText +  ' <span class="sr-only">' + resource['name'] + '</span></a>' +
-                                             '</td>' +
+                                            '</td>' +
                                            '</tr>');
     }
 
@@ -183,7 +183,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    $('#accordion .card-header:visible:first a').click();
+    $('#dataset-accordion .card:first a').click();
 }
 
 function buildDataset(response) {
