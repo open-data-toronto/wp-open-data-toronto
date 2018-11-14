@@ -147,6 +147,16 @@ function buildPreview() {
                 body += '</tbody>';
 
                 $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
+                
+                $('#table-preview').DataTable({
+                    'paging': false,
+                    'searching': false,
+                    'ordering': false,
+                    'lengthChange': false,
+                    'info': false,
+                });
+
+                $('#content-preview .dataTables_wrapper div.row:last-of-type ').remove()
 
                 config['built']['preview'] = true;
             });
