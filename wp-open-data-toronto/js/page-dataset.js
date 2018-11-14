@@ -31,8 +31,6 @@ function buildDownloads() {
     if ($.isEmptyObject(config['package']) || config['built']['downloads']) return;
 
     for (var i in config['package']['resources']) {
-        if (config['package']['resources'][i]['file_type'] == 'Preview data') continue;
-
         var resource = config['package']['resources'][i],
             link = config['ckanURL'] + '/download_resource/' + resource['id'],
             btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
@@ -105,14 +103,18 @@ function buildFeatures() {
     if ($.isEmptyObject(config['package']) || config['built']['features']) return;
 
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'] }, function(response) {
-        var fields = response['result']['fields'],
-            row = '';
+        var fields = response['result']['fields'];
 
         for (var i in fields) {
-            row += '<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>';
+            $('#table-features tbody').append('<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>');
         }
 
-        $('#table-features tbody').append(row);
+        $('#table-features').DataTable({
+            'pagingType': 'numbers',
+            'searching': false
+        });
+        $('.dataTables_length').addClass('bs-select');
+
 
         config['built']['features'] = true;
     });
@@ -144,10 +146,12 @@ function buildPreview(evt) {
                 head += '</thead>';
                 body += '</tbody>';
 
-                $('#content-preview').append('<table class="table table-striped table-responsive">' + head + body + '</table>');
+                $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
 
                 config['built']['preview'] = true;
             });
+
+
             break;
         case 'Map':
             var preview = config['package']['preview_resource'];
