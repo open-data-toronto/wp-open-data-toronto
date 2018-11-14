@@ -345,7 +345,7 @@ ul.pagination a:visited{
   color: #175787;
 }
 
-ul.pagination a:hover{
+ul.pagination a:hover {
   font-weight: 500;
   font-family: 'Roboto';
   color: #fff;
@@ -969,16 +969,16 @@ START OF CARLOS CHANGES (I think)
     margin-bottom: 1.25rem;
 }
 
-.dataset-sidebar .filter-heading{
+.dataset-sidebar .filter-heading {
     background: #f5f5f5;
     padding: .75rem !important;
 }
 
-.dataset-sidebar .filter-heading h5{
+.dataset-sidebar .filter-heading h5 {
     font-weight: bold !important;
 }
 
-.dataset-sidebar li{
+.dataset-sidebar li {
     padding: 0 !important;
 }
 
@@ -987,28 +987,28 @@ START OF CARLOS CHANGES (I think)
 }
 
 .dataset-sidebar label,
-.dataset-sidebar dl{
+.dataset-sidebar dl {
     padding: .5rem .8rem;
     margin: 0;
     width: 100%;
     font-size: .8rem !important;
 }
 
-.dataset-sidebar .show-more{
+.dataset-sidebar .show-more {
     text-align: center;
     background: #F5F5F5;
 }
 
-.filter-value .checkbox-checked{
+.filter-value .checkbox-checked {
     background: #666666;
     color: #F5F5F5 !important;
 }
 
-.checkbox-checked span.badge{
+.checkbox-checked span.badge {
     display: none;
 }
 
-.dataset-sidebar .show-more label{
+.dataset-sidebar .show-more label {
     padding: 0 !important;
 }
 
@@ -1016,7 +1016,7 @@ START OF CARLOS CHANGES (I think)
     padding: 1em;
 }
 
-.filter-value label .badge{
+.filter-value label .badge {
     background: #666666;
     position: absolute;
     top: 50%;
@@ -1025,15 +1025,16 @@ START OF CARLOS CHANGES (I think)
     transform: translateY(-50%);
 }
 
-.show-more .on-hover{
+.show-more .on-hover {
     color: #F5F5F5;
     background: #666666;
     border-radius: inherit !important;
 }
+
 /* DATASET PAGE */
 
 #dataset-accordion .card {
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
     border-top: 0;
     border-radius: 0;
 }
@@ -1044,16 +1045,16 @@ START OF CARLOS CHANGES (I think)
     padding: 0;
 }
 
-#dataset-accordion .card:first-of-type{
+#dataset-accordion .card:first-of-type {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
-#dataset-accordion .card:last-of-type{
+#dataset-accordion .card:last-of-type {
     border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
 }
 
-#dataset-accordion .card-content{
+#dataset-accordion .card-content {
     padding: 0.5em;
 }
 
@@ -1067,12 +1068,12 @@ START OF CARLOS CHANGES (I think)
     background-color: #FFFFFF !important;
 }
 
-#dataset-accordion .card-header a:not(.collapse)  {
+#dataset-accordion .card-header a:not(.collapse) {
     color: #F5F5F5;
     background-color: #165788;
 }
 
-#dataset-accordion .card-header a.collapsed:hover  {
+#dataset-accordion .card-header a.collapsed:hover {
     color: #F5F5F5 !important;
     background-color: #165788 !important;
 }
@@ -1086,13 +1087,13 @@ START OF CARLOS CHANGES (I think)
     margin: 0;
 }
 
-#dataset-accordion #table-resources th:first, 
+#dataset-accordion #table-resources th:first,
 #dataset-accordion #table-resources td:nth-child(3n+1) {
     text-align: left !important;
 }
 
 #dataset-accordion #table-resources th:nth-child(n+2),
-#dataset-accordion #table-resources td:nth-child(3n+2), 
+#dataset-accordion #table-resources td:nth-child(3n+2),
 #dataset-accordion #table-resources td:nth-child(3n+3) {
     text-align: center !important;
 }
@@ -1105,7 +1106,7 @@ START OF CARLOS CHANGES (I think)
 
 
 #dataset-accordion .explore-line:visbile:nth-child(odd) {
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 #dataset-accordion .explore-column {
