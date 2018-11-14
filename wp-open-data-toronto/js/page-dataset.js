@@ -120,7 +120,7 @@ function buildFeatures() {
     });
 }
 
-function buildPreview(evt) {
+function buildPreview() {
     if ($.isEmptyObject(config['package']) || config['built']['preview']) return;
 
     switch (config['package']['dataset_category']) {
