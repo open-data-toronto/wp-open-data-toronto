@@ -98,11 +98,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <!-- Collapse Area -->
-                  <div id="accordion" role="tablist" aria-multiselectable="true">
+                  <div id="dataset-accordion" role="tablist" aria-multiselectable="true">
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-preview">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-preview" aria-expanded="true" aria-controls="collapse-preview">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-preview" aria-expanded="true" aria-controls="collapse-preview">
                             Preview Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -111,7 +111,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-preview" class="collapse" role="tabpanel" aria-labelledby="heading-preview">
+                      <div id="collapse-preview" class="collapse card-content" role="tabpanel" aria-labelledby="heading-preview">
                         <div class="row">
                           <div id="content-preview" class="col-md-12"></div>
                         </div>
@@ -121,7 +121,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-features">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-features" aria-expanded="true" aria-controls="collapse-download">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-features" aria-expanded="true" aria-controls="collapse-download">
                             Features of Dataset
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -130,7 +130,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-features" class="collapse" role="tabpanel" aria-labelledby="heading-features">
+                      <div id="collapse-features" class="collapse card-content" role="tabpanel" aria-labelledby="heading-features">
                         <div class="row">
                           <div class="col-md-12">
                             <table class="table table-striped" id="table-features">
@@ -151,7 +151,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-download">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-download" aria-expanded="true" aria-controls="collapse-download">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-download" aria-expanded="true" aria-controls="collapse-download">
                             Get Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -160,15 +160,15 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-download" class="collapse" role="tabpanel" aria-labelledby="heading-download">
+                      <div id="collapse-download" class="collapse card-content" role="tabpanel" aria-labelledby="heading-download">
                         <div class="row">
                           <div class="col-md-12">
                             <table class="table table-striped" id="table-resources">
                               <thead>
                                 <tr>
+                                  <th scope="col">File</th>
                                   <th scope="col">Format</th>
-                                  <th scope="col">File Name</th>
-                                  <th scope="col">Get Data</th>
+                                  <th scope="col">Data</th>
                                 </tr>
                               </thead>
                               <tbody></tbody>
@@ -181,7 +181,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-explore">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-explore" aria-expanded="false" aria-controls="collapse-explore">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-explore" aria-expanded="false" aria-controls="collapse-explore">
                             Explore Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -190,7 +190,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-explore" class="collapse" role="tabpanel" aria-labelledby="heading-explore">
+                      <div id="collapse-explore" class="collapse card-content" role="tabpanel" aria-labelledby="heading-explore">
                         <div class="row explore-line" id="explore-ckan">
                           <div class="col-md-3">
                             <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png">
@@ -200,7 +200,7 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-4">
-                            <a href="#" class="btn btn-md" id="redirect-ckan" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
+                          <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Open <span class="sr-only"> Visualization</span> in New Window</button></a>
                           </div>
                         </div>
                         <div class="row explore-line" id="explore-esri">
@@ -212,7 +212,7 @@
                             <p>Want to explore this geospatial data further? Try ArcGIS, where you could create and share maps like the one in "Preview Data" or combine it with other geospatial data!</p>
                           </div>
                           <div class="col-md-4">
-                            <a href="#" class="btn btn-md" id="redirect-esri" target="_blank">Open <span class="sr-only"> Visualization</span> in a New Window</a>
+                            <a href="#" id="redirect-esri"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-globe"></span>&nbsp;Open <span class="sr-only"> Visualization</span> in New Window</button></a>
                           </div>
                         </div>
                       </div>
@@ -221,7 +221,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-developers">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-developers" aria-expanded="false" aria-controls="collapse-developers">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-developers" aria-expanded="false" aria-controls="collapse-developers">
                             For Developers
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -230,19 +230,13 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-developers" class="collapse" role="tabpanel" aria-labelledby="heading-developers">
+                      <div id="collapse-developers" class="collapse card-content" role="tabpanel" aria-labelledby="heading-developers">
                         <div class="card-block">
                           <div class="row">
                             <div class="col-md-6">
                               <dl>
                                 <dt>Package ID</dt>
                                 <dd data-field="id"></dd>
-                              </dl>
-                            </div>
-                            <div class="col-md-6">
-                              <dl>
-                                <dt>Revision ID</dt>
-                                <dd data-field="revision_id"></dd>
                               </dl>
                             </div>
                           </div>

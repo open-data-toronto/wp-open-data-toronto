@@ -539,8 +539,8 @@ a.btn.btn-md {
     background: #fff;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-} */
-/* .card{
+}
+.card{
     border: 0;
     border-radius: none;
     }
@@ -1028,6 +1028,62 @@ START OF CARLOS CHANGES (I think)
     border-radius: inherit !important;
 }
 
+#dataset-accordion .card {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-top: 0;
+    border-radius: 0;
+}
+
+#dataset-accordion .card-header {
+    border-bottom: 0;
+    border-radius: inherit;
+    padding: 0;
+}
+
+#dataset-accordion .card:first-of-type{
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+#dataset-accordion .card:last-of-type{
+    border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
+}
+
+#dataset-accordion .card-content{
+    padding: 0.5em;
+}
+
+#dataset-accordion .card-header a {
+    display: block;
+    padding: .75rem 1.25rem;
+}
+
+#dataset-accordion .card-header a.collapsed {
+    color: #165788 !important;
+    background-color: #FFFFFF !important;
+}
+
+#dataset-accordion .card-header a:not(.collapse)  {
+    color: #F5F5F5;
+    background-color: #165788;
+}
+
+#dataset-accordion .card-header a.collapsed:hover  {
+    color: #F5F5F5 !important;
+    background-color: #165788 !important;
+}
+
+#collapse-preview.card-content{
+    padding: 0;
+}
+
+.explore-line{
+    /* border-bottom: 1px solid #F5F5F5; */
+    /* margin: 0px 15px 29px 15px; */
+}
+.explore-line:last-child{
+    /* border-bottom: 0; */
+}
 
 /**
 END OF CARLOS CHANGES
@@ -1593,13 +1649,6 @@ table.download-table {
 .alert{
     margin-bottom: 0 !important;
     border-radius: 0 !important;
-}
-.explore-line{
-    border-bottom: 1px solid #ddd;
-    margin: 0px 15px 29px 15px;
-}
-.explore-line:last-child{
-    border-bottom: 0;
 }
 
 /** Device Specific **/
