@@ -111,10 +111,10 @@ function buildFeatures() {
 
         $('#table-features').DataTable({
             'pagingType': 'numbers',
-            'searching': false
+            'searching': false,
+            'ordering': false,
+            'lengthChange': false
         });
-        $('.dataTables_length').addClass('bs-select');
-
 
         config['built']['features'] = true;
     });

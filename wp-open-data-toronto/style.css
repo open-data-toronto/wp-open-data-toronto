@@ -1076,7 +1076,8 @@ START OF CARLOS CHANGES (I think)
     background-color: #165788 !important;
 }
 
-#collapse-preview.card-content{
+#collapse-preview.card-content,
+#collapse-features.card-content {
     padding: 0;
 }
 
@@ -1088,6 +1089,38 @@ START OF CARLOS CHANGES (I think)
     /* border-bottom: 0; */
 }
 
+#dataset-accordion table {
+    margin: 0 !important;
+    font-size: 14px;
+}
+
+#dataset-accordion table th {
+    border-top: 0 !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+#dataset-accordion table th:first-of-type {
+    padding-left: 20px !important;
+}
+
+#dataset-accordion table th:last-of-type {
+    padding-right: 20px !important;
+}
+
+#dataset-accordion table td {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+#dataset-accordion td:nth-child(2n+1) {
+    padding-left: 20px !important;
+}
+
+#collapse-features .dataTables_wrapper div.row:last-of-type {
+    padding: 0 20px !important;
+    margin-bottom: 0.5em;
+}
 /**
 END OF CARLOS CHANGES
 **/
