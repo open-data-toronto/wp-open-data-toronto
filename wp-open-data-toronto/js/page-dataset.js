@@ -113,7 +113,7 @@ function buildFeatures() {
             'pagingType': 'numbers',
             'searching': false
         });
-        $('.dataTables_length').addClass('bs-select');
+        $('.dataTables_length').hide();
 
 
         config['built']['features'] = true;
