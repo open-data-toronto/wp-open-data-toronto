@@ -198,8 +198,8 @@
                             <h4 class="card-title">Visualize this data!</h4>
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
-                          <div class="col-md-4">
-                          <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
+                          <div class="col-md-4 explore-column">
+                            <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
                         <div class="row explore-line" id="explore-esri">
@@ -210,8 +210,8 @@
                             <h4 class="card-title">Visualize with advanced mapping features</h4>
                             <p>Want to explore this geospatial data further? Try ArcGIS, where you could create and share maps like the one in "Preview Data" or combine it with other geospatial data!</p>
                           </div>
-                          <div class="col-md-4">
-                            <a href="#" id="redirect-esri"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-globe"></span>&nbsp;Open <span class="sr-only"> Visualization</span> in New Window</button></a>
+                          <div class="col-md-4 explore-column">
+                            <a href="#" id="redirect-esri"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-map"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
                       </div>

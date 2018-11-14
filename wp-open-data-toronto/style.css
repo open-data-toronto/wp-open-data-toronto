@@ -1030,6 +1030,7 @@ START OF CARLOS CHANGES (I think)
     background: #666666;
     border-radius: inherit !important;
 }
+/* DATASET PAGE */
 
 #dataset-accordion .card {
     border-bottom: 1px solid rgba(0,0,0,.125);
@@ -1087,6 +1088,21 @@ START OF CARLOS CHANGES (I think)
 }
 .explore-line:last-child{
     /* border-bottom: 0; */
+#dataset-accordion .explore-line {
+    margin: 0 !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+
+#dataset-accordion .explore-line:visbile:nth-child(odd) {
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+#dataset-accordion .explore-column {
+    text-align: center !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
 }
 
 #dataset-accordion table {
