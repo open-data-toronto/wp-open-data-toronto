@@ -983,6 +983,10 @@ START OF CARLOS CHANGES (I think)
     padding: 0 !important;
 }
 
+.dataset-sidebar li:first {
+    border-top: 0 !important;
+}
+
 .dataset-sidebar label,
 .dataset-sidebar dl{
     padding: .5rem .8rem;
