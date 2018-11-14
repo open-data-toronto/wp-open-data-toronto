@@ -122,7 +122,7 @@
                       <div class="card-header" role="tab" id="heading-features">
                         <h4 class="mb-0">
                           <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-features" aria-expanded="true" aria-controls="collapse-download">
-                            Features of Dataset
+                            Dataset Features
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
@@ -137,7 +137,6 @@
                               <thead>
                                 <tr>
                                   <th scope="col">Column</th>
-                                  <th scope="col">Type</th>
                                   <th scope="col">Description</th>
                                 </tr>
                               </thead>
@@ -200,7 +199,7 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-4">
-                          <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Open <span class="sr-only"> Visualization</span> in New Window</button></a>
+                          <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
                         <div class="row explore-line" id="explore-esri">

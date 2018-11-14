@@ -106,7 +106,7 @@ function buildFeatures() {
         var fields = response['result']['fields'];
 
         for (var i in fields) {
-            $('#table-features tbody').append('<tr><td>' + fields[i]['id'] + '</td><td>' + fields[i]['type'] + '</td><td></td></tr>');
+            $('#table-features tbody').append('<tr><td>' + fields[i]['id'] + '</td><td></td></tr>');
         }
 
         $('#table-features').DataTable({
