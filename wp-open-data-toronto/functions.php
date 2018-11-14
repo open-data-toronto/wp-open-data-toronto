@@ -21,9 +21,7 @@ function query_custom_vars( $vars ) {
     return $vars;
 }
 add_filter('query_vars', 'query_custom_vars');
-// <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
-//
-// <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
 function theme_enqueue_styles() {
     wp_enqueue_style( 'datatable_style_bootstrap', 'https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css' );
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
