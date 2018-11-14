@@ -1082,12 +1082,21 @@ START OF CARLOS CHANGES (I think)
     padding: 0;
 }
 
-.explore-line{
-    /* border-bottom: 1px solid #F5F5F5; */
-    /* margin: 0px 15px 29px 15px; */
+#dataset-accordion #table-resources {
+    margin: 0;
 }
-.explore-line:last-child{
-    /* border-bottom: 0; */
+
+#dataset-accordion #table-resources th:first, 
+#dataset-accordion #table-resources td:nth-child(3n+1) {
+    text-align: left !important;
+}
+
+#dataset-accordion #table-resources th:nth-child(n+2),
+#dataset-accordion #table-resources td:nth-child(3n+2), 
+#dataset-accordion #table-resources td:nth-child(3n+3) {
+    text-align: center !important;
+}
+
 #dataset-accordion .explore-line {
     margin: 0 !important;
     padding-top: 1em !important;
