@@ -11,7 +11,7 @@ function buildDevelopers() {
                                '    dataType: "json",\n' +
                                '    type: "GET",\n' +
                                '    url: "' + config['ckanAPI'] + 'package_search",\n' +
-                               '    data: { "q": \'title:"' + config['package']['title'] + '"\' }\n' +
+                               '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
                                '}).done(function(response) {\n' +
                                '    console.log(response);\n' +
                                '});');
@@ -20,13 +20,13 @@ function buildDevelopers() {
                            'import json\n' +
                            '\n' +
                            'url = "' + config['ckanAPI'] + 'package_search"\n' +
-                           'response = requests.get(url, data={ "q": "title:\'' + config['package']['title'] + '\'" })\n' +
+                           'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
                            'results = json.loads(response.content)\n' +
                            'print(results)');
 
     $('#code-r').text(  'package(httr)\n' +
                         '\n' +
-                        'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("title"="' + config['package']['title'] + '"))\n' +
+                        'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
                         'content(r, "text")');
 
 
