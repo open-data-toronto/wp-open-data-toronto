@@ -1199,7 +1199,7 @@ START OF CARLOS CHANGES (I think)
 }
 
 #api-examples code td.hljs-ln-code {
-    padding-left: 0.5em !important;
+    padding: 0.2em 0.5em;
     white-space: pre-wrap;
 }
 
