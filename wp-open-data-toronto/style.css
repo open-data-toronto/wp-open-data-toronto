@@ -1167,6 +1167,7 @@ START OF CARLOS CHANGES (I think)
     text-align: center !important;
 }
 
+/* accordion card overrides: For Developers */
 #api-examples pre {
     background: #FFFFFF;
     border-left: 1px solid rgba(0, 0, 0, .125);
@@ -1203,6 +1204,9 @@ START OF CARLOS CHANGES (I think)
     white-space: pre-wrap;
 }
 
+#dataset-accordion #collapse-developers h5 {
+    padding-bottom: 1em;
+}
 
 /**
 END OF CARLOS CHANGES

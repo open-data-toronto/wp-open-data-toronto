@@ -233,6 +233,7 @@
                         <div class="card-block">
                           <div class="row">
                             <div class="col-md-12">
+                            <h5>Accessing data through an API</h5>
                               <dl>
                                 <dt>Package ID</dt>
                                 <dd data-field="id"></dd>
@@ -241,8 +242,6 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <h4>Accessing data via our API</h4>
-                              <p>See <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for full list of API endpoints.</p>
                               <ul class="nav nav-tabs" id="devTabs" role="tablist">
                                 <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
                                 <li class="nav-item"><a id="js-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
@@ -259,6 +258,7 @@
                                   <pre><code class="r" id="code-r"></code></pre>
                                 </div>
                               </div>
+                              <p>Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of API endpoints.</p>
                             </div>
                           </div>
                         </div>
