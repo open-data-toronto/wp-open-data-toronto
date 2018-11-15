@@ -165,7 +165,7 @@ function buildSidebar(response) {
 
         if (sidebar.length === 0){
             $('#' + field['title'] + '-values').prepend(
-                '<li class="list-group-item">' +
+                '<li class="list-group-item filter-value">' +
                   '<label>' +
                     '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h5').text().toLowerCase() + 's for this search' + '</span>' +
                   '</label>' +
