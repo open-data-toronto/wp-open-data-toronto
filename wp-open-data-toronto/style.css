@@ -1080,28 +1080,28 @@ START OF CARLOS CHANGES (I think)
     padding: 20px;
 }
 
-#dataset-accordion table {
+#dataset-accordion table:not(hljs-ln) {
     margin: 0 !important;
     font-size: 14px;
 }
 
-#dataset-accordion table th {
+#dataset-accordion table:not(.hljs-ln) th {
     border-top: 0 !important;
     padding-top: 4px !important;
     padding-bottom: 4px !important;
 }
 
-#dataset-accordion table th:first-of-type {
+#dataset-accordion table:not(.hljs-ln) th:first-of-type {
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
 
-#dataset-accordion table th:last-of-type {
+#dataset-accordion table:not(.hljs-ln) th:last-of-type {
     padding-right: 20px !important;
     padding-left: 20px !important;
 }
 
-#dataset-accordion table td {
+#dataset-accordion table:not(.hljs-ln) td {
     padding-top: 4px !important;
     padding-bottom: 4px !important;
 }
@@ -1118,7 +1118,7 @@ START OF CARLOS CHANGES (I think)
 }
 
 /*  accordion card overrides: Explore Data */
-#dataset-accordion .explore-line {
+#dataset-accordion .explore-line:visbile {
     margin: 0 !important;
     padding-top: 1em !important;
     padding-bottom: 1em !important;
@@ -1165,6 +1165,42 @@ START OF CARLOS CHANGES (I think)
 #dataset-accordion #table-resources td:nth-child(3n+2),
 #dataset-accordion #table-resources td:nth-child(3n+3) {
     text-align: center !important;
+}
+
+#api-examples pre {
+    background: #FFFFFF;
+    border-left: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-right: 1px solid rgba(0, 0, 0, .125);
+}
+
+#api-examples code {
+    background: #FFFFFF;
+    padding:0 ;
+}
+
+#api-examples code tr:nth-child(even) {
+    background: #F5F5F5;
+}
+
+#api-examples code td {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#api-examples code td.hljs-ln-numbers {
+    border-right: 2px solid rgba(0, 0, 0, .125);
+    padding-right: 0.5em !important;
+    vertical-align: top;
+}
+
+#api-examples code td.hljs-ln-code {
+    padding-left: 0.5em !important;
+    white-space: pre-wrap;
 }
 
 

@@ -24,6 +24,20 @@ function buildDevelopers() {
                            'results = json.loads(response.content)\n' +
                            'print(results)');
 
+    $('#code-r').text(  'package(httr)\n' +
+                        '\n' +
+                        'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("title"="' + config['package']['title'] + '"))\n' +
+                        'content(r, "text")');
+
+
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+
+    $('code.hljs').each(function(i, block) {
+        hljs.lineNumbersBlock(block);
+    });
+
     config['built']['developer'] = true;
 }
 

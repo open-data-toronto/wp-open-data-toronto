@@ -239,13 +239,28 @@
                               </dl>
                             </div>
                           </div>
-                          <br/>
-                          <p>See <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for full list of API endpoints.</p>
-                          <h4>Example: Javascript</h4>
-                          <div class="code" id='code-javascript'></div>
-                          <br/>
-                          <h4>Example: Python</h4>
-                          <div class="code" id='code-python'></div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h4>Accessing data via our API</h4>
+                              <p>See <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for full list of API endpoints.</p>
+                              <ul class="nav nav-tabs" id="devTabs" role="tablist">
+                                <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
+                                <li class="nav-item"><a id="js-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
+                                <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
+                              </ul>
+                              <div class="tab-content" id="api-examples">
+                                <div class="tab-pane fade show active" id="python" role="tabpanel" aria-labelledby="python-tab">
+                                  <pre><code class="python" id="code-python"></code></pre>
+                                </div>
+                                <div class="tab-pane fade" id="javascript" role="tabpanel" aria-labelledby="javascript-tab">
+                                  <pre><code class="javascript" id="code-javascript"></code></pre>
+                                </div>
+                                <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
+                                  <pre><code class="r" id="code-r"></code></pre>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
