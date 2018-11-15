@@ -1106,7 +1106,8 @@ START OF CARLOS CHANGES (I think)
     border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
-#dataset-accordion .explore-column {
+#dataset-accordion .explore-column,
+#dataset-accordion .explore-img {
     text-align: center !important;
     margin-top: auto !important;
     margin-bottom: auto !important;
