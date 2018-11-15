@@ -26,7 +26,7 @@ function buildCatalogue(response) {
                                   '<div class="col-md-12 not-found">' +
                                     '<p>Please try again or <a href="mailto:opendata@toronto.ca?' +
                                                                 'subject=Open Data Portal - Request for Data' +'&' +
-                                                                'body=Give us some context first, such as what do you need? How can we help?"</a>let us know what data you needed</p>' +
+                                                                'body=Give us some context first, such as what do you need? How can we help?"</a>let us know what data you need</p>' +
                                   '</div>' +
                                 '</div>');
         return;
