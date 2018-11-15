@@ -133,6 +133,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($) { init(); });
+    $("a, button").on('mouseup', function(){ this.blur() });
 </script>
 
 <?php get_footer();
