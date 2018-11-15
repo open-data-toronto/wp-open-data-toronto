@@ -191,7 +191,7 @@
 
                       <div id="collapse-explore" class="collapse card-content" role="tabpanel" aria-labelledby="heading-explore">
                         <div class="row explore-line" id="explore-ckan">
-                          <div class="col-md-3">
+                          <div class="col-md-3 explore-img">
                             <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png">
                           </div>
                           <div class="col-md-5">
@@ -203,7 +203,7 @@
                           </div>
                         </div>
                         <div class="row explore-line" id="explore-esri">
-                          <div class="col-md-3">
+                          <div class="col-md-3 explore-img">
                             <img src="https://i1.wp.com/geoawesomeness.com/wp-content/uploads/2016/09/Esri-logo.jpg?fit=754%2C754">
                           </div>
                           <div class="col-md-5">
