@@ -1080,6 +1080,10 @@ START OF CARLOS CHANGES (I think)
     padding: 0;
 }
 
+#collapse-developers.card-content {
+    padding: 20px;
+}
+
 #dataset-accordion #table-resources {
     margin: 0;
 }

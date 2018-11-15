@@ -232,7 +232,7 @@
                       <div id="collapse-developers" class="collapse card-content" role="tabpanel" aria-labelledby="heading-developers">
                         <div class="card-block">
                           <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                               <dl>
                                 <dt>Package ID</dt>
                                 <dd data-field="id"></dd>
