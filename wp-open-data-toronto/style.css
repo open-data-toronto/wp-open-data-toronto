@@ -1054,10 +1054,6 @@ START OF CARLOS CHANGES (I think)
     border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
 }
 
-#dataset-accordion .card-content {
-    padding: 0.5em;
-}
-
 #dataset-accordion .card-header a {
     display: block;
     padding: .75rem 1.25rem;
@@ -1079,6 +1075,7 @@ START OF CARLOS CHANGES (I think)
 }
 
 #collapse-preview.card-content,
+#collapse-download.card-content,
 #collapse-features.card-content {
     padding: 0;
 }
@@ -1146,7 +1143,12 @@ START OF CARLOS CHANGES (I think)
 #collapse-features .dataTables_wrapper div.row:last-of-type {
     padding: 0 20px !important;
     margin-bottom: 0.5em;
+
+#dataset-accordion #collapse-download td {
+    vertical-align: middle;
 }
+
+
 /**
 END OF CARLOS CHANGES
 **/

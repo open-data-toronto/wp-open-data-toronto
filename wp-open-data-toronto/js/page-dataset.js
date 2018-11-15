@@ -63,6 +63,16 @@ function buildDownloads() {
         window.open(link, '_blank');
     });
 
+    $('#table-resources').DataTable({
+        'paging': false,
+        'searching': false,
+        'ordering': false,
+        'lengthChange': false,
+        'info': false,
+    });
+    $('#collapse-download .dataTables_wrapper div.row:first').remove()
+    $('#collapse-download .dataTables_wrapper div.row:last-of-type').remove()
+
     config['built']['downloads'] = true;
 }
 
@@ -156,7 +166,8 @@ function buildPreview() {
                     'info': false,
                 });
 
-                $('#content-preview .dataTables_wrapper div.row:last-of-type ').remove()
+                $('#content-preview .dataTables_wrapper div.row:first').remove()
+                $('#content-preview .dataTables_wrapper div.row:last-of-type').remove()
 
                 config['built']['preview'] = true;
             });
