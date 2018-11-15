@@ -113,10 +113,16 @@ function buildFeatures() {
     if ($.isEmptyObject(config['package']) || config['built']['features']) return;
 
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'] }, function(response) {
-        var fields = response['result']['fields'];
+        var fields = response['result']['fields'],
+            fieldList = {};
 
         for (var i in fields) {
-            $('#table-features tbody').append('<tr><td>' + fields[i]['id'] + '</td><td></td></tr>');
+            fieldList[fields[i]['id']] = '<tr><td>' + fields[i]['id'] + '</td><td></td></tr>';
+        }
+
+        var ordered = Object.keys(fieldList).sort();
+        for (var f in ordered) {
+            $('#table-features tbody').append(fieldList[ordered[f]]);
         }
 
         $('#table-features').DataTable({
