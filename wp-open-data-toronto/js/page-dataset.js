@@ -125,6 +125,8 @@ function buildFeatures() {
             $('#table-features tbody').append(fieldList[ordered[f]]);
         }
 
+        config['built']['features'] = true;
+
         $('#table-features').DataTable({
             'pagingType': 'numbers',
             'searching': false,
@@ -132,7 +134,7 @@ function buildFeatures() {
             'lengthChange': false
         });
 
-        config['built']['features'] = true;
+        $('#collapse-features .dataTables_wrapper div.row:first').remove()
     });
 }
 
