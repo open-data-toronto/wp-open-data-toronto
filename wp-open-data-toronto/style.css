@@ -1032,7 +1032,6 @@ START OF CARLOS CHANGES (I think)
 }
 
 /* DATASET PAGE */
-
 #dataset-accordion .card {
     border-bottom: 1px solid rgba(0, 0, 0, .125);
     border-top: 0;
@@ -1045,6 +1044,7 @@ START OF CARLOS CHANGES (I think)
     padding: 0;
 }
 
+/* introduces rounded corners for the first and last cards (right angles clashed with the rest of the pattern for other cards and buttons) */
 #dataset-accordion .card:first-of-type {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
     border-top: 1px solid rgba(0, 0, 0, .125);
@@ -1059,6 +1059,7 @@ START OF CARLOS CHANGES (I think)
     padding: .75rem 1.25rem;
 }
 
+/* logic for hovering through card headers for expand/collapse */
 #dataset-accordion .card-header a.collapsed {
     color: #165788 !important;
     background-color: #FFFFFF !important;
@@ -1074,47 +1075,9 @@ START OF CARLOS CHANGES (I think)
     background-color: #165788 !important;
 }
 
-#collapse-preview.card-content,
-#collapse-download.card-content,
-#collapse-features.card-content {
-    padding: 0;
-}
-
-#collapse-developers.card-content {
+/* accordion cards: Defaults  */
+#dataset-accordion .card-content {
     padding: 20px;
-}
-
-#dataset-accordion #table-resources {
-    margin: 0;
-}
-
-#dataset-accordion #table-resources th:first,
-#dataset-accordion #table-resources td:nth-child(3n+1) {
-    text-align: left !important;
-}
-
-#dataset-accordion #table-resources th:nth-child(n+2),
-#dataset-accordion #table-resources td:nth-child(3n+2),
-#dataset-accordion #table-resources td:nth-child(3n+3) {
-    text-align: center !important;
-}
-
-#dataset-accordion .explore-line {
-    margin: 0 !important;
-    padding-top: 1em !important;
-    padding-bottom: 1em !important;
-}
-
-
-#dataset-accordion .explore-line:visbile:nth-child(odd) {
-    border-top: 1px solid rgba(0, 0, 0, .125);
-}
-
-#dataset-accordion .explore-column,
-#dataset-accordion .explore-img {
-    text-align: center !important;
-    margin-top: auto !important;
-    margin-bottom: auto !important;
 }
 
 #dataset-accordion table {
@@ -1130,10 +1093,12 @@ START OF CARLOS CHANGES (I think)
 
 #dataset-accordion table th:first-of-type {
     padding-left: 20px !important;
+    padding-right: 20px !important;
 }
 
 #dataset-accordion table th:last-of-type {
     padding-right: 20px !important;
+    padding-left: 20px !important;
 }
 
 #dataset-accordion table td {
@@ -1145,9 +1110,34 @@ START OF CARLOS CHANGES (I think)
     padding-left: 20px !important;
 }
 
+/*  accordion card overrides: General */
+#collapse-preview.card-content,
+#collapse-download.card-content,
+#collapse-features.card-content {
+    padding: 0;
+}
+
+/*  accordion card overrides: Explore Data */
+#dataset-accordion .explore-line {
+    margin: 0 !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+#dataset-accordion .explore-line:visbile:nth-child(odd) {
+    border-top: 1px solid rgba(0, 0, 0, .125);
+}
+
+#dataset-accordion .explore-column,
+#dataset-accordion .explore-img {
+    text-align: center !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+/* accordion card overrides: Dataset Features */
 #collapse-features .dataTables_wrapper div.row:last-of-type {
     padding: 0 20px !important;
-    font-size: 14px;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
 }
@@ -1156,8 +1146,24 @@ START OF CARLOS CHANGES (I think)
     border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
 
+/* accordion card overrides: Get Data */
 #dataset-accordion #collapse-download td {
     vertical-align: middle;
+}
+
+#dataset-accordion #table-resources {
+    margin: 0;
+}
+
+#dataset-accordion #table-resources th:first,
+#dataset-accordion #table-resources td:nth-child(3n+1) {
+    text-align: left !important;
+}
+
+#dataset-accordion #table-resources th:nth-child(n+2),
+#dataset-accordion #table-resources td:nth-child(3n+2),
+#dataset-accordion #table-resources td:nth-child(3n+3) {
+    text-align: center !important;
 }
 
 
