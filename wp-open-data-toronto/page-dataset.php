@@ -191,26 +191,26 @@
 
                       <div id="collapse-explore" class="collapse card-content" role="tabpanel" aria-labelledby="heading-explore">
                         <div class="row explore-line" id="explore-ckan">
-                          <div class="col-md-3 explore-img">
+                          <div class="col-md-2 explore-img">
                             <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png">
                           </div>
-                          <div class="col-md-5">
+                          <div class="col-md-7">
                             <h4 class="card-title">Visualize this data!</h4>
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
-                          <div class="col-md-4 explore-column">
+                          <div class="col-md-3 explore-column">
                             <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
                         <div class="row explore-line" id="explore-esri">
-                          <div class="col-md-3 explore-img">
+                          <div class="col-md-2 explore-img">
                             <img src="https://i1.wp.com/geoawesomeness.com/wp-content/uploads/2016/09/Esri-logo.jpg?fit=754%2C754">
                           </div>
-                          <div class="col-md-5">
+                          <div class="col-md-7">
                             <h4 class="card-title">Visualize with advanced mapping features</h4>
                             <p>Want to explore this geospatial data further? Try ArcGIS, where you could create and share maps like the one in "Preview Data" or combine it with other geospatial data!</p>
                           </div>
-                          <div class="col-md-4 explore-column">
+                          <div class="col-md-3 explore-column">
                             <a href="#" id="redirect-esri"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-map"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
