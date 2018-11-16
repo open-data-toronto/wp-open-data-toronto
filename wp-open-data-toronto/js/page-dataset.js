@@ -41,6 +41,17 @@ function buildDevelopers() {
     $('code.hljs').each(function(i, block) {
         hljs.lineNumbersBlock(block);
     });
+    
+
+    $('#code-copy').on('click', function () {
+        $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
+        $('#code-copy').popover({ placement: 'bottom',  animation: true, trigger: 'manual' }).popover('show');
+        setTimeout(function () {
+                $('#code-copy').popover('hide');
+            },
+            500
+        );
+    });
 
     config['built']['developer'] = true;
 }
@@ -302,4 +313,5 @@ function buildDataset(response) {
 function init(package_name) {
     $('.block-hidden').hide();
     getCKAN('package_show', { 'id': package_name }, buildDataset);
+    new ClipboardJS('#code-copy')
 }

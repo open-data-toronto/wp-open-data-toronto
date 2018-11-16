@@ -262,7 +262,7 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <button id="code-copy" class="btn btn-primary" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                              <button id="code-copy" class="btn btn-primary" data-toggle="popover" data-content="Copied" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                             </div>
                           </div>
                           <div class="row">
@@ -290,10 +290,6 @@
         var package_name = '<?php echo get_query_var( 'package' ) ?>';
         init(package_name);
         $("a, button").on('mouseup', function(){ this.blur() });
-        $('#code-copy').on('click', function(){
-          $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'))
-        });
-        var clipboard = new ClipboardJS(document.getElementById('code-copy'));
     });
 </script>
 
