@@ -244,7 +244,7 @@
                             <div class="col-md-12">
                               <ul class="nav nav-tabs" id="devTabs" role="tablist">
                                 <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
-                                <li class="nav-item"><a id="js-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
+                                <li class="nav-item"><a id="javascript-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
                                 <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
                               </ul>
                               <div class="tab-content" id="api-examples">
@@ -258,7 +258,17 @@
                                   <pre><code class="r" id="code-r"></code></pre>
                                 </div>
                               </div>
-                              <p>Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of API endpoints.</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <button id="code-copy" class="btn btn-primary" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <br>
+                            <p>Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of API endpoints.</p>
                             </div>
                           </div>
                         </div>
@@ -280,6 +290,10 @@
         var package_name = '<?php echo get_query_var( 'package' ) ?>';
         init(package_name);
         $("a, button").on('mouseup', function(){ this.blur() });
+        $('#code-copy').on('click', function(){
+          $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'))
+        });
+        var clipboard = new ClipboardJS(document.getElementById('code-copy'));
     });
 </script>
 

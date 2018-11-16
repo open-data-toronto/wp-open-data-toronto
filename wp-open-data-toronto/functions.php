@@ -57,6 +57,10 @@ function theme_enqueue_scripts() {
 
     wp_register_script( 'highlightjs_lines', 'https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.5.0/highlightjs-line-numbers.min.js' );
     wp_enqueue_script( 'highlightjs_lines' );
+
+    wp_register_script( 'copyjs', 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js' );
+    wp_enqueue_script( 'copyjs' );
+
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );

@@ -6,29 +6,33 @@ $.extend(config, {
 
 function buildDevelopers() {
     if ($.isEmptyObject(config['package']) || config['built']['developer']) return;
+    var snippets = {};
+    snippets["python"] =    'import requests\n' +
+                            'import json\n' +
+                            '\n' +
+                            'url = "' + config['ckanAPI'] + 'package_search"\n' +
+                            'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
+                            'results = json.loads(response.content)\n' +
+                            'print(results)';
 
-    $('#code-javascript').text('$.ajax({\n' +
-                               '    dataType: "json",\n' +
-                               '    type: "GET",\n' +
-                               '    url: "' + config['ckanAPI'] + 'package_search",\n' +
-                               '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
-                               '}).done(function(response) {\n' +
-                               '    console.log(response);\n' +
-                               '});');
+    snippets["javascript"] =    '$.ajax({\n' +
+                                '    dataType: "json",\n' +
+                                '    type: "GET",\n' +
+                                '    url: "' + config['ckanAPI'] + 'package_search",\n' +
+                                '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
+                                '}).done(function(response) {\n' +
+                                '    console.log(response);\n' +
+                                '});';
 
-    $('#code-python').text('import requests\n' +
-                           'import json\n' +
-                           '\n' +
-                           'url = "' + config['ckanAPI'] + 'package_search"\n' +
-                           'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
-                           'results = json.loads(response.content)\n' +
-                           'print(results)');
+    snippets["r"] = 'package(httr)\n' +
+                    '\n' +
+                    'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
+                    'content(r, "text")';
 
-    $('#code-r').text(  'package(httr)\n' +
-                        '\n' +
-                        'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
-                        'content(r, "text")');
-
+    for(var c in snippets){
+        $('#code-' + c ).text(snippets[c]);
+        $('#' + c + '-tab').attr('copy', snippets[c]);
+    }
 
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
