@@ -1023,6 +1023,11 @@ START OF CARLOS CHANGES (I think)
     margin: 0rem .8rem;
     right: 0;
     transform: translateY(-50%);
+    font-size: 90% !important;
+}
+
+.dataset.row .badge{
+    font-size: 90% !important;
 }
 
 .show-more .on-hover {
