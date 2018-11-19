@@ -262,7 +262,7 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <button id="code-copy" class="btn btn-primary" data-toggle="popover" data-content="Copied" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                              <button id="code-copy" class="btn btn-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                             </div>
                           </div>
                           <div class="row">
