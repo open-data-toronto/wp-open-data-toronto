@@ -1025,6 +1025,10 @@ START OF CARLOS CHANGES (I think)
     transform: translateY(-50%);
 }
 
+#dataset-search-box input {
+    border-radius: calc(.25rem - 1px) 0 0 calc(.25rem - 1px) !important;
+}
+
 .show-more .on-hover {
     color: #F5F5F5;
     background: #666666;
