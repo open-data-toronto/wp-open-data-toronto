@@ -32,7 +32,7 @@
             <div class="about-dataset">
               <div class="card">
                 <div class="card-header filter-heading">
-                  <h5><i class="fa fa-database"></i>&nbsp; About this Dataset</h5>
+                  <h5><i class="fa fa-database"></i>&nbsp; Details</h5>
                 </div>
                 <dl>
                   <dt>Last updated<span class="sr-only">: </span></dt>
@@ -41,13 +41,6 @@
                   <dd data-field="published_date"></dd>
                   <dt>Refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="refresh_rate"></dd>
-                </dl>
-              </div>
-              <div class="card">
-                <div class="card-header filter-heading">
-                  <h5><i class="fa fa-table"></i>&nbsp; Data Attributes</h5>
-                </div>
-                <dl>
                   <dt>Data type<span class="sr-only">: </span></dt>
                   <dd data-field="dataset_category"></dd>
                   <dt>More information<span class="sr-only">: </span></dt>
@@ -58,7 +51,7 @@
               </div>
               <div class="card">
                 <div class="card-header filter-heading">
-                  <h5><i class="fa fa-user"></i>&nbsp; Data Owner</h5>
+                  <h5><i class="fa fa-user"></i>&nbsp; Publisher</h5>
                 </div>
                   <dl>
                     <dt>Owner type<span class="sr-only">: </span></dt>
@@ -103,7 +96,7 @@
                       <div class="card-header" role="tab" id="heading-preview">
                         <h4 class="mb-0">
                           <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-preview" aria-expanded="true" aria-controls="collapse-preview">
-                            Preview Data
+                            Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
@@ -122,7 +115,7 @@
                       <div class="card-header" role="tab" id="heading-features">
                         <h4 class="mb-0">
                           <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-features" aria-expanded="true" aria-controls="collapse-download">
-                            Dataset Features
+                            Column Descriptions
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
@@ -181,7 +174,7 @@
                       <div class="card-header" role="tab" id="heading-explore">
                         <h4 class="mb-0">
                           <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-explore" aria-expanded="false" aria-controls="collapse-explore">
-                            Explore Data
+                            Visualize Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>

@@ -57,7 +57,7 @@ function buildCatalogue(response) {
                     '</div>' +
                     '<div class="col-md-3 text-left attributes">' +
                         '<div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) +
-                        '<div class="dataset-meta-label">Division</div>' + row['owner_division'] +
+                        '<div class="dataset-meta-label">Publisher</div>' + row['owner_division'] +
                         '<div class="dataset-meta-label">Type</div>' + row['dataset_category'] +
                     '</div>' +
                 '</div>' +
