@@ -41,7 +41,7 @@ function buildDevelopers() {
     $('code.hljs').each(function(i, block) {
         hljs.lineNumbersBlock(block);
     });
-    
+
 
     $('#code-copy').on('click', function () {
         $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
@@ -188,7 +188,10 @@ function buildPreview() {
                             head += '<th>' + fields[j]['id'] + '</th>';
                         }
 
-                        body += '<td>' + data[i][fields[j]['id']] + '</td>';
+                        var valueContent = data[i][fields[j]['id']] + '';
+                        valueContent = valueContent.length > 25 ? valueContent.substring(0, 25) + '...' : valueContent;
+
+                        body += '<td>' + valueContent + '</td>';
                     }
                     body += '</tr>';
                 }
@@ -197,7 +200,7 @@ function buildPreview() {
                 body += '</tbody>';
 
                 $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
-                
+
                 $('#table-preview').DataTable({
                     'paging': false,
                     'searching': false,
