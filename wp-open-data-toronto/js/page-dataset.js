@@ -63,13 +63,26 @@ function buildDownloads() {
         var resource = config['package']['resources'][i],
             link = config['ckanURL'] + '/download_resource/' + resource['id'],
             btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
+        
+        resource['format'] = resource['format'].toUpperCase()
 
         if (resource['datastore_active']) {
-            resource['format'] = '<select class="select-download-formats">' +
-                                   (resource['format'].toUpperCase() == 'CSV' ? '<option value="csv">CSV</option>' : '') +
-                                   '<option value="json">JSON</option>' +
-                                   '<option value="xml">XML</option>' +
-                                 '</select>';
+            if (['XML', 'JSON', 'CSV'].indexOf(resource['format'])  > -1 ){
+                resource['format'] = '<select class="select-download-formats">' +
+                                        (resource['format'] == 'CSV' ? '<option value="csv">CSV</option>' : '') +
+                                        '<option value="json">JSON</option>' +
+                                        '<option value="xml">XML</option>' +
+                                    '</select>';
+            } else {
+                resource['format'] = '<select class="select-download-formats">' +
+                                        (resource['format'] == 'GEOJSON' ? '<option value="geojson">GeoJSON</option>' : '') +
+                                        '<option value="csv">CSV</option>' +
+                                    '</select>&nbsp;' +
+                                    '<select class="select-download-projections">' +
+                                        '<option value="4326">WGS84</option>' +
+                                        '<option value="2019">MTM3</option>' +
+                                    '</select>';
+            }
         }
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
@@ -86,7 +99,9 @@ function buildDownloads() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            link += '?format=' + $(this).parents().eq(1).find('select').val()
+            var format = $(this).parents().eq(1).find('.select-download-formats').val(),
+                proj = $(this).parents().eq(1).find('.select-download-projections').val();
+            link += '?format=' + format + (proj != null ? '?projection=' + proj: '')
         }
 
         window.open(link, '_blank');
