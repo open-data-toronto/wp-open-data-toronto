@@ -1040,12 +1040,14 @@ START OF CARLOS CHANGES (I think)
     border-bottom: 1px solid rgba(0, 0, 0, .125);
     border-top: 0;
     border-radius: 0;
+    margin: 0 !important;
 }
 
 #dataset-accordion .card-header {
     border-bottom: 0;
     border-radius: inherit;
     padding: 0;
+    background: transparent !important;
 }
 
 /* introduces rounded corners for the first and last cards (right angles clashed with the rest of the pattern for other cards and buttons) */
@@ -1063,10 +1065,14 @@ START OF CARLOS CHANGES (I think)
     padding: .75rem 1.25rem;
 }
 
+#dataset-accordion .card:first-of-type a {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0 !important;
+}
+
 /* logic for hovering through card headers for expand/collapse */
 #dataset-accordion .card-header a.collapsed {
     color: #165788 !important;
-    background-color: #FFFFFF !important;
+    background-color: transparent !important;
 }
 
 #dataset-accordion .card-header a:not(.collapse) {
