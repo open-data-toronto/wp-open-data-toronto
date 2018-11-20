@@ -54,8 +54,6 @@
                   <h5><i class="fa fa-user"></i>&nbsp; Publisher</h5>
                 </div>
                   <dl>
-                    <dt>Owner type<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_type"></dd>
                     <dt>Published by<span class="sr-only">: </span></dt>
                     <dd data-field="owner_division"></dd>
                     <dt>Contact<span class="sr-only">: </span></dt>
