@@ -77,6 +77,7 @@ function buildDownloads() {
                 resource['format'] = '<select class="select-download-formats">' +
                                         (resource['format'] == 'GEOJSON' ? '<option value="geojson">GeoJSON</option>' : '') +
                                         '<option value="csv">CSV</option>' +
+                                        '<option value="shp">Shapefile</option>' +
                                     '</select>&nbsp;' +
                                     '<select class="select-download-projections">' +
                                         '<option value="4326">WGS84</option>' +
