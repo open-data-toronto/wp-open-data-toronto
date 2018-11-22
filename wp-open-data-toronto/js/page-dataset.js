@@ -118,7 +118,7 @@ function buildDownloads() {
         if ($(this).parents('tr').data('stored')) {
             var format = $(this).parents().eq(1).find('.select-download-formats').val(),
                 proj = $(this).parents().eq(1).find('.select-download-projections').val();
-            link += '?format=' + format + (proj != null ? '?projection=' + proj: '')
+            link += '?format=' + format + (proj != null ? '&projection=' + proj: '')
         }
 
         window.open(link, '_blank');
@@ -195,7 +195,7 @@ function buildFeatures() {
             'lengthChange': false,
             'columnDefs': [
                 { 'width': '20%', 'targets': 0 }
-              ]
+            ]
         });
 
         $('#collapse-features .dataTables_wrapper div.row:first').remove()
@@ -233,17 +233,6 @@ function buildPreview() {
 
                 $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
 
-                $('#table-preview').DataTable({
-                    'paging': false,
-                    'searching': false,
-                    'ordering': false,
-                    'lengthChange': false,
-                    'info': false,
-                });
-
-                $('#content-preview .dataTables_wrapper div.row:first').remove()
-                $('#content-preview .dataTables_wrapper div.row:last-of-type').remove()
-
                 config['built']['preview'] = true;
             });
 
@@ -257,10 +246,10 @@ function buildPreview() {
 
                 for (var i in results) {
                     var view = results[i];
-                    if (view['view_type'] == 'geojson_view') {
+                    if (view['view_type'] == 'recline_map_view') {
                         var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
                         var w = $('#collapse-preview .col-md-12').width(),
-                            h = w / 2;
+                            h = w * 5.7/9;
 
                         $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
 
