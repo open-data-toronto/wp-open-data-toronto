@@ -7,7 +7,7 @@ $.extend(config, {
 function buildDevelopers() {
     if ($.isEmptyObject(config['package']) || config['built']['developer']) return;
     var snippets = {};
-    snippets["python"] =    'import requests\n' +
+    snippets['python'] =    'import requests\n' +
                             'import json\n' +
                             '\n' +
                             'url = "' + config['ckanAPI'] + 'package_search"\n' +
@@ -15,7 +15,7 @@ function buildDevelopers() {
                             'results = json.loads(response.content)\n' +
                             'print(results)';
 
-    snippets["javascript"] =    '$.ajax({\n' +
+    snippets['javascript'] =    '$.ajax({\n' +
                                 '    dataType: "json",\n' +
                                 '    type: "GET",\n' +
                                 '    url: "' + config['ckanAPI'] + 'package_search",\n' +
@@ -24,7 +24,7 @@ function buildDevelopers() {
                                 '    console.log(response);\n' +
                                 '});';
 
-    snippets["r"] = 'package(httr)\n' +
+    snippets['r'] = 'package(httr)\n' +
                     '\n' +
                     'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
                     'content(r, "text")';
@@ -59,55 +59,58 @@ function buildDevelopers() {
 function buildDownloads() {
     if ($.isEmptyObject(config['package']) || config['built']['downloads']) return;
 
-    if (config['package']['dataset_category'].toLowerCase() === 'map'){
-        $('#table-resources thead').html('<th scope="col">File</th>' +
-                                            '<th scope="col">Format</th>' +
-                                            '<th scope="col">Projection</th>' +
-                                            '<th scope="col">Data</th>'
-                                            )
-    }
+    $('#table-resources thead').append('<tr>' +
+                                         '<th scope="col">File</th>' +
+                                         '<th scope="col">Format</th>' +
+                                         (config['package']['dataset_category'] == 'Map' ? '<th scope="col">Projection</th>' : '') +
+                                         '<th scope="col">Data</th>' +
+                                       '</tr>');
 
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i],
             link = config['ckanURL'] + '/download_resource/' + resource['id'],
             btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-outline-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-outline-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
-        
-        resource['format'] = resource['format'].toUpperCase()
+
+        resource['format'] = resource['format'].toUpperCase();
 
         if (resource['datastore_active']) {
-            if (['XML', 'JSON', 'CSV'].indexOf(resource['format'])  > -1 ){
-                resource['format'] = '<select class="select-download-formats">' +
-                                        (resource['format'] == 'CSV' ? '<option value="csv">CSV</option>' : '') +
-                                        '<option value="json">JSON</option>' +
-                                        '<option value="xml">XML</option>' +
-                                    '</select>';
-            } else {
-                resource['format'] = '<span class="dropdown">' +
-                                        '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                                        'GeoJSON' +
-                                        '</button>' +
-                                        '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                        '<span class="dropdown-item">CSV</span>' +
-                                        '<span class="dropdown-item">Shapefile</span>' +
-                                        '</div>' +
-                                    '</span></td>;' +
-                                    '<td><span class="dropdown">' +
-                                        '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                                        'WGS84' +
-                                    '</button>' +
-                                        '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                                        '<span class="dropdown-item">MTM3</span>' +
-                                        '</div>' +
-                                    '</span>';
+            switch (config['package']['dataset_category']) {
+                case 'Table':
+                    resource['format'] = '<select class="select-download-formats">' +
+                                            (resource['format'] == 'CSV' ? '<option value="csv">CSV</option>' : '') +
+                                            '<option value="json">JSON</option>' +
+                                            '<option value="xml">XML</option>' +
+                                         '</select>';
+                    break;
+                case 'Map':
+                    resource['format'] = '<span class="dropdown">' +
+                                           '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                             'GeoJSON' +
+                                           '</button>' +
+                                           '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
+                                             '<span class="dropdown-item">CSV</span>' +
+                                             '<span class="dropdown-item">Shapefile</span>' +
+                                           '</div>' +
+                                         '</span>';
             }
         }
 
+        var projBtn = '<span class="dropdown">' +
+                        '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                          'WGS84' +
+                        '</button>' +
+                        '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
+                          '<span class="dropdown-item">MTM3</span>' +
+                        '</div>' +
+                      '</span>';
+
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
-                                            '<td>' + resource['name'] + '</td>' +
-                                            '<td>' + resource['format'] + '</td>' +
-                                            '<td>' +
-                                               '<a href="' + link + '">' + btnText +  ' <span class="sr-only">' + resource['name'] + '</span></a>' +
-                                            '</td>' +
+                                             '<td>' + resource['name'] + '</td>' +
+                                             '<td>' + resource['format'] + '</td>' +
+                                             (config['package']['dataset_category'] == 'Map' ? '<td>' + projBtn + '</td>': '') +
+                                             '<td>' +
+                                                '<a href="' + link + '">' + btnText +  ' <span class="sr-only">' + resource['name'] + '</span></a>' +
+                                             '</td>' +
                                            '</tr>');
     }
 
@@ -123,16 +126,6 @@ function buildDownloads() {
 
         window.open(link, '_blank');
     });
-
-    $('#table-resources').DataTable({
-        'paging': false,
-        'searching': false,
-        'ordering': false,
-        'lengthChange': false,
-        'info': false,
-    });
-    $('#collapse-download .dataTables_wrapper div.row:first').remove()
-    $('#collapse-download .dataTables_wrapper div.row:last-of-type').remove()
 
     config['built']['downloads'] = true;
 }
@@ -272,7 +265,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    $('#dataset-accordion .card:first a').click();
+    // $('#dataset-accordion .card:first a').click();
 }
 
 function buildDataset(response) {

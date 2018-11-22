@@ -53,20 +53,13 @@
                 <div class="card-header filter-heading">
                   <h5><i class="fa fa-user"></i>&nbsp; Publisher</h5>
                 </div>
-                  <dl>
-                    <dt>Published by<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_division"></dd>
-                    <dt>Contact<span class="sr-only">: </span></dt>
-                    <dd data-field="owner_email"></dd>
-                  </dl>
-                </div>
-                  <!-- <h2><span class="fa fa-book"></span>&nbsp; Additional Info</h2>
-                  <dl>
-                    <dt>Pageviews<span class="sr-only">: </span></dt>
-                    <dd data-field="pageviews"></dd>
-                    <dt>Downloads<span class="sr-only">: </span></dt>
-                    <dd data-field="downloads"></dd>
-                  </dl> -->
+                <dl>
+                  <dt>Published by<span class="sr-only">: </span></dt>
+                  <dd data-field="owner_division"></dd>
+                  <dt>Contact<span class="sr-only">: </span></dt>
+                  <dd data-field="owner_email"></dd>
+                </dl>
+              </div>
             </div>
           </div>
 
@@ -154,13 +147,7 @@
                         <div class="row">
                           <div class="col-md-12">
                             <table class="table table-striped" id="table-resources">
-                              <thead>
-                                <tr>
-                                  <th scope="col">File</th>
-                                  <th scope="col">Format</th>
-                                  <th scope="col">Data</th>
-                                </tr>
-                              </thead>
+                              <thead></thead>
                               <tbody></tbody>
                             </table>
                           </div>
