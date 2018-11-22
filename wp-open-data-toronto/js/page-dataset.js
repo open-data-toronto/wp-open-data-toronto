@@ -59,6 +59,14 @@ function buildDevelopers() {
 function buildDownloads() {
     if ($.isEmptyObject(config['package']) || config['built']['downloads']) return;
 
+    if (config['package']['dataset_category'].toLowerCase() === 'map'){
+        $('#table-resources thead').html('<th scope="col">File</th>' +
+                                            '<th scope="col">Format</th>' +
+                                            '<th scope="col">Projection</th>' +
+                                            '<th scope="col">Data</th>'
+                                            )
+    }
+
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i],
             link = config['ckanURL'] + '/download_resource/' + resource['id'],
@@ -74,15 +82,23 @@ function buildDownloads() {
                                         '<option value="xml">XML</option>' +
                                     '</select>';
             } else {
-                resource['format'] = '<select class="select-download-formats">' +
-                                        (resource['format'] == 'GEOJSON' ? '<option value="geojson">GeoJSON</option>' : '') +
-                                        '<option value="csv">CSV</option>' +
-                                        '<option value="shp">Shapefile</option>' +
-                                    '</select>&nbsp;' +
-                                    '<select class="select-download-projections">' +
-                                        '<option value="4326">WGS84</option>' +
-                                        '<option value="2019">MTM3</option>' +
-                                    '</select>';
+                resource['format'] = '<span class="dropdown">' +
+                                        '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                        'GeoJSON' +
+                                        '</button>' +
+                                        '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
+                                        '<span class="dropdown-item">CSV</span>' +
+                                        '<span class="dropdown-item">Shapefile</span>' +
+                                        '</div>' +
+                                    '</span></td>;' +
+                                    '<td><span class="dropdown">' +
+                                        '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                        'WGS84' +
+                                    '</button>' +
+                                        '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
+                                        '<span class="dropdown-item">MTM3</span>' +
+                                        '</div>' +
+                                    '</span>';
             }
         }
 
