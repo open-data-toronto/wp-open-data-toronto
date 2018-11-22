@@ -1189,6 +1189,18 @@ START OF CARLOS CHANGES (I think)
     text-align: center !important;
 }
 
+#dataset-accordion .dropdown-item.selected {
+    font-weight: bold;
+}
+
+#dataset-accordion .dropdown-item.selected:hover {
+    background: transparent;
+}
+
+#dataset-accordion .dropdown-item:not(.selected):hover {
+    cursor: pointer;
+}
+
 /* accordion card overrides: For Developers */
 #api-examples pre {
     background: #FFFFFF;

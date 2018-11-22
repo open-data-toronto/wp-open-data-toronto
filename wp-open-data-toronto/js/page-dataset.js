@@ -76,18 +76,24 @@ function buildDownloads() {
         if (resource['datastore_active']) {
             switch (config['package']['dataset_category']) {
                 case 'Table':
-                    resource['format'] = '<select class="select-download-formats">' +
-                                            (resource['format'] == 'CSV' ? '<option value="csv">CSV</option>' : '') +
-                                            '<option value="json">JSON</option>' +
-                                            '<option value="xml">XML</option>' +
-                                         '</select>';
+                    resource['format'] = '<span class="dropdown">' +
+                                            '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                                'CSV' +
+                                            '</button>' +
+                                            '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
+                                                '<span class="dropdown-item selected">CSV</span>' +
+                                                '<span class="dropdown-item">JSON</span>' +
+                                                '<span class="dropdown-item">XML</span>' +
+                                            '</div>' +
+                                        '</span>';
                     break;
                 case 'Map':
                     resource['format'] = '<span class="dropdown">' +
-                                           '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                           '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                              'GeoJSON' +
                                            '</button>' +
                                            '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
+                                             '<span class="dropdown-item selected">GeoJSON</span>' +
                                              '<span class="dropdown-item">CSV</span>' +
                                              '<span class="dropdown-item">Shapefile</span>' +
                                            '</div>' +
@@ -96,11 +102,12 @@ function buildDownloads() {
         }
 
         var projBtn = '<span class="dropdown">' +
-                        '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                        '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-src="4326">' +
                           'WGS84' +
                         '</button>' +
                         '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                          '<span class="dropdown-item">MTM3</span>' +
+                          '<span class="dropdown-item selected" data-src="4326">WGS84</span>' +
+                          '<span class="dropdown-item" data-src="2019">MTM3</span>' +
                         '</div>' +
                       '</span>';
 
@@ -119,13 +126,18 @@ function buildDownloads() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents().eq(1).find('.select-download-formats').val(),
-                proj = $(this).parents().eq(1).find('.select-download-projections').val();
-            link += '?format=' + format + (proj != null ? '&projection=' + proj: '')
+            var format = $(this).parents().eq(1).find('.select-download-formats').text().toLowerCase(),
+                proj = $(this).parents().eq(1).find('.select-download-projections').data('src');
+            link += '?format=' + format + (proj != "" ? '&projection=' + proj: '')
         }
 
         window.open(link, '_blank');
     });
+
+    $('.dropdown-item').on('click', function(){
+        $(this).siblings().removeClass('selected');
+        $(this).addClass('selected').parents().eq(1).find('button').data('src', $(this).data('src')).text($(this).text());
+    });    
 
     config['built']['downloads'] = true;
 }
