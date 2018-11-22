@@ -62,7 +62,7 @@ function buildDownloads() {
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i],
             link = config['ckanURL'] + '/download_resource/' + resource['id'],
-            btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
+            btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-outline-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-outline-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
         
         resource['format'] = resource['format'].toUpperCase()
 

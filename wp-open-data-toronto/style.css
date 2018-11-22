@@ -469,14 +469,27 @@ button.btn.btn-default {
     background: #1594a3;
 }
 
-button.btn{
+button.btn.btn-primary{
     border: 0;
     background: #0e626b;
     color: #fff;
     font-weight: bold;
 }
-.btn{
+
+button.btn.btn-outline-primary{
+    border-color: #0e626b;
+    background: white;
+    color: #0e626b;
+    font-weight: bold;
 }
+
+button.btn.btn-outline-primary:hover{
+    border-color: #0e626b;
+    background: #0e626b;
+    color: white;
+    font-weight: bold;
+}
+
 a.btn.btn-md {
     color: #ffffff;
     background: #165788;
