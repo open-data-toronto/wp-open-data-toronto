@@ -81,7 +81,7 @@
                 <label for="search" class="sr-only">Search Dataset</label>
                 <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets" />
                 <span class="input-group-btn">
-                  <button id="btn-search" class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+                  <button id="btn-search" class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                 </span>
               </div>
             </div>
