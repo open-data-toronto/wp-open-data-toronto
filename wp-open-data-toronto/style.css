@@ -1185,8 +1185,7 @@ START OF CARLOS CHANGES (I think)
 }
 
 #dataset-accordion #table-resources th:nth-child(n+2),
-#dataset-accordion #table-resources td:nth-child(3n+2),
-#dataset-accordion #table-resources td:nth-child(3n+3) {
+#dataset-accordion #table-resources td:nth-child(1n+2) {
     text-align: center !important;
 }
 
