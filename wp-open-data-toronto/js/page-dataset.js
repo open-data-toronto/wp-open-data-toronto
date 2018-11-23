@@ -244,12 +244,16 @@ function buildPreview() {
                         var w = $('#collapse-preview .col-md-12').width(),
                             h = w * 5.7/9;
 
-                        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                        $('#content-preview').append('<iframe width="' + w +  '" src="' + viewURL + '" frameBorder="0"></iframe>');
 
                         config['built']['preview'] = true;
                         break;
                     }
                 }
+
+                $('iframe').load(function() {
+                    $(this).height($(this).contents().find('body').height());
+                });
             });
             break;
     }
@@ -265,7 +269,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    // $('#dataset-accordion .card:first a').click();
+    $('#dataset-accordion .card:first a').click();
 }
 
 function buildDataset(response) {
