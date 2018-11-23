@@ -6,6 +6,7 @@ $.extend(config, {
 
 function buildDevelopers() {
     if ($.isEmptyObject(config['package']) || config['built']['developer']) return;
+
     var snippets = {};
     snippets['python'] =    'import requests\n' +
                             'import json\n' +
@@ -29,7 +30,7 @@ function buildDevelopers() {
                     'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
                     'content(r, "text")';
 
-    for(var c in snippets){
+    for (var c in snippets) {
         $('#code-' + c ).text(snippets[c]);
         $('#' + c + '-tab').attr('copy', snippets[c]);
     }
@@ -41,7 +42,6 @@ function buildDevelopers() {
     $('code.hljs').each(function(i, block) {
         hljs.lineNumbersBlock(block);
     });
-
 
     $('#code-copy').on('click', function () {
         $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
@@ -77,37 +77,37 @@ function buildDownloads() {
             switch (config['package']['dataset_category']) {
                 case 'Table':
                     resource['format'] = '<span class="dropdown">' +
-                                            '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="csv">' +
+                                            '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                                 'CSV' +
                                             '</button>' +
                                             '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                                '<span class="dropdown-item selected" data-selection="csv">CSV</span>' +
-                                                '<span class="dropdown-item" data-selection="json">JSON</span>' +
-                                                '<span class="dropdown-item" data-selection="xml">XML</span>' +
+                                                '<span class="dropdown-item selected">CSV</span>' +
+                                                '<span class="dropdown-item">JSON</span>' +
+                                                '<span class="dropdown-item">XML</span>' +
                                             '</div>' +
                                         '</span>';
                     break;
                 case 'Map':
                     resource['format'] = '<span class="dropdown">' +
-                                           '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="geojson">' +
+                                           '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                                              'GeoJSON' +
                                            '</button>' +
                                            '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                             '<span class="dropdown-item selected" data-selection="geojson">GeoJSON</span>' +
-                                             '<span class="dropdown-item" data-selection="csv">CSV</span>' +
-                                             '<span class="dropdown-item" data-selection="shp">Shapefile</span>' +
+                                             '<span class="dropdown-item selected">GeoJSON</span>' +
+                                             '<span class="dropdown-item">CSV</span>' +
+                                             '<span class="dropdown-item">Shapefile</span>' +
                                            '</div>' +
                                          '</span>';
             }
         }
 
         var projBtn = '<span class="dropdown">' +
-                        '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
+                        '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-src="4326">' +
                           'WGS84' +
                         '</button>' +
                         '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                          '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
-                          '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
+                          '<span class="dropdown-item selected" data-src="4326">WGS84</span>' +
+                          '<span class="dropdown-item" data-src="2019">MTM3</span>' +
                         '</div>' +
                       '</span>';
 
@@ -126,8 +126,8 @@ function buildDownloads() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents().eq(1).find('.select-download-formats').data('selection'),
-                proj = $(this).parents().eq(1).find('.select-download-projections').data('selection');
+            var format = $(this).parents().eq(1).find('.select-download-formats').text().toLowerCase(),
+                proj = $(this).parents().eq(1).find('.select-download-projections').data('src');
             link += '?format=' + format + (proj != "" ? '&projection=' + proj: '')
         }
 
@@ -136,8 +136,8 @@ function buildDownloads() {
 
     $('.dropdown-item').on('click', function(){
         $(this).siblings().removeClass('selected');
-        $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
-    });    
+        $(this).addClass('selected').parents().eq(1).find('button').data('src', $(this).data('src')).text($(this).text());
+    });
 
     config['built']['downloads'] = true;
 }
@@ -254,7 +254,7 @@ function buildPreview() {
                     if (view['view_type'] == 'recline_map_view') {
                         var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
                         var w = $('#collapse-preview .col-md-12').width(),
-                            h = w * 5.7/9;
+                            h = w * (0.58);
 
                         $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
 
@@ -263,6 +263,7 @@ function buildPreview() {
                     }
                 }
             });
+
             break;
     }
 }
@@ -277,7 +278,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    // $('#dataset-accordion .card:first a').click();
+    $('#dataset-accordion .card-header a').click();
 }
 
 function buildDataset(response) {
