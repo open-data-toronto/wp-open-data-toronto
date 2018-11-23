@@ -86,7 +86,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-preview">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-preview" aria-expanded="true" aria-controls="collapse-preview">
+                          <a class="collapsed" data-parent="#dataset-accordion" aria-expanded="true" aria-controls="collapse-preview">
                             Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -95,7 +95,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-preview" class="collapse card-content" role="tabpanel" aria-labelledby="heading-preview">
+                      <div id="collapse-preview" class="card-content" role="tabpanel" aria-labelledby="heading-preview">
                         <div class="row">
                           <div id="content-preview" class="col-md-12"></div>
                         </div>
@@ -105,7 +105,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-features">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-features" aria-expanded="true" aria-controls="collapse-download">
+                          <a class="collapsed" data-parent="#dataset-accordion" aria-expanded="true" aria-controls="collapse-download">
                             Column Descriptions
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -114,7 +114,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-features" class="collapse card-content" role="tabpanel" aria-labelledby="heading-features">
+                      <div id="collapse-features" class="card-content" role="tabpanel" aria-labelledby="heading-features">
                         <div class="row">
                           <div class="col-md-12">
                             <table class="table table-striped" id="table-features">
@@ -134,7 +134,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-download">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-download" aria-expanded="true" aria-controls="collapse-download">
+                          <a class="collapsed" data-parent="#dataset-accordion" aria-controls="collapse-download">
                             Get Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -143,7 +143,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-download" class="collapse card-content" role="tabpanel" aria-labelledby="heading-download">
+                      <div id="collapse-download" class="card-content" role="tabpanel" aria-labelledby="heading-download">
                         <div class="row">
                           <div class="col-md-12">
                             <table class="table table-striped" id="table-resources">
@@ -158,7 +158,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-explore">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-explore" aria-expanded="false" aria-controls="collapse-explore">
+                          <a class="collapsed" data-parent="#dataset-accordion" aria-expanded="false" aria-controls="collapse-explore">
                             Visualize Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -167,7 +167,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-explore" class="collapse card-content" role="tabpanel" aria-labelledby="heading-explore">
+                      <div id="collapse-explore" class="card-content" role="tabpanel" aria-labelledby="heading-explore">
                         <div class="row explore-line" id="explore-ckan">
                           <div class="col-md-2 explore-img">
                             <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png">
@@ -198,7 +198,7 @@
                     <div class="card">
                       <div class="card-header" role="tab" id="heading-developers">
                         <h4 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-parent="#dataset-accordion" href="#collapse-developers" aria-expanded="false" aria-controls="collapse-developers">
+                          <a class="collapsed" data-parent="#dataset-accordion" aria-expanded="false" aria-controls="collapse-developers">
                             For Developers
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -207,7 +207,7 @@
                         </h4>
                       </div>
 
-                      <div id="collapse-developers" class="collapse card-content" role="tabpanel" aria-labelledby="heading-developers">
+                      <div id="collapse-developers" class="card-content" role="tabpanel" aria-labelledby="heading-developers">
                         <div class="card-block">
                           <div class="row">
                             <div class="col-md-12">

@@ -6,6 +6,7 @@ $.extend(config, {
 
 function buildDevelopers() {
     if ($.isEmptyObject(config['package']) || config['built']['developer']) return;
+
     var snippets = {};
     snippets['python'] =    'import requests\n' +
                             'import json\n' +
@@ -29,7 +30,7 @@ function buildDevelopers() {
                     'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
                     'content(r, "text")';
 
-    for(var c in snippets){
+    for (var c in snippets) {
         $('#code-' + c ).text(snippets[c]);
         $('#' + c + '-tab').attr('copy', snippets[c]);
     }
@@ -41,7 +42,6 @@ function buildDevelopers() {
     $('code.hljs').each(function(i, block) {
         hljs.lineNumbersBlock(block);
     });
-
 
     $('#code-copy').on('click', function () {
         $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
@@ -137,7 +137,7 @@ function buildDownloads() {
     $('.dropdown-item').on('click', function(){
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected').parents().eq(1).find('button').data('src', $(this).data('src')).text($(this).text());
-    });    
+    });
 
     config['built']['downloads'] = true;
 }
@@ -254,19 +254,16 @@ function buildPreview() {
                     if (view['view_type'] == 'recline_map_view') {
                         var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
                         var w = $('#collapse-preview .col-md-12').width(),
-                            h = w * 5.7/9;
+                            h = w * (0.58);
 
-                        $('#content-preview').append('<iframe width="' + w +  '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
 
                         config['built']['preview'] = true;
                         break;
                     }
                 }
-
-                $('iframe').load(function() {
-                    $(this).height($(this).contents().find('body').height());
-                });
             });
+
             break;
     }
 }
@@ -281,7 +278,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    $('#dataset-accordion .card:first a').click();
+    $('#dataset-accordion .card-header a').click();
 }
 
 function buildDataset(response) {
