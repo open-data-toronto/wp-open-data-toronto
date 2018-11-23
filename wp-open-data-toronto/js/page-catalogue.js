@@ -68,7 +68,7 @@ function buildCatalogue(response) {
             '</div>');
 
         if (row['formats'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' '));
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' | '));
         }
     }
 
