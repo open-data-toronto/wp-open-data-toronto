@@ -1185,9 +1185,20 @@ START OF CARLOS CHANGES (I think)
 }
 
 #dataset-accordion #table-resources th:nth-child(n+2),
-#dataset-accordion #table-resources td:nth-child(3n+2),
-#dataset-accordion #table-resources td:nth-child(3n+3) {
+#dataset-accordion #table-resources td:nth-child(1n+2) {
     text-align: center !important;
+}
+
+#dataset-accordion .dropdown-item.selected {
+    font-weight: bold;
+}
+
+#dataset-accordion .dropdown-item.selected:hover {
+    background: transparent;
+}
+
+#dataset-accordion .dropdown-item:not(.selected):hover {
+    cursor: pointer;
 }
 
 /* accordion card overrides: For Developers */
