@@ -211,7 +211,7 @@
                         <div class="card-block">
                           <div class="row">
                             <div class="col-md-12">
-                            <h5>Accessing data through an API</h5>
+                            <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
                               <dl>
                                 <dt>Package ID</dt>
                                 <dd data-field="id"></dd>
@@ -241,12 +241,6 @@
                           <div class="row">
                             <div class="col-md-12">
                               <button id="code-copy" class="btn btn-outline-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <br>
-                            <p>Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of API endpoints.</p>
                             </div>
                           </div>
                         </div>
