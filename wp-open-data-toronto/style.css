@@ -1075,9 +1075,7 @@ START OF CARLOS CHANGES (I think)
 
 #dataset-accordion .card-header h4 a {
     display: block;
-    padding: 0 0;
-    padding-bottom: .50rem;
-    padding-top: 1rem;
+    padding: 1rem 1rem;
     font-weight: bold;
 }
 
@@ -1153,7 +1151,8 @@ span.fa{
     display: inline-block;
     margin: 0 0;
     margin-left: 1rem;
-    margin-right: 0.75rem;
+    margin-right: 1rem;
+    float: right;
 }
 
  /* accordion card overrides: General

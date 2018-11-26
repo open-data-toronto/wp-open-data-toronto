@@ -235,6 +235,7 @@ function buildUI() {
     buildDownloads();
     buildDevelopers();
 
+    // TODO: OPEN THE FIRST ACCORDION
     // $('.collapse').collapse();
 
     config['isInitializing'] = false;
