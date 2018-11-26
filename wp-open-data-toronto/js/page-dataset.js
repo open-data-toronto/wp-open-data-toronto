@@ -1,64 +1,59 @@
 $.extend(config, {
     'isInitializing': true,
-    'package': {},
-    'built': {}
+    'package': {}
 });
 
 function buildDevelopers() {
-    if ($.isEmptyObject(config['package']) || config['built']['developer']) return;
-
     var snippets = {};
-    snippets['python'] =    'import requests\n' +
-                            'import json\n' +
-                            '\n' +
-                            'url = "' + config['ckanAPI'] + 'package_search"\n' +
-                            'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
-                            'results = json.loads(response.content)\n' +
-                            'print(results)';
+    snippets['python'] = 'import requests\n' +
+                         'import json\n' +
+                         '\n' +
+                         'url = "' + config['ckanAPI'] + 'package_search"\n' +
+                         'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
+                         'results = json.loads(response.content)\n' +
+                         'print(results)';
 
-    snippets['javascript'] =    '$.ajax({\n' +
-                                '    dataType: "json",\n' +
-                                '    type: "GET",\n' +
-                                '    url: "' + config['ckanAPI'] + 'package_search",\n' +
-                                '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
-                                '}).done(function(response) {\n' +
-                                '    console.log(response);\n' +
-                                '});';
+    snippets['javascript'] = '$.ajax({\n' +
+                             '    dataType: "json",\n' +
+                             '    type: "GET",\n' +
+                             '    url: "' + config['ckanAPI'] + 'package_search",\n' +
+                             '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
+                             '}).done(function(response) {\n' +
+                             '    console.log(response);\n' +
+                             '});';
 
     snippets['r'] = 'package(httr)\n' +
                     '\n' +
                     'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
                     'content(r, "text")';
 
-    for (var c in snippets) {
-        $('#code-' + c ).text(snippets[c]);
-        $('#' + c + '-tab').attr('copy', snippets[c]);
+    for (var lang in snippets) {
+        $('#code-' + lang).text(snippets[lang]);
+        $('#' + lang + '-tab').attr('copy', snippets[lang]);
     }
 
-    $('pre code').each(function(i, block) {
+    $('code').each(function(i, block) {
         hljs.highlightBlock(block);
-    });
-
-    $('code.hljs').each(function(i, block) {
         hljs.lineNumbersBlock(block);
     });
 
-    $('#code-copy').on('click', function () {
+    $('#code-copy').on('click', function() {
         $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
-        $('#code-copy').popover({ placement: 'bottom',  animation: true, trigger: 'manual' }).popover('show');
+        $(this).popover({
+            placement: 'bottom',
+            animation: true,
+            trigger: 'manual'
+        }).popover('show');
+
         setTimeout(function () {
                 $('#code-copy').popover('hide');
             },
             500
         );
     });
-
-    config['built']['developer'] = true;
 }
 
 function buildDownloads() {
-    if ($.isEmptyObject(config['package']) || config['built']['downloads']) return;
-
     $('#table-resources thead').append('<tr>' +
                                          '<th scope="col">File</th>' +
                                          '<th scope="col">Format</th>' +
@@ -68,55 +63,55 @@ function buildDownloads() {
 
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i],
-            link = config['ckanURL'] + '/download_resource/' + resource['id'],
-            btnText = resource['format'].toLowerCase() == 'html' ? '<button type="button" class="btn btn-outline-primary"><span class="fa fa-desktop"></span>&nbsp; Visit page</button>' : '<button type="button" class="btn btn-outline-primary"><span class="fa fa-download"></span>&nbsp; Download </button>';
+            link = config['ckanURL'] + '/download_resource/' + resource['id'];
 
-        resource['format'] = resource['format'].toUpperCase();
-
-        if (resource['datastore_active']) {
-            switch (config['package']['dataset_category']) {
-                case 'Table':
-                    resource['format'] = '<span class="dropdown">' +
-                                            '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="csv">' +
-                                                'CSV' +
-                                            '</button>' +
-                                            '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                                '<span class="dropdown-item selected" data-selection="csv">CSV</span>' +
-                                                '<span class="dropdown-item" data-selection="json">JSON</span>' +
-                                                '<span class="dropdown-item" data-selection="xml">XML</span>' +
-                                            '</div>' +
-                                        '</span>';
-                    break;
-                case 'Map':
-                    resource['format'] = '<span class="dropdown">' +
-                                           '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="geojson">' +
-                                             'GeoJSON' +
-                                           '</button>' +
-                                           '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                             '<span class="dropdown-item selected" data-selection="geojson">GeoJSON</span>' +
-                                             '<span class="dropdown-item" data-selection="csv">CSV</span>' +
-                                             '<span class="dropdown-item" data-selection="shp">Shapefile</span>' +
-                                           '</div>' +
-                                         '</span>';
-            }
+        if (resource['datastore_active'] && config['package']['dataset_category'] == 'Table') {
+            resource['format'] = '<span class="dropdown">' +
+                                    '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="csv">' +
+                                        'CSV' +
+                                    '</button>' +
+                                    '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
+                                        '<span class="dropdown-item selected" data-selection="csv">CSV</span>' +
+                                        '<span class="dropdown-item" data-selection="json">JSON</span>' +
+                                        '<span class="dropdown-item" data-selection="xml">XML</span>' +
+                                    '</div>' +
+                                '</span>';
+        } else if (resource['datastore_active'] && config['package']['dataset_category'] == 'Map') {
+            resource['format'] = '<span class="dropdown">' +
+                                   '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="geojson">' +
+                                     'GeoJSON' +
+                                   '</button>' +
+                                   '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
+                                     '<span class="dropdown-item selected" data-selection="geojson">GeoJSON</span>' +
+                                     '<span class="dropdown-item" data-selection="csv">CSV</span>' +
+                                     '<span class="dropdown-item" data-selection="shp">Shapefile</span>' +
+                                   '</div>' +
+                                 '</span>';
+        } else {
+            resource['format'] = resource['format'].toUpperCase();
         }
 
-        var projBtn = '<span class="dropdown">' +
-                        '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
-                          'WGS84' +
-                        '</button>' +
-                        '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                          '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
-                          '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
-                        '</div>' +
-                      '</span>';
+        var projection = '<span class="dropdown">' +
+                           '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
+                             'WGS84' +
+                           '</button>' +
+                           '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
+                             '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
+                             '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
+                           '</div>' +
+                         '</span>',
+            download = resource['format'] == 'HTML' ? '<span class="fa fa-desktop"></span>&nbsp; Visit page' : '<span class="fa fa-download"></span>&nbsp; Download';
+
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
                                              '<td>' + resource['name'] + '</td>' +
                                              '<td>' + resource['format'] + '</td>' +
-                                             (config['package']['dataset_category'] == 'Map' ? '<td>' + projBtn + '</td>': '') +
+                                             '<td>' + (config['package']['dataset_category'] == 'Map' ? projection : '') + '</td>' +
                                              '<td>' +
-                                                '<a href="' + link + '">' + btnText +  ' <span class="sr-only">' + resource['name'] + '</span></a>' +
+                                                '<a href="' + link + '">' +
+                                                  '<button type="button" class="btn btn-outline-primary">' + download +  '</button>' +
+                                                  '<span class="sr-only">' + resource['name'] + '</span>' +
+                                                '</a>' +
                                              '</td>' +
                                            '</tr>');
     }
@@ -126,8 +121,8 @@ function buildDownloads() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents().eq(1).find('.select-download-formats').data('selection'),
-                proj = $(this).parents().eq(1).find('.select-download-projections').data('selection');
+            var format = $(this).parents('tr').find('.select-download-formats').data('selection'),
+                proj = $(this).parents('tr').find('.select-download-projections').data('selection');
 
             link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
         }
@@ -139,59 +134,32 @@ function buildDownloads() {
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
     });
-
-    config['built']['downloads'] = true;
 }
 
 function buildExplore() {
-    if ($.isEmptyObject(config['package']) || config['built']['explore']) return;
+    getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
+        var results = response['result'],
+            viewURL = '#';
 
-    switch (config['package']['dataset_category']) {
-        case 'Table':
-            $('#explore-esri').hide();
+        for (var i in results) {
+            var view = results[i];
+            if (view['view_type'] == 'recline_view') {
+                viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                break;
+            }
+        }
 
-            getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
-                var results = response['result'],
-                    viewURL = '#';
-
-                for (var i in results) {
-                    var view = results[i];
-                    if (view['view_type'] == 'recline_view') {
-                        viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
-                        break;
-                    }
-                }
-
-                $('#redirect-ckan').attr('href', viewURL);
-
-                config['built']['explore'] = true;
-            });
-            break;
-        case 'Map':
-            $('#heading-explore').parent('.card').find('.card-content').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
-
-            config['built']['explore'] = true;
-            break;
-    }
+        $('#redirect-ckan').attr('href', viewURL);
+    });
 }
 
 function buildFeatures() {
-    if ($.isEmptyObject(config['package']) || config['built']['features']) return;
-
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'] }, function(response) {
-        var fields = response['result']['fields'],
-            fieldList = {};
+        var fields = response['result']['fields'];
 
         for (var i in fields) {
-            fieldList[fields[i]['id']] = '<tr><td>' + fields[i]['id'] + '</td><td></td></tr>';
+            $('#table-features tbody').append('<tr><td>' + fields[i]['id'] + '</td><td></td></tr>');
         }
-
-        var ordered = Object.keys(fieldList).sort();
-        for (var f in ordered) {
-            $('#table-features tbody').append(fieldList[ordered[f]]);
-        }
-
-        config['built']['features'] = true;
 
         if (fields.length > 10){
             $('#table-features').DataTable({
@@ -204,84 +172,73 @@ function buildFeatures() {
                 ]
             });
 
-            $('#collapse-features .dataTables_wrapper div.row:first').remove()
+            $('#collapse-features .dataTables_wrapper div.row:first').remove();
         }
     });
 }
 
 function buildPreview() {
-    if ($.isEmptyObject(config['package']) || config['built']['preview']) return;
+    var preview = config['package']['preview_resource'];
 
-    switch (config['package']['dataset_category']) {
-        case 'Table':
-            getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
-                var data = response['result']['records'],
-                    fields = response['result']['fields'],
-                    head = '<thead>',
-                    body = '<tbody>';
+    if (config['package']['dataset_category'] == 'Table') {
+        getCKAN('datastore_search', { 'resource_id': preview['id'], 'limit': 3 }, function(response) {
+            var data = response['result']['records'],
+                fields = response['result']['fields'],
+                head = '<thead>',
+                body = '<tbody>';
 
-                for (var i in data) {
-                    body += '<tr>';
-                    for (var j in fields) {
-                        if (i == 0) {
-                            head += '<th>' + fields[j]['id'] + '</th>';
-                        }
-
-                        var valueContent = data[i][fields[j]['id']] + '';
-                        valueContent = valueContent.length > 25 ? valueContent.substring(0, 25) + '...' : valueContent;
-
-                        body += '<td>' + valueContent + '</td>';
+            for (var i in data) {
+                body += '<tr>';
+                for (var j in fields) {
+                    if (i == 0) {
+                        head += '<th>' + fields[j]['id'] + '</th>';
                     }
-                    body += '</tr>';
+
+                    var valueContent = data[i][fields[j]['id']] + '';
+                    valueContent = valueContent.length > 25 ? valueContent.substring(0, 25) + '...' : valueContent;
+
+                    body += '<td>' + valueContent + '</td>';
                 }
+                body += '</tr>';
+            }
 
-                head += '</thead>';
-                body += '</tbody>';
+            head += '</thead>';
+            body += '</tbody>';
 
-                $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
+            $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
+        });
+    } else if (config['package']['dataset_category'] == 'Map') {
+        getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
+            var results = response['result'];
 
-                config['built']['preview'] = true;
-            });
+            for (var i in results) {
+                var view = results[i];
+                if (view['view_type'] == 'recline_map_view') {
+                    var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                    var w = $('#collapse-preview .col-md-12').width(),
+                        h = w * (0.647);
 
-
-            break;
-        case 'Map':
-            var preview = config['package']['preview_resource'];
-
-            getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
-                var results = response['result'];
-
-                for (var i in results) {
-                    var view = results[i];
-                    if (view['view_type'] == 'recline_map_view') {
-                        var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
-                        var w = $('#collapse-preview .col-md-12').width(),
-                            h = w * (0.647);
-
-                        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
-
-                        config['built']['preview'] = true;
-                        break;
-                    }
+                    $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                    break;
                 }
-            });
-
-            break;
+            }
+        });
     }
 }
 
 function buildUI() {
-    $('#heading-developers').on('click', buildDevelopers);
-    $('#heading-download').on('click', buildDownloads);
-    $('#heading-explore').on('click', buildExplore);
-    $('#heading-features').on('click', buildFeatures);
-    $('#heading-preview').on('click', buildPreview);
+    if (config['package']['preview_resource'] != undefined) {
+        buildPreview();
+        buildFeatures();
+        buildExplore();
+    }
+    buildDownloads();
+    buildDevelopers();
+
+    // $('.collapse').collapse();
 
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
-
-    $('#dataset-accordion .card-header a').click();
-    $('.collapse').collapse()
 }
 
 function buildDataset(response) {
@@ -334,15 +291,15 @@ function buildDataset(response) {
         }
     });
 
-    if ((['Map', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || $.isEmptyObject(data['preview_resource'])) {
-        $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
-    }
-
     buildUI();
 }
 
 function init(package_name) {
     $('.block-hidden').hide();
-    getCKAN('package_show', { 'id': package_name }, buildDataset);
-    new ClipboardJS('#code-copy')
+
+    getCKAN('package_show', {
+        'id': package_name
+    }, buildDataset);
+
+    new ClipboardJS('#code-copy');
 }

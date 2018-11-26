@@ -101,6 +101,8 @@ function buildCatalogue(response) {
         }
 
         $('#nav-catalogue .page-remove a').on('click', function(evt) {
+            evt.preventDefault();
+
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
