@@ -138,7 +138,7 @@
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
                           </span>
-                          Get Data
+                          Download Data
                           </a>
                         </h4>
                       </div>
