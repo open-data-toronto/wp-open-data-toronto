@@ -1116,6 +1116,7 @@ span.fa{
 
 #dataset-accordion .card-content.inactive {
     background: #F5F5F5;
+    font-style: italic;
 }
 
 #dataset-accordion table:not(hljs-ln) {
