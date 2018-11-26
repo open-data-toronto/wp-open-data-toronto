@@ -162,7 +162,7 @@
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
                           </span>  
-                          Visualize Data
+                          Explore Data
                           </a>
                         </h4>
                       </div>
