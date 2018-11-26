@@ -177,7 +177,7 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-3 explore-column">
-                            <a href="#" id="redirect-ckan"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
+                            <a href="#" id="redirect-ckan"><button href="#" class="btn btn-outline-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
                         <div class="row explore-line" id="explore-esri">
@@ -189,7 +189,7 @@
                             <p>Want to explore this geospatial data further? Try ArcGIS, where you could create and share maps like the one in "Preview Data" or combine it with other geospatial data!</p>
                           </div>
                           <div class="col-md-3 explore-column">
-                            <a href="#" id="redirect-esri"><button href="#" class="btn btn-primary" type="button" target="_blank"><span class="fa fa-map"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
+                            <a href="#" id="redirect-esri"><button href="#" class="btn btn-outline-primary" type="button" target="_blank"><span class="fa fa-map"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
                           </div>
                         </div>
                       </div>
@@ -240,7 +240,7 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <button id="code-copy" class="btn btn-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                              <button id="code-copy" class="btn btn-outline-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                             </div>
                           </div>
                           <div class="row">
