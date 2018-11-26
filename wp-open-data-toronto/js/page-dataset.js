@@ -128,7 +128,8 @@ function buildDownloads() {
         if ($(this).parents('tr').data('stored')) {
             var format = $(this).parents().eq(1).find('.select-download-formats').data('selection'),
                 proj = $(this).parents().eq(1).find('.select-download-projections').data('selection');
-            link += '?format=' + format + (proj != "" ? '&projection=' + proj: '')
+
+            link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
         }
 
         window.open(link, '_blank');
