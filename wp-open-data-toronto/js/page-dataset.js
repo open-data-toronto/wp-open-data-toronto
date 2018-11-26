@@ -279,6 +279,7 @@ function buildUI() {
     $('.block-hidden').fadeIn(250);
 
     $('#dataset-accordion .card-header a').click();
+    $('.collapse').collapse()
 }
 
 function buildDataset(response) {

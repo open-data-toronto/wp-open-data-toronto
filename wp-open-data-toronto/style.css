@@ -1050,57 +1050,72 @@ START OF CARLOS CHANGES (I think)
 
 /* DATASET PAGE */
 #dataset-accordion .card {
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-    border-top: 0;
+    /* border-bottom: 1px solid rgba(0, 0, 0, .125); */
+    border: 0;
     border-radius: 0;
-    margin: 0 !important;
+    margin: 0;
 }
 
 #dataset-accordion .card-header {
-    border-bottom: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .50);
     border-radius: inherit;
     padding: 0;
     background: transparent !important;
 }
 
 /* introduces rounded corners for the first and last cards (right angles clashed with the rest of the pattern for other cards and buttons) */
-#dataset-accordion .card:first-of-type {
+/* #dataset-accordion .card:first-of-type {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
     border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 #dataset-accordion .card:last-of-type {
     border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
-}
+} */
 
-#dataset-accordion .card-header a {
+#dataset-accordion .card-header h4 a {
     display: block;
-    padding: .75rem 1.25rem;
+    padding: 0 0;
+    padding-bottom: .50rem;
+    padding-top: 1rem;
+    font-weight: bold;
 }
 
-#dataset-accordion .card:first-of-type a {
+/* #dataset-accordion .card:first-of-type a {
     border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0 !important;
-}
+} */
 
 /* logic for hovering through card headers for expand/collapse */
-#dataset-accordion .card-header a.collapsed {
-    color: #165788 !important;
+#dataset-accordion .card-header a {
+    /* color: #165788 !important; */
+    /* color: #165788 !important; */
     background-color: transparent !important;
+    /* padding-top: 1em; */
 }
 
-#dataset-accordion .card-header a:not(.collapse) {
+/* #dataset-accordion .card-header a:not(.collapse) {
     color: #F5F5F5;
     background-color: #165788;
+} */
+
+span.fa{
+    transition: none !important;
 }
 
-#dataset-accordion .card-header a.collapsed:hover {
+#dataset-accordion .card-header a:hover {
     color: #F5F5F5 !important;
     background-color: #165788 !important;
+    transition: all 0.5s ease !important;
 }
 
 /* accordion cards: Defaults  */
 #dataset-accordion .card-content {
-    padding: 20px;
+    padding: 10px;
+    margin-bottom: 1em;
+}
+
+#dataset-accordion .card-content.inactive {
+    background: #F5F5F5;
 }
 
 #dataset-accordion table:not(hljs-ln) {
@@ -1133,12 +1148,18 @@ START OF CARLOS CHANGES (I think)
     padding-left: 20px !important;
 }
 
-/*  accordion card overrides: General */
-#collapse-preview.card-content,
-#collapse-download.card-content,
-#collapse-features.card-content {
-    padding: 0;
+#dataset-accordion .accordion-arrow {
+    display: inline-block;
+    margin: 0 0;
+    margin-left: 1rem;
+    margin-right: 0.75rem;
 }
+
+ /* accordion card overrides: General
+#collapse-preview.card-content,
+#collapse-download.card-content {
+    padding: 0;
+} */
 
 /*  accordion card overrides: Explore Data */
 #dataset-accordion .explore-line:visbile {
@@ -1609,11 +1630,7 @@ ul.post-list li {
 h4.card-title {
     font-size: 20px;
 }
-.accordion-arrow {
-    display: inline-block;
-    float: right;
-    margin: 0 5px;
-}
+
 
 span.fa.fa-chevron-down {
     transform: rotate(180deg);
