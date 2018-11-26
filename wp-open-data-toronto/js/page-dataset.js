@@ -193,17 +193,19 @@ function buildFeatures() {
 
         config['built']['features'] = true;
 
-        $('#table-features').DataTable({
-            'pagingType': 'numbers',
-            'searching': false,
-            'ordering': false,
-            'lengthChange': false,
-            'columnDefs': [
-                { 'width': '20%', 'targets': 0 }
-            ]
-        });
-
-        $('#collapse-features .dataTables_wrapper div.row:first').remove()
+        if (fields.length > 10){
+            $('#table-features').DataTable({
+                'pagingType': 'numbers',
+                'searching': false,
+                'ordering': false,
+                'lengthChange': false,
+                'columnDefs': [
+                    { 'width': '20%', 'targets': 0 }
+                ]
+            });
+    
+            $('#collapse-features .dataTables_wrapper div.row:first').remove()
+        }
     });
 }
 
