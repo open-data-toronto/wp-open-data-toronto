@@ -145,6 +145,11 @@ function buildDownloads() {
 function buildExplore() {
     if ($.isEmptyObject(config['package']) || config['built']['explore']) return;
 
+    if (!config['package']['explore_url'].length) {
+        $('#heading-explore').parent('.card').find('.card-content').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
+        return;
+    }
+
     switch (config['package']['dataset_category']) {
         case 'Table':
             $('#explore-esri').hide();
@@ -334,7 +339,6 @@ function buildDataset(response) {
 
     if ((['Map', 'Table'].indexOf(data['dataset_category']) == -1) || data['is_archive'] == 'true' || $.isEmptyObject(data['preview_resource'])) {
         $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
-
     } else if (data['dataset_category'] == 'Map') {
         $('#heading-features').parent('.card').remove();
     }
