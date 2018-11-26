@@ -77,37 +77,37 @@ function buildDownloads() {
             switch (config['package']['dataset_category']) {
                 case 'Table':
                     resource['format'] = '<span class="dropdown">' +
-                                            '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                            '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="csv">' +
                                                 'CSV' +
                                             '</button>' +
                                             '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                                '<span class="dropdown-item selected">CSV</span>' +
-                                                '<span class="dropdown-item">JSON</span>' +
-                                                '<span class="dropdown-item">XML</span>' +
+                                                '<span class="dropdown-item selected" data-selection="csv">CSV</span>' +
+                                                '<span class="dropdown-item" data-selection="json">JSON</span>' +
+                                                '<span class="dropdown-item" data-selection="xml">XML</span>' +
                                             '</div>' +
                                         '</span>';
                     break;
                 case 'Map':
                     resource['format'] = '<span class="dropdown">' +
-                                           '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                           '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="geojson">' +
                                              'GeoJSON' +
                                            '</button>' +
                                            '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                             '<span class="dropdown-item selected">GeoJSON</span>' +
-                                             '<span class="dropdown-item">CSV</span>' +
-                                             '<span class="dropdown-item">Shapefile</span>' +
+                                             '<span class="dropdown-item selected" data-selection="geojson">GeoJSON</span>' +
+                                             '<span class="dropdown-item" data-selection="csv">CSV</span>' +
+                                             '<span class="dropdown-item" data-selection="shp">Shapefile</span>' +
                                            '</div>' +
                                          '</span>';
             }
         }
 
         var projBtn = '<span class="dropdown">' +
-                        '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-src="4326">' +
+                        '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
                           'WGS84' +
                         '</button>' +
                         '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                          '<span class="dropdown-item selected" data-src="4326">WGS84</span>' +
-                          '<span class="dropdown-item" data-src="2019">MTM3</span>' +
+                          '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
+                          '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
                         '</div>' +
                       '</span>';
 
@@ -126,8 +126,8 @@ function buildDownloads() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents().eq(1).find('.select-download-formats').text().toLowerCase(),
-                proj = $(this).parents().eq(1).find('.select-download-projections').data('src');
+            var format = $(this).parents().eq(1).find('.select-download-formats').data('selection'),
+                proj = $(this).parents().eq(1).find('.select-download-projections').data('selection');
             link += '?format=' + format + (proj != "" ? '&projection=' + proj: '')
         }
 
@@ -136,8 +136,8 @@ function buildDownloads() {
 
     $('.dropdown-item').on('click', function(){
         $(this).siblings().removeClass('selected');
-        $(this).addClass('selected').parents().eq(1).find('button').data('src', $(this).data('src')).text($(this).text());
-    });
+        $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
+    });    
 
     config['built']['downloads'] = true;
 }
