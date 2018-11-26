@@ -1263,6 +1263,10 @@ span.fa{
     padding-bottom: 1em;
 }
 
+#dataset-accordion #collapse-developers #code-copy {
+    float: right;
+}
+
 /**
 END OF CARLOS CHANGES
 **/
