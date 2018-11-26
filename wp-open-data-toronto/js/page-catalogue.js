@@ -134,28 +134,19 @@ function buildSidebar(response) {
         for (var i in sidebar) {
             var value = sidebar[i],
                 selected = state['filters'][field['title']],
-                tokens = value['name'].split(' ');
-
-            while (tokens.join(' ').length > 30) {
-                tokens.pop();
-            }
-
-            var formattedName = tokens.join(' ').replace(/[^a-z\d]*$/gi, '');
-            if (formattedName != value['name']) {
-                formattedName += '<small> ...</small>';
-            }
+                name = truncateString(value['name'], 30, true);
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
                   '<label data-trigger="hover" data-placement="right" title="' + value['name'] + '">' +
                     '<span>' +
-                      '<input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + formattedName +
+                      '<input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + name +
                     '</span>' +
                     '<span class="badge float-right">' + value['count'] + '</span>' +
                   '</label>' +
                 '</li>');
 
-            if (formattedName != value['name']) {
+            if (name != value['name']) {
                 sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
             }
 

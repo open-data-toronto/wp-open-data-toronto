@@ -62,3 +62,27 @@ function getURLParam(name){
         return decodeURI(results[1]);
     }
 }
+
+function truncateString(original, size, clean) {
+    var tokens = (original + '').split(' '),
+        shorten;
+
+    if (tokens[0].length > size) {
+        shorten = tokens[0];
+    } else {
+        while (tokens.join(' ').length > size) {
+            tokens.pop();
+        }
+        shorten = tokens.join(' ');
+    }
+
+    if (clean) {
+        shorten = shorten.replace(/[^a-z\d]*$/gi, '');
+    }
+
+    if (shorten != original) {
+        shorten += ' <small>...</small>';
+    }
+
+    return shorten;
+}

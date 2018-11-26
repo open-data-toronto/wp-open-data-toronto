@@ -172,6 +172,7 @@ function buildFeatures() {
                 ]
             });
 
+            $('table.dataTable').width($('#heading-features').width());
             $('#collapse-features .dataTables_wrapper div.row:first').remove();
         }
     });
@@ -183,39 +184,35 @@ function buildPreview() {
     if (config['package']['dataset_category'] == 'Table') {
         getCKAN('datastore_search', { 'resource_id': preview['id'], 'limit': 3 }, function(response) {
             var data = response['result']['records'],
-                fields = response['result']['fields'],
-                head = '<thead>',
-                body = '<tbody>';
+                fields = response['result']['fields'];
+
+            $('#content-preview').append(
+                '<table id="table-preview" class="table table-striped table-responsive">' +
+                  '<thead></thead>' +
+                  '<tbody></tbody>' +
+                '</table>');
 
             for (var i in data) {
-                body += '<tr>';
+                var row = $('<tr></tr>');
                 for (var j in fields) {
                     if (i == 0) {
-                        head += '<th>' + fields[j]['id'] + '</th>';
+                        $('#content-preview thead').append('<th>' + fields[j]['id'] + '</th>');
                     }
 
-                    var valueContent = data[i][fields[j]['id']] + '';
-                    valueContent = valueContent.length > 25 ? valueContent.substring(0, 25) + '...' : valueContent;
-
-                    body += '<td>' + valueContent + '</td>';
+                    row.append('<td>' + truncateString(data[i][fields[j]['id']], 30) + '</td>');
                 }
-                body += '</tr>';
+
+                $('#content-preview tbody').append(row);
             }
-
-            head += '</thead>';
-            body += '</tbody>';
-
-            $('#content-preview').append('<table id="table-preview" class="table table-striped table-responsive">' + head + body + '</table>');
         });
     } else if (config['package']['dataset_category'] == 'Map') {
         getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
             var results = response['result'];
 
             for (var i in results) {
-                var view = results[i];
-                if (view['view_type'] == 'recline_map_view') {
-                    var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
-                    var w = $('#collapse-preview .col-md-12').width(),
+                if (results[i]['view_type'] == 'recline_map_view') {
+                    var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'],
+                        w = $('#heading-preview').width(),
                         h = w * (0.647);
 
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
@@ -227,16 +224,23 @@ function buildPreview() {
 }
 
 function buildUI() {
+    $('a.collapsed:first').click();
+
     if (config['package']['preview_resource'] != undefined) {
         buildPreview();
         buildFeatures();
         buildExplore();
+    } else {
+        $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content')
+            .addClass('inactive')
+            .html('<div class=“not-available”>Not available for this dataset</div>');
     }
+
+
     buildDownloads();
     buildDevelopers();
 
-    // TODO: OPEN THE FIRST ACCORDION
-    // $('.collapse').collapse();
+    new ClipboardJS('#code-copy');
 
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
@@ -297,10 +301,5 @@ function buildDataset(response) {
 
 function init(package_name) {
     $('.block-hidden').hide();
-
-    getCKAN('package_show', {
-        'id': package_name
-    }, buildDataset);
-
-    new ClipboardJS('#code-copy');
+    getCKAN('package_show', { 'id': package_name }, buildDataset);
 }
