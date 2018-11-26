@@ -137,7 +137,7 @@ function buildDownloads() {
     $('.dropdown-item').on('click', function(){
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
-    });    
+    });
 
     config['built']['downloads'] = true;
 }
@@ -254,7 +254,7 @@ function buildPreview() {
                     if (view['view_type'] == 'recline_map_view') {
                         var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
                         var w = $('#collapse-preview .col-md-12').width(),
-                            h = w * (0.58);
+                            h = w * (0.647);
 
                         $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
 
