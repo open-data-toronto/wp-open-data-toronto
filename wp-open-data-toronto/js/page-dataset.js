@@ -285,8 +285,7 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 
-    $('#dataset-accordion .card-header a').click();
-    $('.collapse').collapse()
+    $('#dataset-accordion .card-header:first a').click();
 }
 
 function buildDataset(response) {
