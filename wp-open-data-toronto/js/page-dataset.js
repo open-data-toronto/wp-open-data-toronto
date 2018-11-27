@@ -105,7 +105,7 @@ function buildDataset(response) {
 
     buildUI();
 
-    if (config['package']['preview_resource'] != undefined) {
+    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
         queryContents();
         queryViews();
     } else {
