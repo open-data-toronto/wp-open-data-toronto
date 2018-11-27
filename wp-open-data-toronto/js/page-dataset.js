@@ -1,155 +1,78 @@
 $.extend(config, {
     'isInitializing': true,
+    'formatOptions': {
+        'Map': ['CSV', 'GeoJSON', 'SHP'],
+        'Table': ['CSV', 'JSON', 'XML']
+    },
     'package': {}
 });
 
-function buildDevelopers() {
-    var snippets = {};
-    snippets['python'] = 'import requests\n' +
-                         'import json\n' +
-                         '\n' +
-                         'url = "' + config['ckanAPI'] + 'package_search"\n' +
-                         'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
-                         'results = json.loads(response.content)\n' +
-                         'print(results)';
-
-    snippets['javascript'] = '$.ajax({\n' +
-                             '    dataType: "json",\n' +
-                             '    type: "GET",\n' +
-                             '    url: "' + config['ckanAPI'] + 'package_search",\n' +
-                             '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
-                             '}).done(function(response) {\n' +
-                             '    console.log(response);\n' +
-                             '});';
-
-    snippets['r'] = 'package(httr)\n' +
-                    '\n' +
-                    'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
-                    'content(r, "text")';
-
+function createCommonContent() {
+    var snippets = buildCodeSnippet();
     for (var lang in snippets) {
         $('#code-' + lang).text(snippets[lang]);
         $('#' + lang + '-tab').attr('copy', snippets[lang]);
     }
 
-    $('code').each(function(i, block) {
-        hljs.highlightBlock(block);
-        hljs.lineNumbersBlock(block);
-    });
-
-    $('#code-copy').on('click', function() {
-        $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
-        $(this).popover({
-            placement: 'bottom',
-            animation: true,
-            trigger: 'manual'
-        }).popover('show');
-
-        setTimeout(function () {
-                $('#code-copy').popover('hide');
-            },
-            500
-        );
-    });
-}
-
-function buildDownloads() {
-    $('#table-resources thead').append('<tr>' +
-                                         '<th scope="col">File</th>' +
-                                         '<th scope="col">Format</th>' +
-                                         (config['package']['dataset_category'] == 'Map' ? '<th scope="col">Projection</th>' : '') +
-                                         '<th scope="col">Data</th>' +
-                                       '</tr>');
-
     for (var i in config['package']['resources']) {
-        var resource = config['package']['resources'][i],
-            link = config['ckanURL'] + '/download_resource/' + resource['id'];
+        var resource = config['package']['resources'][i];
 
-        if (resource['datastore_active'] && config['package']['dataset_category'] == 'Table') {
-            resource['format'] = '<span class="dropdown">' +
-                                    '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="csv">' +
-                                        'CSV' +
-                                    '</button>' +
-                                    '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                        '<span class="dropdown-item selected" data-selection="csv">CSV</span>' +
-                                        '<span class="dropdown-item" data-selection="json">JSON</span>' +
-                                        '<span class="dropdown-item" data-selection="xml">XML</span>' +
-                                    '</div>' +
-                                '</span>';
-        } else if (resource['datastore_active'] && config['package']['dataset_category'] == 'Map') {
-            resource['format'] = '<span class="dropdown">' +
-                                   '<button class="btn btn-outline-primary dropdown-toggle select-download-formats" type="button" id="formatDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="geojson">' +
-                                     'GeoJSON' +
-                                   '</button>' +
-                                   '<div class="dropdown-menu" aria-labelledby="formatDropdown">' +
-                                     '<span class="dropdown-item selected" data-selection="geojson">GeoJSON</span>' +
-                                     '<span class="dropdown-item" data-selection="csv">CSV</span>' +
-                                     '<span class="dropdown-item" data-selection="shp">Shapefile</span>' +
-                                   '</div>' +
-                                 '</span>';
-        } else {
-            resource['format'] = resource['format'].toUpperCase();
+        if (resource['datastore_active']) {
+            resource['format'] = buildFormatDropdown(config['formatOptions'][config['package']['dataset_category']]);
         }
-
-        var projection = '<span class="dropdown">' +
-                           '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
-                             'WGS84' +
-                           '</button>' +
-                           '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                             '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
-                             '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
-                           '</div>' +
-                         '</span>',
-            download = resource['format'] == 'HTML' ? '<span class="fa fa-desktop"></span>&nbsp; Visit page' : '<span class="fa fa-download"></span>&nbsp; Download';
-
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
                                              '<td>' + resource['name'] + '</td>' +
                                              '<td>' + resource['format'] + '</td>' +
-                                             '<td>' + (config['package']['dataset_category'] == 'Map' ? projection : '') + '</td>' +
                                              '<td>' +
-                                                '<a href="' + link + '">' +
-                                                  '<button type="button" class="btn btn-outline-primary">' + download +  '</button>' +
+                                                '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '">' +
+                                                  '<button type="button" class="btn btn-outline-primary">' +
+                                                    '<span class="fa fa-download"></span>&nbsp; Download' +
+                                                  '</button>' +
                                                   '<span class="sr-only">' + resource['name'] + '</span>' +
                                                 '</a>' +
                                              '</td>' +
                                            '</tr>');
-    }
 
-    $('#table-resources tbody a').on('click', function(evt) {
-        evt.preventDefault();
-
-        var link = $(this).attr('href');
-        if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents('tr').find('.select-download-formats').data('selection'),
-                proj = $(this).parents('tr').find('.select-download-projections').data('selection');
-
-            link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
+        if (resource['format'] == 'HTML') {
+            $('#table-resource tbody').last('tr').find('td:nth-child(3) button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
         }
 
-        window.open(link, '_blank');
-    });
+        if (config['package']['dataset_category'] == 'Map') {
+            if (i == 0) {
+                $('#table-resources thead th:nth-child(2)').after('<th>Projection</th>');
+            }
 
-    $('.dropdown-item').on('click', function(){
-        $(this).siblings().removeClass('selected');
-        $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
-    });
+            $('#table-resource tbody').last('tr').find('th:nth-child(2)').after(
+                '<span class="dropdown">' +
+                  '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
+                    'WGS84' +
+                  '</button>' +
+                  '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
+                    '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
+                    '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
+                  '</div>' +
+                '</span>');
+        }
+    }
+
+    buildUI();
 }
 
-function getResourceViews() {
+function createResourceViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
         var results = response['result'];
 
         for (var i in results) {
+            var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
+
             if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
-                var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'],
-                    w = $('#heading-preview').width(),
-                    h = w * (0.647);
+                    var w = $('#heading-preview').width(),
+                        h = w * (0.647);
 
                 $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
                 break;
-            } else if (config['package']['dataset_category'] == 'Table' && view['view_type'] == 'recline_view') {
-                var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+            } else if (config['package']['dataset_category'] == 'Table' && results[i]['view_type'] == 'recline_view') {
                 $('#btn-ckan').attr('href', viewURL);
                 break;
             }
@@ -157,7 +80,7 @@ function getResourceViews() {
     });
 }
 
-function getDatastoreSearch() {
+function createDatastoreContent() {
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
         var data = response['result']['records'],
             fields = response['result']['fields'];
@@ -185,7 +108,7 @@ function getDatastoreSearch() {
             previewTable.find('tbody').append(row);
         }
 
-        if (config['pacakge']['dataset_category'] == 'Table') $('#content-preview').append(previewTable);
+        if (config['package']['dataset_category'] == 'Table') $('#content-preview').append(previewTable);
         $('#content-features').append(featuresTable);
 
         if (fields.length > 10){
@@ -205,20 +128,42 @@ function getDatastoreSearch() {
 }
 
 function buildUI() {
+    $('code').each(function(i, block) {
+        hljs.highlightBlock(block);
+        hljs.lineNumbersBlock(block);
+    });
+
+    $('#code-copy').on('click', function() {
+        $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
+        $(this).popover({
+            placement: 'bottom',
+            animation: true,
+            trigger: 'manual'
+        }).popover('show');
+
+        setTimeout(function() { $('#code-copy').popover('hide'); }, 500);
+    });
+
+    $('#table-resources tbody a').on('click', function(evt) {
+        evt.preventDefault();
+
+        var link = $(this).attr('href');
+        if ($(this).parents('tr').data('stored')) {
+            var format = $(this).parents('tr').find('button').data('selection'),
+                proj = $(this).parents('tr').find('.select-download-projections').data('selection');
+
+            link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
+        }
+
+        window.open(link, '_blank');
+    });
+
+    $('.dropdown-item').on('click', function(){
+        $(this).siblings().removeClass('selected');
+        $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
+    });
+
     $('a.collapsed:first').click();
-
-    if (config['package']['preview_resource'] != undefined) {
-        getDatastoreSearch();
-        getResourceViews();
-    } else {
-        $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content')
-            .addClass('inactive')
-            .html('<div class=“not-available”>Not available for this dataset</div>');
-    }
-
-    buildDownloads();
-    buildDevelopers();
-
     new ClipboardJS('#code-copy');
 
     config['isInitializing'] = false;
@@ -272,7 +217,65 @@ function buildDataset(response) {
         }
     });
 
-    buildUI();
+    createCommonContent();
+
+    if (config['package']['preview_resource'] != undefined) {
+        createDatastoreContent();
+        createResourceViews();
+    } else {
+        $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content')
+            .addClass('inactive')
+            .html('<div class="not-available">Not available for this dataset</div>');
+    }
+}
+
+function buildCodeSnippet() {
+    var snippets = {};
+    snippets['python'] = 'import requests\n' +
+                         'import json\n' +
+                         '\n' +
+                         'url = "' + config['ckanAPI'] + 'package_search"\n' +
+                         'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
+                         'results = json.loads(response.content)\n' +
+                         'print(results)';
+
+    snippets['javascript'] = '$.ajax({\n' +
+                             '    dataType: "json",\n' +
+                             '    type: "GET",\n' +
+                             '    url: "' + config['ckanAPI'] + 'package_search",\n' +
+                             '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
+                             '}).done(function(response) {\n' +
+                             '    console.log(response);\n' +
+                             '});';
+
+    snippets['r'] = 'package(httr)\n' +
+                    '\n' +
+                    'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
+                    'content(r, "text")';
+
+    return snippets;
+}
+
+function buildFormatDropdown(options) {
+    var dropdown = $('<div>' +
+                       '<span class="dropdown">' +
+                         '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdown-format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                         '</button>' +
+                         '<div class="dropdown-menu" aria-labelledby="dropdown-format">' +
+                         '</div>' +
+                       '</span>' +
+                     '</div>');
+
+    for (var i in options) {
+        dropdown.find('.dropdown-menu').append('<span class="dropdown-item" data-selection="' + options[i].toLowerCase() + '">' + options[i] + '</span>');
+
+        if (i == 0) {
+            dropdown.find('button').data('selection', options[0].toLowerCase()).html(options[0]);
+            dropdown.find('span').addClass('selected');
+        }
+    }
+
+    return dropdown.html();
 }
 
 function init(package_name) {

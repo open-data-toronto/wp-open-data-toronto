@@ -135,9 +135,16 @@
                       <div id="collapse-download" class="card-content collapse" aria-labelledby="heading-download">
                         <div class="row">
                           <div class="col-md-12">
-                            <table class="table table-striped" id="table-resources">
-                              <thead></thead>
-                              <tbody></tbody>
+                            <table id="table-resources" class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th scope="col">File</th>
+                                  <th scope="col">Format</th>
+                                  <th scope="col">Data</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
                             </table>
                           </div>
                         </div>
@@ -166,10 +173,12 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-3 explore-column">
-                            <button id="btn-ckan" class="btn btn-outline-primary" href="#" type="button" target="_blank">
-                              <span class="fa fa-area-chart"></span>&nbsp;Visualize
-                              <span class="sr-only"> Visualize data in new window</span>
-                            </button>
+                            <a id="redirect-ckan" href="#" target="_blank">
+                              <button class="btn btn-outline-primary" type="button">
+                                <span class="fa fa-area-chart"></span>&nbsp;Visualize
+                                <span class="sr-only"> Visualize data in new window</span>
+                              </button>
+                            </a>
                           </div>
                         </div>
                       </div>
