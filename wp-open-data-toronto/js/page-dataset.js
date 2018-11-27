@@ -258,9 +258,9 @@ function generateSnippets() {
                              '    console.log(response);\n' +
                              '});';
 
-    snippets['r'] = 'package(httr)\n' +
+    snippets['r'] = 'library(httr)\n' +
                     '\n' +
-                    'r <- GET(' + '"' + config['ckanAPI'] + 'package_search", query=list("id"="' + config['package']['id'] + '"))\n' +
+                    'r <- GET(' + '"' + config['ckanAPI'] + 'package_show", query=list("id"="' + config['package']['id'] + '"))\n' +
                     'content(r, "text")';
 
     return snippets;
