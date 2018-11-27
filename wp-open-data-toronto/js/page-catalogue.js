@@ -7,10 +7,10 @@ var state = history.state || {
 
 $.extend(config, {
     'isInitializing': true,
-    'cataloguePages': 0,                                                        // Total number of pages within the catalogue
-    'datasetsPerPage': 10,                                                      // Number of datasets to display per page
+    'cataloguePages': 0,
+    'datasetsPerPage': 10,
     'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic'],
-    'filterSize': 5                                                             // Number of filters shown plus 1 (+1 due to the show more/less li)
+    'filterSize': 5
 });
 
 function buildCatalogue(response) {
@@ -40,7 +40,6 @@ function buildCatalogue(response) {
         $('#results-count').html('<span>' + foundPhrase + '</span>');
     }
 
-    // Iterrates over each of the results and build the HTML for each of the dataset
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i];
 
@@ -72,12 +71,9 @@ function buildCatalogue(response) {
         }
     }
 
-    // Build the catalogue page navigation
-    // This needs to be built on every catalogue refresh because total number of pages changes based on searches and filters
     if (data['count'] > config['datasetsPerPage']) {
         $('#nav-catalogue .page-remove').remove();
 
-        // Build the page buttons
         for (var i = 0; i < state['size']; i++) {
             var pageNumber = i + 1 + '';
 
@@ -165,7 +161,7 @@ function buildSidebar(response) {
                 '</li>')
         };
 
-        var numFilters = sidebarEle.find('li').length - 1;                      // Subtract 1 due to the show more/less button
+        var numFilters = sidebarEle.find('li').length - 1;
         if (numFilters > config['filterSize']){
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
             showMoreButton.find('label').html('[+] ' + (numFilters - config['filterSize']) + ' more');
@@ -187,8 +183,7 @@ function buildSidebar(response) {
     buildDynamicUI();
 }
 
-var buildStaticUI = function() {
-    // Controls the previous and next navigation buttons for pagination
+function buildStaticUI() {
     $('#nav-catalogue .page-keep a').on('click', function() {
         switch($(this).data('page')) {
             case 'previous':
@@ -236,7 +231,7 @@ var buildStaticUI = function() {
         $(this).find('label').html(labelText);
     });
 
-    config['isInitializing'] = false;                                           // Set isInitializing to false to prevent duplication of events
+    config['isInitializing'] = false;
     $('.block-hidden').fadeIn(250);
 }
 

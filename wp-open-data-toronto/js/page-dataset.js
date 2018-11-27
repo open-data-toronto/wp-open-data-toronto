@@ -7,8 +7,53 @@ $.extend(config, {
     'package': {}
 });
 
-function createCommonContent() {
-    var snippets = buildCodeSnippet();
+function buildDataset(response) {
+    var data = config['package'] = response['result'];
+    data['preview_resource'] = {};
+
+    for (var i in data['resources']) {
+        if (data['resources'][i]['is_preview'] == 'true') {
+            data['preview_resource'] = data['resources'][i];
+            break;
+        }
+    }
+
+    $('[data-field]').each(function(idx) {
+        var field = $(this).data('field');
+        data['image_url'] = data['image_url'] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+
+        if (data[field]) {
+            switch(field) {
+                case 'image_url':
+                    $(this).css('background-image', 'url("' + data[field] + '")');
+                    break;
+                case 'information_url':
+                    $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
+                    break;
+                case 'tags':
+                    for (var i in data[field]) {
+                        if (!$(this).is(':empty')) $(this).append(', ');
+                        // $(this).append('<a href="/catalogue?q=(tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
+                        $(this).append(data[field][i]['display_name']);
+                    }
+                    break;
+                case 'metadata_modified':
+                case 'published_date':
+                    $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
+                    break
+                case 'notes':
+                    var converter = new showdown.Converter();
+                    $(this).html(converter.makeHtml(data[field]));
+                    break;
+                default:
+                    $(this).text(data[field]);
+            }
+        } else {
+            $(this).prev().hide();
+        }
+    });
+
+    var snippets = generateSnippets();
     for (var lang in snippets) {
         $('#code-' + lang).text(snippets[lang]);
         $('#' + lang + '-tab').attr('copy', snippets[lang]);
@@ -18,7 +63,7 @@ function createCommonContent() {
         var resource = config['package']['resources'][i];
 
         if (resource['datastore_active']) {
-            resource['format'] = buildFormatDropdown(config['formatOptions'][config['package']['dataset_category']]);
+            resource['format'] = generateFormatDropdowns(config['formatOptions'][config['package']['dataset_category']]);
         }
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
@@ -44,43 +89,65 @@ function createCommonContent() {
             }
 
             $('#table-resources tbody tr:last-child').find('td:nth-child(2)').after(
-                '<span class="dropdown">' +
-                  '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
-                    'WGS84' +
-                  '</button>' +
-                  '<div class="dropdown-menu" aria-labelledby="formatProjection">' +
-                    '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
-                    '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
-                  '</div>' +
-                '</span>');
+                '<td>' +
+                  '<span class="dropdown">' +
+                    '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdown-projections" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
+                      'WGS84' +
+                    '</button>' +
+                    '<div class="dropdown-menu" aria-labelledby="dropdown-projections">' +
+                      '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
+                      '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
+                    '</div>' +
+                  '</span>' +
+                '</td>');
         }
     }
 
     buildUI();
+
+    if (config['package']['preview_resource'] != undefined) {
+        queryContents();
+        queryViews();
+    } else {
+        $('#collapse-preview, #collapse-features, #collapse-explore')
+            .addClass('inactive')
+            .html('<div class="not-available">Not available for this dataset</div>');
+    }
 }
 
-function createResourceViews() {
+function queryViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
-        var results = response['result'];
+        var results = response['result'],
+            viewFound = false;
 
         for (var i in results) {
-            var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
+            var isMapView = config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view',
+                isTableView = config['package']['dataset_category'] == 'Table' && results[i]['view_type'] == 'recline_view';
 
-            if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
+            if (isMapView || isTableView) {
+                var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
+
+                if (isMapView) {
                     var w = $('#heading-preview').width(),
-                        h = w * (0.647);
+                        h = 0.647*w;
 
-                $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
-                break;
-            } else if (config['package']['dataset_category'] == 'Table' && results[i]['view_type'] == 'recline_view') {
-                $('#btn-ckan').attr('href', viewURL);
+                    $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                } else {
+                    $('#btn-ckan').attr('href', viewURL);
+                }
+
+                viewFound = true;
                 break;
             }
+        }
+
+        if (!viewFound) {
+            $('#collapse-explore').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
 }
 
-function createDatastoreContent() {
+function queryContents() {
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
         var data = response['result']['records'],
             fields = response['result']['fields'];
@@ -170,66 +237,7 @@ function buildUI() {
     $('.block-hidden').fadeIn(250);
 }
 
-function buildDataset(response) {
-    var data = config['package'] = response['result'];
-    data['preview_resource'] = {};
-
-    for (var i in data['resources']) {
-        if (data['resources'][i]['is_preview'] == 'true') {
-            data['preview_resource'] = data['resources'][i];
-            break;
-        }
-    }
-
-    // Fill metadata content from CKAN package fields
-    $('[data-field]').each(function(idx) {
-        var field = $(this).data('field');
-        data['image_url'] = data['image_url'] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
-
-        if (data[field]) {
-            switch(field) {
-                case 'image_url':
-                    $(this).css('background-image', 'url("' + data[field] + '")');
-                    break;
-                case 'information_url':
-                    $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
-                    break;
-                case 'tags':
-                    for (var i in data[field]) {
-                        if (!$(this).is(':empty')) $(this).append(', ');
-                        // $(this).append('<a href="/catalogue?q=(tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
-                        $(this).append(data[field][i]['display_name']);
-                    }
-                    break;
-                case 'metadata_modified':
-                case 'published_date':
-                    $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
-                    break
-                case 'notes':
-                    var converter = new showdown.Converter();
-                    $(this).html(converter.makeHtml(data[field]));
-                    break;
-                default:
-                    $(this).text(data[field]);
-            }
-        } else {
-            $(this).prev().hide();
-        }
-    });
-
-    createCommonContent();
-
-    if (config['package']['preview_resource'] != undefined) {
-        createDatastoreContent();
-        createResourceViews();
-    } else {
-        $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content')
-            .addClass('inactive')
-            .html('<div class="not-available">Not available for this dataset</div>');
-    }
-}
-
-function buildCodeSnippet() {
+function generateSnippets() {
     var snippets = {};
     snippets['python'] = 'import requests\n' +
                          'import json\n' +
@@ -256,8 +264,8 @@ function buildCodeSnippet() {
     return snippets;
 }
 
-function buildFormatDropdown(options) {
-    var dropdown = $('<div>' +
+function generateFormatDropdowns(options) {
+    var dropdown = $('<div class="placeholder">' +
                        '<span class="dropdown">' +
                          '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdown-format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                          '</button>' +
