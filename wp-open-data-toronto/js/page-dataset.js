@@ -118,7 +118,7 @@ function buildDataset(response) {
 function queryViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
         var results = response['result'],
-            viewFound = false;
+            exploreFound = false;
 
         for (var i in results) {
             var isMapView = config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view',
@@ -134,14 +134,14 @@ function queryViews() {
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
                 } else {
                     $('#btn-ckan').attr('href', viewURL);
+                    exploreFound = true;
                 }
 
-                viewFound = true;
                 break;
             }
         }
 
-        if (!viewFound) {
+        if (!exploreFound) {
             $('#collapse-explore').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
