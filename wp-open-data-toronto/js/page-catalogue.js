@@ -45,29 +45,27 @@ function buildCatalogue(response) {
 
         $('.table-list').append(
             '<div class="dataset row" id ="' + row['id'] + '">' +
-                '<div class="row">' +
-                    '<div class="col-md-12">' +
-                        '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
-                    '</div>' +
+              '<div class="row">' +
+                '<div class="col-md-9">' +
+                  '<div class="col-md-12">' +
+                    '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                    '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
+                  '</div>' +
                 '</div>' +
-                '<div class="row">' +
-                    '<div class="col-md-9">' +
-                        '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
-                    '</div>' +
-                    '<div class="col-md-3 text-left attributes">' +
-                        '<div class="dataset-meta-label">Last Updated</div>' + getFullDate(row['metadata_modified'].split('-')) +
-                        '<div class="dataset-meta-label">Publisher</div>' + row['owner_division'] +
-                        '<div class="dataset-meta-label">Type</div>' + row['dataset_category'] +
-                    '</div>' +
+                '<div class="col-md-3 text-left attributes">' +
+                  '<div class="dataset-meta-label">Last Updated</div><span>' + getFullDate(row['metadata_modified'].split('-')) + '</span>' +
+                  '<div class="dataset-meta-label">Publisher</div><span>' + row['owner_division'] + '</span>' +
+                  '<div class="dataset-meta-label">Type</div><span>' + row['dataset_category'] + '</span>' +
                 '</div>' +
-                '<div class="row">' +
-                    '<div class="col-md-12 formats-available">' +
-                    '<h3 class="sr-only">Category available for: ' + row['title'] + '</h3><span class="badge badge-secondary">' + row['topic'] + '</span>' +
-                '</div>' +
+              '</div>' +
             '</div>');
 
         if (row['formats'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div>' + row['formats'].join(' | '));
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div><span>' + row['formats'].join(' | ') + '</span>');
+        }
+
+        if (row['topic'].length > 0) {
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topic</div><span>' + row['topic'] + '</span>');
         }
     }
 

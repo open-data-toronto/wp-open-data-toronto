@@ -133,7 +133,8 @@ function queryViews() {
 
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
                 } else {
-                    $('#btn-ckan').attr('href', viewURL);
+                    console.log(viewURL)
+                    $('#redirect-ckan').attr('href', viewURL);
                     exploreFound = true;
                 }
 
