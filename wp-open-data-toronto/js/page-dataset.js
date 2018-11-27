@@ -232,6 +232,11 @@ function buildUI() {
         $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
     });
 
+    $(window).on('resize', function() {
+        var w = $('#heading-preview').width();
+        $('iframe').width(w).height(0.647*w);
+    });
+
     $('a.collapsed:first').click();
     new ClipboardJS('#code-copy');
 
