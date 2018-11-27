@@ -70,10 +70,9 @@
                 <div class="col-md-12">
                   <h3>About <span data-field="title"><span></h3>
                   <br/>
+                  <p data-field="notes"></p>
                   <h2>Collection Method</h2>
                   <p data-field="collection_method"></p>
-                  <h2>Description</h2>
-                  <p data-field="notes"></p>
                   <h2>Limitations</h2>
                   <p data-field="limitations"></p>
                 </div>
@@ -87,10 +86,10 @@
                       <div class="card-header" id="heading-preview">
                         <h4 class="mb-0">
                           <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-preview" href="#collapse-preview" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-preview">
-                          Data Preview
-                          <span class="accordion-arrow">
-                            <span class="fa fa-chevron-down"></span>
-                          </span>
+                            Data Preview
+                            <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
                           </a>
                         </h4>
                       </div>
@@ -116,17 +115,7 @@
 
                       <div id="collapse-features" class="card-content collapse" role="tabpanel" aria-labelledby="heading-features">
                         <div class="row">
-                          <div class="col-md-12">
-                            <table class="table table-striped" id="table-features">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Column</th>
-                                  <th scope="col">Description</th>
-                                </tr>
-                              </thead>
-                              <tbody></tbody>
-                            </table>
-                          </div>
+                          <div id="content-features" class="col-md-12"></div>
                         </div>
                       </div>
                     </div>
@@ -162,7 +151,7 @@
                           Explore Data
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
-                          </span>  
+                          </span>
                           </a>
                         </h4>
                       </div>
@@ -177,7 +166,10 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-3 explore-column">
-                            <a href="#" id="redirect-ckan"><button href="#" class="btn btn-outline-primary" type="button" target="_blank"><span class="fa fa-area-chart"></span>&nbsp;Visualize <span class="sr-only"> Visualize data in new window</span></button></a>
+                            <button id="btn-ckan" class="btn btn-outline-primary" href="#" type="button" target="_blank">
+                              <span class="fa fa-area-chart"></span>&nbsp;Visualize
+                              <span class="sr-only"> Visualize data in new window</span>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -190,7 +182,7 @@
                           For Developers
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
-                          </span>  
+                          </span>
                           </a>
                         </h4>
                       </div>

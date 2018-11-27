@@ -136,30 +136,57 @@ function buildDownloads() {
     });
 }
 
-function buildExplore() {
+function getResourceViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
-        var results = response['result'],
-            viewURL = '#';
+        var results = response['result'];
 
         for (var i in results) {
-            var view = results[i];
-            if (view['view_type'] == 'recline_view') {
-                viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+            if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
+                var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'],
+                    w = $('#heading-preview').width(),
+                    h = w * (0.647);
+
+                $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                break;
+            } else if (config['package']['dataset_category'] == 'Table' && view['view_type'] == 'recline_view') {
+                var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + view['resource_id'] + '/view/' + view['id'];
+                $('#btn-ckan').attr('href', viewURL);
                 break;
             }
         }
-
-        $('#redirect-ckan').attr('href', viewURL);
     });
 }
 
-function buildFeatures() {
-    getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'] }, function(response) {
-        var fields = response['result']['fields'];
+function getDatastoreSearch() {
+    getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
+        var data = response['result']['records'],
+            fields = response['result']['fields'];
+
+        var previewTable = $('<table id="table-preview" class="table table-striped table-responsive">' +
+                               '<thead></thead>' +
+                               '<tbody></tbody>' +
+                             '</table>'),
+            featuresTable = $('<table class="table table-striped" id="table-features">' +
+                               '<thead><tr><th scope="col">Column</th><th scope="col">Description</th></tr></thead>' +
+                               '<tbody></tbody>' +
+                             '</table>');
 
         for (var i in fields) {
-            $('#table-features tbody').append('<tr><td>' + fields[i]['id'] + '</td><td></td></tr>');
+            previewTable.find('thead').append('<th>' + fields[i]['id'] + '</th>');
+            featuresTable.find('tbody').append('<tr><td>' + fields[i]['id'] + '</td><td></td></tr>');
         }
+
+        for (var i in data) {
+            var row = $('<tr></tr>');
+            for (var j in fields) {
+                row.append('<td>' + truncateString(data[i][fields[j]['id']], 30) + '</td>');
+            }
+
+            previewTable.find('tbody').append(row);
+        }
+
+        if (config['pacakge']['dataset_category'] == 'Table') $('#content-preview').append(previewTable);
+        $('#content-features').append(featuresTable);
 
         if (fields.length > 10){
             $('#table-features').DataTable({
@@ -172,70 +199,22 @@ function buildFeatures() {
                 ]
             });
 
-            $('table.dataTable').width($('#heading-features').width());
-            $('#collapse-features .dataTables_wrapper div.row:first').remove();
+            $('.dataTables_wrapper div.row:first').remove();
         }
     });
-}
-
-function buildPreview() {
-    var preview = config['package']['preview_resource'];
-
-    if (config['package']['dataset_category'] == 'Table') {
-        getCKAN('datastore_search', { 'resource_id': preview['id'], 'limit': 3 }, function(response) {
-            var data = response['result']['records'],
-                fields = response['result']['fields'];
-
-            $('#content-preview').append(
-                '<table id="table-preview" class="table table-striped table-responsive">' +
-                  '<thead></thead>' +
-                  '<tbody></tbody>' +
-                '</table>');
-
-            for (var i in data) {
-                var row = $('<tr></tr>');
-                for (var j in fields) {
-                    if (i == 0) {
-                        $('#content-preview thead').append('<th>' + fields[j]['id'] + '</th>');
-                    }
-
-                    row.append('<td>' + truncateString(data[i][fields[j]['id']], 30) + '</td>');
-                }
-
-                $('#content-preview tbody').append(row);
-            }
-        });
-    } else if (config['package']['dataset_category'] == 'Map') {
-        getCKAN('resource_view_list', { 'id': preview['id'] }, function(response) {
-            var results = response['result'];
-
-            for (var i in results) {
-                if (results[i]['view_type'] == 'recline_map_view') {
-                    var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'],
-                        w = $('#heading-preview').width(),
-                        h = w * (0.647);
-
-                    $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
-                    break;
-                }
-            }
-        });
-    }
 }
 
 function buildUI() {
     $('a.collapsed:first').click();
 
     if (config['package']['preview_resource'] != undefined) {
-        buildPreview();
-        buildFeatures();
-        buildExplore();
+        getDatastoreSearch();
+        getResourceViews();
     } else {
         $('#heading-preview, #heading-features, #heading-explore').parent('.card').find('.card-content')
             .addClass('inactive')
             .html('<div class=“not-available”>Not available for this dataset</div>');
     }
-
 
     buildDownloads();
     buildDevelopers();
@@ -257,7 +236,7 @@ function buildDataset(response) {
         }
     }
 
-    // Fill fields
+    // Fill metadata content from CKAN package fields
     $('[data-field]').each(function(idx) {
         var field = $(this).data('field');
         data['image_url'] = data['image_url'] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
@@ -278,9 +257,6 @@ function buildDataset(response) {
                     }
                     break;
                 case 'metadata_modified':
-                    var date = data[field];
-                    $(this).text(getFullDate(date.substring(0, 10).split('-')));
-                    break
                 case 'published_date':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
                     break
