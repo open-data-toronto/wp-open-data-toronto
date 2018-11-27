@@ -35,7 +35,7 @@ function createCommonContent() {
                                            '</tr>');
 
         if (resource['format'] == 'HTML') {
-            $('#table-resource tbody').last('tr').find('td:nth-child(3) button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
+            $('#table-resources tbody tr:last-child').find('td:nth-child(3) button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
         }
 
         if (config['package']['dataset_category'] == 'Map') {
@@ -43,7 +43,7 @@ function createCommonContent() {
                 $('#table-resources thead th:nth-child(2)').after('<th>Projection</th>');
             }
 
-            $('#table-resource tbody').last('tr').find('th:nth-child(2)').after(
+            $('#table-resources tbody tr:last-child').find('td:nth-child(2)').after(
                 '<span class="dropdown">' +
                   '<button class="btn btn-outline-primary dropdown-toggle select-download-projections" type="button" id="formatProjection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
                     'WGS84' +
