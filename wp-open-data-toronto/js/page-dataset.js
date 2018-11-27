@@ -162,8 +162,10 @@ function queryContents() {
                              '</table>');
 
         for (var i in fields) {
+            var columnDesc = ('info' in fields[i]) ? fields[i]['info']['notes'] : '';
+
             previewTable.find('thead').append('<th>' + fields[i]['id'] + '</th>');
-            featuresTable.find('tbody').append('<tr><td>' + fields[i]['id'] + '</td><td></td></tr>');
+            featuresTable.find('tbody').append('<tr><td>' + fields[i]['id'] + '</td><td>' + columnDesc + '</td></tr>');
         }
 
         for (var i in data) {
