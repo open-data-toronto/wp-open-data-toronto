@@ -44,7 +44,7 @@ function buildCatalogue(response) {
         var row = data['results'][i];
 
         $('.table-list').append(
-            '<div class="dataset row" id ="' + row['id'] + '">' +
+            '<div class="dataset card" id ="' + row['id'] + '">' +
               '<div class="row">' +
                 '<div class="col-md-9">' +
                   '<div class="col-md-12">' +

@@ -1045,6 +1045,10 @@ START OF CARLOS CHANGES (I think)
     border-radius: inherit !important;
 }
 
+.table-list .card {
+    border-radius: 0 0 0 0 !important;
+}
+
 /* DATASET PAGE */
 #dataset-accordion .card {
     border: 0;
