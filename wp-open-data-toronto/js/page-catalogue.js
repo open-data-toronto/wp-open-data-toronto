@@ -21,7 +21,7 @@ function buildCatalogue(response) {
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
     if (data['results'].length == 0) {
-        $('#results-count').html('<span>No datasets found for "' + state['filters']['search'] + '"</span>');
+        $('#results-count').html('No datasets found for "' + state['filters']['search'] + '"');
         $('.table-list').append('<div class="row">' +
                                   '<div class="col-md-12 not-found">' +
                                     '<p>Please try again or <a href="mailto:opendata@toronto.ca?' +
@@ -37,7 +37,7 @@ function buildCatalogue(response) {
             foundPhrase += 'for "' + state['filters']['search'] + '"';
         }
 
-        $('#results-count').html('<span>' + foundPhrase + '</span>');
+        $('#results-count').html(foundPhrase);
     }
 
     for (var i = 0; i < data['results'].length; i++) {
