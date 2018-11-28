@@ -40,7 +40,7 @@
                 <h5>Topic</h5>
               </div>
               <ul data-type="filter" data-field="topic" class="list-group list-group-flush" id="topic-values">
-                <li class="show-more list-group-item list-group-item-action" data-field="topic"><label></label></li>
+                <li class="show-more list-group-item list-group-item-action" data-field="topic"></li>
               </ul>
             </div>
 
@@ -49,7 +49,7 @@
                 <h5>Publisher</h5>
               </div>
               <ul data-type="filter" data-field="owner_division" class="list-group list-group-flush" id="owner_division-values">
-                <li class="show-more list-group-item list-group-item-action" data-field="owner_division"><label></label></li>
+                <li class="show-more list-group-item list-group-item-action" data-field="owner_division"></li>
               </ul>
             </div>
 
@@ -58,7 +58,7 @@
                 <h5>Type</h5>
               </div>
               <ul data-type="filter" data-field="dataset_category" class="list-group list-group-flush" id="dataset_category-values">
-                <li class="show-more list-group-item list-group-item-action" data-field="dataset_category"><label></label></li>
+                <li class="show-more list-group-item list-group-item-action" data-field="dataset_category"></li>
               </ul>
             </div>
 
@@ -67,7 +67,7 @@
                 <h5>Format</h5>
               </div>
               <ul data-type="filter" data-field="vocab_formats" class="list-group list-group-flush" id="vocab_formats-values">
-                <li class="show-more list-group-item list-group-item-action" data-field="vocab_formats"><label></label></li>
+                <li class="show-more list-group-item list-group-item-action" data-field="vocab_formats"></li>
               </ul>
             </div>
           </div>
