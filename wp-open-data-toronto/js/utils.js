@@ -81,7 +81,7 @@ function truncateString(original, size, clean) {
     }
 
     if (shorten != original) {
-        shorten += ' <small>...</small>';
+        shorten += ' ...';
     }
 
     return shorten;
