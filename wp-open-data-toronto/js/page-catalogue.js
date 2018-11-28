@@ -44,11 +44,11 @@ function buildCatalogue(response) {
         var row = data['results'][i];
 
         $('.table-list').append(
-            '<div class="dataset row" id ="' + row['id'] + '">' +
+            '<div class="dataset card" id ="' + row['id'] + '">' +
               '<div class="row">' +
                 '<div class="col-md-9">' +
                   '<div class="col-md-12">' +
-                    '<h2><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h2>' +
+                    '<h3><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h3>' +
                     '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                   '</div>' +
                 '</div>' +
