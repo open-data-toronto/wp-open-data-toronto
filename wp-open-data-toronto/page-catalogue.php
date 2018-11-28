@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-12">
           <!-- Breadcrumbs -->
-          <nav class="breadcrumb" aria-label="breadcrumbs">
+          <nav class="breadcrumb" aria-label="breadcrumbs" role="navigation">
             <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
             <a class="breadcrumb-item">
               <?php the_title();?></a>
@@ -109,7 +109,7 @@
             <!-- Datasets -->
             <div class="row table-list" aria-label="List of Datasets"></div>
             <div class="row">
-              <nav id="nav-catalogue" aria-label="Page Navigation">
+              <nav id="nav-catalogue" aria-label="Page navigation for dataset search results" role="navigation">
                 <ul class="pagination pagination-sm">
                   <li class="page-item page-keep">
                     <a class="page-link" href="#" aria-label="Go to previous page" data-page="previous">
