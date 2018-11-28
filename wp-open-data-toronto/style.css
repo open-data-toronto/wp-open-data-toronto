@@ -1036,6 +1036,7 @@ START OF CARLOS CHANGES (I think)
     margin: 0rem .8rem;
     right: 0;
     transform: translateY(-50%);
+    font-size: 100%;
 }
 
 #dataset-search-box input {
