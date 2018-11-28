@@ -241,7 +241,7 @@ function buildUI() {
     new ClipboardJS('#code-copy');
 
     config['isInitializing'] = false;
-    $('.block-hidden').fadeIn(250);
+    $('.block-hidden').css('visibility', 'visible');
 }
 
 function generateSnippets() {
@@ -294,6 +294,6 @@ function generateFormatDropdowns(options) {
 }
 
 function init(package_name) {
-    $('.block-hidden').hide();
+    $('.block-hidden').css('visibility', 'hidden');
     getCKAN('package_show', { 'id': package_name }, buildDataset);
 }

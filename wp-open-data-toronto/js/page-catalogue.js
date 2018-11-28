@@ -230,7 +230,7 @@ function buildStaticUI() {
     });
 
     config['isInitializing'] = false;
-    $('.block-hidden').fadeIn(250);
+    $('.block-hidden').css('visibility', 'visible');
 }
 
 function buildDynamicUI() {
@@ -322,6 +322,6 @@ function updateURL() {
 }
 
 function init() {
-    $('.block-hidden').hide();
+    $('.block-hidden').css('visibility', 'hidden');
     loadCatalogue();
 }
