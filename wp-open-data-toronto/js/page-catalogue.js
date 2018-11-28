@@ -218,6 +218,7 @@ function buildStaticUI() {
 
         state['page'] = 0;
         loadCatalogue();
+        $("#current-sort span").text($('#sort-results-by :selected').text())
     });
 
     $('.show-more').on('mouseenter mouseleave', function () {

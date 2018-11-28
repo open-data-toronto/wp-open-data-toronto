@@ -93,8 +93,9 @@
                 <form>
                   <div class="form-group row">
                     <label for="sort-results-by" class="col-sm-5 text-right col-form-label">Order by:</label>
+                    <div role="alert" class="sr-only" id="current-sort">Results currently ordered by <span>Last Updated</span></div>
                     <div class="col-sm-7">
-                      <select class="form-control" id="sort-results-by">
+                      <select class="form-control" id="sort-results-by" aria-label="Sorting method for catalogue search results">
                         <option value="metadata_modified desc">Last Updated</option>
                         <option value="relevance asc">Relevance</option>
                         <option value="name asc">Name</option>
