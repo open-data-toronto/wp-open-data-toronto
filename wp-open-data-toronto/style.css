@@ -987,10 +987,6 @@ START OF CARLOS CHANGES (I think)
     padding: .75rem !important;
 }
 
-.dataset-sidebar .filter-heading h5 {
-    font-weight: bold !important;
-}
-
 .dataset-sidebar li {
     padding: 0 !important;
 }
