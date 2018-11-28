@@ -196,20 +196,30 @@ function buildStaticUI() {
     });
 
     $('#btn-search').on('click', function() {
-        state['filters'] = {};
-        state['filters']['search'] = $('#input-search').val();
+        var value = $('#input-search').val();
 
-        state['page'] = 0;
-        loadCatalogue();
-    });
-
-    $('#input-search').on('keyup', function(evt) {
-        if (evt.keyCode == 13) {
+        if (value.length > 0 && value.match(/^[0-9a-z]+$/)) {
             state['filters'] = {};
             state['filters']['search'] = $('#input-search').val();
 
             state['page'] = 0;
             loadCatalogue();
+        }
+    });
+
+    $('#input-search').on('keyup', function(evt) {
+        var value = $(this).val();
+
+        if (value.length > 0 && !value.match(/^[0-9a-z]+$/)) {
+            $(this).parents('.input-group').addClass('has-danger');
+            $('#search-error').html('<strong>Input contains non-alphanumeric characters</strong>');
+        } else {
+            $(this).parents('.input-group').removeClass('has-danger');
+            $('#search-error').empty();
+
+            if (evt.keyCode == 13) {
+                $('#btn-search').click();
+            }
         }
     });
 
