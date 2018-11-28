@@ -1021,8 +1021,8 @@ START OF CARLOS CHANGES (I think)
     display: none;
 }
 
-.dataset-sidebar .show-more label {
-    padding: 0 !important;
+.dataset-sidebar .show-more a {
+    margin: 0 auto;
 }
 
 .not-found {

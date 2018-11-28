@@ -21,7 +21,7 @@ function buildCatalogue(response) {
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
     if (data['results'].length == 0) {
-        $('#results-count').html('<span>No datasets found for "' + state['filters']['search'] + '"</span>');
+        $('#results-count').html('No datasets found for "' + state['filters']['search'] + '"');
         $('.table-list').append('<div class="row">' +
                                   '<div class="col-md-12 not-found">' +
                                     '<p>Please try again or <a href="mailto:opendata@toronto.ca?' +
@@ -37,7 +37,7 @@ function buildCatalogue(response) {
             foundPhrase += 'for "' + state['filters']['search'] + '"';
         }
 
-        $('#results-count').html('<span>' + foundPhrase + '</span>');
+        $('#results-count').html(foundPhrase);
     }
 
     for (var i = 0; i < data['results'].length; i++) {
@@ -150,7 +150,7 @@ function buildSidebar(response) {
             }
         }
 
-        if (sidebar.length === 0){
+        if (sidebar.length === 0) {
             $('#' + field['title'] + '-values').prepend(
                 '<li class="list-group-item filter-value">' +
                   '<label>' +
@@ -160,15 +160,15 @@ function buildSidebar(response) {
         };
 
         var numFilters = sidebarEle.find('li').length - 1;
-        if (numFilters > config['filterSize']){
+        if (numFilters > config['filterSize']) {
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
-            showMoreButton.find('label').html('[+] ' + (numFilters - config['filterSize']) + ' more');
+
+            showMoreButton.html('<a href="#">[+] ' + (numFilters - config['filterSize']) + ' more</a>');
             showMoreButton.show();
         } else {
             showMoreButton.hide();
         }
     }
-
 
     $('#sort-results-by').val(state['sort']);
     if (state['filters']['search'] != null) {
@@ -222,7 +222,9 @@ function buildStaticUI() {
 
     $('.show-more').on('mouseenter mouseleave', function () {
         $(this).find('label').toggleClass('on-hover');
-    }).on('click', function() {
+    }).on('click', function(evt) {
+        evt.preventDefault();
+
         $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('sr-only');
 
         var labelText = $(this).siblings('li.sr-only').length ? '[+] ' + ($(this).siblings('li').length - config['filterSize']) + ' more' : '[-] Show less';
