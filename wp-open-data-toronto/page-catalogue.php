@@ -78,7 +78,7 @@
             <!-- Dataset Search Area -->
             <div class="row" id="dataset-search-box">
               <div class="input-group" aria-label="Search the Open Data Catalogue">
-                <label for="search" class="sr-only">Search Dataset</label>
+                <label for="input-search" class="sr-only">Search Dataset</label>
                 <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets" aria-label="Search datasets"/>
                 <span class="input-group-btn">
                   <button id="btn-search" class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
