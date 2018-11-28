@@ -133,7 +133,7 @@ function queryViews() {
 
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
                 } else {
-                    $('#btn-ckan').attr('href', viewURL);
+                    $('#redirect-ckan').attr('href', viewURL);
                     exploreFound = true;
                 }
 
@@ -230,6 +230,11 @@ function buildUI() {
     $('.dropdown-item').on('click', function(){
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
+    });
+
+    $(window).on('resize', function() {
+        var w = $('#heading-preview').width();
+        $('iframe').width(w).height(0.647*w);
     });
 
     $('a.collapsed:first').click();
