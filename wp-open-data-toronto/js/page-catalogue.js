@@ -292,6 +292,11 @@ function loadCatalogue() {
         }
     }
 
+    if (state['filters'] && state['filters']['search']) {
+        state['filters']['search'] = DOMPurify.sanitize(state['filters']['search'])
+        console.log(state['filters']['search'])
+    };
+
     getCKAN('catalogue_search', $.extend(true, {
         'type': 'full',
         'rows': config['datasetsPerPage'],

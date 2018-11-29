@@ -61,6 +61,9 @@ function theme_enqueue_scripts() {
     wp_register_script( 'copyjs', 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js' );
     wp_enqueue_script( 'copyjs' );
 
+    wp_register_script( 'dompurify', 'https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.8/purify.min.js' );
+    wp_enqueue_script( 'dompurify' );
+
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
