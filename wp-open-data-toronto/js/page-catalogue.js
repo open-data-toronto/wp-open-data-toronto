@@ -198,7 +198,7 @@ function buildStaticUI() {
     $('#btn-search').on('click', function() {
         var value = $('#input-search').val();
 
-        if (value.length > 0 && value.toLowerCase().match(/^[0-9a-z]+$/)) {
+        if ((value.length > 0 && value.toLowerCase().match(/^[0-9a-z]+$/) || (value.length === 0))) {
             state['filters'] = {};
             state['filters']['search'] = $('#input-search').val();
 
