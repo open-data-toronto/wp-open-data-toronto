@@ -198,7 +198,7 @@ function buildStaticUI() {
     $('#btn-search').on('click', function() {
         var value = $('#input-search').val();
 
-        if (value.length > 0 && value.match(/^[0-9a-z]+$/)) {
+        if (value.length > 0 && value.toLowerCase().match(/^[0-9a-z]+$/)) {
             state['filters'] = {};
             state['filters']['search'] = $('#input-search').val();
 
@@ -210,7 +210,7 @@ function buildStaticUI() {
     $('#input-search').on('keyup', function(evt) {
         var value = $(this).val();
 
-        if (value.length > 0 && !value.match(/^[0-9a-z]+$/)) {
+        if (value.length > 0 && !value.toLowerCase().match(/^[0-9a-z]+$/)) {
             $(this).parents('.input-group').addClass('has-danger');
             $('#search-error').html('<strong>Input contains non-alphanumeric characters</strong>');
         } else {
