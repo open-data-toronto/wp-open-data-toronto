@@ -154,7 +154,7 @@ function buildSidebar(response) {
             $('#' + field['title'] + '-values').prepend(
                 '<li class="list-group-item filter-value">' +
                   '<label>' +
-                    '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h5').text().toLowerCase() + 's for this search' + '</span>' +
+                    '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
                   '</label>' +
                 '</li>')
         };
