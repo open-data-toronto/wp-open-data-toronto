@@ -1057,15 +1057,16 @@ START OF CARLOS CHANGES (I think)
 }
 
 #dataset-accordion .card-header {
-    border-bottom: 1px solid rgba(0, 0, 0, .50);
+    border: 1px solid #ccc;
     border-radius: inherit;
-    padding: 0;
-    background: transparent !important;
+    background: transparent !important
+    margin-bottom: -1px;
+    padding: 0px;
 }
 
 #dataset-accordion .card-header h4 a {
     display: block;
-    padding: 1rem 1rem;
+    padding: 10px;
     font-weight: bold;
 }
 /* logic for hovering through card headers for expand/collapse */
@@ -1085,13 +1086,17 @@ span.fa{
 
 /* accordion cards: Defaults  */
 #dataset-accordion .card-content {
-    padding: 10px;
+    padding: 30px 20px;
     margin-bottom: 1em;
+    border: 1px solid #ccc;
 }
 
 #dataset-accordion .card-content.inactive {
     background: #F5F5F5;
     font-style: italic;
+}
+.dataset-meta-label:first-child{
+  padding-top: 0;
 }
 
 #dataset-accordion table:not(hljs-ln) {
