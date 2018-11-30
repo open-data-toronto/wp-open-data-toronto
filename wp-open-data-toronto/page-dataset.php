@@ -31,8 +31,9 @@
           <div class="col-md-3 dataset-sidebar">
             <div class="about-dataset">
               <div class="card">
+                <h2 class="sr-only">Dataset Details</h2>
                 <div class="card-header filter-heading">
-                  <h5><i class="fa fa-database"></i>&nbsp; Details</h5>
+                  <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
                   <dt>Last updated<span class="sr-only">: </span></dt>
@@ -51,7 +52,7 @@
               </div>
               <div class="card">
                 <div class="card-header filter-heading">
-                  <h5><i class="fa fa-user"></i>&nbsp; Publisher</h5>
+                  <h3><span class="fa fa-user"></span>&nbsp; Publisher</h3>
                 </div>
                 <dl>
                   <dt>Published by<span class="sr-only">: </span></dt>
@@ -68,30 +69,31 @@
             <div id="description-dataset">
               <div class="row">
                 <div class="col-md-12">
-                  <h3>About <span data-field="title"><span></h3>
+                  <h2>About <span data-field="title"><span></h2>
                   <br/>
                   <p data-field="notes"></p>
-                  <h2>Collection Method</h2>
+                  <h3>Collection Method</h3>
                   <p data-field="collection_method"></p>
-                  <h2>Limitations</h2>
+                  <h3>Limitations</h3>
                   <p data-field="limitations"></p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
+
                   <!-- Collapse Area -->
                   <div id="dataset-accordion" aria-multiselectable="true">
                     <div class="card">
                       <div class="card-header" id="heading-preview">
-                        <h4 class="mb-0">
+                        <h3 class="mb-0">
                           <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-preview" href="#collapse-preview" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-preview">
                             Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
 
                       <div id="collapse-preview" class="card-content collapse" role="tabpanel" aria-expanded="true" aria-labelledby="heading-preview">
@@ -103,14 +105,14 @@
 
                     <div class="card">
                       <div class="card-header" id="heading-features">
-                        <h4 class="mb-0">
+                        <h3 class="mb-0">
                           <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-features" href="#collapse-features" aria-controls="collapse-download">
                           Column Descriptions
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
                           </span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
 
                       <div id="collapse-features" class="card-content collapse" role="tabpanel" aria-labelledby="heading-features">
@@ -122,14 +124,14 @@
 
                     <div class="card">
                       <div class="card-header" id="heading-download">
-                        <h4 class="mb-0">
+                        <h3 class="mb-0">
                           <a class="collapsed" data-toggle="collapse" data-target="#collapse-download" href="#collapse-download" data-parent="dataset-accordion" role="button" aria-expanded="true" aria-controls="collapse-download">
                           Download Data
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
                           </span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
 
                       <div id="collapse-download" class="card-content collapse" aria-labelledby="heading-download">
@@ -153,14 +155,14 @@
 
                     <div class="card">
                       <div class="card-header" id="heading-explore">
-                        <h4 class="mb-0">
+                        <h3 class="mb-0">
                           <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-explore" href="#collapse-explore" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-explore">
                           Explore Data
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
                           </span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
 
                       <div id="collapse-explore" class="card-content collapse" role="tabpanel" aria-labelledby="heading-explore">
@@ -186,14 +188,14 @@
 
                     <div class="card">
                       <div class="card-header" id="heading-developers">
-                        <h4 class="mb-0">
+                        <h3 class="mb-0">
                           <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-developers" href="#collapse-developers" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-developers">
                           For Developers
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
                           </span>
                           </a>
-                        </h4>
+                        </h3>
                       </div>
 
                       <div id="collapse-developers" class="card-content collapse" role="tabpanel" aria-labelledby="heading-developers">
