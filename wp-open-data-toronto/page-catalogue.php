@@ -34,7 +34,7 @@
         <!-- Sidebar -->
         <div class="col-md-3" id="filter-sidebar">
           <div class="dataset-sidebar">
-
+<h2 class="sr-only">Dataset Filters</h2>
             <div class="card" id="topic-filter">
               <div class="card-header filter-heading">
                 <h3>Topic</h3>
@@ -111,6 +111,7 @@
             <!-- End Dataset Search Area -->
 
             <!-- Datasets -->
+            <h2 class="sr-only">List of datasets available</h2>
             <div class="row table-list" aria-label="List of Datasets"></div>
             <div class="row">
               <nav id="nav-catalogue" aria-label="Page navigation for dataset search results" role="navigation">
