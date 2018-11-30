@@ -1,7 +1,7 @@
 /*
 Theme Name:      WP Open Data Toronto
 Description:     Theme created to integrate CKAN with WP
-Author:          Sidra Mahmood, Yizhao Tan, Carlos Hernandez
+Author:          Sidra Mahmood & Yizhao Tan
 Template:        wp-bootstrap-starter
 Version:         1.2.0
 -------------------------------------------------------------- */
@@ -272,6 +272,7 @@ header#masthead{background: 0;}ul.status{padding:0;margin:15px 0 25px 0;list-sty
     text-align: center;
     padding: 10px 0 30px 0;
 }
+h3{font-size: 19px}
 h2.lead {
     font-size: 30px;
     width: 100%;
@@ -345,7 +346,7 @@ ul.pagination a:visited{
   color: #175787;
 }
 
-ul.pagination a:hover{
+ul.pagination a:hover {
   font-weight: 500;
   font-family: 'Roboto';
   color: #fff;
@@ -469,14 +470,27 @@ button.btn.btn-default {
     background: #1594a3;
 }
 
-button.btn{
+button.btn.btn-primary{
     border: 0;
     background: #0e626b;
     color: #fff;
     font-weight: bold;
 }
-.btn{
+
+button.btn.btn-outline-primary{
+    border-color: #0e626b;
+    background: white;
+    color: #0e626b;
+    font-weight: bold;
 }
+
+button.btn.btn-outline-primary:hover{
+    border-color: #0e626b;
+    background: #0e626b;
+    color: white;
+    font-weight: bold;
+}
+
 a.btn.btn-md {
     color: #ffffff;
     background: #165788;
@@ -539,8 +553,8 @@ a.btn.btn-md {
     background: #fff;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-} */
-/* .card{
+}
+.card{
     border: 0;
     border-radius: none;
     }
@@ -969,65 +983,268 @@ START OF CARLOS CHANGES (I think)
     margin-bottom: 1.25rem;
 }
 
-.dataset-sidebar .filter-heading{
+.dataset-sidebar .filter-heading {
     background: #f5f5f5;
     padding: .75rem !important;
-    border-bottom: 0;
 }
 
-.dataset-sidebar .filter-heading h5{
-    font-weight: bold !important;
-}
-
-.dataset-sidebar li{
+.dataset-sidebar li {
     padding: 0 !important;
 }
 
+.dataset-sidebar ul li:first-of-type {
+    border-top: 0 !important;
+}
+
 .dataset-sidebar label,
-.dataset-sidebar dl{
+.dataset-sidebar dl {
     padding: .5rem .8rem;
     margin: 0;
     width: 100%;
     font-size: .8rem !important;
 }
 
-.dataset-sidebar .show-more{
+.dataset-sidebar .show-more {
     text-align: center;
     background: #F5F5F5;
 }
 
-.filter-value .checkbox-checked{
+.filter-value .checkbox-checked {
     background: #666666;
     color: #F5F5F5 !important;
 }
 
-.checkbox-checked span.badge{
+.checkbox-checked span.badge {
     display: none;
 }
 
-.dataset-sidebar .show-more label{
-    padding: 0 !important;
+.dataset-sidebar .show-more a {
+    margin: 0 auto;
 }
 
 .not-found {
     padding: 1em;
 }
 
-.filter-value label .badge{
+.filter-value label .badge {
     background: #666666;
     position: absolute;
     top: 50%;
     margin: 0rem .8rem;
     right: 0;
     transform: translateY(-50%);
+    font-size: 100%;
 }
 
-.show-more .on-hover{
+#dataset-search-box input {
+    border-radius: calc(.25rem - 1px) 0 0 calc(.25rem - 1px) !important;
+}
+
+.show-more .on-hover {
     color: #F5F5F5;
     background: #666666;
     border-radius: inherit !important;
 }
 
+.table-list .card {
+    border-radius: 0 0 0 0 !important;
+margin: 0 0 15px 0;
+box-shadow: 1px 1px 2px #cccccc;
+}
+.table-list .dataset:first-child{
+border-top: 0px;
+margin-top: -1px;
+}
+
+
+/* DATASET PAGE */
+#dataset-accordion .card {
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+}
+
+#dataset-accordion .card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, .50);
+    border-radius: inherit;
+    padding: 0;
+    background: transparent !important;
+}
+
+#dataset-accordion .card-header h4 a {
+    display: block;
+    padding: 1rem 1rem;
+    font-weight: bold;
+}
+/* logic for hovering through card headers for expand/collapse */
+#dataset-accordion .card-header a {
+    background-color: transparent !important;
+}
+
+span.fa{
+    transition: none !important;
+}
+
+#dataset-accordion .card-header a:hover {
+    color: #F5F5F5 !important;
+    background-color: #165788 !important;
+    transition: all 0.5s ease !important;
+}
+
+/* accordion cards: Defaults  */
+#dataset-accordion .card-content {
+    padding: 10px;
+    margin-bottom: 1em;
+}
+
+#dataset-accordion .card-content.inactive {
+    background: #F5F5F5;
+    font-style: italic;
+}
+
+#dataset-accordion table:not(hljs-ln) {
+    margin: 0 !important;
+    font-size: 14px;
+}
+
+#dataset-accordion table:not(.hljs-ln) th {
+    border-top: 0 !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+#dataset-accordion table:not(.hljs-ln) th:first-of-type {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+#dataset-accordion table:not(.hljs-ln) th:last-of-type {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+}
+
+#dataset-accordion table:not(.hljs-ln) td {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+#dataset-accordion td:nth-child(2n+1) {
+    padding-left: 20px !important;
+}
+
+#dataset-accordion .accordion-arrow {
+    display: inline-block;
+    margin: 0 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    float: right;
+}
+
+/*  accordion card overrides: Explore Data */
+#dataset-accordion .explore-line:visbile {
+    margin: 0 !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+#dataset-accordion .explore-line:visbile:nth-child(odd) {
+    border-top: 1px solid rgba(0, 0, 0, .125);
+}
+
+#dataset-accordion .explore-column,
+#dataset-accordion .explore-img {
+    text-align: center !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+}
+
+/* accordion card overrides: Dataset Features */
+#collapse-features .dataTables_wrapper div.row:last-of-type {
+    padding: 0 20px !important;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    font-size: 14px;
+}
+
+#dataset-accordion #collapse-features table {
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+/* accordion card overrides: Get Data */
+#dataset-accordion #collapse-download td {
+    vertical-align: middle;
+}
+
+#dataset-accordion #table-resources {
+    margin: 0;
+}
+
+#dataset-accordion #table-resources th:first,
+#dataset-accordion #table-resources td:nth-child(3n+1) {
+    text-align: left !important;
+}
+
+#dataset-accordion #table-resources th:nth-child(n+2),
+#dataset-accordion #table-resources td:nth-child(1n+2) {
+    text-align: center !important;
+}
+
+#dataset-accordion .dropdown-item.selected {
+    font-weight: bold;
+}
+
+#dataset-accordion .dropdown-item.selected:hover {
+    background: transparent;
+}
+
+#dataset-accordion .dropdown-item:not(.selected):hover {
+    cursor: pointer;
+}
+
+/* accordion card overrides: For Developers */
+#api-examples pre {
+    background: #FFFFFF;
+    border-left: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-right: 1px solid rgba(0, 0, 0, .125);
+}
+
+#api-examples code {
+    background: #FFFFFF;
+    padding:0 ;
+}
+
+#api-examples code tr:nth-child(even) {
+    background: #F5F5F5;
+}
+
+#api-examples code td {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#api-examples code td.hljs-ln-numbers {
+    border-right: 2px solid rgba(0, 0, 0, .125);
+    padding: 0.2em 0.3em !important;
+    vertical-align: top;
+}
+
+#api-examples code td.hljs-ln-code {
+    padding: 0.2em 0.3em !important;
+    white-space: pre-wrap;
+}
+
+#dataset-accordion #collapse-developers h5 {
+    padding-bottom: 1em;
+}
+
+#dataset-accordion #collapse-developers #code-copy {
+    float: right;
+}
 
 /**
 END OF CARLOS CHANGES
@@ -1145,26 +1362,16 @@ table.border{
 }
 .table-list .dataset {
     border-bottom: 1px solid #ccc;
-    padding: 1.3em 1em;
+    padding:1.3em 1em;
     margin-right: 0;
     margin-left: 0;
 }
-.table-list .dataset:first-child {
-    border-top: 0px;
-    margin-top: -1px;
-}
-.table-list .card {
-    border-radius: 0 0 0 0 !important;
-    margin: 0 0 15px 0;
-    box-shadow: 1px 1px 2px #ccc;
-}
 
-.table-list {
+.table-list{
     display: block;
     border-top: 2px solid #ccc;
     margin-bottom: 1em;
 }
-
 .table-list h2 a:visited,
 .table-list h2 a:link{
     color: #155687 !important;
@@ -1188,7 +1395,7 @@ table.border{
     padding: 10px 0
 }
 .attributes {
-    font-size: 11px !important;
+    font-size: 13px !important;
 }
 .category-filter li, .format-filter li, .division-filter li{
     margin: 0;
@@ -1405,11 +1612,7 @@ ul.post-list li {
 h4.card-title {
     font-size: 20px;
 }
-.accordion-arrow {
-    display: inline-block;
-    float: right;
-    margin: 0 5px;
-}
+
 
 span.fa.fa-chevron-down {
     transform: rotate(180deg);
@@ -1602,13 +1805,6 @@ table.download-table {
 .alert{
     margin-bottom: 0 !important;
     border-radius: 0 !important;
-}
-.explore-line{
-    border-bottom: 1px solid #ddd;
-    margin: 0px 15px 29px 15px;
-}
-.explore-line:last-child{
-    border-bottom: 0;
 }
 
 /** Device Specific **/
