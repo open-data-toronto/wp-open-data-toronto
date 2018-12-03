@@ -121,13 +121,13 @@
                   <li class="page-item page-keep">
                     <a class="page-link" href="#" aria-label="Go to previous page" data-page="previous">
                       <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
+                      <span class="sr-only">Go to previous page</span>
                     </a>
                   </li>
                   <li class="page-item page-keep">
                     <a class="page-link" href="#" aria-label="Go to next page" data-page="next">
                       <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
+                      <span class="sr-only">Go to next page</span>
                     </a>
                   </li>
                 </ul>
