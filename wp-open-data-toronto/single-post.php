@@ -48,7 +48,7 @@
         <div class="col-md-12">
           <div class="banner" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>) !important">
             <div class="background">
-              <h1><?php the_title(); ?></h1>
+              <h1><span class="sr-only">Blog article: </span><?php the_title(); ?></h1>
             </div>
           </div>
         </div>
@@ -57,8 +57,9 @@
       <div class="row">
         <div class="col-md-3 hide-full-length">
           <!-- Sidebar Content -->
-          <div class="blog-sidebar" role="complimentary">
-            <h2>Latest posts</h2>
+          <div class="blog-sidebar" role="complementary">
+            <h2 class="sr-only">Explore Open Data Blog</h2>
+            <h3>Latest posts</h3>
             <ul class="post-list">
               <?php
               $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
@@ -74,7 +75,7 @@
             </ul>
             <br/>
 
-            <h2>Categories</h2>
+            <h3>Categories</h3>
             <ul class="post-list">
               <?php
               wp_list_categories([
@@ -87,7 +88,7 @@
             </ul>
             <br/>
 
-            <h2>Complexity</h2>
+            <h3>Complexity</h3>
             <ul class="post-list">
               <?php
               $tags = get_tags();
@@ -105,7 +106,7 @@
             </ul>
             <br/>
 
-            <h2>Author</h2>
+            <h3>Author</h3>
             <ul class="post-list">
               <!-- List authors -->
               <?php wp_list_authors(); ?>
@@ -114,6 +115,7 @@
         </div>
 
         <div class="col-md-9 show-full-length">
+          <h2 class="sr-only">Article text</h2>
           <?php
           while ( have_posts() ) :
             the_post();
