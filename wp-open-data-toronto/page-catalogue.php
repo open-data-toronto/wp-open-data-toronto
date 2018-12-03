@@ -73,7 +73,7 @@
           </div>
         </div>
         <!-- End Sidebar -->
-        <div class="col-md-9" id="data-catalogue">
+        <div class="col-md-9" id="data-catalogue" id="content">
           <div class="container-fluid">
             <!-- Dataset Search Area -->
             <div class="row" id="dataset-search-box">

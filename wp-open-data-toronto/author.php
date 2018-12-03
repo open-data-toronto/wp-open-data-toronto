@@ -91,7 +91,7 @@
         </div>
         <div class="col-md-9">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" id="content">
               <?php while ( have_posts() ) : the_post(); ?>
               <div class="single-long-post">
                 <div class="row">

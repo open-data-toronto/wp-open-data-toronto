@@ -89,7 +89,7 @@
 
         <!-- Main Post Listing -->
         <div class="col-md-9">
-          <section class="main-post-listing"  aria-label="Blog Posts">
+          <section class="main-post-listing"  aria-label="Blog Posts" id="content">
             <?php
             $the_query = new WP_Query( array( 'posts_per_page' => 1, 'category_name' => 'featured') );
 

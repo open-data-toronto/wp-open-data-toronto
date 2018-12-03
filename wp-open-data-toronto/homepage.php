@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <section id="about" aria-label="About City of Toronto Open Data">
+      <section id="about" aria-label="About City of Toronto Open Data" id="content">
         <div class="container">
           <div class="row">
             <div class="col-md-5">

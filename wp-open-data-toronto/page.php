@@ -63,7 +63,7 @@
           </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9" id="content">
           <div class="show-full-length">
             <div class="main-content">
             <!-- Query page content-->

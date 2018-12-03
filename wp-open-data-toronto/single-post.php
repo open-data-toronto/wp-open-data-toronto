@@ -114,7 +114,7 @@
           </div>
         </div>
 
-        <div class="col-md-9 show-full-length">
+        <div class="col-md-9 show-full-length" id="content">
           <h2 class="sr-only">Article text</h2>
           <?php
           while ( have_posts() ) :

@@ -65,7 +65,7 @@
           </div>
 
             <!-- Main Content Area -->
-          <div class="col-md-9">
+          <div class="col-md-9" id="content">
             <div id="description-dataset">
               <div class="row">
                 <div class="col-md-12">

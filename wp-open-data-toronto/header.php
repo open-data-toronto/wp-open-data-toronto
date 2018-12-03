@@ -103,6 +103,6 @@
         </div>
       </div>
 
-      <main id="content" class="site-content">
+      <main class="site-content">
         <div class="container">
            <div class="row">

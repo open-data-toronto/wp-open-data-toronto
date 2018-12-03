@@ -5,7 +5,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="page-content">
+          <div class="page-content" id="content">
             <div class="large heading">404</div>
             <div class="subtext">Oops, we can't find that page. Either something went wrong, or the page doesn't exist anymore. Please try another page.</div>
           </div>

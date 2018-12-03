@@ -31,7 +31,7 @@
           </div>
 
           <div class="col-md-9">
-            <div class="main-content">
+            <div class="main-content" id="content">
               <?php
               $allUsers = get_users('orderby=post_count&order=ASC&exclude=8'); $users = array();
 
