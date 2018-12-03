@@ -29,7 +29,8 @@
           <!-- Sidebar Content -->
           <section class="single-sidebar" aria-label="Blog Content Sidebar">
             <div class="blog-sidebar">
-              <h2>Latest posts</h2>
+              <h2>Explore posts</h2>
+              <h3>Latest posts</h3>
               <ul class="post-list">
                 <?php
                 $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
@@ -46,7 +47,7 @@
                </ul>
               <br/>
 
-              <h2>Categories</h2>
+              <h3>Categories</h3>
               <ul class="post-list">
                 <?php
                 wp_list_categories([
@@ -59,7 +60,7 @@
                </ul>
               <br/>
 
-              <h2>Complexity</h2>
+              <h3>Complexity</h3>
               <ul class="post-list">
                 <?php
                 $tags = get_tags();
@@ -77,7 +78,7 @@
               </ul>
               <br/>
 
-              <h2>Author</h2>
+              <h3>Author</h3>
               <ul class="post-list">
                 <!-- List authors -->
                 <?php wp_list_authors(); ?>
@@ -196,41 +197,6 @@
               </div>
             </div>
 
-            <!-- Section 2. Showcase -->
-            <div class="blog-post-list">
-              <h2>News &amp; Updates</h2>
-              <?php
-              $the_query = new WP_Query( array( 'posts_per_page' => 20, 'category_name' => 'news' ) );
-              if ( $the_query->have_posts() ) :
-                while ( $the_query->have_posts() ) :
-                  $the_query->the_post();
-              ?>
-              <div class="single-long-post">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div>
-                  </div>
-                  <div class="col-md-8">
-                    <a href="<?php the_permalink(); ?>">
-                      <h3><?php the_title() ;?></h3>
-                    </a>
-                    <div class="attributes">
-                      <?php the_date(); ?> by <?php the_author(); ?>
-                    </div>
-                    <p><?php the_excerpt(); ?></p>
-                  </div>
-                </div>
-              </div>
-              <?php
-                endwhile;
-              wp_reset_postdata();
-              else :
-              ?>
-              <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-              <?php endif; ?>
-
-            </div>
-            <!-- End Section 2 -->
           </section>
         </div>
       </div>
