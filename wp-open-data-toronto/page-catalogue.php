@@ -82,8 +82,10 @@
                 <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets" aria-label="Search datasets"/>
 
                 <span class="input-group-btn">
-                  <label for="btn-search" class="sr-only">Search dataset</label>
-                  <button id="btn-search" class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
+                  <button id="btn-search" class="btn btn-primary" type="submit">
+                    <span class="sr-only">Search datasets</span>
+                    <span class="fa fa-search"></span>
+                  </button>
                 </span>
               </div>
               <small id="search-error" class="text-danger"></small>
