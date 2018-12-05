@@ -696,6 +696,11 @@ footer#footer{
 6. Homepage Template
 **/
 
+.page-template-homepage main.site-content{
+  border-top: 1px solid #ececec;
+  box-shadow: 1px 1px 10px #ccc;
+}
+
 .hero .jumbotron{
     padding: 8rem 2rem 10rem 2rem;
 }
