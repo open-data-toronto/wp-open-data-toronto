@@ -81,7 +81,7 @@ function buildDataset(response) {
                                              '</td>' +
                                            '</tr>');
 
-        if (resource['format'] == 'HTML') {
+        if (['HTML', 'Web', 'JSP'].indexOf(resource['format']) > -1 ) {
             $('#table-resources tbody tr:last-child').find('td:nth-child(3) button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
         }
 
