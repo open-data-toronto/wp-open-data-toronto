@@ -2,7 +2,9 @@ $.extend(config, {
     'isInitializing': true,
     'formatOptions': {
         'Map': ['CSV', 'GeoJSON', 'SHP'],
-        'Table': ['CSV', 'JSON', 'XML']
+        'Table': ['CSV', 'JSON', 'XML'],
+        'Document': ['CSV', 'JSON', 'XML'],
+        'Website': ['CSV', 'JSON', 'XML']
     },
     'package': {}
 });
