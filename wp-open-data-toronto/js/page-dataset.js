@@ -93,10 +93,10 @@ function buildDataset(response) {
             $('#table-resources tbody tr:last-child').find('td:nth-child(2)').after(
                 '<td>' +
                   '<span class="dropdown">' +
-                    '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdown-projections" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
+                    '<button class="btn btn-outline-primary dropdown-toggle select-download-projection" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
                       'WGS84' +
                     '</button>' +
-                    '<div class="dropdown-menu" aria-labelledby="dropdown-projections">' +
+                    '<div class="dropdown-menu" aria-labelledby="select-download-projection">' +
                       '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
                       '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
                     '</div>' +
@@ -220,8 +220,8 @@ function buildUI() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents('tr').find('button').data('selection'),
-                proj = $(this).parents('tr').find('.select-download-projections').data('selection');
+            var format = $(this).parents('tr').find('.select-download-format').attr('data-selection'),
+                proj = $(this).parents('tr').find('.select-download-projection').attr('data-selection');
 
             link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
         }
@@ -231,7 +231,7 @@ function buildUI() {
 
     $('.dropdown-item').on('click', function(){
         $(this).siblings().removeClass('selected');
-        $(this).addClass('selected').parents().eq(1).find('button').data('selection', $(this).data('selection')).text($(this).text());
+        $(this).addClass('selected').parents().eq(1).find('button').attr('data-selection', $(this).attr('data-selection')).text($(this).text());
     });
 
     $(window).on('resize', function() {
@@ -276,7 +276,7 @@ function generateSnippets() {
 function generateFormatDropdowns(options) {
     var dropdown = $('<div class="placeholder">' +
                        '<span class="dropdown">' +
-                         '<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdown-format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                         '<button class="btn btn-outline-primary dropdown-toggle select-download-format" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                          '</button>' +
                          '<div class="dropdown-menu" aria-labelledby="dropdown-format">' +
                          '</div>' +
@@ -285,12 +285,10 @@ function generateFormatDropdowns(options) {
 
     for (var i in options) {
         dropdown.find('.dropdown-menu').append('<span class="dropdown-item" data-selection="' + options[i].toLowerCase() + '">' + options[i] + '</span>');
-
-        if (i == 0) {
-            dropdown.find('button').data('selection', options[0].toLowerCase()).html(options[0]);
-            dropdown.find('span').addClass('selected');
-        }
     }
+    
+    dropdown.find('button').attr('data-selection', options[0].toLowerCase()).html(options[0]);
+    dropdown.find('span:first').addClass('selected');
 
     return dropdown.html();
 }
