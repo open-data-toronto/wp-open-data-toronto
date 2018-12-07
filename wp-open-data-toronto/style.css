@@ -1349,17 +1349,17 @@ ul.status li{
          padding: 0 !important;
     }
      p{
-         font-size: 13px !important;
+         font-size: 15px !important;
+         padding: 0 15px;
     }
      section#about h2{
          margin-top: 40px;
     }
      a.btn.btn-md {
-         float: left;
          margin: 2px 0 3px 0;
     }
      section#data-stories .jumbotron {
-         height: 330px !important 
+         height: 430px !important 
     }
      #pages h2 {
          margin-top: 30px;
@@ -1367,5 +1367,20 @@ ul.status li{
     }
      .time{
          text-align: left !important 
+    }
+    .banner{
+        height: 10rem;
+    }
+    .background{
+        height: 10rem;
+    }
+    .page-template-blog-template section.single-sidebar{
+        display: none;
+    }
+    section.main-post-listing{
+        text-align: center;
+    }
+    .showcase-thumbnail{
+        margin: 0 0 30px 0;
     }
 }
