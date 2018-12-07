@@ -85,6 +85,9 @@ ul.status li{
  h3{
     font-size: 19px;
 }
+.blog-sidebar h3{
+     margin: 0 0 14px 0;
+}
  h2.lead {
      font-size: 30px;
      width: 100%;
