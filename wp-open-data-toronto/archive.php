@@ -77,6 +77,8 @@
       <div class="col-md-9" id="content">
         <div class="row">
           <div class="col-md-12">
+            
+                  <h2 class="sr-only">Posts</h2>
             <?php while ( have_posts() ) : the_post(); ?>
             <div class="single-long-post">
               <div class="row">
@@ -85,7 +87,7 @@
                 </div>
                 <div class="col-md-8">
                   <a href="<?php the_permalink(); ?>">
-                  <h4><?php the_title(); ?></h4></a>
+                  <h3><?php the_title(); ?></h3></a>
                   <div class="excerpt"><?php the_excerpt(); ?></div>
                 </div>
               </div>
@@ -96,7 +98,7 @@
           </div>
         </div>
       </div>
-    <?php> else : ?>
+    <?php else : ?>
     No posts found for this category.
     <?php endif; ?>
     </div>
