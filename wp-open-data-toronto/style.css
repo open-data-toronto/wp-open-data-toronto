@@ -752,7 +752,6 @@ ul.status li{
  #dataset-accordion .card-header {
      border: 1px solid #ccc;
      border-radius: inherit;
-     background: transparent !important margin-bottom: -1px;
      padding: 0px;
 }
  #dataset-accordion .card-header h4 a {
@@ -762,7 +761,6 @@ ul.status li{
 }
 /* logic for hovering through card headers for expand/collapse */
  #dataset-accordion .card-header a {
-     background-color: transparent !important;
 }
  span.fa{
      transition: none !important;
@@ -775,8 +773,6 @@ ul.status li{
 /* accordion cards: Defaults */
  #dataset-accordion .card-content {
      padding: 30px 20px;
-     margin-bottom: 1em;
-     border: 1px solid #ccc;
 }
  #dataset-accordion .card-content.inactive {
      background: #F5F5F5;
@@ -1383,4 +1379,20 @@ ul.status li{
     .showcase-thumbnail{
         margin: 0 0 30px 0;
     }
+    hr{
+        border: 0;
+    }
+}
+#dataset-accordion .card-header a {
+    display: block;
+    background: white;
+    padding: 15px;
+    margin-top: -1px;
+}
+#dataset-accordion .card:first-child {
+    border-top: 1px solid #ccc;
+}
+#dataset-accordion .card-content {
+    margin: -1px 0 0 0;
+    border: 1px solid #ccc;
 }
