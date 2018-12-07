@@ -1382,6 +1382,22 @@ ul.status li{
     hr{
         border: 0;
     }
+    #filter-sidebar{
+        display: none;
+    }
+    #results-count{
+        text-align: center;
+        font-size: 24px;
+        margin: -15px 0 0 0;
+    }
+    .row.table-list{border-top: 0;}
+    label.col-sm-5.text-right.col-form-label {
+    color: #fff;
+    margin-top: -20px;
+}
+    .attributes{
+        padding: 0 30px;
+    }
 }
 #dataset-accordion .card-header a {
     display: block;
