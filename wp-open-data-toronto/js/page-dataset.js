@@ -1,8 +1,8 @@
 $.extend(config, {
     'isInitializing': true,
     'formatOptions': {
-        'Map': ['CSV', 'GeoJSON', 'SHP'],
-        'Table': ['CSV', 'JSON', 'XML']
+        'geospatial': ['CSV', 'DXF', 'GeoJSON', 'SHP'],
+        'tabular': ['CSV', 'JSON', 'XML']
     },
     'package': {}
 });
@@ -63,7 +63,11 @@ function buildDataset(response) {
         var resource = config['package']['resources'][i];
 
         if (resource['datastore_active']) {
-            resource['format'] = generateFormatDropdowns(config['formatOptions'][config['package']['dataset_category']]);
+            if (config['package']['dataset_category'] == 'Map' && ['SHP', 'GeoJSON'].indexOf(resource['format']) != -1) {
+                resource['format'] = generateFormatDropdowns(config['formatOptions']['geospatial']);
+            } else {
+                resource['format'] = generateFormatDropdowns(config['formatOptions']['tabular']);
+            }
         }
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
