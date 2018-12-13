@@ -1,17 +1,13 @@
-// TODO: Define these with ENVIRONMENT_VARIABLES using NODE (or something)
 var $ = jQuery.noConflict();
-var env = (window.location.host.match(/\d/g) != null) ? parseInt(window.location.host.match(/\d/g).join('')) : 0;
 
-var ckan = [
-    'ckanadmin0.intra.dev-toronto.ca',                                          // dev
-    'ckanadmin1.intra.dev-toronto.ca',                                          // qa
-    '',                                                                         // pre-prod
-    ''                                                                          // prod
-]
+// TODO: Define these with ENVIRONMENT_VARIABLES using NODE (or something)
+var envName = window.location.host.split('.').length >= 4 ? window.location.host.split('.')[2].split('-')[0] : 'dev',
+    envNum = (window.location.host.match(/\d/g) != null) ? parseInt(window.location.host.match(/\d/g).join('')) : 0,
+    ckan = 'ckanadmin' + envNum + '.intra.' + envName + '-toronto.ca';
 
 var config = {
-    'ckanAPI': 'https://' + ckan[env] + '/api/3/action/',
-    'ckanURL': 'https://' + ckan[env]
+    'ckanAPI': 'https://' + ckan + '/api/3/action/',
+    'ckanURL': 'https://' + ckan
 }
 
 function getCKAN(endpoint, data, callback) {
