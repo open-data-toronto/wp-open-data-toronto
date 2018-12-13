@@ -60,11 +60,11 @@ function buildCatalogue(response) {
               '</div>' +
             '</div>');
 
-        if (row['formats'].length > 0) {
+        if ('formats' in row && row['formats'].length > 0) {
             $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div><span>' + row['formats'].join(' | ') + '</span>');
         }
 
-        if (row['topics'].length > 0) {
+        if ('topics' in row && row['topics'].length > 0) {
             $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'] + '</span>');
         }
     }
