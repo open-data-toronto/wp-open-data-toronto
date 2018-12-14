@@ -1,7 +1,7 @@
 $.extend(config, {
     'isInitializing': true,
     'formatOptions': {
-        'geospatial': ['CSV', 'DXF', 'GeoJSON', 'SHP'],
+        'geospatial': ['GeoJSON', 'CSV', 'DXF', 'SHP'],
         'tabular': ['CSV', 'JSON', 'XML']
     },
     'package': {}
