@@ -2,7 +2,7 @@ var $ = jQuery.noConflict();
 
 // TODO: Define these with ENVIRONMENT_VARIABLES using NODE (or something)
 var envName = window.location.host.split('.').length >= 4 ? window.location.host.split('.')[2].split('-')[0] : 'dev',
-    envNum = (window.location.host.match(/\d/g) != null) ? parseInt(window.location.host.match(/\d/g).join('')) : 0,
+    envNum = (window.location.host.match(/\d/g) != null) ? parseInt(window.location.host.match(/\d/g).join('')) : 1,
     ckan = 'ckanadmin' + envNum + '.intra.' + envName + '-toronto.ca';
 
 var config = {

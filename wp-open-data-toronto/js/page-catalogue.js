@@ -65,7 +65,7 @@ function buildCatalogue(response) {
         }
 
         if ('topics' in row && row['topics'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'] + '</span>');
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'].join(' | ') + '</span>');
         }
     }
 
@@ -294,7 +294,7 @@ function loadCatalogue() {
 
     if (state['filters'] && state['filters']['search']) {
         state['filters']['search'] = DOMPurify.sanitize(state['filters']['search'])
-    };
+    }
 
     getCKAN('catalogue_search', $.extend(true, {
         'type': 'full',
