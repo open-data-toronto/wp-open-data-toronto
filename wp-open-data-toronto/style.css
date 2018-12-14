@@ -172,7 +172,7 @@ ul.status li{
      font-weight: 600;
 }
  #temporary-notice a:link, #temporary-notice a:visited{
-     color: #000000 
+     color: #000000
 }
  #masthead .navbar-nav > li > a:focus, #masthead .navbar-nav > li > a:hover {
      text-decoration: underline;
@@ -301,7 +301,7 @@ ul.status li{
      font-size: 40px;
      bottom: 30px;
      font-weight: 300;
-     text-align: left 
+     text-align: left
 }
  .background {
      background: rgba(34, 34, 34, 0.54);
@@ -430,7 +430,7 @@ ul.status li{
 }
  .jumbotron .heading{
      padding: 15px 0;
-     font-weight: lighter 
+     font-weight: lighter
 }
  #content h2{
     /* margin: 0 0 22px 0;
@@ -446,7 +446,7 @@ ul.status li{
 }
  ul.newsfeed{
      width: 100%;
-     margin-top: 12px 
+     margin-top: 12px
 }
  ul.newsfeed li {
      padding: 4px 0;
@@ -502,7 +502,7 @@ ul.status li{
      top: 0;
      width: 100%;
      background: #000;
-     overflow: hidden 
+     overflow: hidden
 }
  .jumbotron h2 {
      font-size: 42px;
@@ -518,7 +518,7 @@ ul.status li{
 }
  .jumbotron{
      position: relative;
-     overflow: hidden 
+     overflow: hidden
 }
  .jumbotron iframe{
      opacity: 0.4;
@@ -557,7 +557,7 @@ ul.status li{
      line-height: 24px;
 }
  .home #content{
-     background :#ffffff 
+     background :#ffffff
 }
  .main-content h3 {
      font-size: 19px;
@@ -666,7 +666,7 @@ ul.status li{
      height: 40px !important;
 }
  #ajaxsearchlite1 .probox .proinput{
-     padding: 5px 5px !important 
+     padding: 5px 5px !important
 }
  .probox .promagnifier .innericon svg {
      fill: rgb(195, 195, 195) !important;
@@ -677,7 +677,7 @@ ul.status li{
 }
  .probox .promagnifier{
      width: 38px !important;
-     height: 38px !important 
+     height: 38px !important
 }
  #ajaxsearchlite1.probox{
      background-color: #ffffff;
@@ -686,7 +686,7 @@ ul.status li{
 }
  #ajaxsearchlite1.probox.proinput{
      color:#222222 !important;
-     text-shadow: none !important 
+     text-shadow: none !important
 }
 /** START OF CARLOS CHANGES (I think) **/
 /** 9. Catalogue Page Template **/
@@ -1030,7 +1030,7 @@ ul.status li{
  .btn-secondary:hover {
      color: #ffffff;
      background-color: #0e626b;
-     border-color: none 
+     border-color: none
 }
  .table-list h2 a:hover{
      text-decoration: underline !important;
@@ -1042,7 +1042,7 @@ ul.status li{
  .table-list p {
      font-size: 13px;
      line-height: 20px;
-     padding: 10px 0 
+     padding: 10px 0
 }
  .attributes {
      font-size: 13px !important;
@@ -1095,7 +1095,7 @@ ul.status li{
      margin-bottom: 8px;
 }
  .excerpt p{
-     line-height: 1.4em 
+     line-height: 1.4em
 }
  .excerpt{
      font-size: 14px;
@@ -1106,7 +1106,7 @@ ul.status li{
      color: #666;
 }
  .excerpt a:hover{
-     text-decoration: none 
+     text-decoration: none
 }
  .showcase-thumbnail {
      padding: 0 0 20px 0;
@@ -1150,10 +1150,10 @@ ul.status li{
 }
  .page-template-blog-template p a:hover{
      color: #666666;
-     text-decoration: none 
+     text-decoration: none
 }
  .page-template-blog-template a:hover{
-     text-decoration: none 
+     text-decoration: none
 }
  .page-template-blog-template p{
      margin: 15px 0 25px 0;
@@ -1174,7 +1174,7 @@ ul.status li{
 }
  ul.post-list {
      padding: 0;
-     margin: 0 
+     margin: 0
 }
  ul.post-list li{
      font-weight: 500;
@@ -1364,14 +1364,14 @@ ul.status li{
          margin: 2px 0 3px 0;
     }
      section#data-stories .jumbotron {
-         height: 430px !important 
+         height: 430px !important
     }
      #pages h2 {
          margin-top: 30px;
          text-align: center;
     }
      .time{
-         text-align: left !important 
+         text-align: left !important
     }
     .banner{
         height: 10rem;

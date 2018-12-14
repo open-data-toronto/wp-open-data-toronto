@@ -9,7 +9,7 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,
     'datasetsPerPage': 10,
-    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'topic'],
+    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'vocab_topics'],
     'filterSize': 5
 });
 
@@ -60,12 +60,12 @@ function buildCatalogue(response) {
               '</div>' +
             '</div>');
 
-        if (row['formats'].length > 0) {
+        if ('formats' in row && row['formats'].length > 0) {
             $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div><span>' + row['formats'].join(' | ') + '</span>');
         }
 
-        if (row['topic'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topic</div><span>' + row['topic'] + '</span>');
+        if ('topics' in row && row['topics'].length > 0) {
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'].join(' | ') + '</span>');
         }
     }
 
@@ -294,7 +294,7 @@ function loadCatalogue() {
 
     if (state['filters'] && state['filters']['search']) {
         state['filters']['search'] = DOMPurify.sanitize(state['filters']['search'])
-    };
+    }
 
     getCKAN('catalogue_search', $.extend(true, {
         'type': 'full',
