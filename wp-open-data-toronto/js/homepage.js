@@ -5,7 +5,7 @@ $.extend(config, {
 
 function init() {
     var fields = ['fl=metadata_modified', 'fl=name', 'fl=title'];
-    getCKAN('package_search?' + fields.join('&'), { 'rows': config['datasetsShown'], 'sort': 'metadata_modified desc' }, function() {
+    getCKAN('package_search?' + fields.join('&'), { 'rows': config['datasetsShown'], 'sort': 'metadata_modified desc' }, function(response) {
         var data = response['result'];
         for (var i = 0; i < data['results'].length; i++) {
             var row = data['results'][i];
