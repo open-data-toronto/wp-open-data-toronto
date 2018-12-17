@@ -37,7 +37,7 @@
             <h2 class="sr-only">Dataset Filters</h2>
             <div class="card" id="vocab_topics-filter">
               <div class="card-header filter-heading">
-                <h3>Topics</h3>
+                <h3>Topic</h3>
               </div>
               <ul data-type="filter" data-field="vocab_topics" class="list-group list-group-flush" id="vocab_topics-values">
                 <li class="show-more list-group-item list-group-item-action" data-field="vocab_topics"></li>
