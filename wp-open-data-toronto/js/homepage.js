@@ -11,7 +11,7 @@ function init() {
             var row = data['results'][i];
 
             $('.newsfeed').append('<li>' +
-                                    '<a href="/package/' + row['name'] + '">' +
+                                    '<a href="/package/' + row['name'] + '/">' +
                                       row['title'] +
                                       '<div class="float-right">' +
                                         '<span class="sr-only">Last updated:</span>' + getTimeSince(row['metadata_modified']) +

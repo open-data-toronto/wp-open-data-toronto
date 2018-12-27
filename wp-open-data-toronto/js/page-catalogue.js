@@ -48,7 +48,7 @@ function buildCatalogue(response) {
               '<div class="row">' +
                 '<div class="col-md-9">' +
                   '<div class="col-md-12">' +
-                    '<h3><a href="/package/' + row['name'] + '">' + row['title'] + '</a></h3>' +
+                    '<h3><a href="/package/' + row['name'] + '/">' + row['title'] + '</a></h3>' +
                     '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                   '</div>' +
                 '</div>' +
