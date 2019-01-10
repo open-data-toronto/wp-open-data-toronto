@@ -7,6 +7,13 @@ $.extend(config, {
     'package': {}
 });
 
+/**
+ * Builds the dataset page HTML elements
+ *
+ * @params {Object} response : Results from the results of the package_show CKAN
+ *      API call for the shown page.
+ */
+
 function buildDataset(response) {
     var data = config['package'] = response['result'];
     data['preview_resource'] = {};
@@ -119,6 +126,11 @@ function buildDataset(response) {
     }
 }
 
+/**
+ * Calls resource_view_list CKAN API endpoint and builds the preview if the
+ * dataset is Map or update the explore redirect URL if the dataset is Table.
+ */
+
 function queryViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
         var results = response['result'],
@@ -150,6 +162,11 @@ function queryViews() {
         }
     });
 }
+
+/**
+ * Calls the datastore_search CKAN API endpoint and builds the features
+ * accordion and the preview accordion if the dataset is a Table
+ */
 
 function queryContents() {
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
@@ -200,6 +217,10 @@ function queryContents() {
     });
 }
 
+/**
+ * Creates the HTML element events
+ */
+
 function buildUI() {
     $('code').each(function(i, block) {
         hljs.highlightBlock(block);
@@ -248,6 +269,10 @@ function buildUI() {
     $('.block-hidden').css('visibility', 'visible');
 }
 
+/**
+ * Returns the code snippets with CKAN API endpoints.
+ */
+
 function generateSnippets() {
     var snippets = {};
     snippets['python'] = 'import requests\n' +
@@ -274,6 +299,12 @@ function generateSnippets() {
 
     return snippets;
 }
+
+/**
+ * Builds the dropdown button for the download accordion
+ *
+ * @params {Array} options : Format options for the download dropdown
+ */
 
 function generateFormatDropdowns(options) {
     var dropdown = $('<div class="placeholder">' +

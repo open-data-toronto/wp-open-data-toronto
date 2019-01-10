@@ -13,6 +13,13 @@ $.extend(config, {
     'filterSize': 5
 });
 
+/**
+ * Builds the catalogue page HTML elements and the page navigation buttons
+ *
+ * @params {Object} response : Results from catalogue_search CKAN API call for
+ *      the shown page.
+ */
+
 function buildCatalogue(response) {
     $('.table-list').empty();
     $('#nav-catalogue').hide();
@@ -107,6 +114,13 @@ function buildCatalogue(response) {
     }
 }
 
+/**
+ * Builds the search sidebar HTML elements
+ *
+ * @params {Object} response : Results from the faceted results of the
+ *      catalogue_search CKAN API call for the shown page.
+ */
+
 function buildSidebar(response) {
     $('[data-type="filter"] .filter-value').remove();
 
@@ -181,6 +195,10 @@ function buildSidebar(response) {
     buildDynamicUI();
 }
 
+/**
+ * Creates the UI events for elements that are static across all catalogue pages
+ */
+
 function buildStaticUI() {
     $('#nav-catalogue .page-keep a').on('click', function() {
         switch($(this).data('page')) {
@@ -246,6 +264,10 @@ function buildStaticUI() {
     $('.block-hidden').css('visibility', 'visible');
 }
 
+/**
+ * Creates the UI events for elements that are re-created per catalogue page
+ */
+
 function buildDynamicUI() {
     switch(state['page']) {
         case 0:
@@ -274,6 +296,10 @@ function buildDynamicUI() {
         loadCatalogue();
    });
 }
+
+/**
+ * Parses the config settings from URL and load the catalogue with the settings
+ */
 
 function loadCatalogue() {
     if (config['isInitializing']) {
@@ -311,6 +337,10 @@ function loadCatalogue() {
 
     updateURL();
 }
+
+/**
+ * Updates the URL on input changes
+ */
 
 function updateURL() {
     var urlParam = [];
