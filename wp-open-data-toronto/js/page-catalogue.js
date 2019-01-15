@@ -220,6 +220,10 @@ function buildStaticUI() {
             state['filters'] = {};
             state['filters']['search'] = $('#input-search').val();
 
+            if (state['sort'] != 'score desc') {
+                $('#sort-results-by').val('score desc').change();
+            }
+
             state['page'] = 0;
             loadCatalogue();
         }
@@ -246,7 +250,6 @@ function buildStaticUI() {
 
         state['page'] = 0;
         loadCatalogue();
-        $("#current-sort span").text($('#sort-results-by :selected').text())
     });
 
     $('.show-more').on('mouseenter mouseleave', function () {
