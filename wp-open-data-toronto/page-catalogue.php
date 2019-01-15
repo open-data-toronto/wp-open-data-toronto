@@ -102,7 +102,7 @@
                     <div class="col-sm-7">
                       <select class="form-control" id="sort-results-by" aria-label="Sorting method for catalogue search results">
                         <option value="metadata_modified desc">Last Updated</option>
-                        <option value="relevance asc">Relevance</option>
+                        <option value="score desc">Relevance</option>
                         <option value="name asc">Name</option>
                       </select>
                     </div>
