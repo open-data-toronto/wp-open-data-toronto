@@ -80,7 +80,8 @@
       </section>
     </div>
   </section>
-</div>
+</div><!-- end row -->
+</div><!-- ends container-->
 
 <script type="text/javascript">
     jQuery(document).ready(function($) { init(); });
