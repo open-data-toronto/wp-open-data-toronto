@@ -69,7 +69,7 @@
             <div id="description-dataset">
               <div class="row">
                 <div class="col-md-12">
-                  <h2>About <span data-field="title"><span></h2>
+                  <h2>About <span data-field="title"></span></h2>
                   <br/>
                   <p data-field="notes"></p>
                   <h3>Collection Method</h3>
@@ -175,12 +175,14 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-3 explore-column">
-                            <a id="redirect-ckan" href="#" target="_blank">
+                            
                               <button class="btn btn-outline-primary" type="button">
+                                <a id="redirect-ckan" href="#" target="_blank">
                                 <span class="fa fa-area-chart"></span>&nbsp;Visualize
                                 <span class="sr-only"> Visualize data in new window</span>
+                                </a>
                               </button>
-                            </a>
+                            
                           </div>
                         </div>
                       </div>
@@ -246,7 +248,8 @@
       </section>
     </div>
   </section>
-</div>
+</div><!-- end row -->
+</div><!-- end container -->
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
