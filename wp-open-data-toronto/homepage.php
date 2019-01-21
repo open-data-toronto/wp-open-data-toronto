@@ -4,7 +4,10 @@
   <section class="content-area">
     <div class="container">
       <div class="hero" aria-label="Introduction">
-        <div class="jumbotron text-center">
+        <div class="jumbotron text-center" style="background-image:url('<?php if(types_render_field('dataset-search-bg', array('output'=>'raw'))){?>
+				<?php echo(types_render_field('dataset-search-bg', array('output'=>'raw'))); ?>
+				<?php }?>
+				') !important;">
           <div class="heading">
             <h1 class="sr-only"><span id="introduction">Welcome to the City of Toronto's Open Data Portal</span></h1>
           </div>
@@ -43,7 +46,10 @@
       </section>
 
       <!-- Data Stories -->
-      <section id="data-stories" style="background-image:url(/wp-content/uploads/2017/08/pexels-photo-392031.jpeg); background-size: cover; background-position: 50% 50%" aria-label="Data Stories">
+      <section id="data-stories" aria-label="Data Stories" style="background-image:url('<?php if(types_render_field('data-story-bg', array('output'=>'raw'))){?>
+				<?php echo(types_render_field('data-story-bg', array('output'=>'raw'))); ?>
+				<?php }?>
+				') !important;">
         <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.67);">
           <h2 class="heading small">Data Stories</h2>
           <div class="row">
@@ -61,18 +67,24 @@
         <div class="row">
           <div class="col-md-4">
             <a href="/about/city-of-toronto-open-data-team/"><h2>About the Open Data Team</h2></a>
-            <img src="/wp-content/uploads/2018/03/team.jpg" alt="" class="img-responsive"/><br/>
+            <img src="<?php if(types_render_field('feature-1-img', array('output'=>'raw'))){?>
+				<?php echo(types_render_field('feature-1-img', array('output'=>'raw'))); ?>
+				<?php }?>" alt="" class="img-responsive"/><br/>
             <p>The City of Toronto's Open Data Team spans a wide range of skills, interests and experience. Despite our differences, we all have one thing in common: we see the unlimited potential of open data and the ways it can transform cities.</p>
           </div>
           <div class="col-md-4">
             <a href="/about/tools-and-tips/"><h2>Tools &amp; Tips</h2></a>
-            <img src="/wp-content/uploads/2017/08/graphs.jpg" class="img-responsive" alt=""/><br/>
+            <img src="<?php if(types_render_field('feature-2-img', array('output'=>'raw'))){?>
+				<?php echo(types_render_field('feature-2-img', array('output'=>'raw'))); ?>
+				<?php }?>"" class="img-responsive" alt=""/><br/>
             <p>New to working with data? Not sure what the difference is between a CSV and a Shapefile? This short primer was designed to help beginners to Open Data learn about the basics of how to understand and interact with data sets on the Open Data Portal.</p>
           </div>
           <div class="col-md-4">
             <a href="/budgetpedia-humanizing-city-budgets/">
             <h2>Showcase: Budgetpedia</h2></a>
-            <img src="/wp-content/uploads/2018/03/calculator.jpg" class="img-responsive" alt=""/>
+            <img src="<?php if(types_render_field('feature-3-img', array('output'=>'raw'))){?>
+				<?php echo(types_render_field('feature-3-img', array('output'=>'raw'))); ?>
+				<?php }?>"" class="img-responsive" alt=""/>
             <br/>
             <p>Our debut community showcase tells the story of a project that is regarded as a pioneer in Toronto's Civic Tech space, and a powerful example of how Open Data empowers citizens to participate in government decision-making; Budgetpedia.</p>
           </div>
