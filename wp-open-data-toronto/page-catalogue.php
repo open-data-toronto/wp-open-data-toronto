@@ -4,6 +4,7 @@
 
   <section class="content-area">
     <div class="container">
+      
       <div class="row">
         <div class="col-md-12">
           <!-- Breadcrumbs -->
@@ -136,8 +137,10 @@
           </div>
         </div>
       </div>
+    </div>
   </section>
-</div>
+</div><!-- ends row -->
+</div><!-- ends container -->
 
 <script type="text/javascript">
   jQuery(document).ready(function($) { init(); });
