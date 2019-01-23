@@ -24,7 +24,7 @@ add_filter('query_vars', 'query_custom_vars');
 
 function theme_enqueue_styles() {
     wp_enqueue_style( 'highlightjs-style', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github-gist.min.css' );
-    wp_enqueue_style( 'datatable-style', 'https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css' );
+    wp_enqueue_style( 'datatable-style', 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css' );
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'font-style', get_stylesheet_directory_uri() . '/fonts/font-awesome.min.css');
 }
