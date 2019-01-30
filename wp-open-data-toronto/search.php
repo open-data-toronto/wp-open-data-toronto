@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- End breadcrumbs -->
-
+    <h1 class="sr-only">Search results</h1>
     <div class="row">
       <div class="col-md-12">
         <?php
