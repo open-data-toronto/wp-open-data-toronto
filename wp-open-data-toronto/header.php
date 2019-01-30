@@ -22,22 +22,16 @@
 
   <body <?php body_class(); ?>>
     <div id="page" class="site">
-      <a class="skip-link screen-reader-text" href="#content">
-        <?php esc_html_e( 'Skip to content', 'wp-bootstrap-starter' ); ?>
-      </a>
-
-      <?php if ( is_page( 'Homepage' ) ) : ?>
-      <div id="temporary-notice" class="alert alert-info" role="alert">
-        <div class="container">
-          <div class="col-md-12 text-center">
-            Thank you for visiting the City of Toronto's Open Data Portal Beta. This website is currently in beta and under development. As such, it contains limited resources and is not a definitive source for Open Data at this time. To access the present Open Data Portal, please visit <a href="https://www1.toronto.ca/wps/portal/contentonly?vgnextoid=9e56e03bb8d1e310VgnVCM10000071d60f89RCRD">www.toronto.ca/open</a>.
-          </div>
-        </div>
-      </div>
-      <?php endif; ?>
 
       <!-- Start COT Header -->
-      <div id="super-header">
+      <div id="super-header" role="navigation" aria-label="Utility links">
+        <div class="container">
+          <div class="row">
+            <a class="skip-link screen-reader-text" href="#content">
+        <?php esc_html_e( 'Skip to content', 'wp-bootstrap-starter' ); ?>
+      </a>
+    </div>
+  </div>
         <div class="container">
           <div class="row">
             <div class="col-3">
