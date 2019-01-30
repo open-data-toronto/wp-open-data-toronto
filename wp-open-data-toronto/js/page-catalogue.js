@@ -163,7 +163,7 @@ function buildSidebar(response) {
         if (numFilters > config['filterSize']) {
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
 
-            showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more <span class="sr-only">' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's</span>'+ '</a>');
+            showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
             showMoreButton.show();
         } else {
             showMoreButton.hide();
