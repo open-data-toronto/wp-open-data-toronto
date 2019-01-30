@@ -103,6 +103,11 @@ ul.status li{
 main.site-content a:link{
 	text-decoration: underline;
 }
+.btn-primary.focus, .btn-primary:focus {
+    -webkit-box-shadow: 0;
+    box-shadow: none !important;
+    background: #002f56 !important;
+}
  .col{
      width: 50%;
      padding: 15px;
