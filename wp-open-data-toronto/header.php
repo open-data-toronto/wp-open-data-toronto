@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title><?php echo get_bloginfo( 'name' ); ?> - <?php the_title(); ?></title>
+  	<title><?php the_title(); ?> - <?php echo get_bloginfo( 'name' ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
