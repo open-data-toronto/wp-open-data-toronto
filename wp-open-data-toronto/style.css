@@ -43,6 +43,9 @@ Version:         1.2.0
     text-decoration: underline;
      border: 0;
 }
+main.site-content a:focus{
+	background: yellow !important;
+}
 /* Buttons */
  button:focus, a.btn:focus{
     background: #abdbff !important;
