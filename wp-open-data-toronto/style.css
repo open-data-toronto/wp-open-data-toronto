@@ -100,11 +100,15 @@ ul.status li{
  a:link {
      font-weight: bold !important;
 }
+main.site-content a:link{
+	text-decoration: underline;
+}
  .col{
      width: 50%;
      padding: 15px;
      display: table-cell;
      border-collapse: collapse;
+}
 }
  .col-container{
      display: table;
