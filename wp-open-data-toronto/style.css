@@ -613,6 +613,9 @@ main.site-content a:link{
  input{
      border-radius: 0 !important;
 }
+input#search {
+    border: 2px solid #007d88;
+}
 /** Search Results **/
  .search-results-content {
      width: 100%;
