@@ -28,17 +28,15 @@ Version:         1.2.0
 /* Default */
  *:focus{
     outline-style: solid;
-     outline-color: #222222;
-     outline-width: 2px;
-     padding: 3px;
+     outline-color: #cccccc;
+     outline-width: 2px
 }
 /* COT Header */
  #super-header a:focus{
-     border: 2px solid #ffffff;
-     padding: 3px;
-}
-section#pages a{
-     display: block;
+    outline-style: solid;
+     outline-color: #222222;
+     outline-width: 1px;
+    text-decoration: underline;
 }
 /* Text */
  #content a:focus{
@@ -1408,7 +1406,10 @@ input#search {
     hr{
         border: 0;
     }
-    #filter-sidebar{
+    #filter-sidebar {
+        order: 2
+    }
+    .mobile-hidden{
         display: none;
     }
     #results-count{

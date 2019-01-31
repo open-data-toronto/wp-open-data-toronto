@@ -340,5 +340,9 @@ function updateURL() {
 
 function init() {
     $('.block-hidden').css('visibility', 'hidden');
+    if (isMobile()) {
+        $('#filter-sidebar').addClass('mobile-hidden');
+    }
+
     loadCatalogue();
 }
