@@ -102,7 +102,7 @@
             <div class="featured-story">
               <div class="featured-banner">
                 <h2>Featured Post</h2>
-                <img src="<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?><?php echo $url ?>" alt="" class="img-responsive img-thumbnail"/>
+                <img src="<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?><?php echo $url ?>" alt="" class="img-responsive img-thumbnail" alt=""/>
               </div>
               <div class="featured-content">
                 <a href="<?php the_permalink(); ?>">
