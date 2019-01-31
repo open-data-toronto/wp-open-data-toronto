@@ -166,7 +166,7 @@ function queryContents() {
                              '</table>');
 
         for (var i in fields) {
-            var columnDesc = ('info' in fields[i]) ? fields[i]['info']['notes'] : '';
+            var columnDesc = ('info' in fields[i]) ? fields[i]['info']['notes'] : '<span aria-label="No values"></span>';
 
             previewTable.find('thead').append('<th>' + fields[i]['id'] + '</th>');
             featuresTable.find('tbody').append('<tr><td>' + fields[i]['id'] + '</td><td>' + columnDesc + '</td></tr>');

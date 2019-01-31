@@ -71,11 +71,11 @@
                 <div class="col-md-12">
                   <h2>About <span data-field="title"></span></h2>
                   <br/>
-                  <p data-field="notes"></p>
+                  <div data-field="notes"></div>
                   <h3>Collection Method</h3>
-                  <p data-field="collection_method"></p>
+                  <div data-field="collection_method"></div>
                   <h3>Limitations</h3>
-                  <p data-field="limitations"></p>
+                  <div data-field="limitations"></div>
                 </div>
               </div>
 
@@ -175,14 +175,14 @@
                             <p>Want to explore this data without having to download it? Try it here</p>
                           </div>
                           <div class="col-md-3 explore-column">
-                            
+
                               <button class="btn btn-outline-primary" type="button">
                                 <a id="redirect-ckan" href="#" target="_blank">
                                 <span class="fa fa-area-chart"></span>&nbsp;Visualize
                                 <span class="sr-only"> Visualize data in new window</span>
                                 </a>
                               </button>
-                            
+
                           </div>
                         </div>
                       </div>
