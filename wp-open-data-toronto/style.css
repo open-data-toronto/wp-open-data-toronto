@@ -28,15 +28,17 @@ Version:         1.2.0
 /* Default */
  *:focus{
     outline-style: solid;
-     outline-color: #cccccc;
-     outline-width: 2px
+     outline-color: #222222;
+     outline-width: 2px;
+     padding: 3px;
 }
 /* COT Header */
  #super-header a:focus{
-    outline-style: solid;
-     outline-color: #222222;
-     outline-width: 1px;
-    text-decoration: underline;
+     border: 2px solid #ffffff;
+     padding: 3px;
+}
+section#pages a{
+     display: block;
 }
 /* Text */
  #content a:focus{
