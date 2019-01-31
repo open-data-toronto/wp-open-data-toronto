@@ -145,7 +145,9 @@ function queryViews() {
 
                 if (isMapView) {
                     var w = $('#heading-preview').width(),
-                        h = 0.647*w;
+                        windowWidth = $(window).width(),
+                        windowHeight = $(window).height(),
+                        h = (w / windowWidth + 0.14) * windowHeight;
 
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
                 } else {
@@ -258,8 +260,12 @@ function buildUI() {
     });
 
     $(window).on('resize', function() {
-        var w = $('#heading-preview').width();
-        $('iframe').width(w).height(0.647*w);
+        var w = $('#heading-preview').width(),
+            windowWidth = $(window).width(),
+            windowHeight = $(window).height(),
+            h = (w / windowWidth + 0.14) * windowHeight;
+
+        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
     });
 
     $('a.collapsed:first').click();
