@@ -136,7 +136,7 @@ function buildSidebar(response) {
                     '<span>' +
                       '<input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + name +
                     '</span>' +
-                    '<span class="badge float-right">' + value['count'] + '</span>' +
+                    '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
                   '</label>' +
                 '</li>');
 
