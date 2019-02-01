@@ -31,6 +31,14 @@ Version:         1.2.0
      outline-color: #cccccc;
      outline-width: 2px
 }
+  .accordion{display:block;width:100%;max-width:100%;}
+            .accordion .card{max-width:100%;}
+            .accordion .card .btn{text-align:left;display:block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
+            .accordion .card .btn:hover{background:#000;}
+            .accordion .card .btn{}
+            .accordion .card .btn .fa{float: right;}
+            .card-header{padding: 0;}
+ 
 section{max-width: 100%;}
 /* COT Header */
  #super-header a:focus{

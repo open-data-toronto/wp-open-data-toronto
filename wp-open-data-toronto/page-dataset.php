@@ -81,63 +81,65 @@
 
               <div class="row">
                 <div class="col-md-12">
+                  <!-- Accordion -->
 
-                  <!-- Collapse Area -->
-                  <div id="dataset-accordion" aria-multiselectable="true">
-                    <div class="card">
-                      <div class="card-header" id="heading-preview">
-                        <h3 class="mb-0">
-                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-preview" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-preview">
-                            Data Preview
+                  <div class="accordion">
+                    
+            <div class="card accordion__section">
+                <div class="card-header accordion__header" id="header-dataPreview">
+                    <h2 class="mb-0">
+                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-dataPreview" aria-expanded="false" aria-controls="accordion-title-1">
+                        Data Preview 
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
-                          </a>
-                        </h3>
-                      </div>
+                    </button>
+                    </h2>
+                </div>
 
-                      <div id="collapse-preview" class="card-content collapse" role="tabpanel" aria-expanded="true" aria-labelledby="heading-preview">
-                        <div class="row">
+                <div data-key="0" id="body-dataPreview" class="collapse show" aria-labelledby="header-dataPreview" data-parent="#js-accordion__su9l98td5">
+                    <div class="card-body accordion__body">
+                      <div class="row">
                           <div id="content-preview" class="col-md-12"></div>
                         </div>
-                      </div>
                     </div>
+                </div>
+            </div>
+        
+            <div class="card accordion__section">
+                <div class="card-header accordion__header" id="header-dataFeatures">
+                    <h2 class="mb-0">
+                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-dataFeatures" aria-expanded="false" aria-controls="accordion-title-2">
+                        Data Features
+                        <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                    </button>
+                    </h2>
+                </div>
 
-                    <div class="card">
-                      <div class="card-header" id="heading-features">
-                        <h3 class="mb-0">
-                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-features" href="#" aria-controls="collapse-download">
-                          Column Descriptions
-                          <span class="accordion-arrow">
-                            <span class="fa fa-chevron-down"></span>
-                          </span>
-                          </a>
-                        </h3>
-                      </div>
-
-                      <div id="collapse-features" class="card-content collapse" role="tabpanel" aria-labelledby="heading-features">
-                        <div class="row">
-                          <div id="content-features" class="col-md-12"></div>
-                        </div>
-                      </div>
+                <div data-key="1" id="body-dataFeatures" class="collapse " aria-labelledby="header-dataFeatures" data-parent="#js-accordion__su9l98td5">
+                    <div class="card-body accordion__body">
+                    <div id="content-features" class="col-md-12"></div>
                     </div>
+                </div>
+            </div>
+        
+            <div class="card accordion__section">
+                <div class="card-header accordion__header" id="header-Download">
+                    <h2 class="mb-0">
+                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-Download" aria-expanded="false" aria-controls="accordion-title-3">
+                        Download Data
+                        <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                    </button>
+                    </h2>
+                </div>
 
-                    <div class="card">
-                      <div class="card-header" id="heading-download">
-                        <h3 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-target="#collapse-download" href="#" data-parent="dataset-accordion" role="tab" aria-expanded="true" aria-controls="collapse-download">
-                          Download Data
-                          <span class="accordion-arrow">
-                            <span class="fa fa-chevron-down"></span>
-                          </span>
-                          </a>
-                        </h3>
-                      </div>
-
-                      <div id="collapse-download" class="card-content collapse" aria-labelledby="heading-download">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <table id="table-resources" class="table table-striped">
+                <div data-key="2" id="body-Download" class="collapse " aria-labelledby="header-Download" data-parent="#js-accordion__su9l98td5">
+                    <div class="card-body accordion__body">
+                    <table id="table-resources" class="table table-striped">
                               <thead>
                                 <tr>
                                   <th scope="col">File</th>
@@ -148,25 +150,25 @@
                               <tbody>
                               </tbody>
                             </table>
-                          </div>
-                        </div>
-                      </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="card">
-                      <div class="card-header" id="heading-explore">
-                        <h3 class="mb-0">
-                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-explore" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-explore">
-                          Explore Data
-                          <span class="accordion-arrow">
-                            <span class="fa fa-chevron-down"></span>
-                          </span>
-                          </a>
-                        </h3>
-                      </div>
+            <div class="card accordion__section">
+                <div class="card-header accordion__header" id="header-Explore">
+                    <h2 class="mb-0">
+                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-Explore" aria-expanded="false" aria-controls="accordion-title-3">
+                        Explore Data
+                        <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                    </button>
+                    </h2>
+                </div>
 
-                      <div id="collapse-explore" class="card-content collapse" role="tabpanel" aria-labelledby="heading-explore">
-                        <div class="row explore-line" id="explore-ckan">
+                <div data-key="2" id="body-Download" class="collapse " aria-labelledby="header-Download" data-parent="#js-accordion__su9l98td5">
+                    <div class="card-body accordion__body">
+                   <div class="row explore-line" id="explore-ckan">
                           <div class="col-md-2 explore-img">
                             <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png" alt="CKAN logo">
                           </div>
@@ -183,23 +185,26 @@
 
                           </div>
                         </div>
-                      </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="card">
-                      <div class="card-header" id="heading-developers">
-                        <h3 class="mb-0">
-                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-developers" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-developers">
-                          For Developers
-                          <span class="accordion-arrow">
-                            <span class="fa fa-chevron-down"></span>
-                          </span>
-                          </a>
-                        </h3>
-                      </div>
+        
+            <div class="card accordion__section">
+                <div class="card-header accordion__header" id="header-Developers">
+                    <h2 class="mb-0">
+                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-Developers" aria-expanded="false" aria-controls="accordion-title-3">
+                        For Developers
+                        <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                    </button>
+                    </h2>
+                </div>
 
-                      <div id="collapse-developers" class="card-content collapse" role="tabpanel" aria-labelledby="heading-developers">
-                        <div class="card-block">
+                <div data-key="2" id="body-Developers" class="collapse " aria-labelledby="header-Developers" data-parent="#js-accordion__su9l98td5">
+                    <div class="card-body accordion__body">
+                    <div class="card-block">
                           <div class="row">
                             <div class="col-md-12">
                             <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
@@ -235,11 +240,15 @@
                             </div>
                           </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
+        
+                </div>
+
+<!-- end accordion -->
+
+
             </div>
           </div>
         </div>
