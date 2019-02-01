@@ -78,10 +78,10 @@
           <div class="container-fluid">
             <!-- Dataset Search Area -->
             <div class="row" id="dataset-search-box">
-              <div class="input-group" aria-label="Search the Open Data Catalogue">
+              <form class="dataset-filter" id="search-dataset" role="search" aria-label="Search the Open Data Catalogue">
+              <div class="input-group">
                 <label for="input-search" class="sr-only">Input for dataset search terms</label>
                 <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets" aria-label="Search datasets"/>
-
                 <span class="input-group-btn">
                   <button id="btn-search" class="btn btn-primary" type="submit">
                     <span class="sr-only">Search datasets</span>
@@ -89,6 +89,7 @@
                   </button>
                 </span>
               </div>
+              </form>
               <small id="search-error" class="text-danger"></small>
             </div>
             <div class="row" id="dataset-search-results">
