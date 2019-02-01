@@ -28,8 +28,9 @@ Version:         1.2.0
 /* Default */
  *:focus{
     outline-style: solid;
-     outline-color: #cccccc;
-     outline-width: 2px
+    outline-color: #222222;
+    outline-width: 2px;
+    padding: 3px;
 }
   .accordion{display:block;width:100%;max-width:100%;}
             .accordion .card{max-width:100%;}
@@ -38,14 +39,12 @@ Version:         1.2.0
             .accordion .card .btn{}
             .accordion .card .btn .fa{float: right;}
             .card-header{padding: 0;}
- 
+
 section{max-width: 100%;}
 /* COT Header */
  #super-header a:focus{
-    outline-style: solid;
-     outline-color: #222222;
-     outline-width: 1px;
-    text-decoration: underline;
+     border: 2px solid #ffffff;
+     padding: 3px;
 }
 /* Text */
  #content a:focus{
@@ -53,14 +52,14 @@ section{max-width: 100%;}
      border: 0;
 }
 main.site-content a:focus{
-	background: yellow !important;
+	background: #abdbff !important;
 }
 main.site-content a.btn:focus {
-    background: #313131 !important;
+    background: #222222 !important;
 }
 /* Buttons */
  button:focus, a.btn:focus{
-    background: #abdbff !important;
+    background: #222222 !important;
 }
 /* Breadcrumbs and Sidebar */
  .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
@@ -68,7 +67,7 @@ main.site-content a.btn:focus {
 }
 /* Tables */
  .table a:focus{
-    background: #FFEB9C;
+    background: abdbff;
 }
 /* Migration */
  header#masthead{
