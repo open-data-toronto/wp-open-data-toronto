@@ -104,7 +104,7 @@ function buildDataset(response) {
                                 '<button type="button" class="btn btn-outline-primary">' +
                                 '<span class="fa fa-download"></span>&nbsp; Download' +
                                 '</button>' +
-                                '<span class="sr-only">' + resource['name'] + '</span>' +
+                                '<span class="sr-only">Download ' + resource['name'] + '</span>' +
                             '</a>' +
                             '</td>' +
                         '</tr>';
