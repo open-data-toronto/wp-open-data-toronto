@@ -64,6 +64,7 @@ function buildDataset(response) {
         resource['format'] = resource['format'].toLowerCase();
 
         var isGeospatial = ['shp', 'geojson'].indexOf(resource['format']) != -1;
+        var isWeb = ['html', 'web', 'jsp'].indexOf(resource['format']) != -1 ;
 
         if (resource['datastore_active']) {
             if (isGeospatial) {
@@ -91,9 +92,9 @@ function buildDataset(response) {
                     break;
                 }
             }
-            var format = '<div class="test">' + resource['format'] + '</div>'
+            var format = '<div class="file-format">' + resource['format'] + '</div>'
         }
-
+        
         var insert_row = '<tr data-stored="' + resource['datastore_active'] + '">' +
                             '<td>' + resource['name'] + '</td>' +
                             '<td>' + format + '</td>' +
@@ -109,10 +110,10 @@ function buildDataset(response) {
                         '</tr>';
 
         $('#table-resources tbody').append(insert_row);
-
-        if (['HTML', 'Web', 'JSP'].indexOf(resource['format']) > -1 ) {
-            $('#table-resources tbody tr:last-child').find('td:nth-child(3) button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
+        if ( isWeb ) {
+            $('#table-resources tr:last-child td:last-child button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
         }
+        
     }
 
     if (isGeospatial) {
