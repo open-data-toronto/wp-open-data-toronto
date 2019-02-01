@@ -47,6 +47,9 @@ section{max-width: 100%;}
 main.site-content a:focus{
 	background: yellow !important;
 }
+main.site-content a.btn:focus {
+    background: #313131 !important;
+}
 /* Buttons */
  button:focus, a.btn:focus{
     background: #abdbff !important;
