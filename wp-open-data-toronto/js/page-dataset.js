@@ -126,8 +126,7 @@ function buildDataset(response) {
         queryContents();
         queryViews();
     } else {
-        $('#collapse-preview, #collapse-features, #collapse-explore')
-            .addClass('inactive')
+        $('#body-dataPreview .card-body, #body-dataFeatures .card-body, #body-Explore .card-body')
             .html('<div class="not-available">Not available for this dataset</div>');
     }
 }
@@ -145,7 +144,7 @@ function queryViews() {
                 var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
 
                 if (isMapView) {
-                    var w = $('#heading-preview').width(),
+                    var w = $('#header-dataPreview').width(),
                         h = 0.647*w;
 
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');

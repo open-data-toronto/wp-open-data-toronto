@@ -99,9 +99,7 @@
 
                 <div data-key="0" id="body-dataPreview" class="collapse show" aria-labelledby="header-dataPreview" data-parent="#js-accordion__su9l98td5">
                     <div class="card-body accordion__body">
-                      <div class="row">
                           <div id="content-preview" class="col-md-12"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -166,7 +164,7 @@
                     </h2>
                 </div>
 
-                <div data-key="2" id="body-Download" class="collapse " aria-labelledby="header-Download" data-parent="#js-accordion__su9l98td5">
+                <div data-key="2" id="body-Explore" class="collapse " aria-labelledby="header-Explore" data-parent="#js-accordion__su9l98td5">
                     <div class="card-body accordion__body">
                    <div class="row explore-line" id="explore-ckan">
                           <div class="col-md-2 explore-img">
