@@ -94,7 +94,7 @@ function buildDataset(response) {
             }
             var format = '<div class="file-format">' + resource['format'] + '</div>'
         }
-        
+
         var insert_row = '<tr data-stored="' + resource['datastore_active'] + '">' +
                             '<td>' + resource['name'] + '</td>' +
                             '<td>' + format + '</td>' +
@@ -117,7 +117,7 @@ function buildDataset(response) {
     }
 
     if (isGeospatial) {
-        $('#table-resources thead th:nth-child(2)').after('<th>Projection</th>');
+        $('#table-resources thead th:nth-child(2)').after('<th scope="col">Projection</th>');
     }
 
     buildUI();
