@@ -87,7 +87,7 @@
                     <div class="card">
                       <div class="card-header" id="heading-preview">
                         <h3 class="mb-0">
-                          <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-preview" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-preview">
+                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-preview" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-preview">
                             Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
@@ -106,7 +106,7 @@
                     <div class="card">
                       <div class="card-header" id="heading-features">
                         <h3 class="mb-0">
-                          <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-features" href="#" aria-controls="collapse-download">
+                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-features" href="#" aria-controls="collapse-download">
                           Column Descriptions
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
@@ -125,7 +125,7 @@
                     <div class="card">
                       <div class="card-header" id="heading-download">
                         <h3 class="mb-0">
-                          <a class="collapsed" data-toggle="collapse" data-target="#collapse-download" href="#" data-parent="dataset-accordion" role="button" aria-expanded="true" aria-controls="collapse-download">
+                          <a class="collapsed" data-toggle="collapse" data-target="#collapse-download" href="#" data-parent="dataset-accordion" role="tab" aria-expanded="true" aria-controls="collapse-download">
                           Download Data
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
@@ -156,7 +156,7 @@
                     <div class="card">
                       <div class="card-header" id="heading-explore">
                         <h3 class="mb-0">
-                          <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-explore" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-explore">
+                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-explore" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-explore">
                           Explore Data
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
@@ -176,12 +176,10 @@
                           </div>
                           <div class="col-md-3 explore-column">
 
-                              <button class="btn btn-outline-primary" type="button">
-                                <a id="redirect-ckan" href="#" target="_blank">
+                              <a class="btn btn-outline-primary" type="button" id="redirect-ckan" href="#" target="_blank">
                                 <span class="fa fa-area-chart"></span>&nbsp;Visualize
                                 <span class="sr-only"> Visualize data in new window</span>
                                 </a>
-                              </button>
 
                           </div>
                         </div>
@@ -191,7 +189,7 @@
                     <div class="card">
                       <div class="card-header" id="heading-developers">
                         <h3 class="mb-0">
-                          <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapse-developers" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-developers">
+                          <a class="collapsed" role="tab" data-toggle="collapse" data-target="#collapse-developers" href="#" data-parent="dataset-accordion" aria-expanded="true" aria-controls="collapse-developers">
                           For Developers
                           <span class="accordion-arrow">
                             <span class="fa fa-chevron-down"></span>
