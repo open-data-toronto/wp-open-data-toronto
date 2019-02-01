@@ -181,22 +181,8 @@ function queryContents() {
             previewTable.find('tbody').append(row);
         }
 
-        if (config['package']['dataset_category'] == 'Table') $('#content-preview').append(previewTable);
+        if (config['package']['dataset_category'] == 'Table') { $('#content-preview').append(previewTable) };
         $('#content-features').append(featuresTable);
-
-        if (fields.length > 10){
-            $('#table-features').DataTable({
-                'pagingType': 'numbers',
-                'searching': false,
-                'ordering': false,
-                'lengthChange': false,
-                'columnDefs': [
-                    { 'width': '20%', 'targets': 0 }
-                ]
-            });
-
-            $('.dataTables_wrapper div.row:first').remove();
-        }
     });
 }
 
