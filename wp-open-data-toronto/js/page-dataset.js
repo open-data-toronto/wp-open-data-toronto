@@ -41,7 +41,7 @@ function buildDataset(response) {
                 case 'metadata_modified':
                 case 'published_date':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
-                    break
+                    break;
                 case 'notes':
                     var converter = new showdown.Converter();
                     $(this).html(converter.makeHtml(data[field]));
