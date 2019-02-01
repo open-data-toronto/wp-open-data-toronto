@@ -57,8 +57,7 @@ function buildDataset(response) {
     var snippets = generateSnippets();
     for (var lang in snippets) {
         $('#code-' + lang).text(snippets[lang]);
-        $('#' + lang + '-tab').attr('copy', snippets[lang]);
-    }
+        $('#' + lang + ' code').attr('data-text', snippets[lang]);    }
 
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i];
@@ -203,9 +202,12 @@ function buildUI() {
         hljs.highlightBlock(block);
         hljs.lineNumbersBlock(block);
     });
+    
+    $('#body-Developers .nav-item').on('click', function() {
+        $('#code-copy').attr('data-clipboard-text', $('#' + $(this).find('a').attr('id').replace('-tab', '') + ' code').attr('data-text'));
+    });
 
     $('#code-copy').on('click', function() {
-        $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
         $(this).popover({
             placement: 'bottom',
             animation: true,
@@ -241,6 +243,7 @@ function buildUI() {
 
     $('a.collapsed:first').click();
     new ClipboardJS('#code-copy');
+    $('#code-copy').attr('data-clipboard-text', $('#body-Developers .tab-pane.active code').attr('data-text'));
 
     config['isInitializing'] = false;
     $('.block-hidden').css('visibility', 'visible');
