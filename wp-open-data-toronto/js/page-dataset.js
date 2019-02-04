@@ -231,11 +231,6 @@ function buildUI() {
         window.open(link, '_blank');
     });
 
-    $('.dropdown-item').on('click', function(){
-        $(this).siblings().removeClass('selected');
-        $(this).addClass('selected').parents().eq(1).find('button').attr('data-selection', $(this).attr('data-selection')).text($(this).text());
-    });
-
     $(window).on('resize', function() {
         var w = $('#heading-preview').width();
         $('iframe').width(w).height(0.647*w);
