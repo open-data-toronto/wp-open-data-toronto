@@ -45,13 +45,22 @@ section{max-width: 100%;}
      border: 2px solid #ffffff;
      padding: 3px;
 }
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    display: block;
+    margin: 0 0 20px 0 !important;
+    padding: 9px;
+    background: #fff283 !important;
+    border: 2px solid #b7a614;
+    outline: 0;
+}
+
 /* Text */
  #content a:focus{
     text-decoration: underline;
      border: 0;
 }
 main.site-content a:focus{
-	background: #abdbff !important;
+	background: #abdbff;
 }
 main.site-content a.btn:focus {
     background: #222222 !important;
