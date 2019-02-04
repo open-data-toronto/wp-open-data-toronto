@@ -30,7 +30,6 @@ Version:         1.2.0
     outline-style: solid;
     outline-color: #222222;
     outline-width: 2px;
-    padding: 3px;
 }
   .accordion{display:block;width:100%;max-width:100%;}
             .accordion .card{max-width:100%;}
