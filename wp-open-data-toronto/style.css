@@ -30,29 +30,54 @@ Version:         1.2.0
     outline-style: solid;
     outline-color: #222222;
     outline-width: 2px;
-    padding: 3px;
 }
-  .accordion{display:block;width:100%;max-width:100%;}
+
+/* Figures */
+figure img {
+    border-bottom: 1px solid #cccccc;
+}
+figure.wp-caption {
+    border: 1px solid #cccccc;
+    font-weight: bold;
+}
+.accordion{display:block;width:100%;max-width:100%;}
             .accordion .card{max-width:100%;}
-            .accordion .card .btn{text-align:left;display:block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
+            .accordion .card .btn{text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
             .accordion .card .btn:hover{background:#000;}
             .accordion .card .btn{}
             .accordion .card .btn .fa{float: right;}
             .card-header{padding: 0;}
-
+.accordion .card .btn .fa {
+    float: right;
+    padding-left: 11px;
+    padding-right: 3px;
+    padding-top: 2px;
+}
 section{max-width: 100%;}
 /* COT Header */
  #super-header a:focus{
      border: 2px solid #ffffff;
      padding: 3px;
 }
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    display: block;
+    margin: 0 0 20px 0 !important;
+    padding: 9px;
+    background: #fff283 !important;
+    border: 2px solid #b7a614;
+    outline: 0;
+}
+.card-body.accordion__body {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+form.dataset-filter{
+    width: 100%;
+}
 /* Text */
  #content a:focus{
     text-decoration: underline;
      border: 0;
-}
-main.site-content a:focus{
-	background: #abdbff !important;
 }
 main.site-content a.btn:focus {
     background: #222222 !important;

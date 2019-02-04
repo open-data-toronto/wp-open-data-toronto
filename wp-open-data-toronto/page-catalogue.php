@@ -33,8 +33,9 @@
 
       <div class="row d-flex block-hidden">
         <!-- Sidebar -->
-        <a href="#data-catalogue" class="sr-only sr-only-focusable">Skip filters and go to main content</a>
+        
         <div class="col-md-3" id="filter-sidebar">
+          <a href="#data-catalogue" class="sr-only sr-only-focusable">Skip filters and go to main content</a>
           <div class="dataset-sidebar">
             <h2 class="sr-only">Dataset Filters</h2>
             <div class="card" id="vocab_topics-filter">
