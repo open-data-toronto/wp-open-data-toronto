@@ -55,7 +55,7 @@ section{max-width: 100%;}
 }
 .card-body.accordion__body {
     border: 1px solid #ccc;
-    padding: 29px 20px 0 20px;
+    padding: 20px;
 }
 /* Text */
  #content a:focus{
