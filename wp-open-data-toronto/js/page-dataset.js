@@ -155,12 +155,9 @@ function queryViews() {
                 var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
 
                 if (isMapView) {
-                    var w = $('#heading-preview').width(),
-                        windowWidth = $(window).width(),
-                        windowHeight = $(window).height(),
-                        h = (w / windowWidth + 0.14) * windowHeight;
+                    var w = $('#body-dataPreview').width();
 
-                    $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+                    $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
                 } else {
                     $('#redirect-ckan').attr('href', viewURL);
                     exploreFound = true;
@@ -255,12 +252,7 @@ function buildUI() {
     });
 
     $(window).on('resize', function() {
-        var w = $('#heading-preview').width(),
-            windowWidth = $(window).width(),
-            windowHeight = $(window).height(),
-            h = (w / windowWidth + 0.14) * windowHeight;
-
-        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
+        $('iframe').width($('#body-dataPreview').width());
     });
 
     $('a.collapsed:first').click();
