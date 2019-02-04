@@ -57,6 +57,9 @@ section{max-width: 100%;}
     border: 1px solid #ccc;
     padding: 20px;
 }
+form.dataset-filter{
+    width: 100%;
+}
 /* Text */
  #content a:focus{
     text-decoration: underline;
