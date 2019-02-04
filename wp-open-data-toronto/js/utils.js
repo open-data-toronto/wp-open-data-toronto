@@ -11,7 +11,7 @@ if (window.location.host.indexOf('intra') !== -1) {
 }
 
 if (ckan.indexOf('toronto.ca') == -1) {
-    ckan = 'ckanadmin1.intra.dev-toronto.ca'
+    ckan = 'ckan0.cf.opendata.inter.sandbox-toronto.ca'
 }
 
 var config = {
