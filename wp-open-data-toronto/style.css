@@ -541,6 +541,8 @@ main.site-content a:link{
  section#data-stories{
      color: #ffffff;
      background: #000000;
+     background-size: cover;
+     background-position: 50% 50%;
 }
  section#data-stories .jumbotron {
      height: 500px;

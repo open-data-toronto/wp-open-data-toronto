@@ -8,6 +8,13 @@ $.extend(config, {
     'package': {}
 });
 
+/**
+ * Builds the dataset page HTML elements
+ *
+ * @params {Object} response : Results from the results of the package_show CKAN
+ *      API call for the shown page.
+ */
+
 function buildDataset(response) {
     var data = config['package'] = response['result'];
     data['preview_resource'] = {};
@@ -130,6 +137,11 @@ function buildDataset(response) {
     }
 }
 
+/**
+ * Calls resource_view_list CKAN API endpoint and builds the preview if the
+ * dataset is Map or update the explore redirect URL if the dataset is Table.
+ */
+
 function queryViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
         var results = response['result'],
@@ -143,8 +155,10 @@ function queryViews() {
                 var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
 
                 if (isMapView) {
-                    var w = $('#header-dataPreview').width(),
-                        h = 0.647*w;
+                    var w = $('#heading-preview').width(),
+                        windowWidth = $(window).width(),
+                        windowHeight = $(window).height(),
+                        h = (w / windowWidth + 0.14) * windowHeight;
 
                     $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
                 } else {
@@ -161,6 +175,11 @@ function queryViews() {
         }
     });
 }
+
+/**
+ * Calls the datastore_search CKAN API endpoint and builds the features
+ * accordion and the preview accordion if the dataset is a Table
+ */
 
 function queryContents() {
     getCKAN('datastore_search', { 'resource_id': config['package']['preview_resource']['id'], 'limit': 3 }, function(response) {
@@ -197,6 +216,10 @@ function queryContents() {
     });
 }
 
+/**
+ * Creates the HTML element events
+ */
+
 function buildUI() {
     $('code').each(function(i, block) {
         hljs.highlightBlock(block);
@@ -232,8 +255,12 @@ function buildUI() {
     });
 
     $(window).on('resize', function() {
-        var w = $('#heading-preview').width();
-        $('iframe').width(w).height(0.647*w);
+        var w = $('#heading-preview').width(),
+            windowWidth = $(window).width(),
+            windowHeight = $(window).height(),
+            h = (w / windowWidth + 0.14) * windowHeight;
+
+        $('#content-preview').append('<iframe width="' + w +  '" height="' + h + '" src="' + viewURL + '" frameBorder="0"></iframe>');
     });
 
     $('a.collapsed:first').click();
@@ -243,6 +270,10 @@ function buildUI() {
     config['isInitializing'] = false;
     $('.block-hidden').css('visibility', 'visible');
 }
+
+/**
+ * Returns the code snippets with CKAN API endpoints.
+ */
 
 function generateSnippets() {
     var snippets = {};
