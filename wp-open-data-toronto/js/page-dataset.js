@@ -102,7 +102,7 @@ function buildDataset(response) {
                             '<td>' + 
                             '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
                                 '<span class="fa fa-download"></span>' + 
-                                '&nbsp; Download' +
+                                'Download' +
                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
                             '</a>' +
                             '</td>' +
@@ -110,7 +110,7 @@ function buildDataset(response) {
 
         $('#table-resources tbody').append(insert_row);
         if ( isWeb ) {
-            $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
+            $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>Visit page');
         }
         
     }
