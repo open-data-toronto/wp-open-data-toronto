@@ -14,7 +14,7 @@ function init() {
                                     '<a href="/package/' + row['name'] + '/">' +
                                       row['title'] +
                                       '<div class="float-right">' +
-                                        '<span class="sr-only">Last updated:</span>' + getTimeSince(row['metadata_created']) +
+                                        '<span class="sr-only">Published on:</span>' + getTimeSince(row['metadata_created']) +
                                       '</div>' +
                                     '</a>' +
                                   '</li>')
