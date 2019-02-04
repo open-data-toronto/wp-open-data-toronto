@@ -10,6 +10,10 @@ if (window.location.host.indexOf('intra') !== -1) {
     var ckan = window.location.host.replace('portal', 'ckan');
 }
 
+if (ckan.indexOf('toronto.ca') == -1) {
+    ckan = 'ckan0.cf.opendata.inter.sandbox-toronto.ca'
+}
+
 var config = {
     'ckanAPI': 'https://' + ckan + '/api/3/action/',
     'ckanURL': 'https://' + ckan
