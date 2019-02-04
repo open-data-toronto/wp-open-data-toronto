@@ -32,6 +32,7 @@
 <?php endif; ?>
 <?php get_header(); ?>
 
+
   <section class="content-area">
     <div class="container">
       <div class="row">

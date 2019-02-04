@@ -145,12 +145,10 @@ function buildSidebar(response) {
                 name = truncateString(value['name'], 30, true);
 
             sidebarEle.prepend(
-                '<li class="list-group-item list-group-item-action checkbox checkbox-filter filter-value">' +
-                  '<label data-trigger="hover" data-placement="right" title="' + value['name'] + '">' +
-                    '<span>' +
-                      '<input type="checkbox"' + 'data-field="' + field['title'] + '" value="' + value['name'] + '">' + name +
-                    '</span>' +
-                    '<span class="badge float-right">' + value['count'] + '</span>' +
+                '<li class="list-group-item list-group-item-action filter filter-value">' +
+                  '<label title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
+                    '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
+                    '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
                   '</label>' +
                 '</li>');
 
@@ -159,8 +157,9 @@ function buildSidebar(response) {
             }
 
             if (selected != null && selected.indexOf(value['name']) !== -1) {
-                $('input[value="' + value['name'] + '"]').prop('checked', true);
-                $('input[value="' + value['name'] + '"]').closest('label').addClass('checkbox-checked').append('<span class="float-right"><i class="fa fa-times"></i></span>');
+                var elLabel = $('label[title="' + value['name'] + '"]');
+                elLabel.parent('li').addClass('filter-selected');
+                elLabel.append('<span class="float-right"><i class="fa fa-times"></i></span>');
             }
         }
 
@@ -177,7 +176,7 @@ function buildSidebar(response) {
         if (numFilters > config['filterSize']) {
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
 
-            showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more <span class="sr-only">' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's</span>'+ '</a>');
+            showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
             showMoreButton.show();
         } else {
             showMoreButton.hide();
@@ -285,14 +284,14 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $('[data-type="filter"] input').on('click', function() {
-        $(this).parent('label').toggleClass('checkbox-checked');
+    $('.filter').on('click', function() {
+        $(this).toggleClass('filter-selected');
 
-        var field = $(this).data('field');
+        var field = $(this).find('label').data('field');
         state['filters'][field] = [];
 
-        $.each($('[data-field="' + field + '"]:checked'), function(idx, element) {
-            state['filters'][field].push($(element).val());
+        $.each($('.filter-selected label[data-field="' + field + '"]'), function(idx, element) {
+            state['filters'][field].push($(element).data('value'));
         });
 
         state['page'] = 0;
@@ -373,5 +372,9 @@ function updateURL() {
 
 function init() {
     $('.block-hidden').css('visibility', 'hidden');
+    if (isMobile()) {
+        $('#filter-sidebar').addClass('mobile-hidden');
+    }
+
     loadCatalogue();
 }

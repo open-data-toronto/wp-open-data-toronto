@@ -28,24 +28,63 @@ Version:         1.2.0
 /* Default */
  *:focus{
     outline-style: solid;
-     outline-color: #cccccc;
-     outline-width: 2px
+    outline-color: #222222;
+    outline-width: 2px;
 }
+
+/* Figures */
+figure img {
+    border-bottom: 1px solid #cccccc;
+}
+figure.wp-caption {
+    border: 1px solid #cccccc;
+    font-weight: bold;
+}
+.accordion{display:block;width:100%;max-width:100%;}
+            .accordion .card{max-width:100%;}
+            .accordion .card .btn{text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
+            .accordion .card .btn:hover{background:#000;}
+            .accordion .card .btn{}
+            .accordion .card .btn .fa{float: right;}
+            .card-header{padding: 0;}
+.accordion .card .btn .fa {
+    float: right;
+    padding-left: 11px;
+    padding-right: 3px;
+    padding-top: 2px;
+}
+section{max-width: 100%;}
 /* COT Header */
  #super-header a:focus{
-    outline-style: solid;
-     outline-color: #222222;
-     outline-width: 1px;
-    text-decoration: underline;
+     border: 2px solid #ffffff;
+     padding: 3px;
+}
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    display: block;
+    margin: 0 0 20px 0 !important;
+    padding: 9px;
+    background: #fff283 !important;
+    border: 2px solid #b7a614;
+    outline: 0;
+}
+.card-body.accordion__body {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+form.dataset-filter{
+    width: 100%;
 }
 /* Text */
  #content a:focus{
     text-decoration: underline;
      border: 0;
 }
+main.site-content a.btn:focus {
+    background: #222222 !important;
+}
 /* Buttons */
  button:focus, a.btn:focus{
-    background: #abdbff !important;
+    background: #222222 !important;
 }
 /* Breadcrumbs and Sidebar */
  .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
@@ -53,7 +92,7 @@ Version:         1.2.0
 }
 /* Tables */
  .table a:focus{
-    background: #FFEB9C;
+    background: abdbff;
 }
 /* Migration */
  header#masthead{
@@ -100,6 +139,14 @@ ul.status li{
  a:link {
      font-weight: bold !important;
 }
+main.site-content a:link{
+	text-decoration: underline;
+}
+.btn-primary.focus, .btn-primary:focus {
+    -webkit-box-shadow: 0;
+    box-shadow: none !important;
+    background: #002f56 !important;
+}
  .col{
      width: 50%;
      padding: 15px;
@@ -115,27 +162,35 @@ ul.status li{
  .col:nth-child(2){
      border-left: 1px solid #ccc;
 }
-/** Checkbox Styles **/
- .checkbox-filter input[type=checkbox] {
-     position: absolute;
-     top: -9999px;
-     left: -9999px;
-}
- .checkbox-filter label {
+
+ .filter label {
      color: #6d6d6d;
 }
- .checkbox-filter label:hover {
+ .filter label:hover {
      color: #185688;
 }
- .checkbox-filter label:hover::before{
+ .filter label:hover::before{
      color: #185688;
 }
- .checkbox-filter label.checkbox-checked{
+ .filter-selected label::before{
      color: #185688;
-     font-weight: bold;
 }
- .checkbox-filter label.checkbox-checked::before{
-     color: #185688;
+ .filter-selected label{
+    background: #666666 !important;
+    font-weight: bold !important;
+    color: #F5F5F5 !important;
+}
+.filter-selected span.badge {
+    display: none;
+}
+.filter .badge {
+   background: #666666;
+   position: absolute;
+   top: 50%;
+   margin: 0rem .8rem;
+   right: 0;
+   transform: translateY(-50%);
+   font-size: 100%;
 }
 /** Checkbox Styles **/
  dd {
@@ -606,6 +661,9 @@ ul.status li{
  input{
      border-radius: 0 !important;
 }
+input#search {
+    border: 2px solid #007d88;
+}
 /** Search Results **/
  .search-results-content {
      width: 100%;
@@ -717,27 +775,11 @@ ul.status li{
      text-align: center;
      background: #F5F5F5;
 }
- .filter-value .checkbox-checked {
-     background: #666666;
-     color: #F5F5F5 !important;
-}
- .checkbox-checked span.badge {
-     display: none;
-}
  .dataset-sidebar .show-more a {
      margin: 0 auto;
 }
  .not-found {
      padding: 1em;
-}
- .filter-value label .badge {
-     background: #666666;
-     position: absolute;
-     top: 50%;
-     margin: 0rem .8rem;
-     right: 0;
-     transform: translateY(-50%);
-     font-size: 100%;
 }
  #dataset-search-box input {
      border-radius: calc(.25rem - 1px) 0 0 calc(.25rem - 1px) !important;
@@ -1393,7 +1435,10 @@ ul.status li{
     hr{
         border: 0;
     }
-    #filter-sidebar{
+    #filter-sidebar {
+        order: 2
+    }
+    .mobile-hidden{
         display: none;
     }
     #results-count{

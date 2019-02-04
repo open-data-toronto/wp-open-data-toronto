@@ -4,6 +4,7 @@ $.extend(config, {
         'geospatial': ['GeoJSON', 'CSV', 'SHP'],
         'tabular': ['CSV', 'JSON', 'XML']
     },
+    'projectionOptions': ['WGS84', 'MTM3'],
     'package': {}
 });
 
@@ -47,7 +48,7 @@ function buildDataset(response) {
                 case 'metadata_modified':
                 case 'published_date':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
-                    break
+                    break;
                 case 'notes':
                     var converter = new showdown.Converter();
                     $(this).html(converter.makeHtml(data[field]));
@@ -63,55 +64,66 @@ function buildDataset(response) {
     var snippets = generateSnippets();
     for (var lang in snippets) {
         $('#code-' + lang).text(snippets[lang]);
-        $('#' + lang + '-tab').attr('copy', snippets[lang]);
-    }
+        $('#' + lang + ' code').attr('data-text', snippets[lang]);    }
 
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i];
+        resource['format'] = resource['format'].toLowerCase();
+
+        var isGeospatial = ['shp', 'geojson'].indexOf(resource['format']) != -1;
+        var isWeb = ['html', 'web', 'jsp'].indexOf(resource['format']) != -1 ;
 
         if (resource['datastore_active']) {
-            if (config['package']['dataset_category'] == 'Map' && ['SHP', 'GeoJSON'].indexOf(resource['format']) != -1) {
-                resource['format'] = generateFormatDropdowns(config['formatOptions']['geospatial']);
+            if (isGeospatial) {
+                var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
+                if (resource['format'] == 'geojson') {
+                    format.unshift(['geojson', 'GeoJSON']);
+                }
+
+                var projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
             } else {
-                resource['format'] = generateFormatDropdowns(config['formatOptions']['tabular']);
-            }
-        }
-
-        $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
-                                             '<td>' + resource['name'] + '</td>' +
-                                             '<td>' + resource['format'] + '</td>' +
-                                             '<td>' +
-                                                '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '">' +
-                                                  '<button type="button" class="btn btn-outline-primary">' +
-                                                    '<span class="fa fa-download"></span>&nbsp; Download' +
-                                                  '</button>' +
-                                                  '<span class="sr-only">' + resource['name'] + '</span>' +
-                                                '</a>' +
-                                             '</td>' +
-                                           '</tr>');
-
-        if (['HTML', 'Web', 'JSP'].indexOf(resource['format']) > -1 ) {
-            $('#table-resources tbody tr:last-child').find('td:nth-child(3) button').html('<span class="fa fa-desktop"></span>&nbsp; Visit page');
-        }
-
-        if (config['package']['dataset_category'] == 'Map') {
-            if (i == 0) {
-                $('#table-resources thead th:nth-child(2)').after('<th>Projection</th>');
+                var format = [['json', 'JSON'], ['xml', 'XML']];
+                if (resource['format'] == 'csv') {
+                    format.unshift(['csv', 'CSV']);
+                }
             }
 
-            $('#table-resources tbody tr:last-child').find('td:nth-child(2)').after(
-                '<td>' +
-                  '<span class="dropdown">' +
-                    '<button class="btn btn-outline-primary dropdown-toggle select-download-projection" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-selection="4326">' +
-                      'WGS84' +
-                    '</button>' +
-                    '<div class="dropdown-menu" aria-labelledby="select-download-projection">' +
-                      '<span class="dropdown-item selected" data-selection="4326">WGS84</span>' +
-                      '<span class="dropdown-item" data-selection="2019">MTM3</span>' +
-                    '</div>' +
-                  '</span>' +
-                '</td>');
+            format = generateDropdowns('format', format);
+        } else {
+            if (isGeospatial) {
+                for (var f in config['projectionOptions']) {
+                    projection = '<div class="projection">' + 'WGS84' + '</div>';
+                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
+                        projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
+                    }
+                    break;
+                }
+            }
+            var format = '<div class="file-format">' + resource['format'] + '</div>'
         }
+
+        var insert_row = '<tr data-stored="' + resource['datastore_active'] + '">' +
+                            '<td>' + resource['name'] + '</td>' +
+                            '<td>' + format + '</td>' +
+                            (isGeospatial ? '<td>' + projection + '</td>' : '') +
+                            '<td>' + 
+                            '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
+                                '<span class="fa fa-download"></span>' + 
+                                'Download' +
+                                '<span class="sr-only">Download ' + resource['name'] + '</span>' +
+                            '</a>' +
+                            '</td>' +
+                        '</tr>';
+
+        $('#table-resources tbody').append(insert_row);
+        if ( isWeb ) {
+            $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>Visit page');
+        }
+        
+    }
+
+    if (isGeospatial) {
+        $('#table-resources thead th:nth-child(2)').after('<th scope="col">Projection</th>');
     }
 
     buildUI();
@@ -120,8 +132,7 @@ function buildDataset(response) {
         queryContents();
         queryViews();
     } else {
-        $('#collapse-preview, #collapse-features, #collapse-explore')
-            .addClass('inactive')
+        $('#body-dataPreview .card-body, #body-dataFeatures .card-body, #body-Explore .card-body')
             .html('<div class="not-available">Not available for this dataset</div>');
     }
 }
@@ -185,7 +196,7 @@ function queryContents() {
                              '</table>');
 
         for (var i in fields) {
-            var columnDesc = ('info' in fields[i]) ? fields[i]['info']['notes'] : '';
+            var columnDesc = ('info' in fields[i] && fields[i]['info']['notes']) ? fields[i]['info']['notes'] : '<span aria-label="No value available"></span>';
 
             previewTable.find('thead').append('<th>' + fields[i]['id'] + '</th>');
             featuresTable.find('tbody').append('<tr><td>' + fields[i]['id'] + '</td><td>' + columnDesc + '</td></tr>');
@@ -200,22 +211,8 @@ function queryContents() {
             previewTable.find('tbody').append(row);
         }
 
-        if (config['package']['dataset_category'] == 'Table') $('#content-preview').append(previewTable);
+        if (config['package']['dataset_category'] == 'Table') { $('#content-preview').append(previewTable) };
         $('#content-features').append(featuresTable);
-
-        if (fields.length > 10){
-            $('#table-features').DataTable({
-                'pagingType': 'numbers',
-                'searching': false,
-                'ordering': false,
-                'lengthChange': false,
-                'columnDefs': [
-                    { 'width': '20%', 'targets': 0 }
-                ]
-            });
-
-            $('.dataTables_wrapper div.row:first').remove();
-        }
     });
 }
 
@@ -228,9 +225,12 @@ function buildUI() {
         hljs.highlightBlock(block);
         hljs.lineNumbersBlock(block);
     });
+    
+    $('#body-Developers .nav-item').on('click', function() {
+        $('#code-copy').attr('data-clipboard-text', $('#' + $(this).find('a').attr('id').replace('-tab', '') + ' code').attr('data-text'));
+    });
 
     $('#code-copy').on('click', function() {
-        $(this).attr('data-clipboard-text', $('#collapse-developers .nav-link.active').attr('copy'));
         $(this).popover({
             placement: 'bottom',
             animation: true,
@@ -245,18 +245,13 @@ function buildUI() {
 
         var link = $(this).attr('href');
         if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents('tr').find('.select-download-format').attr('data-selection'),
-                proj = $(this).parents('tr').find('.select-download-projection').attr('data-selection');
+            var format = $(this).parents('tr').find('.select-download-format').val(),
+                proj = $(this).parents('tr').find('.select-download-projection').val();
 
             link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
         }
 
         window.open(link, '_blank');
-    });
-
-    $('.dropdown-item').on('click', function(){
-        $(this).siblings().removeClass('selected');
-        $(this).addClass('selected').parents().eq(1).find('button').attr('data-selection', $(this).attr('data-selection')).text($(this).text());
     });
 
     $(window).on('resize', function() {
@@ -270,6 +265,7 @@ function buildUI() {
 
     $('a.collapsed:first').click();
     new ClipboardJS('#code-copy');
+    $('#code-copy').attr('data-clipboard-text', $('#body-Developers .tab-pane.active code').attr('data-text'));
 
     config['isInitializing'] = false;
     $('.block-hidden').css('visibility', 'visible');
@@ -306,28 +302,15 @@ function generateSnippets() {
     return snippets;
 }
 
-/**
- * Builds the dropdown button for the download accordion
- *
- * @params {Array} options : Format options for the download dropdown
- */
-
-function generateFormatDropdowns(options) {
-    var dropdown = $('<div class="placeholder">' +
-                       '<span class="dropdown">' +
-                         '<button class="btn btn-outline-primary dropdown-toggle select-download-format" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                         '</button>' +
-                         '<div class="dropdown-menu" aria-labelledby="dropdown-format">' +
-                         '</div>' +
-                       '</span>' +
-                     '</div>');
-
+function generateDropdowns(type, options) {
+    var dropdown = $('<form>' +
+                       '<select class="select-download-' + type + '">' +
+                       '</select>' +
+                     '</form>',);
+    
     for (var i in options) {
-        dropdown.find('.dropdown-menu').append('<span class="dropdown-item" data-selection="' + options[i].toLowerCase() + '">' + options[i] + '</span>');
+        dropdown.find('select').append('<option value="' + options[i][0] + '">' + options[i][1] + '</option>');
     }
-
-    dropdown.find('button').attr('data-selection', options[0].toLowerCase()).html(options[0]);
-    dropdown.find('span:first').addClass('selected');
 
     return dropdown.html();
 }

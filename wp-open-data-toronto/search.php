@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- End breadcrumbs -->
-
+    <h1 class="sr-only">Search results</h1>
     <div class="row">
       <div class="col-md-12">
         <?php
@@ -23,7 +23,7 @@
         ?>
 
         <div class="search-results-content">
-          <a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
+          <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
           <?php the_excerpt(); ?>
         </div>
 

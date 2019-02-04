@@ -1,5 +1,5 @@
-<div class="sidebar" role="secondary">
-  <nav role="navigation" aria-label="Secondary Navigation">
+<div class="sidebar" role="navigation" aria-label="Secondary Navigation">
+  <nav>
     <ul class="page-list">
       <!-- Parent-level page -->
       <li>
