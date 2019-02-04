@@ -176,7 +176,7 @@
                           </div>
                           <div class="col-md-3 explore-column">
 
-                              <a class="btn btn-outline-primary" type="button" id="redirect-ckan" href="#" target="_blank">
+                              <a class="btn btn-outline-primary" id="redirect-ckan" href="#" target="_blank">
                                 <span class="fa fa-area-chart"></span>&nbsp;Visualize
                                 <span class="sr-only"> Visualize data in new window</span>
                                 </a>
