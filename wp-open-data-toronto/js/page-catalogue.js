@@ -315,7 +315,7 @@ function loadCatalogue() {
             } else if (filter[0] == 'sort') {
                 state['sort'] = content;
             } else if (filter[0].length > 0) {
-                state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content : content.split('+');
+                state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content.replace('+', ' ') : content.split('+');
             }
         }
     }
