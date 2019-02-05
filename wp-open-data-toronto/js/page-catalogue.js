@@ -234,6 +234,8 @@ function buildStaticUI() {
         if (value.length > 0 && !value.toLowerCase().match(/^[0-9a-z\s]+$/)) {
             $(this).parents('.input-group').addClass('has-danger');
             $('#search-error').html('<strong>Only numbers, letters, and spaces are allowed</strong>');
+
+            return false
         } else {
             $(this).parents('.input-group').removeClass('has-danger');
             $('#search-error').empty();
@@ -315,7 +317,7 @@ function loadCatalogue() {
             } else if (filter[0] == 'sort') {
                 state['sort'] = content;
             } else if (filter[0].length > 0) {
-                state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content : content.split('+');
+                state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content.replace(/\+/g, ' ') : content.split('+');
             }
         }
     }
