@@ -99,7 +99,7 @@ function buildDataset(response) {
             format = generateDropdowns('format', format);
         } else {
             if (hasGeospatial) {
-                projection = '<div class="projection">' + 'N/A' + '</div>';
+                projection = '<div class="projection">' + 'Not Applicable' + '</div>';
                 for (var f in config['projectionOptions']) {
                     if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
                         projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
