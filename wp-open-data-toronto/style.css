@@ -31,7 +31,10 @@ Version:         1.2.0
     outline-color: #222222;
     outline-width: 2px;
 }
-
+a.btn{
+    text-decoration:none !important;
+    padding: 9px 12px 12px 12px;
+}
 /* Figures */
 figure img {
     border-bottom: 1px solid #cccccc;
