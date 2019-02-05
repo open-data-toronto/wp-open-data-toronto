@@ -11,12 +11,12 @@ if (window.location.host.indexOf('intra') !== -1) {
 }
 
 if (ckan.indexOf('toronto.ca') == -1) {
-    ckan = 'ckan0.cf.opendata.inter.sandbox-toronto.ca'
+    ckan = 'ckan0.cf.opendata.inter.sandbox-toronto.ca';
 }
 
 var config = {
-    'ckanAPI': 'https://' + ckan + '/api/3/action/',
-    'ckanURL': 'https://' + ckan
+    'ckanAPI': window.location.protocol + '//' + ckan + '/api/3/action/',
+    'ckanURL': window.location.protocol + '//' + ckan
 }
 
 function getCKAN(endpoint, data, callback) {
