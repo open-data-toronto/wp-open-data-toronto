@@ -106,9 +106,9 @@ function buildDataset(response) {
                             '<td>' + resource['name'] + '</td>' +
                             '<td>' + format + '</td>' +
                             (isGeospatial ? '<td>' + projection + '</td>' : '') +
-                            '<td>' + 
+                            '<td>' +
                             '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
-                                '<span class="fa fa-download"></span>' + 
+                                '<span class="fa fa-download"></span>' +
                                 'Download' +
                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
                             '</a>' +
@@ -119,7 +119,7 @@ function buildDataset(response) {
         if ( isWeb ) {
             $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>Visit page');
         }
-        
+
     }
 
     if (isGeospatial) {
@@ -222,7 +222,7 @@ function buildUI() {
         hljs.highlightBlock(block);
         hljs.lineNumbersBlock(block);
     });
-    
+
     $('#body-Developers .nav-item').on('click', function() {
         $('#code-copy').attr('data-clipboard-text', $('#' + $(this).find('a').attr('id').replace('-tab', '') + ' code').attr('data-text'));
     });
@@ -268,27 +268,33 @@ function buildUI() {
  */
 
 function generateSnippets() {
+    var endpoint = 'package_search',
+        snippetID = config['package']['id']
+    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+        endpoint = 'datastore_search';
+        snippetID = config['package']['preview_resource']['id'];
+    }
     var snippets = {};
     snippets['python'] = 'import requests\n' +
                          'import json\n' +
                          '\n' +
-                         'url = "' + config['ckanAPI'] + 'package_search"\n' +
-                         'response = requests.get(url, data={ "q": "id:\'' + config['package']['id'] + '\'" })\n' +
+                         'url = "' + config['ckanAPI'] + endpoint + '"\n' +
+                         'response = requests.get(url, data={ "q": "id:' + snippetID + '" })\n' +
                          'results = json.loads(response.content)\n' +
                          'print(results)';
 
     snippets['javascript'] = '$.ajax({\n' +
                              '    dataType: "json",\n' +
                              '    type: "GET",\n' +
-                             '    url: "' + config['ckanAPI'] + 'package_search",\n' +
-                             '    data: { "q": \'id:"' + config['package']['id'] + '"\' }\n' +
+                             '    url: "' + config['ckanAPI'] + endpoint + '",\n' +
+                             '    data: { "q": "id:' + snippetID + '" }\n' +
                              '}).done(function(response) {\n' +
                              '    console.log(response);\n' +
                              '});';
 
     snippets['r'] = 'library(httr)\n' +
                     '\n' +
-                    'r <- GET(' + '"' + config['ckanAPI'] + 'package_show", query=list("id"="' + config['package']['id'] + '"))\n' +
+                    'r <- GET(' + '"' + config['ckanAPI'] + endpoint + '", query=list("id"="' + snippetID + '"))\n' +
                     'content(r, "text")';
 
     return snippets;
@@ -299,7 +305,7 @@ function generateDropdowns(type, options) {
                        '<select class="select-download-' + type + '">' +
                        '</select>' +
                      '</form>',);
-    
+
     for (var i in options) {
         dropdown.find('select').append('<option value="' + options[i][0] + '">' + options[i][1] + '</option>');
     }
