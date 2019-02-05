@@ -66,15 +66,34 @@ function buildDataset(response) {
         $('#code-' + lang).text(snippets[lang]);
         $('#' + lang + ' code').attr('data-text', snippets[lang]);    }
 
+    var hasGeospatial = false;
+    for (var i in config['package']['resources']) {
+        hasGeospatial = ['shp', 'geojson'].indexOf(config['package']['resources'][i]['format'].toLowerCase()) != -1;
+        if (hasGeospatial) {
+            break;
+        }
+    }
+
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i];
         resource['format'] = resource['format'].toLowerCase();
 
-        var isGeospatial = ['shp', 'geojson'].indexOf(resource['format']) != -1;
+        var format = '',
+            projection = '';
+
+        if (hasGeospatial && resource['datastore_active']) {
+            var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
+            if (resource['format'] == 'geojson') {
+                format.unshift(['geojson', 'GeoJSON']);
+            }
+
+            var projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
+        }
+
         var isWeb = ['html', 'web', 'jsp'].indexOf(resource['format']) != -1 ;
 
         if (resource['datastore_active']) {
-            if (isGeospatial) {
+            if (hasGeospatial) {
                 var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
                 if (resource['format'] == 'geojson') {
                     format.unshift(['geojson', 'GeoJSON']);
@@ -90,13 +109,13 @@ function buildDataset(response) {
 
             format = generateDropdowns('format', format);
         } else {
-            if (isGeospatial) {
+            if (hasGeospatial) {
+                projection = '<div class="projection">' + 'N/A' + '</div>';
                 for (var f in config['projectionOptions']) {
-                    projection = '<div class="projection">' + 'WGS84' + '</div>';
                     if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
                         projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
+                        break;
                     }
-                    break;
                 }
             }
             var format = '<div class="file-format">' + resource['format'] + '</div>'
@@ -105,7 +124,7 @@ function buildDataset(response) {
         var insert_row = '<tr data-stored="' + resource['datastore_active'] + '">' +
                             '<td>' + resource['name'] + '</td>' +
                             '<td>' + format + '</td>' +
-                            (isGeospatial ? '<td>' + projection + '</td>' : '') +
+                            (hasGeospatial ? '<td>' + projection + '</td>' : '') +
                             '<td>' +
                             '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
                                 '<span class="fa fa-download"></span>' +
@@ -122,7 +141,7 @@ function buildDataset(response) {
 
     }
 
-    if (isGeospatial) {
+    if (hasGeospatial) {
         $('#table-resources thead th:nth-child(2)').after('<th scope="col">Projection</th>');
     }
 
