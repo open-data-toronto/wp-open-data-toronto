@@ -84,12 +84,12 @@
                   <!-- Accordion -->
 
                   <div class="accordion">
-                    
+
             <div class="card accordion__section">
                 <div class="card-header accordion__header" id="header-dataPreview">
                     <h2 class="mb-0">
                     <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-dataPreview" aria-expanded="false" aria-controls="accordion-title-1">
-                        Data Preview 
+                        Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="card accordion__section">
                 <div class="card-header accordion__header" id="header-dataFeatures">
                     <h2 class="mb-0">
@@ -122,7 +122,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="card accordion__section">
                 <div class="card-header accordion__header" id="header-Download">
                     <h2 class="mb-0">
@@ -187,7 +187,7 @@
                 </div>
             </div>
 
-        
+
             <div class="card accordion__section">
                 <div class="card-header accordion__header" id="header-Developers">
                     <h2 class="mb-0">
@@ -205,11 +205,7 @@
                     <div class="card-block">
                           <div class="row">
                             <div class="col-md-12">
-                            <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
-                              <dl>
-                                <dt>Package ID</dt>
-                                <dd data-field="id"></dd>
-                              </dl>
+                              <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
                             </div>
                           </div>
                           <div class="row">
@@ -241,7 +237,7 @@
                     </div>
                 </div>
             </div>
-        
+
                 </div>
 
 <!-- end accordion -->

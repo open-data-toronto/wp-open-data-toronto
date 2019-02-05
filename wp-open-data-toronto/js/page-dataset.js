@@ -81,17 +81,6 @@ function buildDataset(response) {
         var format = '',
             projection = '';
 
-        if (hasGeospatial && resource['datastore_active']) {
-            var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
-            if (resource['format'] == 'geojson') {
-                format.unshift(['geojson', 'GeoJSON']);
-            }
-
-            var projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
-        }
-
-        var isWeb = ['html', 'web', 'jsp'].indexOf(resource['format']) != -1 ;
-
         if (resource['datastore_active']) {
             if (hasGeospatial) {
                 var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
@@ -99,7 +88,7 @@ function buildDataset(response) {
                     format.unshift(['geojson', 'GeoJSON']);
                 }
 
-                var projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
+                projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
             } else {
                 var format = [['json', 'JSON'], ['xml', 'XML']];
                 if (resource['format'] == 'csv') {
@@ -118,10 +107,11 @@ function buildDataset(response) {
                     }
                 }
             }
-            var format = '<div class="file-format">' + resource['format'] + '</div>'
+
+            format = '<div class="file-format">' + resource['format'] + '</div>'
         }
 
-        var insert_row = '<tr data-stored="' + resource['datastore_active'] + '">' +
+        var row = '<tr data-stored="' + resource['datastore_active'] + '">' +
                             '<td>' + resource['name'] + '</td>' +
                             '<td>' + format + '</td>' +
                             (hasGeospatial ? '<td>' + projection + '</td>' : '') +
@@ -132,10 +122,10 @@ function buildDataset(response) {
                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
                             '</a>' +
                             '</td>' +
-                        '</tr>';
+                         '</tr>';
 
-        $('#table-resources tbody').append(insert_row);
-        if ( isWeb ) {
+        $('#table-resources tbody').append(row);
+        if (['html', 'web', 'jsp'].indexOf(resource['format']) != -1) {
             $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>Visit page');
         }
 
@@ -274,7 +264,6 @@ function buildUI() {
         $('iframe').width($('#body-dataPreview').width());
     });
 
-    $('a.collapsed:first').click();
     new ClipboardJS('#code-copy');
     $('#code-copy').attr('data-clipboard-text', $('#body-Developers .tab-pane.active code').attr('data-text'));
 
@@ -287,34 +276,113 @@ function buildUI() {
  */
 
 function generateSnippets() {
-    var endpoint = 'package_search',
-        snippetID = config['package']['id']
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
-        endpoint = 'datastore_search';
-        snippetID = config['package']['preview_resource']['id'];
-    }
     var snippets = {};
-    snippets['python'] = 'import requests\n' +
-                         'import json\n' +
-                         '\n' +
-                         'url = "' + config['ckanAPI'] + endpoint + '"\n' +
-                         'response = requests.get(url, data={ "q": "id:' + snippetID + '" })\n' +
-                         'results = json.loads(response.content)\n' +
-                         'print(results)';
+    snippets['python'] = [
+        'import urllib',
+        'import json',
+        '',
+        '# Get the dataset metadata by passing package_id to the package_search endpoint',
+        '# For example, to retrieve the metadata for this dataset:',
+        '',
+        'url = "' + config['ckanAPI'] + 'package_show"',
+        'params = { "id": "' + config['package']['id'] + '"}',
+        'response = urllib.request.urlopen(url, data=bytes(json.dumps(params), encoding="utf-8"))',
+        'package = json.loads(response.read())',
+        'print(package)'
+    ]
 
-    snippets['javascript'] = '$.ajax({\n' +
-                             '    dataType: "json",\n' +
-                             '    type: "GET",\n' +
-                             '    url: "' + config['ckanAPI'] + endpoint + '",\n' +
-                             '    data: { "q": "id:' + snippetID + '" }\n' +
-                             '}).done(function(response) {\n' +
-                             '    console.log(response);\n' +
-                             '});';
+    snippets['javascript'] = [
+        '// Get the dataset metadata by passing package_id to the package_search endpoint',
+        '// For example, to retrieve the metadata for this dataset:',
+        '',
+        'var package = {}',
+        '$.ajax({',
+        '    dataType: "json",',
+        '    type: "GET",',
+        '    url: "' + config['ckanAPI'] + 'package_show",',
+        '    data: { "id": "' + config['package']['id'] + '" }',
+        '}).done(function(response) {',
+        '    package = response;',
+        '    console.log(response);',
+        '});'
+    ]
 
-    snippets['r'] = 'library(httr)\n' +
-                    '\n' +
-                    'r <- GET(' + '"' + config['ckanAPI'] + endpoint + '", query=list("id"="' + snippetID + '"))\n' +
-                    'content(r, "text")';
+    snippets['r'] = [
+        'library(httr)',
+        '',
+        '# Get the dataset metadata by passing package_id to the package_search endpoint',
+        '# For example, to retrieve the metadata for this dataset:',
+        '',
+        'response <- GET(' + '"' + config['ckanAPI'] + 'package_show", query=list("id"="' + config['package']['id'] + '"))',
+        'package <- content(response, "parsed")',
+        'print(package)'
+    ]
+
+    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+        snippets['python'] = snippets['python'].concat([
+            '',
+            '# Get the data by passing the resource_id to the datastore_search endpoint',
+            '# See https://docs.ckan.org/en/latest/maintaining/datastore.html for detailed parameters options',
+            '# For example, to retrieve the data content for the first resource in the datastore:',
+            '',
+            'for idx, resource in enumerate(package["result"]["resources"]):',
+            '    if resource["datastore_active"]:',
+            '        url = "' + config['ckanAPI'] + 'datastore_search"',
+            '        p = { "id": resource["id"] }',
+            '        r = urllib.request.urlopen(url, data=bytes(json.dumps(p), encoding="utf-8"))',
+            '        data = json.loads(r.read())',
+            '        print(data)',
+            '        break'
+        ]);
+
+        snippets['javascript'] = snippets['javascript'].concat([
+            '',
+            '// Get the data by passing the resource_id to the datastore_search endpoint',
+            '// See https://docs.ckan.org/en/latest/maintaining/datastore.html for detailed parameters options',
+            '// For example, to retrieve the data content for the first resource in the datastore:',
+            '',
+            'var resources = [];',
+            '// setTimeout to wait for response from package_show call',
+            '// This function can be included as a part of the callback instead',
+            'setTimeout(function() {',
+            '    for (var i in package["result"]["resources"]) {',
+            '        var resource = package["result"]["resources"][i];',
+            '        if (resource["datastore_active"]) {',
+            '            $.ajax({',
+            '                dataType: "json",',
+            '                type: "GET",',
+            '                url: "' + config['ckanAPI'] + 'datastore_search",',
+            '                data: { "id": resource["id"] }',
+            '            }).done(function(response) {',
+            '                resources.push(response);',
+            '                console.log(response);',
+            '            });',
+            '            break;',
+            '        }',
+            '    }',
+            '}, 1000);'
+        ]);
+
+        snippets['r'] = snippets['r'].concat([
+            '',
+            '# Get the data by passing the resource_id to the datastore_search endpoint',
+            '# See https://docs.ckan.org/en/latest/maintaining/datastore.html for detailed parameters options',
+            '# For example, to retrieve the data content for the first resource in the datastore:',
+            '',
+            'for (resource in package$result$resources) {',
+            '    if (resource$datastore_active){',
+            '        r <- GET(' + '"' + config['ckanAPI'] + 'datastore_search", query=list("id"=resource$id))',
+            '        data <- content(r, "parsed")',
+            '        print(data)',
+            '        break',
+            '    }',
+            '}',
+        ])
+    }
+
+    for (var i in snippets) {
+        snippets[i] = snippets[i].join('\n');
+    }
 
     return snippets;
 }
