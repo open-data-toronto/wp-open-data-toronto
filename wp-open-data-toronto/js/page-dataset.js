@@ -137,7 +137,8 @@ function buildDataset(response) {
 
     buildUI();
 
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+    var previewResource = config['package']['preview_resource'];
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
         queryContents();
         queryViews();
     } else {
@@ -213,7 +214,9 @@ function queryContents() {
             previewTable.find('tbody').append(row);
         }
 
-        if (config['package']['dataset_category'] == 'Table') { $('#content-preview').append(previewTable) };
+        if (config['package']['dataset_category'] == 'Table') {
+            $('#content-preview').append(previewTable)
+        }
         $('#content-features').append(featuresTable);
     });
 }
@@ -313,8 +316,9 @@ function generateSnippets() {
         'package <- content(response, "parsed")',
         'print(package)'
     ]
-
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+    
+    var previewResource = config['package']['preview_resource'];
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
         snippets['python'] = snippets['python'].concat([
             '',
             '# Get the data by passing the resource_id to the datastore_search endpoint',
