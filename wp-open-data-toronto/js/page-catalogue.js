@@ -226,6 +226,8 @@ function buildStaticUI() {
             state['page'] = 0;
             loadCatalogue();
         }
+
+        return false;
     });
 
     $('#input-search').on('keyup', function(evt) {
@@ -235,14 +237,10 @@ function buildStaticUI() {
             $(this).parents('.input-group').addClass('has-danger');
             $('#search-error').html('<strong>Only numbers, letters, and spaces are allowed</strong>');
 
-            return false
+            return false;
         } else {
             $(this).parents('.input-group').removeClass('has-danger');
             $('#search-error').empty();
-
-            if (evt.keyCode == 13) {
-                $('#btn-search').click();
-            }
         }
     });
 
