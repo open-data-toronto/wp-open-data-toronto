@@ -82,11 +82,11 @@
                   ?>
 
                   <!-- Search -->
-                  <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get" aria-label="Search Open Data Website">
+                  <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get">
                     <label class="sr-only" for="s">
-                      Search
+                      Search Open Data Website
                     </label>
-                    <input type="text" class="form-control mr-sm-2" placeholder="Search" name="s" aria-label="Search site" id="s" value="<?php the_search_query() ?>">
+                    <input type="text" class="form-control mr-sm-2" placeholder="Search" name="s" id="s" value="<?php the_search_query() ?>">
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">
                       Search
                     </button>
