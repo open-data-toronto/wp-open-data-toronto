@@ -47,8 +47,7 @@ figure.wp-caption {
             .accordion .card{max-width:100%;}
             .accordion .card .btn{text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
             .accordion .card .btn:hover{background:#000;}
-            .accordion .card .btn{}
-            .accordion .card .btn .fa{float: right;}
+            .accordion .card .btn .fa{float: none; text-align: right;}
             .card-header{padding: 0;}
 .accordion .card .btn .fa {
     float: right;

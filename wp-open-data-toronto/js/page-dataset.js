@@ -117,9 +117,9 @@ function buildDataset(response) {
                             (hasGeospatial ? '<td>' + projection + '</td>' : '') +
                             '<td>' +
                             '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
-                                '<span class="fa fa-download"></span>' +
                                 'Download' +
                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
+                                '<span class="fa fa-download"></span>' +
                             '</a>' +
                             '</td>' +
                          '</tr>';
