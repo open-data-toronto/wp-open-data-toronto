@@ -316,7 +316,7 @@ function generateSnippets() {
         'package <- content(response, "parsed")',
         'print(package)'
     ]
-    
+
     var previewResource = config['package']['preview_resource'];
     if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
         snippets['python'] = snippets['python'].concat([
@@ -391,7 +391,7 @@ function generateDropdowns(type, options) {
     var dropdown = $('<form>' +
                        '<select class="select-download-' + type + '">' +
                        '</select>' +
-                     '</form>',);
+                     '</form>');
 
     for (var i in options) {
         dropdown.find('select').append('<option value="' + options[i][0] + '">' + options[i][1] + '</option>');
