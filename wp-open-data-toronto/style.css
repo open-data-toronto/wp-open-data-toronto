@@ -1449,9 +1449,6 @@ input#search {
     hr{
         border: 0;
     }
-    #filter-sidebar {
-        order: 2
-    }
     .mobile-hidden{
         display: none;
     }
