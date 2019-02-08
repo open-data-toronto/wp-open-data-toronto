@@ -33,11 +33,11 @@
 
       <div class="row d-flex block-hidden">
         <!-- Sidebar -->
-        
+
         <div class="col-md-3" id="filter-sidebar">
+          <h2>Dataset Filters</h2>
           <a href="#input-search" class="sr-only sr-only-focusable">Skip dataset filters and go to search</a>
           <div class="dataset-sidebar">
-            <h2>Dataset Filters</h2>
             <div class="card" id="vocab_topics-filter">
               <div class="card-header filter-heading">
                 <h3>Topic</h3>

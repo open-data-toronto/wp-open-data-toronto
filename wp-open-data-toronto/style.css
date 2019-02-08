@@ -172,19 +172,19 @@ main.site-content a:link{
      border-left: 1px solid #ccc;
 }
 
- .filter label {
+ .filter a {
      color: #6d6d6d;
 }
- .filter label:hover {
+ .filter a:hover {
      color: #185688;
 }
- .filter label:hover::before{
+ .filter a:hover::before{
      color: #185688;
 }
- .filter-selected label::before{
+ .filter-selected a::before{
      color: #185688;
 }
- .filter-selected label{
+ .filter-selected a{
     background: #666666 !important;
     font-weight: bold !important;
     color: #F5F5F5 !important;
@@ -779,7 +779,7 @@ input#search {
  .dataset-sidebar ul li:first-of-type {
      border-top: 0 !important;
 }
- .dataset-sidebar label, .dataset-sidebar dl {
+ .dataset-sidebar a, .dataset-sidebar dl {
      padding: .5rem .8rem;
      margin: 0;
      width: 100%;

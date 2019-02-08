@@ -146,18 +146,18 @@ function buildSidebar(response) {
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
-                  '<label title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
+                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
                     '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
-                  '</label>' +
+                  '</a>' +
                 '</li>');
 
             if (name != value['name']) {
-                sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
+                sidebarEle.find('a[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
             }
 
             if (selected != null && selected.indexOf(value['name']) !== -1) {
-                var elLabel = $('label[title="' + value['name'] + '"]');
+                var elLabel = $('a[title="' + value['name'] + '"]');
                 elLabel.parent('li').addClass('filter-selected');
                 elLabel.append('<span class="float-right"><i class="fa fa-times"></i></span>');
             }
@@ -166,9 +166,9 @@ function buildSidebar(response) {
         if (sidebar.length === 0) {
             $('#' + field['title'] + '-values').prepend(
                 '<li class="list-group-item filter-value">' +
-                  '<label>' +
+                  '<a href="#">' +
                     '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
-                  '</label>' +
+                  '</a>' +
                 '</li>')
         };
 
@@ -255,7 +255,7 @@ function buildStaticUI() {
     });
 
     $('.show-more').on('mouseenter mouseleave', function () {
-        $(this).find('label').toggleClass('on-hover');
+        $(this).find('a').toggleClass('on-hover');
     }).on('click', function(evt) {
         evt.preventDefault();
 
@@ -293,15 +293,17 @@ function buildDynamicUI() {
     $('.filter').on('click', function() {
         $(this).toggleClass('filter-selected');
 
-        var field = $(this).find('label').data('field');
+        var field = $(this).find('a').data('field');
         state['filters'][field] = [];
 
-        $.each($('.filter-selected label[data-field="' + field + '"]'), function(idx, element) {
+        $.each($('.filter-selected a[data-field="' + field + '"]'), function(idx, element) {
             state['filters'][field].push($(element).data('value'));
         });
 
         state['page'] = 0;
         loadCatalogue();
+
+        return false;
    });
 }
 
