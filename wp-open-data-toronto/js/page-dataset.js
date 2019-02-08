@@ -144,6 +144,8 @@ function buildDataset(response) {
         $('#body-dataPreview .card-body, #body-dataFeatures .card-body, #body-Explore .card-body')
             .html('<div class="not-available">Not available for this dataset</div>');
     }
+
+    $('#header-dataPreview button').click();
 }
 
 /**

@@ -84,165 +84,155 @@
                   <!-- Accordion -->
 
                   <div class="accordion">
-
-            <div class="card accordion__section">
-                <div class="card-header accordion__header" id="header-dataPreview">
-                    <h2 class="mb-0">
-                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-dataPreview" aria-expanded="false" aria-controls="accordion-title-1">
-                        Data Preview
+                    <div class="card accordion__section">
+                      <div class="card-header accordion__header" id="header-dataPreview">
+                        <h2 class="mb-0">
+                          <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-dataPreview" aria-expanded="true">
+                            Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
-                    </button>
-                    </h2>
-                </div>
+                          </button>
+                        </h2>
+                      </div>
 
-                <div data-key="0" id="body-dataPreview" class="collapse show" aria-labelledby="header-dataPreview" data-parent="#js-accordion__su9l98td5">
-                    <div class="card-body accordion__body">
+                      <div data-key="0" id="body-dataPreview" class="collapse" aria-labelledby="header-dataPreview" data-parent="#js-accordion__su9l98td5">
+                        <div class="card-body accordion__body">
                           <div id="content-preview" class="col-md-12"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card accordion__section">
-                <div class="card-header accordion__header" id="header-dataFeatures">
-                    <h2 class="mb-0">
-                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-dataFeatures" aria-expanded="false" aria-controls="accordion-title-2">
-                        Data Features
-                        <span class="accordion-arrow">
-                              <span class="fa fa-chevron-down"></span>
-                            </span>
-                    </button>
-                    </h2>
-                </div>
-
-                <div data-key="1" id="body-dataFeatures" class="collapse " aria-labelledby="header-dataFeatures" data-parent="#js-accordion__su9l98td5">
-                    <div class="card-body accordion__body">
-                    <div id="content-features" class="col-md-12"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card accordion__section">
-                <div class="card-header accordion__header" id="header-Download">
-                    <h2 class="mb-0">
-                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-Download" aria-expanded="false" aria-controls="accordion-title-3">
-                        Download Data
-                        <span class="accordion-arrow">
-                              <span class="fa fa-chevron-down"></span>
-                            </span>
-                    </button>
-                    </h2>
-                </div>
-
-                <div data-key="2" id="body-Download" class="collapse " aria-labelledby="header-Download" data-parent="#js-accordion__su9l98td5">
-                    <div class="card-body accordion__body">
-                    <table id="table-resources" class="table table-striped">
-                              <thead>
-                                <tr>
-                                  <th scope="col">File</th>
-                                  <th scope="col">Format</th>
-                                  <th scope="col">Data</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              </tbody>
-                            </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card accordion__section">
-                <div class="card-header accordion__header" id="header-Explore">
-                    <h2 class="mb-0">
-                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-Explore" aria-expanded="false" aria-controls="accordion-title-3">
-                        Explore Data
-                        <span class="accordion-arrow">
-                              <span class="fa fa-chevron-down"></span>
-                            </span>
-                    </button>
-                    </h2>
-                </div>
-
-                <div data-key="2" id="body-Explore" class="collapse " aria-labelledby="header-Explore" data-parent="#js-accordion__su9l98td5">
-                    <div class="card-body accordion__body">
-                   <div class="row explore-line" id="explore-ckan">
-                          <div class="col-md-2 explore-img">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png" alt="CKAN logo">
-                          </div>
-                          <div class="col-md-7">
-                            <h4 class="card-title">Visualize this data!</h4>
-                            <p>Want to explore this data without having to download it? Try it here</p>
-                          </div>
-                          <div class="col-md-3 explore-column">
-
-                              <a class="btn btn-outline-primary" id="redirect-ckan" href="#" target="_blank">
-                                <span class="fa fa-area-chart"></span>Visualize
-                                <span class="sr-only"> Visualize data in new window</span>
-                                </a>
-
-                          </div>
                         </div>
+                      </div>
                     </div>
+
+                    <div class="card accordion__section">
+                      <div class="card-header accordion__header" id="header-dataFeatures">
+                        <h2 class="mb-0">
+                          <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-dataFeatures" aria-expanded="false">
+                            Data Features
+                            <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                          </button>
+                        </h2>
+                      </div>
+
+                      <div data-key="1" id="body-dataFeatures" class="collapse" aria-labelledby="header-dataFeatures" data-parent="#js-accordion__su9l98td5">
+                        <div class="card-body accordion__body">
+                          <div id="content-features" class="col-md-12"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card accordion__section">
+                      <div class="card-header accordion__header" id="header-Download">
+                        <h2 class="mb-0">
+                          <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Download" aria-expanded="false">
+                            Download Data
+                            <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                          </button>
+                        </h2>
+                      </div>
+
+                      <div data-key="2" id="body-Download" class="collapse" aria-labelledby="header-Download" data-parent="#js-accordion__su9l98td5">
+                        <div class="card-body accordion__body">
+                          <table id="table-resources" class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">File</th>
+                                <th scope="col">Format</th>
+                                <th scope="col">Data</th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card accordion__section">
+                      <div class="card-header accordion__header" id="header-Explore">
+                        <h2 class="mb-0">
+                          <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Explore" aria-expanded="false">
+                            Explore Data
+                            <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                          </button>
+                        </h2>
+                      </div>
+
+                      <div data-key="3" id="body-Explore" class="collapse" aria-labelledby="header-Explore" data-parent="#js-accordion__su9l98td5">
+                        <div class="card-body accordion__body">
+                          <div class="row explore-line" id="explore-ckan">
+                            <div class="col-md-2 explore-img">
+                              <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png" alt="CKAN logo">
+                            </div>
+                            <div class="col-md-7">
+                              <h4 class="card-title">Visualize this data!</h4>
+                              <p>Want to explore this data without having to download it? Try it here</p>
+                            </div>
+                          <div class="col-md-3 explore-column">
+                          <a class="btn btn-outline-primary" id="redirect-ckan" href="#" target="_blank">
+                            <span class="fa fa-area-chart"></span>Visualize
+                            <span class="sr-only"> Visualize data in new window</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
 
-
-            <div class="card accordion__section">
-                <div class="card-header accordion__header" id="header-Developers">
+                <div class="card accordion__section">
+                  <div class="card-header accordion__header" id="header-Developers">
                     <h2 class="mb-0">
-                    <button class="btn btn-block btn-link accordion__button" data-toggle="collapse" data-target="#body-Developers" aria-expanded="false" aria-controls="accordion-title-3">
+                      <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Developers" aria-expanded="false">
                         For Developers
                         <span class="accordion-arrow">
-                              <span class="fa fa-chevron-down"></span>
-                            </span>
-                    </button>
+                          <span class="fa fa-chevron-down"></span>
+                        </span>
+                      </button>
                     </h2>
-                </div>
+                  </div>
 
-                <div data-key="2" id="body-Developers" class="collapse " aria-labelledby="header-Developers" data-parent="#js-accordion__su9l98td5">
+                  <div data-key="4" id="body-Developers" class="collapse" aria-labelledby="header-Developers" data-parent="#js-accordion__su9l98td5">
                     <div class="card-body accordion__body">
-                    <div class="card-block">
-                          <div class="row">
-                            <div class="col-md-12">
-                              <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
-                            </div>
+                      <div class="card-block">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
                           </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <ul class="nav nav-tabs" id="devTabs" role="tablist">
-                                <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
-                                <li class="nav-item"><a id="javascript-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
-                                <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
-                              </ul>
-                              <div class="tab-content" id="api-examples">
-                                <div class="tab-pane fade show active" id="python" role="tabpanel" aria-labelledby="python-tab">
-                                  <pre><code class="python" id="code-python"></code></pre>
-                                </div>
-                                <div class="tab-pane fade" id="javascript" role="tabpanel" aria-labelledby="javascript-tab">
-                                  <pre><code class="javascript" id="code-javascript"></code></pre>
-                                </div>
-                                <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
-                                  <pre><code class="r" id="code-r"></code></pre>
-                                </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <ul class="nav nav-tabs" id="devTabs" role="tablist">
+                              <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
+                              <li class="nav-item"><a id="javascript-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
+                              <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
+                            </ul>
+                            <div class="tab-content" id="api-examples">
+                              <div class="tab-pane fade show active" id="python" role="tabpanel" aria-labelledby="python-tab">
+                                <pre><code class="python" id="code-python"></code></pre>
+                              </div>
+                              <div class="tab-pane fade" id="javascript" role="tabpanel" aria-labelledby="javascript-tab">
+                                <pre><code class="javascript" id="code-javascript"></code></pre>
+                              </div>
+                              <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
+                                <pre><code class="r" id="code-r"></code></pre>
                               </div>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <button id="code-copy" class="btn btn-outline-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
-                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <button id="code-copy" class="btn btn-outline-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                           </div>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-
-                </div>
-
-<!-- end accordion -->
-
-
+              </div><!-- end accordion -->
             </div>
           </div>
         </div>
