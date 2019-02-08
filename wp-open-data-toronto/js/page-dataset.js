@@ -140,7 +140,8 @@ function buildDataset(response) {
 
     buildUI();
 
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+    var previewResource = config['package']['preview_resource'];
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
         queryContents();
         queryViews();
     } else {
@@ -162,27 +163,23 @@ function queryViews() {
             exploreFound = false;
 
         for (var i in results) {
-            var isMapView = config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view',
-                isTableView = config['package']['dataset_category'] == 'Table' && results[i]['view_type'] == 'recline_view';
-
-            if (isMapView || isTableView) {
+            if (['Map', 'Table'].indexOf(config['package']['dataset_category']) != -1) {
                 var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
 
-                if (isMapView) {
-                    var w = $('#body-dataPreview').width();
-
-                    $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
-                } else {
+                if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
+                    if (!$('#content-preview iframe').length) {
+                        var w = $('#body-dataPreview').width();
+                        $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
+                    }
+                } else if (results[i]['view_type'] == 'recline_view') {
                     $('#redirect-ckan').attr('href', viewURL);
                     exploreFound = true;
                 }
-
-                break;
             }
         }
 
         if (!exploreFound) {
-            $('#collapse-explore').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
+            $('#body-Explore .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
 }
@@ -222,7 +219,9 @@ function queryContents() {
             previewTable.find('tbody').append(row);
         }
 
-        if (config['package']['dataset_category'] == 'Table') { $('#content-preview').append(previewTable) };
+        if (config['package']['dataset_category'] == 'Table') {
+            $('#content-preview').append(previewTable)
+        }
         $('#content-features').append(featuresTable);
     });
 }
@@ -323,7 +322,8 @@ function generateSnippets() {
         'print(package)'
     ]
 
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+    var previewResource = config['package']['preview_resource'];
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
         snippets['python'] = snippets['python'].concat([
             '',
             '# Get the data by passing the resource_id to the datastore_search endpoint',
@@ -396,7 +396,7 @@ function generateDropdowns(type, options) {
     var dropdown = $('<form>' +
                        '<select class="select-download-' + type + '">' +
                        '</select>' +
-                     '</form>',);
+                     '</form>');
 
     for (var i in options) {
         dropdown.find('select').append('<option value="' + options[i][0] + '">' + options[i][1] + '</option>');

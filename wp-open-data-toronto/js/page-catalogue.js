@@ -127,21 +127,31 @@ function buildSidebar(response) {
     var results = response['result'];
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
-            sidebar = field['items'];
+            sidebar = [[], []],
+            selected = state['filters'][field['title']];
 
-        sidebar.sort(function(a, b) {
+        field['items'].sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? 1 : -1;
             }
+
             return a['count'] - b['count'];
         });
+
+        for (var i in field['items']) {
+            if (selected && selected.indexOf(field['items'][i]['name']) != -1) {
+                sidebar[1].push(field['items'][i]);
+            } else {
+                sidebar[0].push(field['items'][i]);
+            }
+        }
+        sidebar = sidebar[0].concat(sidebar[1]);
 
         var sidebarEle = $('#' + field['title'] + '-values'),
             showMoreButton = sidebarEle.find('li.show-more');
 
         for (var i in sidebar) {
             var value = sidebar[i],
-                selected = state['filters'][field['title']],
                 name = truncateString(value['name'], 30, true);
 
             sidebarEle.prepend(
@@ -227,6 +237,8 @@ function buildStaticUI() {
             state['page'] = 0;
             loadCatalogue();
         }
+
+        return false;
     });
 
     $('#input-search').on('keyup', function(evt) {
@@ -236,14 +248,10 @@ function buildStaticUI() {
             $(this).parents('.input-group').addClass('has-danger');
             $('#search-error').html('<strong>Only numbers, letters, and spaces are allowed</strong>');
 
-            return false
+            return false;
         } else {
             $(this).parents('.input-group').removeClass('has-danger');
             $('#search-error').empty();
-
-            if (evt.keyCode == 13) {
-                $('#btn-search').click();
-            }
         }
     });
 
