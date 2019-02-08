@@ -669,6 +669,7 @@ main.site-content a:link{
 }
 input#search {
     border: 2px solid #007d88;
+    width: 320px;
 }
 /** Search Results **/
  .search-results-content {
