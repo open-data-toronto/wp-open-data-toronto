@@ -201,6 +201,10 @@ main.site-content a:link{
    transform: translateY(-50%);
    font-size: 100%;
 }
+
+.hidden {
+    display: none;
+}
 /** Checkbox Styles **/
  dd {
      word-wrap: break-word;

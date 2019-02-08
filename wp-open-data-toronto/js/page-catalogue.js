@@ -145,7 +145,7 @@ function buildSidebar(response) {
                 name = truncateString(value['name'], 30, true);
 
             sidebarEle.prepend(
-                '<li class="list-group-item list-group-item-action filter filter-value">' +
+                '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
                   '<label title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
                     '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
@@ -174,7 +174,8 @@ function buildSidebar(response) {
 
         var numFilters = sidebarEle.find('li').length - 1;
         if (numFilters > config['filterSize']) {
-            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('hidden');
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').attr('aria-hidden', 'true');
 
             showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
             showMoreButton.show();
@@ -258,9 +259,12 @@ function buildStaticUI() {
     }).on('click', function(evt) {
         evt.preventDefault();
 
-        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('sr-only');
+        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('hidden');
+        $(this).siblings('li.hidden').attr('aria-hidden', 'true');
+        $(this).siblings('li:not(.hidden)').attr('aria-hidden', 'false');
+
         var filterTerm = ' ' + $(this).parents('.card').find('.card-header').text().trim().toLowerCase() + 's';
-        var labelText = $(this).siblings('li.sr-only').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more<span class="sr-only">' + filterTerm + '</span>' : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
+        var labelText = $(this).siblings('li.hidden').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more ' + filterTerm : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
         $(this).find('a').html(labelText);
     });
 
