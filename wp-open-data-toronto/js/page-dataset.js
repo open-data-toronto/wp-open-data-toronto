@@ -45,6 +45,9 @@ function buildDataset(response) {
                         $(this).append(data[field][i]['display_name']);
                     }
                     break;
+                case 'title':
+                    $(this).html(data[field] + ' - City of Toronto Open Data Portal');
+                    break;
                 case 'metadata_modified':
                 case 'published_date':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
@@ -117,9 +120,9 @@ function buildDataset(response) {
                             (hasGeospatial ? '<td>' + projection + '</td>' : '') +
                             '<td>' +
                             '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
-                                '<span class="fa fa-download"></span>' +
                                 'Download' +
                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
+                                '<span class="fa fa-download"></span>' +
                             '</a>' +
                             '</td>' +
                          '</tr>';
@@ -145,6 +148,8 @@ function buildDataset(response) {
         $('#body-dataPreview .card-body, #body-dataFeatures .card-body, #body-Explore .card-body')
             .html('<div class="not-available">Not available for this dataset</div>');
     }
+
+    $('#header-dataPreview button').click();
 }
 
 /**

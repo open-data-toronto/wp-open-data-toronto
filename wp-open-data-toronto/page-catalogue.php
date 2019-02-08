@@ -33,11 +33,11 @@
 
       <div class="row d-flex block-hidden">
         <!-- Sidebar -->
-        
+
         <div class="col-md-3" id="filter-sidebar">
-          <a href="#data-catalogue" class="sr-only sr-only-focusable">Skip filters and go to main content</a>
+          <h2>Dataset Filters</h2>
+          <a href="#input-search" class="sr-only sr-only-focusable">Skip dataset filters and go to search</a>
           <div class="dataset-sidebar">
-            <h2 class="sr-only">Dataset Filters</h2>
             <div class="card" id="vocab_topics-filter">
               <div class="card-header filter-heading">
                 <h3>Topic</h3>
@@ -83,7 +83,7 @@
               <form class="dataset-filter" id="search-dataset" role="search" aria-label="Search the Open Data Catalogue">
               <div class="input-group">
                 <label for="input-search" class="sr-only">Input for dataset search terms</label>
-                <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets" aria-label="Search datasets"/>
+                <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
                 <span class="input-group-btn">
                   <button id="btn-search" class="btn btn-primary" type="submit">
                     <span class="sr-only">Search datasets</span>

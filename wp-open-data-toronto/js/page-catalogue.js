@@ -155,19 +155,19 @@ function buildSidebar(response) {
                 name = truncateString(value['name'], 30, true);
 
             sidebarEle.prepend(
-                '<li class="list-group-item list-group-item-action filter filter-value">' +
-                  '<label title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
+                '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
+                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
                     '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
-                  '</label>' +
+                  '</a>' +
                 '</li>');
 
             if (name != value['name']) {
-                sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
+                sidebarEle.find('a[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
             }
 
             if (selected != null && selected.indexOf(value['name']) !== -1) {
-                var elLabel = $('label[title="' + value['name'] + '"]');
+                var elLabel = $('a[title="' + value['name'] + '"]');
                 elLabel.parent('li').addClass('filter-selected');
                 elLabel.append('<span class="float-right"><i class="fa fa-times"></i></span>');
             }
@@ -176,15 +176,16 @@ function buildSidebar(response) {
         if (sidebar.length === 0) {
             $('#' + field['title'] + '-values').prepend(
                 '<li class="list-group-item filter-value">' +
-                  '<label>' +
+                  '<a href="#">' +
                     '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
-                  '</label>' +
-                '</li>');
+                  '</a>' +
+                '</li>')
         };
 
         var numFilters = sidebarEle.find('li').length - 1;
         if (numFilters > config['filterSize']) {
-            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('hidden');
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').attr('aria-hidden', 'true');
 
             showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
             showMoreButton.show();
@@ -262,13 +263,16 @@ function buildStaticUI() {
     });
 
     $('.show-more').on('mouseenter mouseleave', function () {
-        $(this).find('label').toggleClass('on-hover');
+        $(this).find('a').toggleClass('on-hover');
     }).on('click', function(evt) {
         evt.preventDefault();
 
-        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('sr-only');
+        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('hidden');
+        $(this).siblings('li.hidden').attr('aria-hidden', 'true');
+        $(this).siblings('li:not(.hidden)').attr('aria-hidden', 'false');
+
         var filterTerm = ' ' + $(this).parents('.card').find('.card-header').text().trim().toLowerCase() + 's';
-        var labelText = $(this).siblings('li.sr-only').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more<span class="sr-only">' + filterTerm + '</span>' : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
+        var labelText = $(this).siblings('li.hidden').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more ' + filterTerm : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
         $(this).find('a').html(labelText);
     });
 
@@ -297,15 +301,17 @@ function buildDynamicUI() {
     $('.filter').on('click', function() {
         $(this).toggleClass('filter-selected');
 
-        var field = $(this).find('label').data('field');
+        var field = $(this).find('a').data('field');
         state['filters'][field] = [];
 
-        $.each($('.filter-selected label[data-field="' + field + '"]'), function(idx, element) {
+        $.each($('.filter-selected a[data-field="' + field + '"]'), function(idx, element) {
             state['filters'][field].push($(element).data('value'));
         });
 
         state['page'] = 0;
         loadCatalogue();
+
+        return false;
    });
 }
 
