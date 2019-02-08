@@ -45,6 +45,9 @@ function buildDataset(response) {
                         $(this).append(data[field][i]['display_name']);
                     }
                     break;
+                case 'title':
+                    $(this).html(data[field] + ' - City of Toronto Open Data Portal');
+                    break;
                 case 'metadata_modified':
                 case 'published_date':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));

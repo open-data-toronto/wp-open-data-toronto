@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title><?php the_title(); ?> - <?php echo get_bloginfo( 'name' ); ?></title>
+  	<title data-field="title"><?php the_title(); ?> - <?php echo get_bloginfo( 'name' ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    
+
     <!-- Open Graph Attributes -->
     <meta property="og:title" content="<?php the_title(); ?>" />
 	<meta property="og:url" content="<?php the_permalink(); ?>" />
