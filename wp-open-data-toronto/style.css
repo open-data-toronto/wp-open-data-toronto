@@ -46,6 +46,9 @@ figure.wp-caption {
     border: 1px solid #cccccc;
     font-weight: bold;
 }
+.collapsed span.fa.fa-chevron-down {
+    padding-right: 11px !important;
+}
 .accordion{display:block;width:100%;max-width:100%;}
             .accordion .card{max-width:100%;}
             .accordion .card .btn{text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
