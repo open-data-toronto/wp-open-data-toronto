@@ -49,7 +49,7 @@ function getTimeSince(date) {
 
         var timeSince = months + period;
     } else {
-        var years = Math.round(days / 30.);
+        var years = Math.round(days / 365.);
         var period = years > 1 ? ' years ago' : ' year ago';
 
         var timeSince = years + period;
