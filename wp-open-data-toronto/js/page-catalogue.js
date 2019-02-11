@@ -152,7 +152,7 @@ function buildSidebar(response) {
 
         for (var i in sidebar) {
             var value = sidebar[i],
-                name = truncateString(value['name'], 30, true);
+                name = truncateString(value['name'], 27, true);
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
