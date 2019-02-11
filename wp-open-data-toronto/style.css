@@ -37,6 +37,9 @@ Version:         1.2.0
     outline: 0;
     border: 2px solid #1c64a0;
 }
+input#search:focus{
+    border: 2px solid #000000;
+}
 a.btn{
     text-decoration:none !important;
     padding: 9px 12px 12px 12px;
