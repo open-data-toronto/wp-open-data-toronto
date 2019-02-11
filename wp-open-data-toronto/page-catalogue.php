@@ -92,7 +92,7 @@
                 </span>
               </div>
               </form>
-              <small id="search-error" class="text-danger"></small>
+              <small id="search-error" class="text-danger" role="status"></small>
             </div>
             <div class="row" id="dataset-search-results">
               <div class="col-md-8 info count">
