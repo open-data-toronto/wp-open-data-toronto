@@ -257,8 +257,9 @@ function buildStaticUI() {
 
     $('#sort-results-by').on('change', function() {
         state['sort'] = $(this).val();
-
         state['page'] = 0;
+
+        $('#current-sort span').html($(this).children('option:selected').text());
         loadCatalogue();
     });
 
@@ -330,6 +331,7 @@ function loadCatalogue() {
                 state['page'] = parseInt(content);
             } else if (filter[0] == 'sort') {
                 state['sort'] = content;
+                $('#current-sort span').html($('#sort-results-by option[value="' + content + '"]').text());
             } else if (filter[0].length > 0) {
                 state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content.replace(/\+/g, ' ') : content.split('+');
             }
