@@ -81,37 +81,33 @@ function buildDataset(response) {
         var resource = config['package']['resources'][i];
         resource['format'] = resource['format'].toLowerCase();
 
-        var format = '',
-            projection = '';
+        var format = '<div class="file-format">' + resource['format'] + '</div>',
+            projection = '<div class="projection">' + 'Not Applicable' + '</div>';
 
-        if (resource['datastore_active']) {
-            if (hasGeospatial) {
+        if (hasGeospatial) {
+            if (resource['datastore_active'] && resource['format'] == 'geojson') {
                 var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
                 if (resource['format'] == 'geojson') {
                     format.unshift(['geojson', 'GeoJSON']);
                 }
+                format = generateDropdowns('format', format);
 
                 projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
             } else {
-                var format = [['json', 'JSON'], ['xml', 'XML']];
-                if (resource['format'] == 'csv') {
-                    format.unshift(['csv', 'CSV']);
-                }
-            }
-
-            format = generateDropdowns('format', format);
-        } else {
-            if (hasGeospatial) {
-                projection = '<div class="projection">' + 'Not Applicable' + '</div>';
                 for (var f in config['projectionOptions']) {
-                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1 && resource['format'].toLowerCase() == 'shp') {
+                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
                         projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
                         break;
                     }
                 }
             }
+        } else if (resource['datastore_active']){
+            var format = [['json', 'JSON'], ['xml', 'XML']];
+            if (resource['format'] == 'csv') {
+                format.unshift(['csv', 'CSV']);
+            }
 
-            format = '<div class="file-format">' + resource['format'] + '</div>'
+            format = generateDropdowns('format', format);
         }
 
         var row = '<tr data-stored="' + resource['datastore_active'] + '">' +
