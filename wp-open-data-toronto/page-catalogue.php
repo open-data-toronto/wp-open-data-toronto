@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="row d-flex block-hidden">
+      <div class="row d-flex block-hidden" id="content">
         <!-- Sidebar -->
 
         <div class="col-md-3" id="filter-sidebar">
@@ -76,7 +76,7 @@
           </div>
         </div>
         <!-- End Sidebar -->
-        <div class="col-md-9" id="content">
+        <div class="col-md-9">
           <div class="container-fluid">
             <!-- Dataset Search Area -->
             <div class="row" id="dataset-search-box">
