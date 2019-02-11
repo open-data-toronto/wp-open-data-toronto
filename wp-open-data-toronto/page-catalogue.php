@@ -96,7 +96,7 @@
             </div>
             <div class="row" id="dataset-search-results">
               <div class="col-md-8 info count">
-                <div id="results-count" aria-label="Data catalogue search results" role="alert"></div>
+                <div role="alert" id="results-count"></div>
               </div>
               <div class="col-md-4 info sort">
                 <form>
