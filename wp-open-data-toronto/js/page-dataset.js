@@ -213,7 +213,7 @@ function queryContents() {
         for (var i in data) {
             var row = $('<tr></tr>');
             for (var j in fields) {
-                row.append('<td>' + truncateString(data[i][fields[j]['id']], 30) + '</td>');
+                row.append('<td>' + truncateString(data[i][fields[j]['id']], 30, false, true) + '</td>');
             }
 
             previewTable.find('tbody').append(row);

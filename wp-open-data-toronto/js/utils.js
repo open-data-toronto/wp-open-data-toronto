@@ -79,7 +79,7 @@ function isMobile() {
     return check;
 }
 
-function truncateString(original, size, clean) {
+function truncateString(original, size, clean, padding) {
     var tokens = (original + '').split(' '),
         shorten;
 
@@ -97,7 +97,10 @@ function truncateString(original, size, clean) {
     }
 
     if (shorten != original) {
-        shorten += ' ...';
+        if (padding) {
+            shorten += ' ';
+        }
+        shorten += '...';
     }
 
     return shorten;
