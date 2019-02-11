@@ -104,7 +104,7 @@ function buildDataset(response) {
             if (hasGeospatial) {
                 projection = '<div class="projection">' + 'Not Applicable' + '</div>';
                 for (var f in config['projectionOptions']) {
-                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
+                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1 && resource['format'].toLowerCase() == 'shp') {
                         projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
                         break;
                     }
