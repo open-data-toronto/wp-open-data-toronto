@@ -156,8 +156,8 @@ function buildSidebar(response) {
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
-                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
-                    '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
+                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '" data-trigger="hover" data-placement="right">' +
+                    '<span>' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
                   '</a>' +
                 '</li>');
@@ -299,10 +299,12 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $('.filter').on('click', function() {
-        $(this).toggleClass('filter-selected');
+    $('.filter a').on('click', function() {
+        $(this).parent('li').toggleClass('filter-selected');
 
-        var field = $(this).find('a').data('field');
+        $('.tooltip').remove();
+
+        var field = $(this).data('field');
         state['filters'][field] = [];
 
         $.each($('.filter-selected a[data-field="' + field + '"]'), function(idx, element) {
