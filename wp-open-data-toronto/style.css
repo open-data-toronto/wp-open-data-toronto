@@ -165,6 +165,9 @@ ul.status li{
 main.site-content a:link{
 	text-decoration: underline;
 }
+.normal-text {
+    text-decoration: none !important;
+}
 .btn-primary.focus, .btn-primary:focus {
     -webkit-box-shadow: 0;
     box-shadow: none !important;
