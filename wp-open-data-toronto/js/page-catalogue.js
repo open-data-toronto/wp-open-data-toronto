@@ -252,12 +252,12 @@ function buildStaticUI() {
 
         if (value.length > 0 && !value.toLowerCase().match(/^[0-9a-z\s]+$/)) {
             $(this).parents('.input-group').addClass('has-danger');
-            $('#search-error').html('<strong>Only numbers, letters, and spaces are allowed</strong>');
+            // $('#search-error').removeClass('hidden');
 
             return false;
         } else {
             $(this).parents('.input-group').removeClass('has-danger');
-            $('#search-error').empty();
+            // $('#search-error').addClass('hidden');
         }
     });
 
