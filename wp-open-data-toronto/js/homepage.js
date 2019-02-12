@@ -22,6 +22,6 @@ function init() {
 
     $('form').on('submit', function(evt) {
         evt.preventDefault();
-        window.location.href = '../catalogue?search=' + $('#search').val();
+        window.location.href = '../catalogue?search=' + encodeURIComponent($('#search').val());
     });
 }

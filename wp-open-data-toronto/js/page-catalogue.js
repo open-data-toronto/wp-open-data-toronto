@@ -347,7 +347,7 @@ function loadCatalogue() {
     }
 
     if (state['filters'] && state['filters']['search']) {
-        state['filters']['search'] = DOMPurify.sanitize(state['filters']['search'])
+        state['filters']['search'] = DOMPurify.sanitize(state['filters']['search']).replace(/[^a-zA-Z0-9]+/g,'');
     }
 
     getCKAN('catalogue_search', $.extend(true, {
