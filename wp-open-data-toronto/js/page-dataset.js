@@ -137,7 +137,7 @@ function buildDataset(response) {
     buildUI();
 
     var previewResource = config['package']['preview_resource'];
-    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active'] && config['package']['dataset_category'] != 'Document') {
         queryContents();
         queryViews();
     } else {
