@@ -107,6 +107,10 @@ function buildCatalogue(response) {
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
+            $('html, body').animate({
+                scrollTop: $("#content").offset().top
+            }, 1000);
+
             loadCatalogue();
         });
 
@@ -217,6 +221,10 @@ function buildStaticUI() {
                 state['page'] += 1;
                 break;
         }
+
+        $('html, body').animate({
+            scrollTop: $("#content").offset().top
+        }, 1000);
 
         loadCatalogue();
     });
