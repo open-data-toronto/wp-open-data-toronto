@@ -20,8 +20,8 @@ function init() {
         }
     });
 
-    $('#search-dataset button').on('click', function() {
-        var term = $('#search-dataset input').val();
-        window.location.href = '../catalogue?search=' + $('#search-dataset input').val();
+    $('form').on('submit', function(evt) {
+        evt.preventDefault();
+        window.location.href = '../catalogue?search=' + $('#search').val();
     });
 }
