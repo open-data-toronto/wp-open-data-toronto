@@ -796,7 +796,7 @@ input#search {
  .dataset-sidebar ul li:first-of-type {
      border-top: 0 !important;
 }
- .dataset-sidebar a, .dataset-sidebar dl {
+ .dataset-sidebar a, .dataset-sidebar dl, .filter-no-results span {
      padding: .5rem .8rem;
      margin: 0;
      width: 100%;

@@ -10,7 +10,7 @@ $.extend(config, {
     'cataloguePages': 0,
     'datasetsPerPage': 10,
     'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'vocab_topics'],
-    'filterSize': 5
+    'filterSize': 6 // Actual number of results shown is filterSize -1
 });
 
 /**
@@ -107,6 +107,10 @@ function buildCatalogue(response) {
             state['page'] = $(this).data('page');
             $(this).addClass('active');
 
+            $('html, body').animate({
+                scrollTop: $("#content").offset().top
+            }, 1000);
+
             loadCatalogue();
         });
 
@@ -175,10 +179,8 @@ function buildSidebar(response) {
 
         if (sidebar.length === 0) {
             $('#' + field['title'] + '-values').prepend(
-                '<li class="list-group-item filter-value">' +
-                  '<a href="#">' +
-                    '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
-                  '</a>' +
+                '<li class="list-group-item filter-value filter-no-results">' +
+                  '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
                 '</li>')
         };
 
@@ -220,6 +222,10 @@ function buildStaticUI() {
                 break;
         }
 
+        $('html, body').animate({
+            scrollTop: $("#content").offset().top
+        }, 1000);
+
         loadCatalogue();
     });
 
@@ -246,12 +252,12 @@ function buildStaticUI() {
 
         if (value.length > 0 && !value.toLowerCase().match(/^[0-9a-z\s]+$/)) {
             $(this).parents('.input-group').addClass('has-danger');
-            $('#search-error').html('<strong>Only numbers, letters, and spaces are allowed</strong>');
+            $('#search-error').removeClass('hidden');
 
             return false;
         } else {
             $(this).parents('.input-group').removeClass('has-danger');
-            $('#search-error').empty();
+            $('#search-error').addClass('hidden');
         }
     });
 
@@ -387,7 +393,9 @@ function updateURL() {
         urlParam.push('sort=' + state['sort']);
     }
 
-    history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
+    urlParam = urlParam.length ? '?' + urlParam.join('&') : '';
+
+    history.replaceState(null, '', '/catalogue/' + urlParam);
 }
 
 function init() {

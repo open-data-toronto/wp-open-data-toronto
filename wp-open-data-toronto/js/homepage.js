@@ -1,5 +1,4 @@
 $.extend(config, {
-    'isInitializing': true,
     'datasetsShown': 5
 });
 
