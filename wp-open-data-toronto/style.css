@@ -31,6 +31,20 @@ Version:         1.2.0
     outline-color: #222222;
     outline-width: 2px;
 }
+.form-control:focus {
+    color: #464a4c;
+    background-color: #fff;
+    outline: 0;
+    border: 2px solid #1c64a0;
+}
+input#search:focus{
+    border: 2px solid #000000;
+}
+a.btn:focus{
+    color: #ffffff;
+    background: #165788;
+    border: 2px solid #ffffff;
+}
 a.btn{
     text-decoration:none !important;
     padding: 9px 12px 12px 12px;
@@ -150,6 +164,9 @@ ul.status li{
 }
 main.site-content a:link{
 	text-decoration: underline;
+}
+.normal-text {
+    text-decoration: none !important;
 }
 .btn-primary.focus, .btn-primary:focus {
     -webkit-box-shadow: 0;

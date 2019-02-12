@@ -90,7 +90,7 @@ function buildCatalogue(response) {
                                                          '</li>');
             } else if (Math.abs(state['page'] - i) == 3) {
                 $('#nav-catalogue li:last-child').before('<li class="page-item page-remove disabled">' +
-                                                           '<a class="page-link" href="#" aria-label="...">' +
+                                                           '<a class="page-link normal-text" href="#" aria-label="...">' +
                                                               '...' +
                                                            '</a>' +
                                                          '</li>');
@@ -152,12 +152,12 @@ function buildSidebar(response) {
 
         for (var i in sidebar) {
             var value = sidebar[i],
-                name = truncateString(value['name'], 30, true);
+                name = truncateString(value['name'], 27, true, false);
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
-                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
-                    '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
+                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '" data-trigger="hover" data-placement="right">' +
+                    '<span>' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
                   '</a>' +
                 '</li>');
@@ -257,8 +257,9 @@ function buildStaticUI() {
 
     $('#sort-results-by').on('change', function() {
         state['sort'] = $(this).val();
-
         state['page'] = 0;
+
+        $('#current-sort span').html($(this).children('option:selected').text());
         loadCatalogue();
     });
 
@@ -298,10 +299,12 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $('.filter').on('click', function() {
-        $(this).toggleClass('filter-selected');
+    $('.filter a').on('click', function() {
+        $(this).parent('li').toggleClass('filter-selected');
 
-        var field = $(this).find('a').data('field');
+        $('.tooltip').remove();
+
+        var field = $(this).data('field');
         state['filters'][field] = [];
 
         $.each($('.filter-selected a[data-field="' + field + '"]'), function(idx, element) {
@@ -330,6 +333,7 @@ function loadCatalogue() {
                 state['page'] = parseInt(content);
             } else if (filter[0] == 'sort') {
                 state['sort'] = content;
+                $('#current-sort span').html($('#sort-results-by option[value="' + content + '"]').text());
             } else if (filter[0].length > 0) {
                 state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content.replace(/\+/g, ' ') : content.split('+');
             }
