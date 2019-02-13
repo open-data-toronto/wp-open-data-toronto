@@ -1,10 +1,16 @@
 $.extend(config, {
     'isInitializing': true,
     'formatOptions': {
-        'geospatial': ['GeoJSON', 'CSV', 'SHP'],
-        'tabular': ['CSV', 'JSON', 'XML']
+        'geospatial': [['geojson', 'GeoJSON'], ['csv', 'CSV'], ['shp', 'Shapefile']], // First element in CKAN format (converted to lowerCase), second is displayed in WP
+        'tabular': {
+            'default': [['json', 'JSON'], ['xml', 'XML']],
+            'extended': ['csv', 'CSV']
+        }
     },
-    'projectionOptions': ['WGS84', 'MTM3'],
+    'projectionOptions': {
+        'epsg': ['WGS84', 'MTM3'],
+        'dropdown': [['4326', 'WGS84'], ['2019', 'MTM3']]
+    },
     'package': {}
 });
 
@@ -88,52 +94,44 @@ function buildDataset(response) {
 
         if (hasGeospatial) {
             if (resource['datastore_active'] && resource['format'] == 'geojson') {
-                var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
-                if (resource['format'] == 'geojson') {
-                    format.unshift(['geojson', 'GeoJSON']);
-                }
-                format = generateDropdowns('format', format);
-
-                projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
+                format = generateDropdowns('format', config['formatOptions']['geospatial']);
+                projection = generateDropdowns('projection', projectionOptions['projectionOptions']['dropdown']);
             } else {
-                for (var f in config['projectionOptions']) {
-                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
-                        projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
+                for (var f in config['projectionOptions']['epsg']) {
+                    if (resource['name'].toUpperCase().indexOf(config['projectionOptions']['epsg'][f]) != -1) {
+                        projection = '<div class="projection">' + config['projectionOptions']['epsg'][f] + '</div>';
                         break;
                     }
                 }
             }
         } else if (resource['datastore_active']){
-            var format = [['json', 'JSON'], ['xml', 'XML']];
+            format = config['formatOptions']['tabular']['default'];
             if (resource['format'] == 'csv') {
-                format.unshift(['csv', 'CSV']);
+                format.unshift(config['formatOptions']['tabular']['extended']);
             }
 
             format = generateDropdowns('format', format);
         }
 
-        var row = '<tr data-stored="' + resource['datastore_active'] + '">' +
-                            '<td>' + resource['name'] + '</td>' +
-                            '<td>' + format + '</td>' +
-                            (hasGeospatial ? '<td>' + projection + '</td>' : '') +
-                            '<td>' +
-                            '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
-                                'Download' +
-                                '<span class="sr-only">Download ' + resource['name'] + '</span>' +
-                                '<span class="fa fa-download"></span>' +
-                            '</a>' +
-                            '</td>' +
-                         '</tr>';
+        $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
+                                             '<td>' + resource['name'] + '</td>' +
+                                             '<td>' + format + '</td>' +
+                                             (hasGeospatial ? '<td>' + projection + '</td>' : '') +
+                                             '<td>' +
+                                               '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
+                                                 'Download' +
+                                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
+                                                 '<span class="fa fa-download"></span>' +
+                                               '</a>' +
+                                             '</td>' +
+                                           '</tr>');
 
-        $('#table-resources tbody').append(row);
         if (['html', 'web', 'jsp'].indexOf(resource['format']) != -1) {
             $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>Visit page');
+                                                                     '<span class="sr-only">Visit ' + resource['name'] + '</span>' +
+                                                                     '<span class="fa fa-desktop"></span>');
         }
 
-    }
-
-    if (hasGeospatial) {
-        $('#table-resources thead th:nth-child(2)').after('<th scope="col">Projection</th>');
     }
 
     buildUI();
