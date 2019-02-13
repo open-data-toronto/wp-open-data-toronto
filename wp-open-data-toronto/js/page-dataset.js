@@ -83,9 +83,10 @@ function buildDataset(response) {
 
     // For Developers accordion
     var snippets = generateSnippets();
-    for (var lang in snippets) {
-        $('#code-' + lang).text(snippets[lang]);
-        $('#' + lang + ' code').attr('data-text', snippets[lang]);
+    for (var l in snippets) {
+        $('#code-' + l).text(snippets[l]);
+        $('#' + l + ' code').attr('data-text', snippets[l]);
+        $('.btn-copy[data-language="' + l + '"]').attr('data-clipboard-text', snippets[l]);
     }
 
     // Download Data accordion
@@ -255,18 +256,18 @@ function buildUI() {
         hljs.lineNumbersBlock(block);
     });
 
-    $('#body-Developers .nav-item').on('click', function() {
-        $('#code-copy').attr('data-clipboard-text', $('#' + $(this).find('a').attr('id').replace('-tab', '') + ' code').attr('data-text'));
-    });
+    $('.btn-copy').on('click', function() {
+        var el = $(this);
 
-    $('#code-copy').on('click', function() {
-        $(this).popover({
+        el.popover({
             placement: 'bottom',
             animation: true,
             trigger: 'manual'
         }).popover('show');
 
-        setTimeout(function() { $('#code-copy').popover('hide'); }, 500);
+        setTimeout(function() {
+            el.popover('hide');
+        }, 500);
     });
 
     $('.select-download-projection, .select-download-format').on('change', function(evt) {
@@ -286,8 +287,7 @@ function buildUI() {
         $('iframe').width($('#body-dataPreview').width());
     });
 
-    new ClipboardJS('#code-copy');
-    $('#code-copy').attr('data-clipboard-text', $('#body-Developers .tab-pane.active code').attr('data-text'));
+    new ClipboardJS('.btn-copy');
 
     config['isInitializing'] = false;
     $('.block-hidden').css('visibility', 'visible');

@@ -213,19 +213,17 @@
                             <div class="tab-content" id="api-examples">
                               <div class="tab-pane fade show active" id="python" role="tabpanel" aria-labelledby="python-tab">
                                 <pre><code class="python" id="code-python"></code></pre>
+                                <button class="btn btn-outline-primary btn-copy" data-language="python" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                               </div>
                               <div class="tab-pane fade" id="javascript" role="tabpanel" aria-labelledby="javascript-tab">
                                 <pre><code class="javascript" id="code-javascript"></code></pre>
+                                <button class="btn btn-outline-primary btn-copy" data-language="javascript" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                               </div>
                               <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
                                 <pre><code class="r" id="code-r"></code></pre>
+                                <button class="btn btn-outline-primary btn-copy" data-language="r" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <button id="code-copy" class="btn btn-outline-primary" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                           </div>
                         </div>
                       </div>
