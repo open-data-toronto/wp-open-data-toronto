@@ -28,11 +28,11 @@ function buildDataset(response) {
 
     $('[data-field]').each(function(idx) {
         var field = $(this).data('field');
-        data['image_url'] = data['image_url'] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
 
         if (data[field]) {
             switch(field) {
                 case 'image_url':
+                    data[field] = data[field] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
                     $(this).css('background-image', 'url("' + data[field] + '")');
                     break;
                 case 'information_url':
