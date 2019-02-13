@@ -24,11 +24,20 @@ $.extend(config, {
 function buildDataset(response) {
     var data = config['package'] = response['result'];
     data['preview_resource'] = {};
+    data['datastore_active'] = false;
+    data['is_geospatial'] = false;
 
     for (var i in data['resources']) {
-        if (data['resources'][i]['is_preview'] == 'true') {
+        if (data['resources'][i]['is_preview'] == 'true' && $.isEmptyObject(data['preview_resource'])) {
             data['preview_resource'] = data['resources'][i];
-            break;
+        }
+
+        if (data['resources'][i]['datastore_active'] == 'true' && !data['datastore_active']) {
+            data['datastore_active'] = true;
+        }
+
+        if (['shp', 'geojson'].indexOf(config['package']['resources'][i]['format'].toLowerCase()) && !data['is_geospatial']) {
+            data['is_geospatial'] = true;
         }
     }
 
@@ -47,7 +56,7 @@ function buildDataset(response) {
                 case 'tags':
                     for (var i in data[field]) {
                         if (!$(this).is(':empty')) {
-                            $(this).append(', '); 
+                            $(this).append(', ');
                         }
                         // $(this).append('<a href="/catalogue?q=(tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
                         $(this).append(data[field][i]['display_name']);
@@ -76,19 +85,11 @@ function buildDataset(response) {
     var snippets = generateSnippets();
     for (var lang in snippets) {
         $('#code-' + lang).text(snippets[lang]);
-        $('#' + lang + ' code').attr('data-text', snippets[lang]);   
-    }
-
-    var hasGeospatial = false;
-    for (var i in config['package']['resources']) {
-        hasGeospatial = ['shp', 'geojson'].indexOf(config['package']['resources'][i]['format'].toLowerCase()) != -1;
-        if (hasGeospatial) {
-            break;
-        }
+        $('#' + lang + ' code').attr('data-text', snippets[lang]);
     }
 
     // Download Data accordion
-    if (hasGeospatial) {
+    if (data['is_geospatial']) {
         $('#table-resources thead th:nth-child(2)').after('<th scope="col">Projection</th>');
     }
 
@@ -99,10 +100,10 @@ function buildDataset(response) {
         var format = '<div class="format">' + resource['format'] + '</div>',
             projection = '<div class="projection">' + 'Not Applicable' + '</div>';
 
-        if (hasGeospatial) {
+        if (data['is_geospatial']) {
             if (resource['datastore_active'] && resource['format'] == 'geojson') {
                 format = generateDropdowns('format', config['formatOptions']['geospatial']);
-                projection = generateDropdowns('projection', projectionOptions['projectionOptions']['dropdown']);
+                projection = generateDropdowns('projection', config['projectionOptions']['dropdown']);
             } else {
                 for (var f in config['projectionOptions']['epsg']) {
                     if (resource['name'].toUpperCase().indexOf(config['projectionOptions']['epsg'][f]) != -1) {
@@ -123,7 +124,7 @@ function buildDataset(response) {
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
                                              '<td>' + resource['name'] + '</td>' +
                                              '<td>' + format + '</td>' +
-                                             (hasGeospatial ? '<td>' + projection + '</td>' : '') +
+                                             (data['is_geospatial'] ? '<td>' + projection + '</td>' : '') +
                                              '<td>' +
                                                '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
                                                  'Download' +
@@ -143,7 +144,7 @@ function buildDataset(response) {
     buildUI();
 
     var previewResource = config['package']['preview_resource'];
-    if (previewResource != undefined && previewResource['datastore_active'] && ['Document', 'Website'].indexOf(config['package']['dataset_category']) != -1) {
+    if (previewResource != undefined && previewResource['datastore_active'] && ['Map', 'Table'].indexOf(config['package']['dataset_category']) != -1) {
         queryContents();
         queryViews();
     } else {
@@ -167,7 +168,6 @@ function queryViews() {
 
         for (var i in results) {
             var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
-
             if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
                 if (!$('#content-preview iframe').length) {
                     var w = $('#body-dataPreview').width();
@@ -211,9 +211,9 @@ function queryContents() {
 
         for (var i in fields) {
             var columnDesc = '<span aria-label="No value available"></span>';
-            if (fields[i]['name'] == '_id') {
+            if (fields[i]['id'] == '_id') {
                 columnDesc = 'Unique row identifier for Open Data database';
-            } else {
+            } else if (fields[i]['info']) {
                 columnDesc = fields[i]['info']['notes'];
             }
 
