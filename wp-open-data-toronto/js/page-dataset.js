@@ -64,10 +64,12 @@ function buildDataset(response) {
         }
     });
 
+    // For Developers accordion
     var snippets = generateSnippets();
     for (var lang in snippets) {
         $('#code-' + lang).text(snippets[lang]);
-        $('#' + lang + ' code').attr('data-text', snippets[lang]);    }
+        $('#' + lang + ' code').attr('data-text', snippets[lang]);   
+    }
 
     var hasGeospatial = false;
     for (var i in config['package']['resources']) {
