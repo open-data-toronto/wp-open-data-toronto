@@ -33,7 +33,9 @@ Version:         1.2.0
     padding: 5px;
     display: inline-block;
 }
-
+.list-group-item-action:focus, .list-group-item-action:hover {
+    margin-bottom: 2px;
+}
 .form-control:focus {
     color: #464a4c;
     background-color: #fff;
