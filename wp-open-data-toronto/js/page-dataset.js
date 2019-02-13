@@ -63,7 +63,7 @@ function buildDataset(response) {
                     }
                     break;
                 case 'title':
-                    $(this).html(data[field] + ' - City of Toronto Open Data Portal');
+                    $(this).html(data[field] + ($(this).is('title') ? ' - City of Toronto Open Data Portal' : ''));
                     break;
                 case 'metadata_modified':
                 case 'published_date':
