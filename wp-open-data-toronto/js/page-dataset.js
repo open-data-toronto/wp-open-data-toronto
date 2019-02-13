@@ -46,7 +46,9 @@ function buildDataset(response) {
                     break;
                 case 'tags':
                     for (var i in data[field]) {
-                        if (!$(this).is(':empty')) $(this).append(', ');
+                        if (!$(this).is(':empty')) {
+                            $(this).append(', '); 
+                        }
                         // $(this).append('<a href="/catalogue?q=(tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
                         $(this).append(data[field][i]['display_name']);
                     }
@@ -89,7 +91,7 @@ function buildDataset(response) {
         var resource = config['package']['resources'][i];
         resource['format'] = resource['format'].toLowerCase();
 
-        var format = '<div class="file-format">' + resource['format'] + '</div>',
+        var format = '<div class="format">' + resource['format'] + '</div>',
             projection = '<div class="projection">' + 'Not Applicable' + '</div>';
 
         if (hasGeospatial) {
@@ -156,7 +158,7 @@ function buildDataset(response) {
 function queryViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
         var results = response['result'],
-            exploreFound = false;
+            exploreFound = false,
             previewFound = false;
 
         for (var i in results) {
@@ -325,7 +327,7 @@ function generateSnippets() {
     ]
 
     var previewResource = config['package']['preview_resource'];
-    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
+    if (previewResource != undefined && previewResource['datastore_active']) {
         snippets['python'] = snippets['python'].concat([
             '',
             '# Get the data by passing the resource_id to the datastore_search endpoint',
