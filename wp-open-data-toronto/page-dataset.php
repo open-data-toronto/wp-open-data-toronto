@@ -31,7 +31,7 @@
           <div class="col-md-3 dataset-sidebar">
             <div class="about-dataset">
               <div class="card">
-                <h2 class="sr-only">Dataset Details</h2>
+                <div class="sr-only">Dataset Details</div>
                 <div class="card-header filter-heading">
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
@@ -69,7 +69,7 @@
             <div id="description-dataset">
               <div class="row">
                 <div class="col-md-12">
-                  <h2>About <span data-field="title"></span></h2>
+                  <div>About <span data-field="title"></span></div>
                   <br/>
                   <div data-field="notes"></div>
                   <h3>Collection Method</h3>
@@ -86,14 +86,14 @@
                   <div class="accordion">
                     <div class="card accordion__section">
                       <div class="card-header accordion__header" id="header-dataPreview">
-                        <h2 class="mb-0">
+                        <div class="mb-0">
                           <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-dataPreview" aria-expanded="true">
                             Data Preview
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
                           </button>
-                        </h2>
+                        </div>
                       </div>
 
                       <div data-key="0" id="body-dataPreview" class="collapse" aria-labelledby="header-dataPreview" data-parent="#js-accordion__su9l98td5">
@@ -105,14 +105,14 @@
 
                     <div class="card accordion__section">
                       <div class="card-header accordion__header" id="header-dataFeatures">
-                        <h2 class="mb-0">
+                        <div class="mb-0">
                           <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-dataFeatures" aria-expanded="false">
                             Data Features
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
                           </button>
-                        </h2>
+                        </div>
                       </div>
 
                       <div data-key="1" id="body-dataFeatures" class="collapse" aria-labelledby="header-dataFeatures" data-parent="#js-accordion__su9l98td5">
@@ -124,14 +124,14 @@
 
                     <div class="card accordion__section">
                       <div class="card-header accordion__header" id="header-Download">
-                        <h2 class="mb-0">
+                        <div class="mb-0">
                           <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Download" aria-expanded="false">
                             Download Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
                           </button>
-                        </h2>
+                        </div>
                       </div>
 
                       <div data-key="2" id="body-Download" class="collapse" aria-labelledby="header-Download" data-parent="#js-accordion__su9l98td5">
@@ -152,14 +152,14 @@
 
                     <div class="card accordion__section">
                       <div class="card-header accordion__header" id="header-Explore">
-                        <h2 class="mb-0">
+                        <div class="mb-0">
                           <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Explore" aria-expanded="false">
                             Explore Data
                             <span class="accordion-arrow">
                               <span class="fa fa-chevron-down"></span>
                             </span>
                           </button>
-                        </h2>
+                        </div>
                       </div>
 
                       <div data-key="3" id="body-Explore" class="collapse" aria-labelledby="header-Explore" data-parent="#js-accordion__su9l98td5">
@@ -185,14 +185,14 @@
 
                 <div class="card accordion__section">
                   <div class="card-header accordion__header" id="header-Developers">
-                    <h2 class="mb-0">
+                    <div class="mb-0">
                       <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Developers" aria-expanded="false">
                         For Developers
                         <span class="accordion-arrow">
                           <span class="fa fa-chevron-down"></span>
                         </span>
                       </button>
-                    </h2>
+                    </div>
                   </div>
 
                   <div data-key="4" id="body-Developers" class="collapse" aria-labelledby="header-Developers" data-parent="#js-accordion__su9l98td5">
