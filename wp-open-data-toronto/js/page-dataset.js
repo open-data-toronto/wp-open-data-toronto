@@ -87,6 +87,11 @@ function buildDataset(response) {
         }
     }
 
+    // Download Data accordion
+    if (hasGeospatial) {
+        $('#table-resources thead th:nth-child(2)').after('<th scope="col">Projection</th>');
+    }
+
     for (var i in config['package']['resources']) {
         var resource = config['package']['resources'][i];
         resource['format'] = resource['format'].toLowerCase();
