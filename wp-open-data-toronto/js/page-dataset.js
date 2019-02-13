@@ -157,6 +157,7 @@ function queryViews() {
     getCKAN('resource_view_list', { 'id': config['package']['preview_resource']['id'] }, function(response) {
         var results = response['result'],
             exploreFound = false;
+            previewFound = false;
 
         for (var i in results) {
             if (['Map', 'Table'].indexOf(config['package']['dataset_category']) != -1) {
@@ -166,6 +167,7 @@ function queryViews() {
                     if (!$('#content-preview iframe').length) {
                         var w = $('#body-dataPreview').width();
                         $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
+                    previewFound = true;
                     }
                 } else if (results[i]['view_type'] == 'recline_view') {
                     $('#redirect-ckan').attr('href', viewURL);
@@ -176,6 +178,10 @@ function queryViews() {
 
         if (!exploreFound) {
             $('#body-Explore .card-body').html('<div class="not-available">Not available for this dataset</div>');
+        }
+
+        if (!previewFound) {
+            $('#body-dataPreview .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
 }
