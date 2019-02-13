@@ -54,6 +54,10 @@ a.btn{
     text-decoration:none !important;
     padding: 9px 12px 12px 12px;
 }
+.btn-primary.focus, .btn-primary:focus {
+    padding: 9px 16px;
+    background-color: white;
+}
 /* Increase contrast for error */
 small#search-error{color:#A72925 !important}
 
