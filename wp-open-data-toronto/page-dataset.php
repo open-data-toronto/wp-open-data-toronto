@@ -166,7 +166,7 @@
                         <div class="card-body accordion__body">
                           <div class="row explore-line" id="explore-ckan">
                             <div class="col-md-2 explore-img">
-                              <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png" alt="CKAN logo">
+                              <img src="/wp-content/themes/wp-open-data-toronto/img/ckan.png" alt="CKAN logo">
                             </div>
                             <div class="col-md-7">
                               <h4 class="card-title">Visualize this data!</h4>

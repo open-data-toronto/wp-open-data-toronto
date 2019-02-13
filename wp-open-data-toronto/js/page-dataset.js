@@ -47,7 +47,7 @@ function buildDataset(response) {
         if (data[field]) {
             switch(field) {
                 case 'image_url':
-                    data[field] = data[field] || 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+                    data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
                     $(this).css('background-image', 'url("' + data[field] + '")');
                     break;
                 case 'information_url':
