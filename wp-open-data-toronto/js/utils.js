@@ -19,13 +19,17 @@ var config = {
     'ckanURL': window.location.protocol + '//' + ckan
 }
 
-function getCKAN(endpoint, data, callback) {
+function getCKAN(endpoint, data, callback, error) {
     $.ajax({
         dataType: 'json',
         type: 'GET',
         url: config['ckanAPI'] + endpoint,
         data: data,
-    }).done(callback);
+    }).done(
+        callback
+    ).error(
+        error
+    );
 }
 
 function getFullDate(date) {

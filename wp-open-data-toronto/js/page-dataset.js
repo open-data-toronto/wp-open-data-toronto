@@ -124,23 +124,27 @@ function buildDataset(response) {
             resourceLink += '?format=' + (resource['format'] == 'csv' ? 'csv' : 'json');
         }
 
-        $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
-                                             '<td>' + resource['name'] + '</td>' +
-                                             '<td>' + format + '</td>' +
-                                             (data['is_geospatial'] ? '<td>' + projection + '</td>' : '') +
-                                             '<td>' +
-                                               '<a href="' + resourceLink + '" target="_blank" class="btn btn-outline-primary">' +
-                                                 'Download' +
-                                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
-                                                 '<span class="fa fa-download"></span>' +
-                                               '</a>' +
-                                             '</td>' +
-                                           '</tr>');
+        $('#table-resources tbody').append(
+            '<tr data-stored="' + resource['datastore_active'] + '">' +
+              '<td>' + resource['name'] + '</td>' +
+              '<td>' + format + '</td>' +
+              (data['is_geospatial'] ? '<td>' + projection + '</td>' : '') +
+              '<td>' +
+                '<a href="' + resourceLink + '" target="_blank" class="btn btn-outline-primary">' +
+                  'Download' +
+                  '<span class="sr-only">Download ' + resource['name'] + '</span>' +
+                  '<span class="fa fa-download"></span>' +
+                '</a>' +
+              '</td>' +
+            '</tr>'
+        );
 
         if (['html', 'web', 'jsp'].indexOf(resource['format']) != -1) {
-            $('#table-resources tr:last-child td:last-child a').html('Visit page' +
-                                                                     '<span class="sr-only">Visit ' + resource['name'] + '</span>' +
-                                                                     '<span class="fa fa-desktop"></span>');
+            $('#table-resources tr:last-child td:last-child a').html(
+                'Visit page' +
+                '<span class="sr-only">Visit ' + resource['name'] + '</span>' +
+                '<span class="fa fa-desktop"></span>'
+            );
         }
     }
 
@@ -151,8 +155,9 @@ function buildDataset(response) {
         queryContents();
         queryViews();
     } else {
-        $('#body-dataPreview .card-body, #body-dataFeatures .card-body, #body-Explore .card-body')
-            .html('<div class="not-available">Not available for this dataset</div>');
+        $('#body-dataPreview, #body-dataFeatures, #body-Explore').find('.card-body').html(
+            '<div class="not-available">Not available for this dataset</div>'
+        );
     }
 
     $('#header-dataPreview button').click();
@@ -420,5 +425,15 @@ function generateDropdowns(type, options) {
 
 function init(package_name) {
     $('.block-hidden').css('visibility', 'hidden');
-    getCKAN('package_show', { 'id': package_name }, buildDataset);
+    getCKAN('package_show', { 'id': package_name }, buildDataset, function() {
+        $('.content-area .container').children().not(':first').remove();
+        $('.content-area .container').append(
+            '<div class="page-content" id="content">' +
+              '<div class="large heading" id="dataset-error-heading">Dataset not found.</div>' +
+              '<div class="subtext" id="dataset-error-subtext">' +
+                'Oops, we can\'t find that dataset. Please contact <a href-="mailto:opendata@toronto.ca">opendata@toronto.ca</a> if you think you\'re seeing this in error.' +
+              '</div>' +
+            '</div>'
+        );
+    });
 }
