@@ -205,7 +205,12 @@ function queryContents() {
                              '</table>');
 
         for (var i in fields) {
-            var columnDesc = ('info' in fields[i] && fields[i]['info']['notes']) ? fields[i]['info']['notes'] : '<span aria-label="No value available"></span>';
+            var columnDesc = '<span aria-label="No value available"></span>';
+            if (fields[i]['name'] == '_id') {
+                columnDesc = 'Unique row identifier for Open Data database';
+            } else {
+                columnDesc = fields[i]['info']['notes'];
+            }
 
             previewTable.find('thead').append('<th>' + fields[i]['id'] + '</th>');
             featuresTable.find('tbody').append('<tr><td>' + fields[i]['id'] + '</td><td>' + columnDesc + '</td></tr>');
