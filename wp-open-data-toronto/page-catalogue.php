@@ -31,13 +31,13 @@
         </div>
       </div>
 
-      <div class="row d-flex block-hidden">
+      <div class="row d-flex block-hidden" id="content">
         <!-- Sidebar -->
-        
+
         <div class="col-md-3" id="filter-sidebar">
-          <a href="#data-catalogue" class="sr-only sr-only-focusable">Skip filters and go to main content</a>
+          <h2>Dataset Filters</h2>
+          <a href="#input-search" class="sr-only sr-only-focusable">Skip dataset filters and go to search</a>
           <div class="dataset-sidebar">
-            <h2 class="sr-only">Dataset Filters</h2>
             <div class="card" id="vocab_topics-filter">
               <div class="card-header filter-heading">
                 <h3>Topic</h3>
@@ -76,14 +76,14 @@
           </div>
         </div>
         <!-- End Sidebar -->
-        <div class="col-md-9" id="content">
+        <div class="col-md-9">
           <div class="container-fluid">
             <!-- Dataset Search Area -->
             <div class="row" id="dataset-search-box">
               <form class="dataset-filter" id="search-dataset" role="search" aria-label="Search the Open Data Catalogue">
               <div class="input-group">
                 <label for="input-search" class="sr-only">Input for dataset search terms</label>
-                <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets" aria-label="Search datasets"/>
+                <input type="text" class="form-control" name="search" id="input-search" placeholder="Search datasets"/>
                 <span class="input-group-btn">
                   <button id="btn-search" class="btn btn-primary" type="submit">
                     <span class="sr-only">Search datasets</span>
@@ -92,17 +92,16 @@
                 </span>
               </div>
               </form>
-              <small id="search-error" class="text-danger"></small>
+              <small id="search-error" class="text-danger hidden"><strong>Only numbers, letters, and spaces are allowed</strong></small>
             </div>
             <div class="row" id="dataset-search-results">
               <div class="col-md-8 info count">
-                <div id="results-count" aria-label="Data catalogue search results" role="alert"></div>
+                <div role="alert" id="results-count"></div>
               </div>
               <div class="col-md-4 info sort">
                 <form>
                   <div class="form-group row">
                     <label for="sort-results-by" class="col-sm-5 text-right col-form-label">Order by:</label>
-                    <div role="alert" class="sr-only" id="current-sort">Results currently ordered by <span>Last Updated</span></div>
                     <div class="col-sm-7">
                       <select class="form-control" id="sort-results-by" aria-label="Sorting method for catalogue search results">
                         <option value="metadata_modified desc">Last Updated</option>
@@ -110,6 +109,7 @@
                         <option value="name asc">Name</option>
                       </select>
                     </div>
+                    <div role="alert" class="sr-only" id="current-sort">Results currently ordered by <span>Last Updated</span></div>
                   </div>
                 </form>
               </div>

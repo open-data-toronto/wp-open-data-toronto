@@ -45,6 +45,9 @@ function buildDataset(response) {
                         $(this).append(data[field][i]['display_name']);
                     }
                     break;
+                case 'title':
+                    $(this).html(data[field] + ' - City of Toronto Open Data Portal');
+                    break;
                 case 'metadata_modified':
                 case 'published_date':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
@@ -78,28 +81,19 @@ function buildDataset(response) {
         var resource = config['package']['resources'][i];
         resource['format'] = resource['format'].toLowerCase();
 
-        var format = '',
-            projection = '';
+        var format = '<div class="file-format">' + resource['format'] + '</div>',
+            projection = '<div class="projection">' + 'Not Applicable' + '</div>';
 
-        if (resource['datastore_active']) {
-            if (hasGeospatial) {
+        if (hasGeospatial) {
+            if (resource['datastore_active'] && resource['format'] == 'geojson') {
                 var format = [['csv', 'CSV'], ['shp', 'Shapefile']];
                 if (resource['format'] == 'geojson') {
                     format.unshift(['geojson', 'GeoJSON']);
                 }
+                format = generateDropdowns('format', format);
 
                 projection = generateDropdowns('projection', [['4326', 'WGS84'], ['2019', 'MTM3']]);
             } else {
-                var format = [['json', 'JSON'], ['xml', 'XML']];
-                if (resource['format'] == 'csv') {
-                    format.unshift(['csv', 'CSV']);
-                }
-            }
-
-            format = generateDropdowns('format', format);
-        } else {
-            if (hasGeospatial) {
-                projection = '<div class="projection">' + 'Not Applicable' + '</div>';
                 for (var f in config['projectionOptions']) {
                     if (resource['name'].toUpperCase().indexOf(config['projectionOptions'][f]) != -1) {
                         projection = '<div class="projection">' + config['projectionOptions'][f] + '</div>';
@@ -107,8 +101,13 @@ function buildDataset(response) {
                     }
                 }
             }
+        } else if (resource['datastore_active']){
+            var format = [['json', 'JSON'], ['xml', 'XML']];
+            if (resource['format'] == 'csv') {
+                format.unshift(['csv', 'CSV']);
+            }
 
-            format = '<div class="file-format">' + resource['format'] + '</div>'
+            format = generateDropdowns('format', format);
         }
 
         var row = '<tr data-stored="' + resource['datastore_active'] + '">' +
@@ -117,9 +116,9 @@ function buildDataset(response) {
                             (hasGeospatial ? '<td>' + projection + '</td>' : '') +
                             '<td>' +
                             '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
-                                '<span class="fa fa-download"></span>' +
                                 'Download' +
                                 '<span class="sr-only">Download ' + resource['name'] + '</span>' +
+                                '<span class="fa fa-download"></span>' +
                             '</a>' +
                             '</td>' +
                          '</tr>';
@@ -137,13 +136,16 @@ function buildDataset(response) {
 
     buildUI();
 
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+    var previewResource = config['package']['preview_resource'];
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active'] && config['package']['dataset_category'] != 'Document') {
         queryContents();
         queryViews();
     } else {
         $('#body-dataPreview .card-body, #body-dataFeatures .card-body, #body-Explore .card-body')
             .html('<div class="not-available">Not available for this dataset</div>');
     }
+
+    $('#header-dataPreview button').click();
 }
 
 /**
@@ -157,27 +159,23 @@ function queryViews() {
             exploreFound = false;
 
         for (var i in results) {
-            var isMapView = config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view',
-                isTableView = config['package']['dataset_category'] == 'Table' && results[i]['view_type'] == 'recline_view';
-
-            if (isMapView || isTableView) {
+            if (['Map', 'Table'].indexOf(config['package']['dataset_category']) != -1) {
                 var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
 
-                if (isMapView) {
-                    var w = $('#body-dataPreview').width();
-
-                    $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
-                } else {
+                if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
+                    if (!$('#content-preview iframe').length) {
+                        var w = $('#body-dataPreview').width();
+                        $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
+                    }
+                } else if (results[i]['view_type'] == 'recline_view') {
                     $('#redirect-ckan').attr('href', viewURL);
                     exploreFound = true;
                 }
-
-                break;
             }
         }
 
         if (!exploreFound) {
-            $('#collapse-explore').addClass('inactive').html('<div class="not-available">Not available for this dataset</div>');
+            $('#body-Explore .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
 }
@@ -211,13 +209,15 @@ function queryContents() {
         for (var i in data) {
             var row = $('<tr></tr>');
             for (var j in fields) {
-                row.append('<td>' + truncateString(data[i][fields[j]['id']], 30) + '</td>');
+                row.append('<td>' + truncateString(data[i][fields[j]['id']], 30, false, true) + '</td>');
             }
 
             previewTable.find('tbody').append(row);
         }
 
-        if (config['package']['dataset_category'] == 'Table') { $('#content-preview').append(previewTable) };
+        if (config['package']['dataset_category'] == 'Table') {
+            $('#content-preview').append(previewTable)
+        }
         $('#content-features').append(featuresTable);
     });
 }
@@ -318,7 +318,8 @@ function generateSnippets() {
         'print(package)'
     ]
 
-    if (config['package']['preview_resource'] != undefined && !$.isEmptyObject(config['package']['preview_resource'])) {
+    var previewResource = config['package']['preview_resource'];
+    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active']) {
         snippets['python'] = snippets['python'].concat([
             '',
             '# Get the data by passing the resource_id to the datastore_search endpoint',
@@ -391,7 +392,7 @@ function generateDropdowns(type, options) {
     var dropdown = $('<form>' +
                        '<select class="select-download-' + type + '">' +
                        '</select>' +
-                     '</form>',);
+                     '</form>');
 
     for (var i in options) {
         dropdown.find('select').append('<option value="' + options[i][0] + '">' + options[i][1] + '</option>');

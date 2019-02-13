@@ -10,7 +10,7 @@ $.extend(config, {
     'cataloguePages': 0,
     'datasetsPerPage': 10,
     'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'vocab_topics'],
-    'filterSize': 5
+    'filterSize': 6 // Actual number of results shown is filterSize -1
 });
 
 /**
@@ -90,7 +90,7 @@ function buildCatalogue(response) {
                                                          '</li>');
             } else if (Math.abs(state['page'] - i) == 3) {
                 $('#nav-catalogue li:last-child').before('<li class="page-item page-remove disabled">' +
-                                                           '<a class="page-link" href="#" aria-label="...">' +
+                                                           '<a class="page-link normal-text" href="#" aria-label="...">' +
                                                               '...' +
                                                            '</a>' +
                                                          '</li>');
@@ -106,6 +106,10 @@ function buildCatalogue(response) {
 
             state['page'] = $(this).data('page');
             $(this).addClass('active');
+
+            $('html, body').animate({
+                scrollTop: $("#content").offset().top
+            }, 1000);
 
             loadCatalogue();
         });
@@ -127,37 +131,47 @@ function buildSidebar(response) {
     var results = response['result'];
     for (var i in results['search_facets']) {
         var field = results['search_facets'][i],
-            sidebar = field['items'];
+            sidebar = [[], []],
+            selected = state['filters'][field['title']];
 
-        sidebar.sort(function(a, b) {
+        field['items'].sort(function(a, b) {
             if (b['count'] == a['count']) {
                 return a['name'] < b['name'] ? 1 : -1;
             }
+
             return a['count'] - b['count'];
         });
+
+        for (var i in field['items']) {
+            if (selected && selected.indexOf(field['items'][i]['name']) != -1) {
+                sidebar[1].push(field['items'][i]);
+            } else {
+                sidebar[0].push(field['items'][i]);
+            }
+        }
+        sidebar = sidebar[0].concat(sidebar[1]);
 
         var sidebarEle = $('#' + field['title'] + '-values'),
             showMoreButton = sidebarEle.find('li.show-more');
 
         for (var i in sidebar) {
             var value = sidebar[i],
-                selected = state['filters'][field['title']],
-                name = truncateString(value['name'], 30, true);
+                name = truncateString(value['name'], 27, true, false);
 
             sidebarEle.prepend(
-                '<li class="list-group-item list-group-item-action filter filter-value">' +
-                  '<label title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '">' +
-                    '<span data-trigger="hover" data-placement="right">' + name + '</span>' +
+                '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
+                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '" data-trigger="hover" data-placement="right">' +
+                    '<span>' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
-                  '</label>' +
+                  '</a>' +
                 '</li>');
 
             if (name != value['name']) {
-                sidebarEle.find('label[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
+                sidebarEle.find('a[title="' + value['name'] + '"]').attr('data-toggle', 'tooltip');
             }
 
             if (selected != null && selected.indexOf(value['name']) !== -1) {
-                var elLabel = $('label[title="' + value['name'] + '"]');
+                var elLabel = $('a[title="' + value['name'] + '"]');
                 elLabel.parent('li').addClass('filter-selected');
                 elLabel.append('<span class="float-right"><i class="fa fa-times"></i></span>');
             }
@@ -165,16 +179,15 @@ function buildSidebar(response) {
 
         if (sidebar.length === 0) {
             $('#' + field['title'] + '-values').prepend(
-                '<li class="list-group-item filter-value">' +
-                  '<label>' +
-                    '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
-                  '</label>' +
+                '<li class="list-group-item filter-value filter-no-results">' +
+                  '<span class="no-matches">' + 'No ' + $('#' + field['title'] + '-filter h3').text().toLowerCase() + 's for this search' + '</span>' +
                 '</li>')
         };
 
         var numFilters = sidebarEle.find('li').length - 1;
         if (numFilters > config['filterSize']) {
-            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('sr-only');
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('hidden');
+            sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').attr('aria-hidden', 'true');
 
             showMoreButton.html('<a href="#">Show ' + (numFilters - config['filterSize']) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
             showMoreButton.show();
@@ -209,6 +222,10 @@ function buildStaticUI() {
                 break;
         }
 
+        $('html, body').animate({
+            scrollTop: $("#content").offset().top
+        }, 1000);
+
         loadCatalogue();
     });
 
@@ -226,6 +243,8 @@ function buildStaticUI() {
             state['page'] = 0;
             loadCatalogue();
         }
+
+        return false;
     });
 
     $('#input-search').on('keyup', function(evt) {
@@ -233,34 +252,34 @@ function buildStaticUI() {
 
         if (value.length > 0 && !value.toLowerCase().match(/^[0-9a-z\s]+$/)) {
             $(this).parents('.input-group').addClass('has-danger');
-            $('#search-error').html('<strong>Only numbers, letters, and spaces are allowed</strong>');
+            $('#search-error').removeClass('hidden');
 
-            return false
+            return false;
         } else {
             $(this).parents('.input-group').removeClass('has-danger');
-            $('#search-error').empty();
-
-            if (evt.keyCode == 13) {
-                $('#btn-search').click();
-            }
+            $('#search-error').addClass('hidden');
         }
     });
 
     $('#sort-results-by').on('change', function() {
         state['sort'] = $(this).val();
-
         state['page'] = 0;
+
+        $('#current-sort span').html($(this).children('option:selected').text());
         loadCatalogue();
     });
 
     $('.show-more').on('mouseenter mouseleave', function () {
-        $(this).find('label').toggleClass('on-hover');
+        $(this).find('a').toggleClass('on-hover');
     }).on('click', function(evt) {
         evt.preventDefault();
 
-        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('sr-only');
+        $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('hidden');
+        $(this).siblings('li.hidden').attr('aria-hidden', 'true');
+        $(this).siblings('li:not(.hidden)').attr('aria-hidden', 'false');
+
         var filterTerm = ' ' + $(this).parents('.card').find('.card-header').text().trim().toLowerCase() + 's';
-        var labelText = $(this).siblings('li.sr-only').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more<span class="sr-only">' + filterTerm + '</span>' : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
+        var labelText = $(this).siblings('li.hidden').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more ' + filterTerm : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
         $(this).find('a').html(labelText);
     });
 
@@ -286,18 +305,22 @@ function buildDynamicUI() {
             $('#nav-catalogue .page-keep').removeClass('disabled');
     }
 
-    $('.filter').on('click', function() {
-        $(this).toggleClass('filter-selected');
+    $('.filter a').on('click', function() {
+        $(this).parent('li').toggleClass('filter-selected');
 
-        var field = $(this).find('label').data('field');
+        $('.tooltip').remove();
+
+        var field = $(this).data('field');
         state['filters'][field] = [];
 
-        $.each($('.filter-selected label[data-field="' + field + '"]'), function(idx, element) {
+        $.each($('.filter-selected a[data-field="' + field + '"]'), function(idx, element) {
             state['filters'][field].push($(element).data('value'));
         });
 
         state['page'] = 0;
         loadCatalogue();
+
+        return false;
    });
 }
 
@@ -316,6 +339,7 @@ function loadCatalogue() {
                 state['page'] = parseInt(content);
             } else if (filter[0] == 'sort') {
                 state['sort'] = content;
+                $('#current-sort span').html($('#sort-results-by option[value="' + content + '"]').text());
             } else if (filter[0].length > 0) {
                 state['filters'][filter[0]] = ['search'].indexOf(filter[0]) !== -1 ? content.replace(/\+/g, ' ') : content.split('+');
             }
@@ -323,7 +347,7 @@ function loadCatalogue() {
     }
 
     if (state['filters'] && state['filters']['search']) {
-        state['filters']['search'] = DOMPurify.sanitize(state['filters']['search'])
+        state['filters']['search'] = DOMPurify.sanitize(state['filters']['search']).replace(/[^a-zA-Z0-9]+/g,'');
     }
 
     getCKAN('catalogue_search', $.extend(true, {
@@ -369,7 +393,9 @@ function updateURL() {
         urlParam.push('sort=' + state['sort']);
     }
 
-    history.replaceState(null, '', '/catalogue/?' + urlParam.join('&'));
+    urlParam = urlParam.length ? '?' + urlParam.join('&') : '';
+
+    history.replaceState(null, '', '/catalogue/' + urlParam);
 }
 
 function init() {

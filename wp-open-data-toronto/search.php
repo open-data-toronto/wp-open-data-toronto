@@ -13,6 +13,7 @@
       </div>
     </div>
     <!-- End breadcrumbs -->
+    <div id="content">
     <h1 class="sr-only">Search results</h1>
     <div class="row">
       <div class="col-md-12">
@@ -41,6 +42,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <?php get_footer(); ?>

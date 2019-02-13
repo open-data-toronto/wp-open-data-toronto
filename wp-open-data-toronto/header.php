@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title><?php the_title(); ?> - <?php echo get_bloginfo( 'name' ); ?></title>
+  	<title data-field="title"><?php the_title(); ?> - <?php echo get_bloginfo( 'name' ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    
+
     <!-- Open Graph Attributes -->
     <meta property="og:title" content="<?php the_title(); ?>" />
 	<meta property="og:url" content="<?php the_permalink(); ?>" />
@@ -82,11 +82,11 @@
                   ?>
 
                   <!-- Search -->
-                  <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get" aria-label="Search Open Data Website">
+                  <form class="form-inline my-2 my-lg-0" role="search" action="<?php echo site_url('/'); ?>" method="get">
                     <label class="sr-only" for="s">
-                      Search
+                      Search Open Data Website
                     </label>
-                    <input type="text" class="form-control mr-sm-2" placeholder="Search" name="s" aria-label="Search site" id="s" value="<?php the_search_query() ?>">
+                    <input type="text" class="form-control mr-sm-2" placeholder="Search" name="s" id="s" value="<?php the_search_query() ?>">
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">
                       Search
                     </button>
