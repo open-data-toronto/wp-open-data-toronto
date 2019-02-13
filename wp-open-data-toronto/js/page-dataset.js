@@ -139,7 +139,7 @@ function buildDataset(response) {
     buildUI();
 
     var previewResource = config['package']['preview_resource'];
-    if (previewResource != undefined && !$.isEmptyObject(previewResource) && previewResource['datastore_active'] && config['package']['dataset_category'] != 'Document') {
+    if (previewResource != undefined && previewResource['datastore_active'] && ['Document', 'Website'].indexOf(config['package']['dataset_category']) != -1) {
         queryContents();
         queryViews();
     } else {
@@ -162,19 +162,17 @@ function queryViews() {
             previewFound = false;
 
         for (var i in results) {
-            if (['Map', 'Table'].indexOf(config['package']['dataset_category']) != -1) {
-                var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
+            var viewURL = config['ckanURL'] + '/dataset/' + config['package']['name'] + '/resource/' + results[i]['resource_id'] + '/view/' + results[i]['id'];
 
-                if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
-                    if (!$('#content-preview iframe').length) {
-                        var w = $('#body-dataPreview').width();
-                        $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
+            if (config['package']['dataset_category'] == 'Map' && results[i]['view_type'] == 'recline_map_view') {
+                if (!$('#content-preview iframe').length) {
+                    var w = $('#body-dataPreview').width();
+                    $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
                     previewFound = true;
-                    }
-                } else if (results[i]['view_type'] == 'recline_view') {
-                    $('#redirect-ckan').attr('href', viewURL);
-                    exploreFound = true;
                 }
+            } else if (results[i]['view_type'] == 'recline_view') {
+                $('#redirect-ckan').attr('href', viewURL);
+                exploreFound = true;
             }
         }
 
