@@ -244,9 +244,8 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-        var package_name = '<?php echo get_query_var( 'package' ) ?>';
-        init(package_name);
-        $("a, button").on('mouseup', function(){ this.blur() });
+        var datasetName = '<?php echo get_query_var( 'dataset' ) ?>';
+        init(datasetName);
     });
 </script>
 

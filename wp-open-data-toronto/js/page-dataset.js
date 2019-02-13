@@ -227,6 +227,10 @@ function queryContents() {
  */
 
 function buildUI() {
+    $('a, button').on('mouseup', function() {
+        $(this).blur();
+    });
+
     $('code').each(function(i, block) {
         hljs.highlightBlock(block);
         hljs.lineNumbersBlock(block);
