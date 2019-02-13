@@ -53,13 +53,13 @@ function buildDataset(response) {
                 case 'information_url':
                     $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
                     break;
-                case 'tags':
+                case 'topics':
                     for (var i in data[field]) {
                         if (!$(this).is(':empty')) {
                             $(this).append(', ');
                         }
-                        // $(this).append('<a href="/catalogue?q=(tags:&quot;' + data[field][i]['display_name'] + '&quot;)">' + data[field][i]['display_name'] + '</a>');
-                        $(this).append(data[field][i]['display_name']);
+                        $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(data[field][i]) + '">' + data[field][i] + '</a>');
+                        // $(this).append(data[field][i]);
                     }
                     break;
                 case 'title':

@@ -46,8 +46,8 @@
                   <dd data-field="dataset_category"></dd>
                   <dt>More information<span class="sr-only">: </span></dt>
                   <dd data-field="information_url"></dd>
-                  <dt>Tags<span class="sr-only">: </span></dt>
-                  <dd data-field="tags"></dd>
+                  <dt>Topics<span class="sr-only">: </span></dt>
+                  <dd data-field="topics"></dd>
                 </dl>
               </div>
               <div class="card">
