@@ -160,7 +160,7 @@ function buildSidebar(response) {
 
             sidebarEle.prepend(
                 '<li class="list-group-item list-group-item-action filter filter-value" aria-hidden="false">' +
-                  '<a href="#" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '" data-trigger="hover" data-placement="right">' +
+                  '<a href="#" role="button" title="' + value['name'] + '" data-field="' + field['title'] + '" data-value="' + value['name'] + '" data-trigger="hover" data-placement="right">' +
                     '<span>' + name + '</span>' +
                     '<span class="badge float-right">' + value['count'] + '<div class="sr-only"> datasets </div> </span>' +
                   '</a>' +
