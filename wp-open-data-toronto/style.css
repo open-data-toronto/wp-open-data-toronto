@@ -30,7 +30,10 @@ Version:         1.2.0
     outline-style: solid;
     outline-color: #222222;
     outline-width: 2px;
+    padding: 5px;
+    display: inline-block;
 }
+
 .form-control:focus {
     color: #464a4c;
     background-color: #fff;
