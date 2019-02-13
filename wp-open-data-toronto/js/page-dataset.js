@@ -32,7 +32,7 @@ function buildDataset(response) {
             data['preview_resource'] = data['resources'][i];
         }
 
-        if (data['resources'][i]['datastore_active'] == 'true' && !data['datastore_active']) {
+        if (data['resources'][i]['datastore_active'] && !data['datastore_active']) {
             data['datastore_active'] = true;
         }
 
@@ -94,7 +94,9 @@ function buildDataset(response) {
     }
 
     for (var i in config['package']['resources']) {
-        var resource = config['package']['resources'][i];
+        var resource = config['package']['resources'][i],
+            resourceLink = (config['ckanURL'] + '/download_resource/' + resource['id']);
+
         resource['format'] = resource['format'].toLowerCase();
 
         var format = '<div class="format">' + resource['format'] + '</div>',
@@ -112,13 +114,14 @@ function buildDataset(response) {
                     }
                 }
             }
+            resourceLink += '?format=geojson&projection=4326';
         } else if (resource['datastore_active']){
             format = config['formatOptions']['tabular']['default'];
             if (resource['format'] == 'csv') {
                 format.unshift(config['formatOptions']['tabular']['extended']);
             }
-
             format = generateDropdowns('format', format);
+            resourceLink += '?format=' + (resource['format'] == 'csv' ? 'csv' : 'json');
         }
 
         $('#table-resources tbody').append('<tr data-stored="' + resource['datastore_active'] + '">' +
@@ -126,7 +129,7 @@ function buildDataset(response) {
                                              '<td>' + format + '</td>' +
                                              (data['is_geospatial'] ? '<td>' + projection + '</td>' : '') +
                                              '<td>' +
-                                               '<a href="' + (config['ckanURL'] + '/download_resource/' + resource['id']) + '" class="btn btn-outline-primary">' +
+                                               '<a href="' + resourceLink + '" target="_blank" class="btn btn-outline-primary">' +
                                                  'Download' +
                                                  '<span class="sr-only">Download ' + resource['name'] + '</span>' +
                                                  '<span class="fa fa-download"></span>' +
@@ -261,18 +264,17 @@ function buildUI() {
         setTimeout(function() { $('#code-copy').popover('hide'); }, 500);
     });
 
-    $('#table-resources tbody a').on('click', function(evt) {
-        evt.preventDefault();
+    $('.select-download-projection, .select-download-format').on('change', function(evt) {
+        var row = $(this).parents('tr'),
+            btn = row.find('a'),
+            link = btn.attr('href').split('?')[0];
 
-        var link = $(this).attr('href');
-        if ($(this).parents('tr').data('stored')) {
-            var format = $(this).parents('tr').find('.select-download-format').val(),
-                proj = $(this).parents('tr').find('.select-download-projection').val();
+        if (row.data('stored')) {
+            var format = row.find('.select-download-format').val(),
+                proj = row.find('.select-download-projection').val();
 
-            link += '?format=' + format + (proj != undefined ? '&projection=' + proj : '');
+            btn.attr('href', link + '?format=' + format + (proj != undefined ? '&projection=' + proj : ''));
         }
-
-        window.open(link, '_blank');
     });
 
     $(window).on('resize', function() {
