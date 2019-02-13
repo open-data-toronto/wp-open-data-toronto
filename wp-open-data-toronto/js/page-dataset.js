@@ -129,11 +129,10 @@ function buildDataset(response) {
                                            '</tr>');
 
         if (['html', 'web', 'jsp'].indexOf(resource['format']) != -1) {
-            $('#table-resources tr:last-child td:last-child a').html('<span class="fa fa-desktop"></span>Visit page');
+            $('#table-resources tr:last-child td:last-child a').html('Visit page' +
                                                                      '<span class="sr-only">Visit ' + resource['name'] + '</span>' +
                                                                      '<span class="fa fa-desktop"></span>');
         }
-
     }
 
     buildUI();
