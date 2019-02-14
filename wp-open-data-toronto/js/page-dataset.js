@@ -44,10 +44,13 @@ function buildDataset(response) {
     $('[data-field]').each(function(idx) {
         var field = $(this).data('field');
 
+        if (field == 'image_url') {
+            data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
+        }
+
         if (data[field]) {
             switch(field) {
                 case 'image_url':
-                    data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
                     $(this).css('background-image', 'url("' + data[field] + '")');
                     break;
                 case 'information_url':
