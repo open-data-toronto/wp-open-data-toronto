@@ -48,7 +48,7 @@ function buildDataset(response) {
             data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
         }
 
-        if (data[field]) {
+        if (data[field] && data[field].length) {
             switch(field) {
                 case 'image_url':
                     $(this).css('background-image', 'url("' + data[field] + '")');
@@ -196,7 +196,7 @@ function queryViews() {
             $('#body-Explore .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
 
-        if (!previewFound) {
+        if (config['package']['dataset_category'] == 'Map' && !previewFound) {
             $('#body-dataPreview .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
