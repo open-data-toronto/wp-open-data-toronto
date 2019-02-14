@@ -42,6 +42,9 @@ a:focus{
     display: inline-block;
     padding: 4px 2px;
 }
+.inline-link {
+    padding: 0px !important;
+}
 .list-group-item-action:focus{
     margin-bottom: 2px !important;
 }
