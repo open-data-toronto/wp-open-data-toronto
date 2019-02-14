@@ -196,7 +196,7 @@ function queryViews() {
             $('#body-Explore .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
 
-        if (!previewFound) {
+        if (config['package']['dataset_category'] == 'Map' && !previewFound) {
             $('#body-dataPreview .card-body').html('<div class="not-available">Not available for this dataset</div>');
         }
     });
