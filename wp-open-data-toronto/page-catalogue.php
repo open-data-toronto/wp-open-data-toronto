@@ -92,7 +92,7 @@
                 </span>
               </div>
               </form>
-              <small id="search-error" class="text-danger hidden"><strong>Only numbers, letters, and spaces are allowed</strong></small>
+              <p role="alert" id="search-error" class="text-danger hidden"><strong>Only numbers, letters, and spaces are allowed</strong></p>
             </div>
             <div class="row" id="dataset-search-results">
               <div class="col-md-8 info count">
