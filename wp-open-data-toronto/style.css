@@ -26,12 +26,13 @@ Version:         1.2.0
 */
 
 /* Default */
- *:focus{
+
+a:focus{
     outline-style: solid;
     outline-color: #222222;
     outline-width: 2px;
-    padding: 5px;
     display: inline-block;
+    padding: 4px 2px;
 }
 .list-group-item-action:focus{
     margin-bottom: 2px !important;
@@ -59,7 +60,7 @@ a.btn{
     background-color: white;
 }
 /* Increase contrast for error */
-small#search-error{color:#A72925 !important}
+#search-error{color:#A72925 !important}
 
 /* Figures */
 figure img {
@@ -91,7 +92,7 @@ section{max-width: 100%;}
     outline-color: #FFFFFF;
     outline-width: 2px;
 }
-.sr-only-focusable:active, .sr-only-focusable:focus {
+.sr-only-focusable:focus {
     display: block;
     margin: 0 0 20px 0 !important;
     padding: 9px;
