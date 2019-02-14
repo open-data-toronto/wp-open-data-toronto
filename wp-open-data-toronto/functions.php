@@ -17,7 +17,7 @@ function custom_url_rewrite() {
 add_action( 'init', 'custom_url_rewrite' );
 
 function query_custom_vars( $vars ) {
-    $vars[] = 'package';
+    $vars[] = 'dataset';
     return $vars;
 }
 add_filter('query_vars', 'query_custom_vars');

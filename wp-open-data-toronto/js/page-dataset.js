@@ -44,21 +44,24 @@ function buildDataset(response) {
     $('[data-field]').each(function(idx) {
         var field = $(this).data('field');
 
+        if (field == 'image_url') {
+            data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
+        }
+
         if (data[field]) {
             switch(field) {
                 case 'image_url':
-                    data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
                     $(this).css('background-image', 'url("' + data[field] + '")');
                     break;
                 case 'information_url':
-                    $(this).append('<a href="' + data[field] + '">' + 'External Link' + '</a>');
+                    $(this).append('<a href="' + data[field] + '" class="inline-link">' + 'External Link' + '</a>');
                     break;
                 case 'topics':
                     for (var i in data[field]) {
                         if (!$(this).is(':empty')) {
                             $(this).append(', ');
                         }
-                        $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(data[field][i]) + '">' + data[field][i] + '</a>');
+                        $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(data[field][i]) + '" class="inline-link">' + data[field][i] + '</a>');
                         // $(this).append(data[field][i]);
                     }
                     break;
