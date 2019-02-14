@@ -274,6 +274,10 @@ function buildStaticUI() {
     }).on('click', function(evt) {
         evt.preventDefault();
 
+        if ($(this).find('a').is(':focus') && $(this).siblings('li.hidden').length > 0) {
+            $(this).data('focused', 'true');
+        }
+
         $(this).parent('ul').find('li.filter-value:nth-child(n+' + config['filterSize'] +')').toggleClass('hidden');
         $(this).siblings('li.hidden').attr('aria-hidden', 'true');
         $(this).siblings('li:not(.hidden)').attr('aria-hidden', 'false');
@@ -281,6 +285,12 @@ function buildStaticUI() {
         var filterTerm = ' ' + $(this).parents('.card').find('.card-header').text().trim().toLowerCase() + 's';
         var labelText = $(this).siblings('li.hidden').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more ' + filterTerm : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
         $(this).find('a').html(labelText);
+    }).on('keydown', function(evt) {
+        if (evt.which == 9 && $(this).data('focused') == 'true') {
+            evt.preventDefault();
+            $(this).data('focused', 'false');
+            $(this).parent('ul').find('li:nth-child(' + config['filterSize'] + ') a').focus();
+        }
     });
 
     config['isInitializing'] = false;
