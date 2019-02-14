@@ -32,6 +32,9 @@ ul.newsfeed li a {
 ul.list-group li a:focus {
     margin-bottom: 2px !important;
 }
+.dataset-sidebar a {
+    padding: 0;
+}
 a:focus{
     outline-style: solid;
     outline-color: #222222;
