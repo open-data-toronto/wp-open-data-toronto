@@ -26,14 +26,14 @@ Version:         1.2.0
 */
 
 /* Default */
+.dataset-sidebar li a {
+    padding: 7px !important;
+}
 ul.newsfeed li a {
     display: block;
 }
 ul.list-group li a:focus {
     margin-bottom: 2px !important;
-}
-.dataset-sidebar a {
-    padding: 0 !important;
 }
 a:focus{
     outline-style: solid;
