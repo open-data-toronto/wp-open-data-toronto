@@ -1508,3 +1508,11 @@ input#search {
     margin: -1px 0 0 0;
     border: 1px solid #ccc;
 }
+
+#dataset-error-heading {
+    font-size: 92px;
+}
+
+#dataset-error-subtext {
+    font-size: 52px;
+}
