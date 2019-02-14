@@ -9,8 +9,8 @@ register_activation_hook( __FILE__, 'custom_flush_rewrites' );
 
 function custom_url_rewrite() {
     add_rewrite_rule(
-        '^package/([^/]+)([/]?)(.*)/?$',
-        'index.php?pagename=package&package=$matches[1]',
+        '^dataset/([^/]+)([/]?)(.*)/?$',
+        'index.php?pagename=dataset&dataset=$matches[1]',
         'top'
     );
 }
