@@ -29,6 +29,9 @@ Version:         1.2.0
 ul.newsfeed li a {
     display: block;
 }
+ul.list-group li a:focus {
+    margin-bottom: 2px !important;
+}
 a:focus{
     outline-style: solid;
     outline-color: #222222;
