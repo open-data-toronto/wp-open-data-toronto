@@ -33,7 +33,7 @@ ul.list-group li a:focus {
     margin-bottom: 2px !important;
 }
 .dataset-sidebar a {
-    padding: 0;
+    padding: 0 !important;
 }
 a:focus{
     outline-style: solid;
