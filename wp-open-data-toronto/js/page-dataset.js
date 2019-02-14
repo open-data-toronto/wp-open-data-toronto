@@ -48,7 +48,7 @@ function buildDataset(response) {
             data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
         }
 
-        if (data[field]) {
+        if (data[field] && data[field].length) {
             switch(field) {
                 case 'image_url':
                     $(this).css('background-image', 'url("' + data[field] + '")');
