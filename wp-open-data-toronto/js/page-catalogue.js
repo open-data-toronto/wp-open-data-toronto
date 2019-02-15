@@ -72,7 +72,7 @@ function buildCatalogue(response) {
         }
 
         if ('topics' in row && row['topics'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'].join(' | ') + '</span>');
+            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'].split(',').join(' | ') + '</span>');
         }
     }
 
