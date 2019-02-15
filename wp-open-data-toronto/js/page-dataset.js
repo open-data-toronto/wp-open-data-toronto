@@ -36,7 +36,7 @@ function buildDataset(response) {
             data['datastore_active'] = true;
         }
 
-        if (['shp', 'geojson'].indexOf(config['package']['resources'][i]['format'].toLowerCase()) && !data['is_geospatial']) {
+        if (['shp', 'geojson'].indexOf(config['package']['resources'][i]['format'].toLowerCase()) != -1 && !data['is_geospatial']) {
             data['is_geospatial'] = true;
         }
     }
