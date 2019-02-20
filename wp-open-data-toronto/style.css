@@ -469,13 +469,13 @@ main.site-content a:link{
      width: 50%;
 }
 /** 5. Footer **/
- #footer {
-     margin-top: 2rem;
-     padding-top: 2rem;
-     padding-bottom: 2rem;
-     text-align: center;
-     color: #ffffff;
-     background-color: #165788;
+#footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #165788;
+    height: 70px;
+    padding-top: 20px;
 }
  nav#footer-nav img {
      display: inline-block;
@@ -1222,11 +1222,7 @@ input#search {
      height: 120px;
      background-size: 100%;
      background-position: 50% 50%;
-     transition: all .3s ease-in-out;
      border: 1px solid #ddd;
-}
- .showcase-thumbnail:hover{
-     background-size: 110%;
 }
  .page-template-blog-template h4{
      font-size: 20px;
