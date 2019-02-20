@@ -1456,6 +1456,10 @@ input#search {
     width: 84px;
     height: auto;
 }
+.complete-post-list p, .complete-post-list ul, .complete-post-list ol {
+    padding-left: 0;
+    padding-right: 0;
+}
 tr td span.fa.fa-download {
     display: none;
 }
