@@ -85,12 +85,12 @@
           </div>
           <div class="col-md-4">
             
-            <h2><a href="/budgetpedia-humanizing-city-budgets/">Showcase: Budgetpedia</a></h2>
+            <h2><a href="/torontos-open-data-initiative-2018-in-review/">2018 In Review</a></h2>
             <img src="<?php if(types_render_field('feature-3-img', array('output'=>'raw'))){?>
 				<?php echo(types_render_field('feature-3-img', array('output'=>'raw'))); ?>
 				<?php }?>"" class="img-responsive" alt=""/>
             <br/>
-            <p>Our debut community showcase tells the story of a project that is regarded as a pioneer in Toronto's Civic Tech space, and a powerful example of how Open Data empowers citizens to participate in government decision-making; Budgetpedia.</p>
+            <p>It’s been an exciting and progressive time for Open Data at the City of Toronto. Last year, we collaborated with over 125 stakeholders to co-develop an Open Data Master Plan and 4-year roadmap.</p>
           </div>
         </div>
       </section>
