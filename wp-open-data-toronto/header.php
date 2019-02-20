@@ -40,9 +40,7 @@
               </a>
             </div>
             <div class="col-9">
-              <div class="social-media float-right">
-                <a href="https://twitter.com/Open_TO" target="_blank"><img src="/wp-content/themes/wp-open-data-toronto/img/tw.png" alt="Open Data on Twitter"></a>
-              </div>
+              &nbsp;
             </div>
           </div>
         </div>

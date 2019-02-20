@@ -566,13 +566,14 @@ main.site-content a:link{
  ul.newsfeed li:last-child{
      border-bottom: none;
 }
- #super-header {
-     background: #165788;
-     padding: 6px 0;
+#super-header {
+    background: #165788;
+    padding: 8px 0 4px 0;
+    height: 58px;
+    margin: 0;
 }
- #super-header img {
-     width: 72px;
-     height: 22px;
+#super-header img {
+    width: 120px;
 }
  section#about {
      padding: 50px 0;
