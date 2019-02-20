@@ -1433,6 +1433,15 @@ input#search {
          background: #fbfbfb;
          font-weight: 500;
     }
+    .background h1 {
+    color: #fff;
+    display: block;
+    position: static;
+    font-size: 31px;
+    font-weight: 300;
+    text-align: center;
+    padding: 24px;
+}
 }
 @media (max-width:1700px){
      #toc_container{
