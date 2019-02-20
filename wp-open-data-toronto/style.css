@@ -1456,6 +1456,9 @@ input#search {
     width: 84px;
     height: auto;
 }
+tr td span.fa.fa-download {
+    display: none;
+}
 footer#footer {
     height: 49px;
     padding: 0;
