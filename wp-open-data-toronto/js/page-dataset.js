@@ -439,7 +439,8 @@ function init(package_name) {
             '<div class="page-content" id="content">' +
               '<div class="large heading" id="dataset-error-heading">Dataset not found.</div>' +
               '<div class="subtext" id="dataset-error-subtext">' +
-                'Oops, we can\'t find that dataset. Please contact <a href-="mailto:opendata@toronto.ca">opendata@toronto.ca</a> if you think you\'re seeing this in error.' +
+                'Oops, we can\'t find that dataset. Please double-check that the web address you\'ve attempted to access is correct, or contact ' +
+                '<a href="mailto:opendata@toronto.ca">opendata@toronto.ca</a> if you think you\'re seeing this in error.' +
               '</div>' +
             '</div>'
         );
