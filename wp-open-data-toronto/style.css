@@ -32,43 +32,75 @@ Version:         1.2.0
 ul.newsfeed li a {
     display: block;
 }
+
+/** Focus States **/
+ #content a:focus{
+    text-decoration: underline;
+    border: 0;
+}
+ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
+    background: #FFEB9C;
+}
+/* Tables */
+ .table a:focus{
+    background: abdbff;
+}
+
 ul.list-group li a:focus {
     margin-bottom: 2px !important;
 }
-a:focus{
-    outline-style: solid;
-    outline-color: #222222;
-    outline-width: 2px;
-    display: inline-block;
-    padding: 4px 2px;
-}
-.inline-link {
-    padding: 0px !important;
-}
+
 .list-group-item-action:focus{
     margin-bottom: 2px !important;
 }
 .form-control:focus {
     color: #464a4c;
     background-color: #fff;
-    outline: 0;
-    border: 2px solid #1c64a0;
+    outline: thin dotted #222222;
 }
 input#search:focus{
-    border: 2px solid #000000;
 }
 a.btn:focus{
     color: #ffffff;
     background: #165788;
-    border: 2px solid #ffffff;
+	outline: thin dotted #222222;
 }
-a.btn{
-    text-decoration:none !important;
-    padding: 9px 12px 12px 12px;
+a:focus{
+    display: inline-block;
+	outline: thin dotted #222222;
+}
+
+main.site-content a.btn:focus {
+    background: #222222 !important;
+}
+/* Buttons */
+ button:focus, a.btn:focus{
+    background: #222222 !important;
+}
+ #super-header a:focus{
+	outline: thin dotted #222222;
+}
+.sr-only-focusable:focus {
+    display: block;
+    margin: 0 0 20px 0 !important;
+    padding: 9px;
+    background: #fff283 !important;
+    border: 2px solid #b7a614;
+    outline: 0;
 }
 .btn-primary.focus, .btn-primary:focus {
     padding: 9px 16px;
     background-color: white;
+}
+
+/** End Focus States **/
+
+.inline-link {
+    padding: 0px !important;
+}
+a.btn{
+    text-decoration:none !important;
+    padding: 9px 12px 12px 12px;
 }
 /* Increase contrast for error */
 #search-error{color:#A72925 !important}
@@ -98,19 +130,6 @@ figure.wp-caption {
 }
 section{max-width: 100%;}
 /* COT Header */
- #super-header a:focus{
-    outline-style: solid;
-    outline-color: #FFFFFF;
-    outline-width: 2px;
-}
-.sr-only-focusable:focus {
-    display: block;
-    margin: 0 0 20px 0 !important;
-    padding: 9px;
-    background: #fff283 !important;
-    border: 2px solid #b7a614;
-    outline: 0;
-}
 .card-body.accordion__body {
     border: 1px solid #ccc;
     padding: 20px;
@@ -119,25 +138,6 @@ form.dataset-filter{
     width: 100%;
 }
 /* Text */
- #content a:focus{
-    text-decoration: underline;
-     border: 0;
-}
-main.site-content a.btn:focus {
-    background: #222222 !important;
-}
-/* Buttons */
- button:focus, a.btn:focus{
-    background: #222222 !important;
-}
-/* Breadcrumbs and Sidebar */
- .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
-    background: #FFEB9C;
-}
-/* Tables */
- .table a:focus{
-    background: abdbff;
-}
 /* Migration */
  header#masthead{
     background: 0;
