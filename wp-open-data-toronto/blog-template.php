@@ -90,40 +90,7 @@
         <!-- Main Post Listing -->
         <div class="col-md-9">
           <section class="main-post-listing"  aria-label="Blog Posts" id="content">
-            <?php
-            $the_query = new WP_Query( array( 'posts_per_page' => 1, 'category_name' => 'featured') );
-
-            if ( $the_query->have_posts() ) :
-              while ( $the_query->have_posts() ) :
-                $the_query->the_post();
-            ?>
-
-            <!-- Section 1. Featured Story -->
-            <div class="featured-story">
-              <div class="featured-banner">
-                <h2>Featured Post</h2>
-                <img src="<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?><?php echo $url ?>" alt="" class="img-responsive img-thumbnail" alt=""/>
-              </div>
-              <div class="featured-content">
-                <a href="<?php the_permalink(); ?>">
-                  <h3><?php the_title() ;?></h3>
-                </a>
-                <div class="attributes">
-                  Posted on <?php the_date(); ?> by <?php the_author(); ?>
-                </div>
-                <div class="excerpt">
-                  <?php the_excerpt(); ?>
-                </div>
-              </div>
-            </div>
-            <?php
-              endwhile;
-            wp_reset_postdata();
-            else :
-            ?>
-            <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-            <?php endif; ?>
-            <hr>
+         
 
             <!-- News&Updates -->
             <div class="row">
