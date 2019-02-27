@@ -1291,6 +1291,7 @@ border: 0;
  .blog-sidebar {
      padding: 0;
 }
+
  .page-template-blog-template h3 {
      font-size: 18px;
      margin: 0 0 12px 0;
@@ -1446,6 +1447,10 @@ border: 0;
          background: #fbfbfb;
          font-weight: 500;
     }
+     .blog-sidebar {
+     display: none;
+}
+
     .background h1 {
     color: #fff;
     display: block;
