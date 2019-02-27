@@ -63,11 +63,13 @@ input#search:focus{
 a.btn:focus{
     color: #ffffff;
     background: #165788;
-	outline: thin dotted #222222;
+	outline-width: 2px;
+    outline-offset: 2px
 }
 a:focus{
     display: inline-block;
-	outline: thin dotted #222222;
+	outline-width: 2px;
+    outline-offset: 2px
 }
 
 main.site-content a.btn:focus {
@@ -78,15 +80,16 @@ main.site-content a.btn:focus {
     background: #222222 !important;
 }
  #super-header a:focus{
-	outline: thin dotted #222222;
+	outline-width: 2px;
+    outline-offset: 2px;
 }
 .sr-only-focusable:focus {
     display: block;
     margin: 0 0 20px 0 !important;
     padding: 9px;
     background: #fff283 !important;
-    border: 2px solid #b7a614;
-    outline: 0;
+    outline-width: 2px;
+    outline-offset: 2px
 }
 .btn-primary.focus, .btn-primary:focus {
     padding: 9px 16px;
