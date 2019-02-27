@@ -1248,6 +1248,9 @@ input#search {
      border-bottom: 1px solid #e8e8e8;
      padding: 0 0 28px 0;
 }
+.single-long-post:last-child {
+border: 0;
+}
  .single-long-post a p{
      color: #222;
 }
