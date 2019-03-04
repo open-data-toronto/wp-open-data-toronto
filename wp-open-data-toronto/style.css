@@ -1484,6 +1484,9 @@ border: 0;
     width: 84px;
     height: auto;
 }
+#data-stories h3 {
+    font-size: 26px;
+}
 .complete-post-list p, .complete-post-list ul, .complete-post-list ol {
     padding-left: 0;
     padding-right: 0;
@@ -1505,8 +1508,8 @@ footer#footer {
          padding: 0 !important;
     }
      p{
-         font-size: 15px !important;
-         padding: 0 15px;
+         font-size: 14px !important;
+         padding: 0px;
     }
      section#about h2{
          margin-top: 40px;
