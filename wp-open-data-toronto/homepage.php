@@ -55,12 +55,12 @@
 				<?php }?>
 				') !important;">
         <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.67);">
-          <h2 class="heading small">Data Stories</h2>
+          <h2 class="heading small"><?php echo(types_render_field( 'featured-post-type', array( ) )); ?></h2>
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <h3>Exploring Cleared Permits Data</h3>
-              <p>How can we use Cleared Building Permits data to learn about our city and improve service provisioning? Learn about including data preparation scripts and visualization tools to make meaning from data.</p>
-              <p><a class="btn btn-md" href="/exploring-cleared-building-permits/">Read this Data Story</a></p>
+              <h3><?php echo(types_render_field( 'featured-post-title', array( ) )); ?></h3>
+              <p><?php echo(types_render_field( 'featured-post-description', array( ) )); ?></p>
+              <p><a class="btn btn-md" href="<?php echo(types_render_field( 'featured-post-url', array('output'=>'raw') )); ?>"><?php echo(types_render_field( 'featured-post-url-title', array( ) )); ?></a></p>
             </div>
           </div>
         </div>
