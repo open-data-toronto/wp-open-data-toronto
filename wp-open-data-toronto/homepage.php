@@ -67,30 +67,25 @@
       </section>
 
       <!-- Pages -->
-      <section id="pages" aria-label="Featured Pages">
+      <section id="pages" aria-label="Secondary Pages">
         <div class="row">
+
           <div class="col-md-4">
-           <h2> <a href="/about/city-of-toronto-open-data-team/">About the Open Data Team</a></h2>
-            <img src="<?php if(types_render_field('feature-1-img', array('output'=>'raw'))){?>
-				<?php echo(types_render_field('feature-1-img', array('output'=>'raw'))); ?>
-				<?php }?>" alt="" class="img-responsive"/><br/>
-            <p>The City of Toronto's Open Data Team spans a wide range of skills, interests and experience. Despite our differences, we all have one thing in common: we see the unlimited potential of open data and the ways it can transform cities.</p>
+           <h2> <a href="<?php echo(types_render_field( 'secondary-post-1-url', array('output' =>'raw' ) )); ?>"><?php echo(types_render_field( 'secondary-post-1-title', array( ) )); ?></a></h2>
+            <img src="<?php echo(types_render_field('secondary-post-1-image', array('output'=>'raw'))); ?>" alt="" class="img-responsive"/><br/>
+            <p><?php echo(types_render_field( 'secondary-post-1-excerpt', array( ) )); ?></p>
           </div>
           <div class="col-md-4">
-           <h2> <a href="/about/tools-and-tips/">Tools &amp; Tips</a></h2>
-            <img src="<?php if(types_render_field('feature-2-img', array('output'=>'raw'))){?>
-				<?php echo(types_render_field('feature-2-img', array('output'=>'raw'))); ?>
-				<?php }?>"" class="img-responsive" alt=""/><br/>
-            <p>New to working with data? Not sure what the difference is between a CSV and a Shapefile? This short primer was designed to help beginners to Open Data learn about the basics of how to understand and interact with data sets on the Open Data Portal.</p>
+           <h2> <a href="<?php echo(types_render_field('secondary-post-2-url', array('output' =>'raw' ) )); ?>"><?php echo(types_render_field( 'secondary-post-2-title', array( ) )); ?></a></h2>
+            <img src="<?php echo(types_render_field('secondary-post-2-img', array('output'=>'raw'))); ?>" alt="" class="img-responsive"/><br/>
+            <p><?php echo(types_render_field( 'secondary-post-2-excerpt', array( ) )); ?></p>
           </div>
           <div class="col-md-4">
-            
-            <h2><a href="/torontos-open-data-initiative-2018-in-review/">2018 In Review</a></h2>
-            <img src="<?php if(types_render_field('feature-3-img', array('output'=>'raw'))){?>
-				<?php echo(types_render_field('feature-3-img', array('output'=>'raw'))); ?>
-				<?php }?>"" class="img-responsive" alt=""/>
-            <br/>
-            <p>It’s been an exciting and progressive time for Open Data at the City of Toronto. Last year, we collaborated with over 125 stakeholders to co-develop an Open Data Master Plan and 4-year roadmap.</p>
+           <h2> <a href="<?php echo(types_render_field('secondary-post-3-url', array('output' =>'raw' ) )); ?>"><?php echo(types_render_field( 'secondary-post-3-title', array( ) )); ?></a></h2>
+            <img src="<?php if(types_render_field('secondary-post-3-img', array('output'=>'raw'))){?>
+        <?php echo(types_render_field('secondary-post-3-img', array('output'=>'raw'))); ?>
+        <?php }?>" alt="" class="img-responsive"/><br/>
+            <p><?php echo(types_render_field( 'secondary-post-3-excerpt', array( ) )); ?></p>
           </div>
         </div>
       </section>
