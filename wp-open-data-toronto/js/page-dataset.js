@@ -121,7 +121,7 @@ function buildDataset(response) {
             }
             resourceLink += '?format=geojson&projection=4326';
         } else if (resource['datastore_active']){
-            format = config['formatOptions']['tabular']['default'];
+            format = config['formatOptions']['tabular']['default'].slice();
             if (resource['format'] == 'csv') {
                 format.unshift(config['formatOptions']['tabular']['extended']);
             }
