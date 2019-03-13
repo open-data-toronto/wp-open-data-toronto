@@ -55,42 +55,37 @@
 				<?php }?>
 				') !important;">
         <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.67);">
-          <h2 class="heading small">Data Stories</h2>
+          <h2 class="heading small"><?php echo(types_render_field( 'featured-post-type', array( ) )); ?></h2>
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <h3>Exploring Cleared Permits Data</h3>
-              <p>How can we use Cleared Building Permits data to learn about our city and improve service provisioning? Learn about including data preparation scripts and visualization tools to make meaning from data.</p>
-              <p><a class="btn btn-md" href="/exploring-cleared-building-permits/">Read this Data Story</a></p>
+              <h3><?php echo(types_render_field( 'featured-post-title', array( ) )); ?></h3>
+              <p><?php echo(types_render_field( 'featured-post-description', array( ) )); ?></p>
+              <p><a class="btn btn-md" href="<?php echo(types_render_field( 'featured-post-url', array('output'=>'raw') )); ?>"><?php echo(types_render_field( 'featured-post-url-title', array( ) )); ?></a></p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Pages -->
-      <section id="pages" aria-label="Featured Pages">
+      <section id="pages" aria-label="Secondary Pages">
         <div class="row">
+
           <div class="col-md-4">
-           <h2> <a href="/about/city-of-toronto-open-data-team/">About the Open Data Team</a></h2>
-            <img src="<?php if(types_render_field('feature-1-img', array('output'=>'raw'))){?>
-				<?php echo(types_render_field('feature-1-img', array('output'=>'raw'))); ?>
-				<?php }?>" alt="" class="img-responsive"/><br/>
-            <p>The City of Toronto's Open Data Team spans a wide range of skills, interests and experience. Despite our differences, we all have one thing in common: we see the unlimited potential of open data and the ways it can transform cities.</p>
+           <h2> <a href="<?php echo(types_render_field( 'secondary-post-1-url', array('output' =>'raw' ) )); ?>"><?php echo(types_render_field( 'secondary-post-1-title', array( ) )); ?></a></h2>
+            <img src="<?php echo(types_render_field('secondary-post-1-image', array('output'=>'raw'))); ?>" alt="" class="img-responsive"/><br/>
+            <p><?php echo(types_render_field( 'secondary-post-1-excerpt', array( ) )); ?></p>
           </div>
           <div class="col-md-4">
-           <h2> <a href="/about/tools-and-tips/">Tools &amp; Tips</a></h2>
-            <img src="<?php if(types_render_field('feature-2-img', array('output'=>'raw'))){?>
-				<?php echo(types_render_field('feature-2-img', array('output'=>'raw'))); ?>
-				<?php }?>"" class="img-responsive" alt=""/><br/>
-            <p>New to working with data? Not sure what the difference is between a CSV and a Shapefile? This short primer was designed to help beginners to Open Data learn about the basics of how to understand and interact with data sets on the Open Data Portal.</p>
+           <h2> <a href="<?php echo(types_render_field('secondary-post-2-url', array('output' =>'raw' ) )); ?>"><?php echo(types_render_field( 'secondary-post-2-title', array( ) )); ?></a></h2>
+            <img src="<?php echo(types_render_field('secondary-post-2-img', array('output'=>'raw'))); ?>" alt="" class="img-responsive"/><br/>
+            <p><?php echo(types_render_field( 'secondary-post-2-excerpt', array( ) )); ?></p>
           </div>
           <div class="col-md-4">
-            
-            <h2><a href="/budgetpedia-humanizing-city-budgets/">Showcase: Budgetpedia</a></h2>
-            <img src="<?php if(types_render_field('feature-3-img', array('output'=>'raw'))){?>
-				<?php echo(types_render_field('feature-3-img', array('output'=>'raw'))); ?>
-				<?php }?>"" class="img-responsive" alt=""/>
-            <br/>
-            <p>Our debut community showcase tells the story of a project that is regarded as a pioneer in Toronto's Civic Tech space, and a powerful example of how Open Data empowers citizens to participate in government decision-making; Budgetpedia.</p>
+           <h2> <a href="<?php echo(types_render_field('secondary-post-3-url', array('output' =>'raw' ) )); ?>"><?php echo(types_render_field( 'secondary-post-3-title', array( ) )); ?></a></h2>
+            <img src="<?php if(types_render_field('secondary-post-3-img', array('output'=>'raw'))){?>
+        <?php echo(types_render_field('secondary-post-3-img', array('output'=>'raw'))); ?>
+        <?php }?>" alt="" class="img-responsive"/><br/>
+            <p><?php echo(types_render_field( 'secondary-post-3-excerpt', array( ) )); ?></p>
           </div>
         </div>
       </section>

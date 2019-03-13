@@ -90,48 +90,14 @@
         <!-- Main Post Listing -->
         <div class="col-md-9">
           <section class="main-post-listing"  aria-label="Blog Posts" id="content">
-            <?php
-            $the_query = new WP_Query( array( 'posts_per_page' => 1, 'category_name' => 'featured') );
-
-            if ( $the_query->have_posts() ) :
-              while ( $the_query->have_posts() ) :
-                $the_query->the_post();
-            ?>
-
-            <!-- Section 1. Featured Story -->
-            <div class="featured-story">
-              <div class="featured-banner">
-                <h2>Featured Post</h2>
-                <img src="<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?><?php echo $url ?>" alt="" class="img-responsive img-thumbnail" alt=""/>
-              </div>
-              <div class="featured-content">
-                <a href="<?php the_permalink(); ?>">
-                  <h3><?php the_title() ;?></h3>
-                </a>
-                <div class="attributes">
-                  Posted on <?php the_date(); ?> by <?php the_author(); ?>
-                </div>
-                <div class="excerpt">
-                  <?php the_excerpt(); ?>
-                </div>
-              </div>
-            </div>
-            <?php
-              endwhile;
-            wp_reset_postdata();
-            else :
-            ?>
-            <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-            <?php endif; ?>
-            <hr>
+         
 
             <!-- News&Updates -->
             <div class="row">
-              <div class="col-md-12" aria-label="News and Updates">
-                <h2>News &amp; Updates</h2>
-                <p>What's new in open data at the City of Toronto?</p>
+              <div class="col-md-12" aria-label="Blog Posts">
+                <h2>Blog Posts</h2>
                 <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 20, 'category_name' => 'news-and-updates' ) );
+                $the_query = new WP_Query( array( 'posts_per_page' => 20 ) );
                 if ( $the_query->have_posts() ) :
                   while ( $the_query->have_posts() ) :
                     $the_query->the_post();
@@ -161,75 +127,7 @@
               </div>
             </div>
 
-            <!-- Section 2. Showcase -->
-            <div class="blog-post-list" aria-label="Data Stories">
-              <h2>Data Stories</h2>
-              <?php
-              $the_query = new WP_Query( array( 'posts_per_page' => 20, 'category_name' => 'data-stories' ) );
-              if ( $the_query->have_posts() ) :
-                while ( $the_query->have_posts() ) :
-                  $the_query->the_post();
-              ?>
-
-              <div class="single-long-post">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div>
-                  </div>
-                  <div class="col-md-8">
-                    <a href="<?php the_permalink(); ?>">
-                      <h3><?php the_title() ;?></h3>
-                    </a>
-                    <div class="attributes">
-                      <?php the_date(); ?> by <?php the_author(); ?>
-                    </div>
-                    <p><?php the_excerpt(); ?></p>
-                  </div>
-                </div>
-              </div>
-              <?php
-                endwhile;
-              wp_reset_postdata();
-              else :
-              ?>
-              <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-              <?php endif; ?>
-            </div>
-            <!-- End Section 3 -->
-
-            <!-- Showcase -->
-            <div class="row">
-              <div class="col-md-12" aria-label="Showcase of Community Projects">
-                <h2>Showcase</h2>
-                <p>As a bustling technology hub, Toronto's tech community steps up to build innovative apps and products using City of Toronto Open Data.</p>
-                <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 20, 'category_name' => 'showcase' ) );
-                if ( $the_query->have_posts() ) :
-                  while ( $the_query->have_posts() ) :
-                    $the_query->the_post();
-                ?>
-
-                <div class="single-long-post">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div>
-                    </div>
-                    <div class="col-md-8">
-                      <a href="<?php the_permalink(); ?>">
-                        <h3><?php the_title() ;?></h3>
-                      </a>
-                      <div class="attributes">
-                        <?php the_date(); ?> by <?php the_author(); ?>
-                      </div>
-                      <p><?php the_excerpt(); ?></p>
-                    </div>
-                  </div>
-                </div>
-                <?php
-                  endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+            
               </div>
             </div>
 

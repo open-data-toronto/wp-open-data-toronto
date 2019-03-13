@@ -2,8 +2,7 @@
 Theme Name:      WP Open Data Toronto
 Description:     Theme created to integrate CKAN with WP
 Author:          Sidra Mahmood, Yizhao Tan, Carlos Hernandez
-Template:        wp-bootstrap-starter
-Version:         1.2.0
+Template:        wp-open-data-toronto
 -------------------------------------------------------------- */
 
 /* Index
@@ -32,43 +31,78 @@ Version:         1.2.0
 ul.newsfeed li a {
     display: block;
 }
+
+/** Focus States **/
+ #content a:focus{
+    text-decoration: underline;
+    border: 0;
+}
+ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
+    background: #FFEB9C;
+}
+/* Tables */
+ .table a:focus{
+    background: abdbff;
+}
+
 ul.list-group li a:focus {
     margin-bottom: 2px !important;
 }
-a:focus{
-    outline-style: solid;
-    outline-color: #222222;
-    outline-width: 2px;
-    display: inline-block;
-    padding: 4px 2px;
-}
-.inline-link {
-    padding: 0px !important;
-}
+
 .list-group-item-action:focus{
     margin-bottom: 2px !important;
 }
 .form-control:focus {
     color: #464a4c;
     background-color: #fff;
-    outline: 0;
-    border: 2px solid #1c64a0;
+    outline: thin dotted #222222;
 }
 input#search:focus{
-    border: 2px solid #000000;
 }
 a.btn:focus{
     color: #ffffff;
     background: #165788;
-    border: 2px solid #ffffff;
+	outline-width: 2px;
+    outline-offset: 2px
 }
-a.btn{
-    text-decoration:none !important;
-    padding: 9px 12px 12px 12px;
+a:focus{
+    display: inline-block;
+	outline-width: 2px;
+    outline-offset: 2px
+}
+
+main.site-content a.btn:focus {
+    background: #222222 !important;
+}
+/* Buttons */
+ button:focus, a.btn:focus{
+    background: #222222 !important;
+}
+ #super-header a:focus{
+	outline-width: 2px;
+    outline-offset: 2px;
+}
+.sr-only-focusable:focus {
+    display: block;
+    margin: 0 0 20px 0 !important;
+    padding: 9px;
+    background: #fff283 !important;
+    outline-width: 2px;
+    outline-offset: 2px
 }
 .btn-primary.focus, .btn-primary:focus {
     padding: 9px 16px;
     background-color: white;
+}
+
+/** End Focus States **/
+
+.inline-link {
+    padding: 0px !important;
+}
+a.btn{
+    text-decoration:none !important;
+    padding: 9px 12px 12px 12px;
 }
 /* Increase contrast for error */
 #search-error{color:#A72925 !important}
@@ -98,19 +132,6 @@ figure.wp-caption {
 }
 section{max-width: 100%;}
 /* COT Header */
- #super-header a:focus{
-    outline-style: solid;
-    outline-color: #FFFFFF;
-    outline-width: 2px;
-}
-.sr-only-focusable:focus {
-    display: block;
-    margin: 0 0 20px 0 !important;
-    padding: 9px;
-    background: #fff283 !important;
-    border: 2px solid #b7a614;
-    outline: 0;
-}
 .card-body.accordion__body {
     border: 1px solid #ccc;
     padding: 20px;
@@ -119,25 +140,6 @@ form.dataset-filter{
     width: 100%;
 }
 /* Text */
- #content a:focus{
-    text-decoration: underline;
-     border: 0;
-}
-main.site-content a.btn:focus {
-    background: #222222 !important;
-}
-/* Buttons */
- button:focus, a.btn:focus{
-    background: #222222 !important;
-}
-/* Breadcrumbs and Sidebar */
- .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
-    background: #FFEB9C;
-}
-/* Tables */
- .table a:focus{
-    background: abdbff;
-}
 /* Migration */
  header#masthead{
     background: 0;
@@ -454,9 +456,13 @@ main.site-content a:link{
      padding: 0 !important;
 }
  .navbar-light .navbar-toggler {
-     color: rgb(0, 0, 0) !important;
+     color: rgb(0, 0, 0);
      border: 1px solid #cccccc !important;
 }
+.navbar-toggler:focus{
+        background: #aedcff !important;
+    }
+
  .profile-photo img {
      margin: 15px 0;
      max-width: 100%;
@@ -469,13 +475,13 @@ main.site-content a:link{
      width: 50%;
 }
 /** 5. Footer **/
- #footer {
-     margin-top: 2rem;
-     padding-top: 2rem;
-     padding-bottom: 2rem;
-     text-align: center;
-     color: #ffffff;
-     background-color: #165788;
+#footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: #ffffff;
+    background-color: #165788;
+    height: 70px;
+    padding-top: 8px;
 }
  nav#footer-nav img {
      display: inline-block;
@@ -537,6 +543,19 @@ main.site-content a:link{
  .hero .jumbotron{
      padding: 8rem 2rem 10rem 2rem;
 }
+.hero .jumbotron .form-inline .input-group {
+    margin: 0 auto;
+}
+.hero .jumbotron:after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0000008f;
+    top: 0;
+    content: '';
+    left: 0;
+}
  .jumbotron .heading{
      padding: 15px 0;
      font-weight: lighter
@@ -566,13 +585,14 @@ main.site-content a:link{
  ul.newsfeed li:last-child{
      border-bottom: none;
 }
- #super-header {
-     background: #165788;
-     padding: 6px 0;
+#super-header {
+    background: #165788;
+    padding: 8px 0 4px 0;
+    height: 58px;
+    margin: 0;
 }
- #super-header img {
-     width: 72px;
-     height: 22px;
+#super-header img {
+    width: 120px;
 }
  section#about {
      padding: 50px 0;
@@ -1221,11 +1241,7 @@ input#search {
      height: 120px;
      background-size: 100%;
      background-position: 50% 50%;
-     transition: all .3s ease-in-out;
      border: 1px solid #ddd;
-}
- .showcase-thumbnail:hover{
-     background-size: 110%;
 }
  .page-template-blog-template h4{
      font-size: 20px;
@@ -1240,6 +1256,9 @@ input#search {
      margin: 0 0 25px 0;
      border-bottom: 1px solid #e8e8e8;
      padding: 0 0 28px 0;
+}
+.single-long-post:last-child {
+border: 0;
 }
  .single-long-post a p{
      color: #222;
@@ -1281,6 +1300,7 @@ input#search {
  .blog-sidebar {
      padding: 0;
 }
+
  .page-template-blog-template h3 {
      font-size: 18px;
      margin: 0 0 12px 0;
@@ -1436,6 +1456,19 @@ input#search {
          background: #fbfbfb;
          font-weight: 500;
     }
+     .blog-sidebar {
+     display: none;
+}
+
+    .background h1 {
+    color: #fff;
+    display: block;
+    position: static;
+    font-size: 31px;
+    font-weight: 300;
+    text-align: center;
+    padding: 24px;
+}
 }
 @media (max-width:1700px){
      #toc_container{
@@ -1443,6 +1476,27 @@ input#search {
     }
 }
 @media (max-width: 767px) {
+    #super-header {
+    height: 49px;
+    }
+    #super-header img {
+    width: 84px;
+    height: auto;
+}
+#data-stories h3 {
+    font-size: 26px;
+}
+.complete-post-list p, .complete-post-list ul, .complete-post-list ol {
+    padding-left: 0;
+    padding-right: 0;
+}
+tr td span.fa.fa-download {
+    display: none;
+}
+footer#footer {
+    height: 49px;
+    padding: 0;
+}
      .hero .jumbotron .heading {
          font-size: 24px !important;
     }
@@ -1453,8 +1507,8 @@ input#search {
          padding: 0 !important;
     }
      p{
-         font-size: 15px !important;
-         padding: 0 15px;
+         font-size: 14px !important;
+         padding: 0px;
     }
      section#about h2{
          margin-top: 40px;
