@@ -111,6 +111,8 @@ function buildDataset(response) {
             if (resource['datastore_active'] && resource['format'] == 'geojson') {
                 format = generateDropdowns('format', config['formatOptions']['geospatial']);
                 projection = generateDropdowns('projection', config['projectionOptions']['dropdown']);
+
+                resourceLink += '?format=geojson&projection=4326';
             } else {
                 for (var f in config['projectionOptions']['epsg']) {
                     if (resource['name'].toUpperCase().indexOf(config['projectionOptions']['epsg'][f]) != -1) {
@@ -119,7 +121,6 @@ function buildDataset(response) {
                     }
                 }
             }
-            resourceLink += '?format=geojson&projection=4326';
         } else if (resource['datastore_active']){
             format = config['formatOptions']['tabular']['default'].slice();
             if (resource['format'] == 'csv') {
