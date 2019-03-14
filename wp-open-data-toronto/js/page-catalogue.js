@@ -31,9 +31,14 @@ function buildCatalogue(response) {
         $('#results-count').html('No datasets found for "' + state['filters']['search'] + '"');
         $('.table-list').append('<div class="row">' +
                                   '<div class="col-md-12 not-found">' +
-                                    '<p>Please try again or <a href="mailto:opendata@toronto.ca?' +
-                                                                'subject=Open Data Portal - Request for Data' +'&' +
-                                                                'body=Give us some context first, such as what do you need? How can we help?"</a>let us know what data you want to see in the catalogue</p>' +
+                                    '<p>Please try again or ' +
+                                      '<a href="mailto:opendata@toronto.ca?' +
+                                        'subject=Open Data Portal - Request for Data' +'&' +
+                                        'body=Give us some context first, such as what do you need? How can we help?\n' +
+                                        'Message:\n\n' +
+                                        'Description of dataset:\n' +
+                                        'Intended use:'+
+                                      '"</a>let us know what data you want to see in the catalogue</p>' +
                                   '</div>' +
                                 '</div>');
         return;
