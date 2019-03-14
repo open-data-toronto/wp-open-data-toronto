@@ -85,6 +85,10 @@ function isMobile() {
 }
 
 function truncateString(original, size, clean, padding) {
+    if (original == null) {
+        return '';
+    }
+
     var tokens = (original + '').split(' '),
         shorten;
 
