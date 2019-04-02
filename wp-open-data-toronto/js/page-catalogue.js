@@ -194,7 +194,7 @@ function buildSidebar(response) {
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').toggleClass('hidden');
             sidebarEle.find('li.filter-value:nth-child(n+' + (config['filterSize']) + ')').attr('aria-hidden', 'true');
 
-            showMoreButton.html('<a href="#" role="button">Show ' + (numFilters - config['filterSize']) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
+            showMoreButton.html('<a href="#" role="button">Show ' + (numFilters - config['filterSize'] + 1) + ' more ' + $(sidebarEle).parents('.card').find('.card-header').text().trim().toLowerCase() + 's' + '</a>');
             showMoreButton.show();
         } else {
             showMoreButton.hide();
@@ -288,7 +288,7 @@ function buildStaticUI() {
         $(this).siblings('li:not(.hidden)').attr('aria-hidden', 'false');
 
         var filterTerm = ' ' + $(this).parents('.card').find('.card-header').text().trim().toLowerCase() + 's';
-        var labelText = $(this).siblings('li.hidden').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize']) + ' more ' + filterTerm : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
+        var labelText = $(this).siblings('li.hidden').length > 0 ? 'Show ' + ($(this).siblings('li').length - config['filterSize'] + 1) + ' more ' + filterTerm : 'Collapse<span class="sr-only">  expanded list of' + filterTerm + '</span>';
         $(this).find('a').html(labelText);
     }).on('keydown', function(evt) {
         if (evt.which == 9 && $(this).data('focused') == 'true') {
