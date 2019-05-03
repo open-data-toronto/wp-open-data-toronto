@@ -15,8 +15,7 @@ if (ckan.indexOf('toronto.ca') == -1) {
 }
 
 var config = {
-    'ckanAPI': window.location.protocol + '//' + ckan + '/api/3/action/',
-    'ckanURL': window.location.protocol + '//' + ckan
+"ckanAPI": window.location.protocol + "//" + ckan + "/api/3/action/", "ckanURL": window.location.protocol + "//" + ckan
 }
 
 function getCKAN(endpoint, data, callback, error) {
