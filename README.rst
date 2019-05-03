@@ -40,11 +40,3 @@ To install wp-open-data-toronto:
    Note that the Page Name can be modified to be more descriptive if needed, but the URLs must be /dataset and /catalogue.
 
 5. Enable the WP Open Data Toronto theme in Appearances
-
-------------
-Contribution
-------------
-
-------------
-License
-------------
