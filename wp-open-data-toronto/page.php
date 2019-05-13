@@ -1,35 +1,4 @@
 <!-- Plain Page Template -->
-
-<!-- Hide Sidebar if User Picks Full Screen Layout -->
-<?php if ( types_render_field( 'hide-sidebar-page', array( 'value'=>1 ) ) ) : ?>
-<!-- Conditional Display for Sidebar on page.php // Do not remove -->
-<style>
-/** Device Specific Styles **/
-.hide-full-length {
-    display: none !important;
-}
-
-.show-full-length {
-    width: 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-}
-
-#toc_container {
-    background: #ffffff;
-    border: 1px solid #aaa;
-    padding: 10px;
-    margin-bottom: 1em;
-    width: auto;
-    display: table;
-    font-size: 95%;
-    position: fixed;
-    left: 0;
-    top: 40vh;
-    margin-left: 20px;
-}
-</style>
-<?php endif; ?>
 <?php get_header(); ?>
 
 
