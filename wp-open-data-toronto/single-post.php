@@ -1,35 +1,6 @@
 
 <?php get_header(); ?>
 
-<!-- Hide sidebar in full-width layout // Do not remove -->
-<?php if( types_render_field( 'hide-sidebar', array( 'value'=>1 ) ) ) : ?>
-<style>
-.hide-full-length {
-    display: none !important;
-}
-
-.show-full-length {
-    width: 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-}
-
-#toc_container {
-    background: #ffffff;
-    border: 1px solid #aaa;
-    padding: 10px;
-    margin-bottom: 1em;
-    width: auto;
-    display: table;
-    font-size: 95%;
-    position: fixed;
-    left: 0;
-    top: 40vh;
-    margin-left: 20px;
-}
-</style>
-<?php endif; ?>
-
   <section class="content-area" aria-label="Blog Post">
     <div class="container">
       <div class="row">
@@ -37,7 +8,7 @@
           <!-- Breadcrumbs -->
           <nav class="breadcrumb" aria-label="breadcrumbs">
             <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
-            <a class="breadcrumb-item" href="<?php echo site_url(); ?>/blog/">Open Data Blog</a>
+            <a class="breadcrumb-item" href="<?php echo site_url(); ?>/blog/">Knowledge Centre</a>
             <a class="breadcrumb-item"><?php the_title(); ?></a>
           </nav>
           <!-- End breadcrumbs -->
@@ -59,7 +30,7 @@
           <!-- Sidebar Content -->
           <div class="blog-sidebar" role="complementary">
             <h2 class="sr-only">Explore Open Data Blog</h2>
-            <h3>Latest posts</h3>
+            <h3>Latest Posts</h3>
             <ul class="post-list">
               <?php
               $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
@@ -88,7 +59,7 @@
             </ul>
             <br/>
 
-            <h3>Complexity</h3>
+            <h3>Tags</h3>
             <ul class="post-list">
               <?php
               $tags = get_tags();
