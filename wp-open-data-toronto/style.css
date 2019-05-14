@@ -1476,6 +1476,11 @@ border: 0;
     }
 }
 @media (max-width: 767px) {
+table#table-resources{width: 100%; display: block;}
+table#table-resources td{width: 100%; display: block;text-align: center;padding:9px 22px;}
+table#table-resources th{display: none;}
+table#table-resources tbody{border: 1px solid #ccc;}
+
     #super-header {
     height: 49px;
     }
