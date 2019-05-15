@@ -95,6 +95,10 @@ main.site-content a.btn:focus {
     background-color: white;
 }
 
+.single-post section.content-area h3 {
+    margin: 0 0 20px 0;
+}
+
 /** End Focus States **/
 
 .inline-link {
