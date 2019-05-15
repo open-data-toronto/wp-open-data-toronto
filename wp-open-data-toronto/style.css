@@ -120,7 +120,7 @@ figure.wp-caption {
 }
 .accordion{display:block;width:100%;max-width:100%;}
             .accordion .card{max-width:100%;}
-            .accordion .card .btn{text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
+            .accordion .card .btn{width: max-content; text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
             .accordion .card .btn:hover{background:#000;}
             .accordion .card .btn .fa{float: none; text-align: right;}
             .card-header{padding: 0;}
