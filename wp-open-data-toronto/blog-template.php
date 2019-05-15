@@ -58,7 +58,7 @@
             </ul>
             <br/>
 
-            <h3>Tags</h3>
+            <h3>Civic Issues</h3>
             <ul class="post-list">
               <?php
               $tags = get_tags();
@@ -110,7 +110,7 @@
                         <h3><?php the_title() ;?></h3>
                       </a>
                       <div class="attributes">
-                        Published on <?php the_date(); ?> by <?php the_author(); ?>
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
                       </div>
                       <p><?php the_excerpt(); ?></p>
                     </div>
