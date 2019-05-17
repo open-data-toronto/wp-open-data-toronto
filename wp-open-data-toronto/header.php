@@ -13,6 +13,13 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url(); ?>/wp-content/themes/wp-open-data-toronto/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo site_url(); ?>/wp-content/themes/wp-open-data-toronto/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo site_url(); ?>/wp-content/themes/wp-open-data-toronto/img/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- Open Graph Attributes -->
     <meta property="og:title" content="<?php the_title(); ?>" />
 	<meta property="og:url" content="<?php the_permalink(); ?>" />
