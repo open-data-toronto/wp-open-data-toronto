@@ -11,7 +11,7 @@
           </div>
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <form class="form-inline" role="search">
+              <form id="dataset-search" class="form-inline" role="search">
                 <div class="input-group">
                   <label for="search" class="sr-only">Search Dataset Catalogue</label>
                   <input type="text" class="form-control" name="search" id="search" placeholder="Search datasets"/>
