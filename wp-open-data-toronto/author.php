@@ -31,13 +31,6 @@
           <?php $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author)); ?>
 
           <!-- Author Box -->
-          <h2>About the Author</h2>
-          <div class="profile-photo">
-            <?php echo(types_render_usermeta_field( "profile-photo", array( "alt" => "Author image", "width" => "300", "height" => "200", "proportional" => "true" ) )); ?>
-          </div>
-          <p class="biography"><?php echo $curauth->user_description; ?></p>
-
-          <hr>
 
           <h2>Latest posts</h2>
           <ul class="post-list">

@@ -25,66 +25,63 @@
       </div>
 
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 hide-full-length">
           <!-- Sidebar Content -->
-          <section class="single-sidebar" aria-label="Blog Content Sidebar">
-            <div class="blog-sidebar">
-              <h2>Explore posts</h2>
-              <h3>Latest posts</h3>
-              <ul class="post-list">
-                <?php
-                $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
-                while ( $query2->have_posts() ) :
-                  $query2->the_post();
-                ?>
+          <div class="blog-sidebar" role="complementary">
+            <h2 class="sr-only">Explore Open Data Blog</h2>
+            <h3>Latest Posts</h3>
+            <ul class="post-list">
+              <?php
+              $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
+              while ( $query2->have_posts() ) :
+                $query2->the_post(); ?>
                 <li>
                   <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                 </li>
-                <?php
-                endwhile;
-                wp_reset_postdata();
-                ?>
-               </ul>
-              <br/>
+              <?php
+              endwhile;
 
-              <h3>Categories</h3>
-              <ul class="post-list">
-                <?php
-                wp_list_categories([
-                  'orderby'    => 'name',
-                  'show_count' => true,
-                  'exclude'    => array( 10 ),
-                  'title_li'    => ''
-                ]);
-                ?>
-               </ul>
-              <br/>
+              wp_reset_postdata(); ?>
+            </ul>
+            <br/>
 
-              <h3>Complexity</h3>
-              <ul class="post-list">
-                <?php
-                $tags = get_tags();
-                $html = '';
+            <h3>Categories</h3>
+            <ul class="post-list">
+              <?php
+              wp_list_categories([
+                'orderby'    => 'name',
+                'show_count' => true,
+                'exclude'    => array( 10 ),
+                'title_li'   => ''
+              ]);
+              ?>
+            </ul>
+            <br/>
 
-                foreach ( $tags as $tag ) :
-                  $tag_link = get_tag_link( $tag->term_id );
-                  $html .= "<li><a href='{$tag_link}' aria-label='{$tag->name} Tag' class='{$tag->slug}'>";
-                  $html .= "{$tag->name}</a></li>";
-                endforeach;
+            <h3>Civic Issues</h3>
+            <ul class="post-list">
+              <?php
+              $tags = get_tags();
+              $html = '';
+              foreach ( $tags as $tag ) :
+                $tag_link = get_tag_link( $tag->term_id );
 
-                $html .= '';
-                echo $html;
-                ?>
-              </ul>
-              <br/>
+                $html .= "<li><a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
+                $html .= "{$tag->name}</a></li>";
+              endforeach;
 
-              <h3>Author</h3>
-              <ul class="post-list">
-                <!-- List authors -->
-                <?php wp_list_authors(); ?>
-              </ul>
-            </div>
-          </section>
+              $html .= '';
+              echo $html;
+              ?>
+            </ul>
+            <br/>
+
+            <h3>Author</h3>
+            <ul class="post-list">
+              <!-- List authors -->
+              <?php wp_list_authors(); ?>
+            </ul>
+          </div>
         </div>
 
         <!-- Main Post Listing -->
@@ -95,7 +92,7 @@
             <!-- News&Updates -->
             <div class="row">
               <div class="col-md-12" aria-label="Blog Posts">
-                <h2>Blog Posts</h2>
+                <h2>Articles</h2>
                 <?php
                 $the_query = new WP_Query( array( 'posts_per_page' => 20 ) );
                 if ( $the_query->have_posts() ) :
@@ -113,7 +110,7 @@
                         <h3><?php the_title() ;?></h3>
                       </a>
                       <div class="attributes">
-                        <?php the_date(); ?> by <?php the_author(); ?>
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
                       </div>
                       <p><?php the_excerpt(); ?></p>
                     </div>

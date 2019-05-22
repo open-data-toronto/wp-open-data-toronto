@@ -95,6 +95,10 @@ main.site-content a.btn:focus {
     background-color: white;
 }
 
+.single-post section.content-area h3 {
+    margin: 0 0 20px 0;
+}
+
 /** End Focus States **/
 
 .inline-link {
@@ -124,6 +128,11 @@ figure.wp-caption {
             .accordion .card .btn:hover{background:#000;}
             .accordion .card .btn .fa{float: none; text-align: right;}
             .card-header{padding: 0;}
+
+           table#table-resources .btn{
+            width: max-content; 
+           }
+
 .accordion .card .btn .fa {
     float: right;
     padding-left: 11px;
@@ -1476,6 +1485,11 @@ border: 0;
     }
 }
 @media (max-width: 767px) {
+table#table-resources{width: 100%; display: block;}
+table#table-resources td{width: 100%; display: block;text-align: center;padding:9px 22px;}
+table#table-resources th{display: none;}
+table#table-resources tbody{border: 1px solid #ccc;}
+
     #super-header {
     height: 49px;
     }
