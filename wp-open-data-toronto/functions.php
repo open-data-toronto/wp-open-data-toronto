@@ -38,6 +38,7 @@ function theme_enqueue_scripts() {
 
     wp_enqueue_script( 'ckan_base', $script_path . 'utils.js', array('jquery') );
     if (in_array($page_name, ['homepage.php', 'page-catalogue.php', 'page-dataset.php'])):
+        wp_enqueue_script( 'ckan_config', $script_path . 'config.js')
         wp_enqueue_script( 'ckan_page', $script_path . str_replace('php', 'js', $page_name), array('ckan_base') );
     endif;
 
