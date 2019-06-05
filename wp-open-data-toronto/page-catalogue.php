@@ -104,12 +104,12 @@
                     <label for="sort-results-by" class="col-sm-5 text-right col-form-label">Order by:</label>
                     <div class="col-sm-7">
                       <select class="form-control" id="sort-results-by" aria-label="Sorting method for catalogue search results">
-                        <option value="metadata_modified desc">Last Updated</option>
+                        <option value="last_refreshed desc">Last Refreshed</option>
                         <option value="score desc">Relevance</option>
                         <option value="name asc">Name</option>
                       </select>
                     </div>
-                    <div role="alert" class="sr-only" id="current-sort">Results currently ordered by <span>Last Updated</span></div>
+                    <div role="alert" class="sr-only" id="current-sort">Results currently ordered by <span>Last Refreshed</span></div>
                   </div>
                 </form>
               </div>
