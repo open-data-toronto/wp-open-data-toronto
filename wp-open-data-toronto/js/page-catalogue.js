@@ -53,32 +53,58 @@ function buildCatalogue(response) {
     }
 
     for (var i = 0; i < data['results'].length; i++) {
-        var row = data['results'][i];
+        var row = data['results'][i],
+            formatLabels = '',
+            topicLabels = '',
+            specialLabel = '';
+
+        if ('formats' in row && row['formats'].length > 0) {
+            formatLabels = '<div class="col-md-4 text-left attributes">' +
+                             '<div class="dataset-meta-label">Formats</div><span>' + row['formats'].join(' | ') + '</span>' +
+                           '</div>';
+        }
+
+        if ('formats' in row && row['formats'].length > 0) {
+            topicLabels = '<div class="col-md-8 text-left attributes">' +
+                            '<div class="dataset-meta-label">Topics</div><span>' + row['topics'].split(',').join(' | ') + '</span>' +
+                          '</div>';
+        }
+
+        if (row['is_retired']) {
+          specialLabel = '<div class="col-md-2">' +
+                           '<div class="status-label">Retired</div>' +
+                         '</div>';
+        } else if (getDaysSince(row['metadata_created']) <= 30) {
+          specialLabel = '<div class="col-md-2">' +
+                           '<div class="status-label">New</div>' +
+                         '</div>';
+        }
 
         $('.table-list').append(
             '<div class="dataset card" id ="' + row['id'] + '">' +
               '<div class="row">' +
-                '<div class="col-md-9">' +
+                '<div class="col-md-12 row">' +
                   '<div class="col-md-12">' +
-                    '<h3><a href="/dataset/' + row['name'] + '/">' + row['title'] + '</a></h3>' +
-                    '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
+                    '<h3 class="col-md-10"><a href="/dataset/' + row['name'] + '/">' + row['title'] + '</a></h3>' +
+                    specialLabel +
+                    '<div class="col-md-12">' +
+                      '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
+                    '</div>' +
                   '</div>' +
                 '</div>' +
-                '<div class="col-md-3 text-left attributes">' +
+                '<div class="col-md-4 text-left attributes">' +
                   '<div class="dataset-meta-label">Last Refreshed</div><span>' + getFullDate(row['last_refreshed'].split('-')) + '</span>' +
+                '</div>' +
+                '<div class="col-md-4 text-left attributes">' +
                   '<div class="dataset-meta-label">Publisher</div><span>' + row['owner_division'] + '</span>' +
+                '</div>' +
+                '<div class="col-md-4 text-left attributes">' +
                   '<div class="dataset-meta-label">Type</div><span>' + row['dataset_category'] + '</span>' +
                 '</div>' +
+                formatLabels +
+                topicLabels
               '</div>' +
             '</div>');
-
-        if ('formats' in row && row['formats'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Formats</div><span>' + row['formats'].join(' | ') + '</span>');
-        }
-
-        if ('topics' in row && row['topics'].length > 0) {
-            $('#' + row['id'] + ' .attributes').append('<div class="dataset-meta-label">Topics</div><span>' + row['topics'].split(',').join(' | ') + '</span>');
-        }
     }
 
     if (data['count'] > config['datasetsPerPage']) {

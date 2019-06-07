@@ -130,7 +130,7 @@ figure.wp-caption {
             .card-header{padding: 0;}
 
            table#table-resources .btn{
-            width: max-content; 
+            width: max-content;
            }
 
 .accordion .card .btn .fa {
@@ -1596,3 +1596,8 @@ footer#footer {
 #dataset-error-subtext {
     font-size: 52px;
 }
+
+.attributes .dataset-meta-label{margin-top: 10px}
+p.dataset-excerpt{border-bottom: 1px solid #cccccc; padding: 12px 0 20px 0 !important}
+.dataset-card h3{display: block; margin: 0 0 12px 0}
+.status-label{float:right; text-align: center; padding: 4px 12px; background: #145788; display: block; color:#fff; border-radius:32px; font-size: 12px; font-weight: bold; width: auto}

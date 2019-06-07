@@ -21,8 +21,12 @@ function getFullDate(date) {
     return month + ' ' + day + ', ' + year;
 }
 
+function getDaysSince(date) {
+    return days = Math.round((Date.now() - new Date(date).getTime())/(24*60*60*1000));
+}
+
 function getTimeSince(date) {
-    var days = Math.round((Date.now() - new Date(date).getTime())/(24*60*60*1000));
+    var days = getDaysSince(date);
 
     if (days <= 1) {
         var timeSince = days == 0 ? 'today' : 'yesterday';
