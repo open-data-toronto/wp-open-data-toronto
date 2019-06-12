@@ -1,7 +1,7 @@
 $.extend(config, {
     'isInitializing': true,
     'formatOptions': {
-        'geospatial': [['geojson', 'GeoJSON'], ['csv', 'CSV'], ['shp', 'Shapefile']], // First element in CKAN format (converted to lowerCase), second is displayed in WP
+        'geospatial': [['geojson', 'GeoJSON'], ['csv', 'CSV'], ['gpkg', 'GeoPackage'], ['shp', 'Shapefile']], // First element in CKAN format (converted to lowerCase), second is displayed in WP
         'tabular': {
             'default': [['json', 'JSON'], ['xml', 'XML']],
             'extended': ['csv', 'CSV']
