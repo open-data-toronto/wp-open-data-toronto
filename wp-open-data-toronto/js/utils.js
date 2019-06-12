@@ -1,23 +1,5 @@
 var $ = jQuery.noConflict();
 
-// TODO: Define these with ENVIRONMENT_VARIABLES using NODE (or something)
-
-if (window.location.host.indexOf('intra') !== -1) {
-    var envName = window.location.host.split('.').length >= 4 ? window.location.host.split('.')[2].split('-')[0] : 'dev',
-        envNum = (window.location.host.match(/\d/g) != null) ? parseInt(window.location.host.match(/\d/g).join('')) : 1,
-        ckan = 'ckanadmin' + envNum + '.intra.' + envName + '-toronto.ca';
-} else {
-    var ckan = window.location.host.replace('portal', 'ckan');
-}
-
-if (ckan.indexOf('toronto.ca') == -1) {
-    ckan = 'ckan0.cf.opendata.inter.sandbox-toronto.ca';
-}
-
-var config = {
-"ckanAPI": window.location.protocol + "//" + ckan + "/api/3/action/", "ckanURL": window.location.protocol + "//" + ckan
-}
-
 function getCKAN(endpoint, data, callback, error) {
     $.ajax({
         dataType: 'json',
@@ -39,8 +21,12 @@ function getFullDate(date) {
     return month + ' ' + day + ', ' + year;
 }
 
+function getDaysSince(date) {
+    return days = Math.round((Date.now() - new Date(date).getTime())/(24*60*60*1000));
+}
+
 function getTimeSince(date) {
-    var days = Math.round((Date.now() - new Date(date).getTime())/(24*60*60*1000));
+    var days = getDaysSince(date);
 
     if (days <= 1) {
         var timeSince = days == 0 ? 'today' : 'yesterday';

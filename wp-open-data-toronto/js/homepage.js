@@ -22,6 +22,8 @@ function init() {
 
     $('#dataset-search').on('submit', function(evt) {
         evt.preventDefault();
-        window.location.href = '../catalogue?search=' + encodeURIComponent($('#search').val());
+
+        var term = encodeURIComponent($('#search').val());
+        window.location.href = '../catalogue?search=' + term + (term.length > 0 ? '&sort=score%20desc' : '');
     });
 }
