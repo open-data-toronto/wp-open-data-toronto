@@ -2,7 +2,7 @@ var state = history.state || {
     'filters': {},
     'page': 0,
     'size': 0,
-    'sort': 'metadata_modified desc'
+    'sort': 'last_refreshed desc'
 };
 
 $.extend(config, {
@@ -60,7 +60,7 @@ function buildCatalogue(response) {
 
         if (row['formats'] && row['formats'].length > 0) {
             formatLabels = '<div class="col-md-4 text-left attributes">' +
-                             '<div class="dataset-meta-label">Formats</div><span>' + row['formats'].join(' | ') + '</span>' +
+                             '<div class="dataset-meta-label">Formats</div><span>' + row['formats'].split(',').join(' | ') + '</span>' +
                            '</div>';
         }
 
