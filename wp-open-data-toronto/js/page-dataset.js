@@ -28,7 +28,7 @@ function buildDataset(response) {
     data['is_geospatial'] = false;
 
     for (var i in data['resources']) {
-        if (data['resources'][i]['is_preview'] == 'true' && $.isEmptyObject(data['preview_resource'])) {
+        if (data['resources'][i]['is_preview'] && $.isEmptyObject(data['preview_resource'])) {
             data['preview_resource'] = data['resources'][i];
         }
 
