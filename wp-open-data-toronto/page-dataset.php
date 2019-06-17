@@ -70,7 +70,6 @@
               <div class="row">
                 <div class="col-md-12">
                   <h3>About <span data-field="title"></span></h3>
-                  <br/>
                   <div data-field="notes"></div>
                   <h3>Collection Method</h3>
                   <p><div data-field="collection_method"></div></p>
