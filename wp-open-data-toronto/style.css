@@ -489,8 +489,10 @@ main.site-content a:link{
     text-align: center;
     color: #ffffff;
     background-color: #165788;
-    height: 70px;
-    padding-top: 8px;
+    height: 80px;
+}
+footer#footer p {
+    padding-top: 28px;
 }
  nav#footer-nav img {
      display: inline-block;
@@ -596,12 +598,12 @@ main.site-content a:link{
 }
 #super-header {
     background: #165788;
-    padding: 8px 0 4px 0;
-    height: 58px;
+    height: 80px;
     margin: 0;
 }
 #super-header img {
-    width: 120px;
+    width: 160px;
+    margin-top: 13px;
 }
  section#about {
      padding: 50px 0;
@@ -1087,6 +1089,9 @@ input#search {
  #description-dataset h4{
      font-weight: 400;
      font-size: 22px;
+}
+#description-dataset h3 {
+    margin: 0 0 12px 0;
 }
  #dataset-preview, #explore-dataset, #download-datset{
      margin: 0 0 40px 0;
