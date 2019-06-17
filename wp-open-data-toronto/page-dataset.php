@@ -69,13 +69,13 @@
             <div id="description-dataset">
               <div class="row">
                 <div class="col-md-12">
-                  <div>About <span data-field="title"></span></div>
+                  <h3>About <span data-field="title"></span></h3>
                   <br/>
                   <div data-field="notes"></div>
                   <h3>Collection Method</h3>
-                  <div data-field="collection_method"></div>
+                  <p><div data-field="collection_method"></div></p>
                   <h3>Limitations</h3>
-                  <div data-field="limitations"></div>
+                  <p> <div data-field="limitations"></div></p>
                 </div>
               </div>
 

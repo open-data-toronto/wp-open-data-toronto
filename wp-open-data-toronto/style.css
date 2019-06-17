@@ -1090,6 +1090,9 @@ input#search {
      font-weight: 400;
      font-size: 22px;
 }
+#description-dataset h3 {
+    margin: 0 0 12px 0;
+}
  #dataset-preview, #explore-dataset, #download-datset{
      margin: 0 0 40px 0;
 }
