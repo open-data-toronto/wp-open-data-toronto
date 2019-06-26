@@ -37,7 +37,7 @@
                 </div>
                 <dl>
                   <dt>Last refreshed<span class="sr-only">: </span></dt>
-                  <dd data-field="metadata_modified"></dd>
+                  <dd data-field="last_refreshed"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
                   <dd data-field="published_date"></dd>
                   <dt>Refreshed<span class="sr-only">: </span></dt>
