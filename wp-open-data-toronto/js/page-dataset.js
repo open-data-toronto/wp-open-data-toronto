@@ -70,9 +70,11 @@ function buildDataset(response) {
                     $(this).html(data[field] + ($(this).is('title') ? ' - City of Toronto Open Data Portal' : ''));
                     break;
                 case 'metadata_modified':
-                case 'published_date':
+                case 'last_refreshed':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
                     break;
+                case 'limitation':
+                case 'collection_method':
                 case 'notes':
                     var converter = new showdown.Converter();
                     $(this).html(converter.makeHtml(data[field]));
