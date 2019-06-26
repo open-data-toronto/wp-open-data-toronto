@@ -10,7 +10,7 @@
           <nav class="breadcrumb" aria-label="breadcrumbs">
             <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal Home</a>
             <a class="breadcrumb-item" href="<?php echo site_url(); ?>/catalogue/">Open Data Catalogue</a>
-            <a class="breadcrumb-item"><?php the_title(); ?></a>
+            <a class="breadcrumb-item" data-field="title"><?php the_title(); ?></a>
           </nav>
         </div>
       </div>
@@ -36,8 +36,8 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
-                  <dt>Last updated<span class="sr-only">: </span></dt>
-                  <dd data-field="metadata_modified"></dd>
+                  <dt>Last refreshed<span class="sr-only">: </span></dt>
+                  <dd data-field="last_refreshed"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
                   <dd data-field="published_date"></dd>
                   <dt>Refreshed<span class="sr-only">: </span></dt>

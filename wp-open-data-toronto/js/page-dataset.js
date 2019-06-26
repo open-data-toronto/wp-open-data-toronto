@@ -49,6 +49,9 @@ function buildDataset(response) {
         }
 
         if (data[field] && data[field].length) {
+            var converter = new showdown.Converter();
+            converter.setFlavor('github');
+
             switch(field) {
                 case 'image_url':
                     $(this).css('background-image', 'url("' + data[field] + '")');
@@ -70,11 +73,12 @@ function buildDataset(response) {
                     $(this).html(data[field] + ($(this).is('title') ? ' - City of Toronto Open Data Portal' : ''));
                     break;
                 case 'metadata_modified':
-                case 'published_date':
+                case 'last_refreshed':
                     $(this).text(getFullDate(data[field].substring(0, 10).split('-')));
                     break;
+                case 'limitations':
+                case 'collection_method':
                 case 'notes':
-                    var converter = new showdown.Converter();
                     $(this).html(converter.makeHtml(data[field]));
                     break;
                 default:
