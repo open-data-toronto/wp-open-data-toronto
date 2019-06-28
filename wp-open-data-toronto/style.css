@@ -40,6 +40,10 @@ ul.newsfeed li a {
  .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
     background: #FFEB9C;
 }
+
+.status-label.new-tag{background: #155788 !important;}
+.status-label.retired-tag{background: #666666 !important;}
+
 /* Tables */
  .table a:focus{
     background: abdbff;
@@ -1605,4 +1609,4 @@ footer#footer {
 .attributes .dataset-meta-label{margin-top: 10px}
 p.dataset-excerpt{border-bottom: 1px solid #cccccc; padding: 12px 0 20px 0 !important}
 .dataset-card h3{display: block; margin: 0 0 12px 0}
-.status-label{float:right; text-align: center; padding: 4px 12px; background: #145788; display: block; color:#fff; border-radius:32px; font-size: 12px; font-weight: bold; width: auto}
+.status-label{float:right; text-align: center; padding: 4px 8px; display: block; color:#fff; border-radius:6px; font-size: 12px; font-weight: bold; width: auto}
