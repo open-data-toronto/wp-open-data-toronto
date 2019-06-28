@@ -72,25 +72,25 @@ function buildCatalogue(response) {
 
         if (row['is_retired']) {
           specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label">Retired</div>' +
+                           '<div class="status-label retired-tag">Retired</div>' +
                          '</div>';
         } else if (getDaysSince(row['metadata_created']) <= 30) {
           specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label">New</div>' +
+                           '<div class="status-label new-tag">New</div>' +
                          '</div>';
         }
 
         $('.table-list').append(
             '<div class="dataset card" id ="' + row['id'] + '">' +
               '<div class="row">' +
-                '<div class="col-md-12 row">' +
-                    '<h3 class="col-md-10"><a href="/dataset/' + row['name'] + '/">' + row['title'] + '</a></h3>' +
+                '<div class="col-md-10">' +
+                    '<h3><a href="/dataset/' + row['name'] + '/">' + row['title'] + '</a></h3></div>' +
                     specialLabel +
-                    '<div class="col-md-12">' +
+                    '</div><div class="row"><div class="col-md-12">' +
                       '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                     '</div>' +
                 '</div>' +
-                '<div class="col-md-4 text-left attributes">' +
+                '<div class="row"><div class="col-md-4 text-left attributes">' +
                   '<div class="dataset-meta-label">Last Refreshed</div><span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
                 '</div>' +
                 '<div class="col-md-4 text-left attributes">' +
