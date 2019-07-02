@@ -66,7 +66,6 @@ function buildDataset(response) {
                             $(this).append(', ');
                         }
                         $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
-                        // $(this).append(data[field][i]);
                     }
                     break;
                 case 'title':
