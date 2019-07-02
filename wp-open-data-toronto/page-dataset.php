@@ -72,9 +72,9 @@
                   <h3>About <span data-field="title"></span></h3>
                   <div data-field="notes"></div>
                   <h3>Collection Method</h3>
-                  <p><div data-field="collection_method"></div></p>
+                  <p data-field="collection_method"></p>
                   <h3>Limitations</h3>
-                  <p> <div data-field="limitations"></div></p>
+                  <p data-field="limitations"></p>
                 </div>
               </div>
 
