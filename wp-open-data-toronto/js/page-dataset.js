@@ -50,7 +50,6 @@ function buildDataset(response) {
 
         if (data[field] && data[field].length) {
             var converter = new showdown.Converter();
-            converter.setFlavor('github');
 
             switch(field) {
                 case 'image_url':
