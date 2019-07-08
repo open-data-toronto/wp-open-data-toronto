@@ -50,7 +50,6 @@ function buildDataset(response) {
 
         if (data[field] && data[field].length) {
             var converter = new showdown.Converter();
-            converter.setFlavor('github');
 
             switch(field) {
                 case 'image_url':
@@ -66,7 +65,6 @@ function buildDataset(response) {
                             $(this).append(', ');
                         }
                         $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
-                        // $(this).append(data[field][i]);
                     }
                     break;
                 case 'title':
