@@ -3,7 +3,7 @@ if (window.location.host.indexOf('intra') !== -1) {
 } else if (window.location.host.indexOf('inter') !== -1) {
     var ckan = window.location.host.replace('portal', 'ckan');
 } else {
-    var ckan = 'ckan.cf.opendata.inter.prod-toronto.ca'
+    var ckan = 'ckan0.cf.opendata.inter.prod-toronto.ca'
 }
 
 var config = {
