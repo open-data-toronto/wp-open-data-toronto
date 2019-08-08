@@ -31,7 +31,21 @@
           <div class="row">
             <div class="col-md-5">
               <h2 class="heading">City of Toronto Open Data</h2>
-              <p>This sandbox environment is intended to give the wider open data community the chance to not only test and experiment with the open data portal, but to innovate new ways that we can improve access to and delivery of open data within the City of Toronto. You’re welcome to explore this sandbox, give us feedback, and innovate ways to use this data with us.</p>
+
+            <!-- This displays the excerpt from the About page -->
+             <?php echo get_the_excerpt(); ?>
+
+            <?php 
+                query_posts("page_id=35");
+                while ( have_posts() ) : the_post()
+            ?>
+            <?php the_excerpt(); ?>
+            <?php
+                endwhile; 
+                wp_reset_query();
+            ?>  
+
+
               <a class="btn btn-md" href="/about/">Learn more about Open Data</a>
             </div>
 
