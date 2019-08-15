@@ -76,6 +76,10 @@ function arphabet_widgets_init() {
 }
 add_action( 'widgets_init', 'arphabet_widgets_init' );
 
+
+// Adds Excerpts to Pages 
+add_post_type_support( 'page', 'excerpt' );
+
 add_theme_support( 'post-thumbnails' );
 
 // function new_excerpt_more( $more ) {
