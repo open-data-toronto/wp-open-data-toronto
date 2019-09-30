@@ -38,7 +38,7 @@ function theme_enqueue_scripts() {
     if (strpos($site_url, 'dev') !== false) {
       wp_enqueue_script( 'webtrend', 'https://delivery0.cf.wp.inter.dev-toronto.ca/scripts/dev-webtrends-infinity.load.js');
     } elseif (strpos($site_url, 'qa') !== false) {
-      wp_enqueue_script( 'webtrend', 'https://delivery0.cf.wp.inter.dev-toronto.ca/scripts/qa-webtrends-infinity.load.js');
+      wp_enqueue_script( 'webtrend', 'https://delivery0.cf.wp.inter.qa-toronto.ca/scripts/qa-webtrends-infinity.load.js');
     } else {
       wp_enqueue_script( 'webtrend', $script_path . 'webtrends-infinity.load.js');
     }
