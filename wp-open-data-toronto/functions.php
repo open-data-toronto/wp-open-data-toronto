@@ -34,7 +34,14 @@ function theme_enqueue_scripts() {
     $script_path = get_stylesheet_directory_uri() . '/js/';
     $page_name = basename(get_page_template());
 
-    wp_enqueue_script( 'webtrend', $script_path . 'webtrends-infinity.load.js');
+    $site_url = get_site_url();
+    if (strpos($site_url, 'dev') !== false) {
+      wp_enqueue_script( 'webtrend', 'https://delivery0.cf.wp.inter.dev-toronto.ca/scripts/dev-webtrends-infinity.load.js');
+    } elseif () {
+      wp_enqueue_script( 'webtrend', 'https://delivery0.cf.wp.inter.dev-toronto.ca/scripts/qa-webtrends-infinity.load.js');
+    } else {
+      wp_enqueue_script( 'webtrend', $script_path . 'webtrends-infinity.load.js');
+    }
 
     wp_enqueue_script( 'ckan_base', $script_path . 'utils.js', array('jquery') );
     if (in_array($page_name, ['homepage.php', 'page-catalogue.php', 'page-dataset.php'])):
@@ -77,7 +84,7 @@ function arphabet_widgets_init() {
 add_action( 'widgets_init', 'arphabet_widgets_init' );
 
 
-// Adds Excerpts to Pages 
+// Adds Excerpts to Pages
 add_post_type_support( 'page', 'excerpt' );
 
 add_theme_support( 'post-thumbnails' );
