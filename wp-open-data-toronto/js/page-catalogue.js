@@ -389,15 +389,13 @@ function loadCatalogue() {
         state['filters']['search'] = DOMPurify.sanitize(state['filters']['search']).replace(/[^a-zA-Z0-9\s]+/g,'');
     }
 
-    getCKAN('catalogue_search', $.extend(true, {
-        'type': 'full',
+    getCKAN('search_packages', $.extend(true, {
         'rows': config['datasetsPerPage'],
         'sort': state['sort'],
         'start': state['page'] * config['datasetsPerPage']
     }, state['filters']), buildCatalogue);
 
-    getCKAN('catalogue_search', $.extend(true, {
-        'type': 'facet',
+    getCKAN('search_facet', $.extend(true, {
         'rows': config['datasetsPerPage'],
         'facet_field': config['filters']
     }, state['filters']), buildSidebar);
