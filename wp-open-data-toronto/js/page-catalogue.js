@@ -9,8 +9,8 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,
     'datasetsPerPage': 10,
-    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'vocab_topics'],
-    'filterSize': 6 // Actual number of results shown is filterSize -1
+    'filters': ['dataset_category', 'owner_division', 'formats', 'topics'],
+    'filterSize': 6 // Actual number of results shown is filterSize minus 1
 });
 
 /**
