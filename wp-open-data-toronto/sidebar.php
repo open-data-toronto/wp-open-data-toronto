@@ -1,18 +1,36 @@
 <div class="sidebar" role="navigation" aria-label="Secondary Navigation">
   <nav>
     <ul class="page-list">
-      <!-- Parent-level page -->
-      <li>
-        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        <!-- Display second-level if this parent-level page has children -->
-        <?php
-        $children = wp_list_pages( 'title_li=&child_of='.$post->ID.'&echo=0' );
-        if ( $children) :
-        ?>
-        <ul>
-          <?php echo $children; ?>
-        </ul>
-        <?php endif; ?>
+      <li>          
+  <?php
+  // Parent-level page 
+    if ( $post->post_parent ) { ?>
+      <a href="<?php echo get_permalink( $post->post_parent ); ?>" >
+      <?php echo get_the_title( $post->post_parent ); ?>
+      </a>
+    <?php } 
+    else { ?>
+      <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+    <?php }
+
+     // Display second-level if this parent-level page has children 
+    if ($post->post_parent) {
+       $page = $post->post_parent;
+    }
+    else {
+      $page = $post->ID;
+    }
+
+    $children = wp_list_pages(array(
+      'child_of' => $page,
+      'echo' => '0',
+      'title_li' => ''
+     ));
+
+    if ($children) {
+      echo "<ul>\n".$children."</ul>\n";
+    } 
+    ?>
       </li>
     </ul>
   </nav>
