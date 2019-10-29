@@ -12,7 +12,6 @@
     else { ?>
       <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
     <?php }
-
      // Display second-level if this parent-level page has children 
     if ($post->post_parent) {
        $page = $post->post_parent;
@@ -20,13 +19,11 @@
     else {
       $page = $post->ID;
     }
-
     $children = wp_list_pages(array(
       'child_of' => $page,
       'echo' => '0',
       'title_li' => ''
      ));
-
     if ($children) {
       echo "<ul>\n".$children."</ul>\n";
     } 
