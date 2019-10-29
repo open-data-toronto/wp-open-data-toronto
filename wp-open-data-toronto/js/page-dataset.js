@@ -330,14 +330,14 @@ function generateSnippets() {
         '# For example, to retrieve the data content for the first resource in the datastore:',
         '',
         'for idx, resource in enumerate(package["result"]["resources"]):',
-            'if resource["datastore_active"]:',
-                'url = "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/datastore_search"',
-                'p = { "id": resource["id"] }',
-                'r = urllib.request.urlopen(url, data=bytes(json.dumps(p), encoding="utf-8"))',
-                'data = json.loads(r.read())',
-                'df = pd.DataFrame(data)',
-                'print(df)',
-                'break',
+            '    if resource["datastore_active"]:',
+                '        url = "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/datastore_search"',
+                '        p = { "id": resource["id"] }',
+                '        r = urllib.request.urlopen(url, data=bytes(json.dumps(p), encoding="utf-8"))',
+                '        data = json.loads(r.read())',
+                '        df = pd.DataFrame(data)',
+                '        print(df)',
+                '        break',
     ]
 
     snippets['javascript'] = [
