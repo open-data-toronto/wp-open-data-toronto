@@ -164,7 +164,7 @@ function buildDataset(response) {
         queryViews();
     } else {
         $('#body-dataPreview, #body-dataFeatures, #body-Explore').find('.card-body').html(
-            '<div class="not-available">Not available for this dataset</div>'
+            '<div class="not-available">Coming soon for this dataset</div>'
         );
     }
 
@@ -197,11 +197,11 @@ function queryViews() {
         }
 
         if (!exploreFound) {
-            $('#body-Explore .card-body').html('<div class="not-available">Not available for this dataset</div>');
+            $('#body-Explore .card-body').html('<div class="not-available">Coming soon for this dataset</div>');
         }
 
         if (config['package']['dataset_category'] == 'Map' && !previewFound) {
-            $('#body-dataPreview .card-body').html('<div class="not-available">Not available for this dataset</div>');
+            $('#body-dataPreview .card-body').html('<div class="not-available">Coming soon for this dataset</div>');
         }
     });
 }

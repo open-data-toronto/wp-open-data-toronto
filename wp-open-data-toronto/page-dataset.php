@@ -36,8 +36,10 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
-                  <dt>Last refreshed<span class="sr-only">: </span></dt>
+                  <dt>Data Last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
+                  <dt>Metadata last updated<span class="sr-only">: </span></dt>
+                  <dd data-field="metadata_modified"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
                   <dd data-field="published_date"></dd>
                   <dt>Refreshed<span class="sr-only">: </span></dt>
@@ -46,6 +48,8 @@
                   <dd data-field="dataset_category"></dd>
                   <dt>More information<span class="sr-only">: </span></dt>
                   <dd data-field="information_url"></dd>
+                  <dt>Civic issues<span class="sr-only">: </span></dt>
+                  <dd data-field="civic_issues"></dd>
                   <dt>Topics<span class="sr-only">: </span></dt>
                   <dd data-field="topics"></dd>
                 </dl>
