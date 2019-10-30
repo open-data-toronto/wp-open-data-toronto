@@ -10,7 +10,7 @@ $.extend(config, {
     'cataloguePages': 0,
     'datasetsPerPage': 10,
     'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'vocab_topics'],
-    'filterSize': 6 // Actual number of results shown is filterSize -1
+    'filterSize': 6 // Actual number of results shown is filterSize minus 1
 });
 
 /**
@@ -389,15 +389,13 @@ function loadCatalogue() {
         state['filters']['search'] = DOMPurify.sanitize(state['filters']['search']).replace(/[^a-zA-Z0-9\s]+/g,'');
     }
 
-    getCKAN('catalogue_search', $.extend(true, {
-        'type': 'full',
+    getCKAN('search_packages', $.extend(true, {
         'rows': config['datasetsPerPage'],
         'sort': state['sort'],
         'start': state['page'] * config['datasetsPerPage']
     }, state['filters']), buildCatalogue);
 
-    getCKAN('catalogue_search', $.extend(true, {
-        'type': 'facet',
+    getCKAN('search_facet', $.extend(true, {
         'rows': config['datasetsPerPage'],
         'facet_field': config['filters']
     }, state['filters']), buildSidebar);
