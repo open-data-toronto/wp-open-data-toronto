@@ -72,18 +72,6 @@ function buildCatalogue(response) {
             }
         }
 
-        // if (row['formats'] && row['formats'].length > 0) {
-        //     formatLabels = '<div class="col-md-4 text-left attributes">' +
-        //                      '<div class="dataset-meta-label">Formats</div><span>' + row['formats'].split(',').join(' | ') + '</span>' +
-        //                    '</div>';
-        // }
-        //
-        // if (row['topics']&& row['topics'].length > 0) {
-        //     topicLabels = '<div class="col-md-8 text-left attributes">' +
-        //                     '<div class="dataset-meta-label">Topics</div><span>' + row['topics'].split(',').join(' | ') + '</span>' +
-        //                   '</div>';
-        // }
-
         if (row['is_retired']) {
           specialLabel = '<div class="col-md-2">' +
                            '<div class="status-label retired-tag" aria-label="archived">Retired</div>' +
@@ -104,16 +92,25 @@ function buildCatalogue(response) {
                       '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                     '</div>' +
                 '</div>' +
-                '<div class="row"><div class="col-md-4 text-left attributes">' +
-                  '<div class="dataset-meta-label">Last Refreshed</div><span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
+                '<div class="row">' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Refresh Rate</div>' +
+                    '<span>' + row['refresh_rate'] + '</span>' +
+                  '</div>' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Last Refreshed</div>' +
+                    '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
+                  '</div>' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Publisher</div>' +
+                    '<span>' + row['owner_division'] + '</span>' +
+                  '</div>' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Type</div>' +
+                    '<span>' + row['dataset_category'] + '</span>' +
+                  '</div>' +
+                  listLabels.join('\n') +
                 '</div>' +
-                '<div class="col-md-4 text-left attributes">' +
-                  '<div class="dataset-meta-label">Publisher</div><span>' + row['owner_division'] + '</span>' +
-                '</div>' +
-                '<div class="col-md-4 text-left attributes">' +
-                  '<div class="dataset-meta-label">Type</div><span>' + row['dataset_category'] + '</span>' +
-                '</div>' +
-                listLabels.join('\n') +
               '</div>' +
             '</div>');
     }
