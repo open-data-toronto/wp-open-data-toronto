@@ -253,6 +253,18 @@ function queryContents() {
     });
 }
 
+function queryQualityScore() {
+  getCKAN(
+      'quality_show',
+      { 'package_id': config['package']['name'] },
+      function(response) {
+          var result = response['result'];
+
+      }
+  );
+}
+
+
 /**
  * Creates the HTML element events
  */
