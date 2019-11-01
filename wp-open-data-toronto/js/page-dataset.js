@@ -23,6 +23,9 @@ $.extend(config, {
 
 function buildDataset(response) {
     var data = config['package'] = response['result'];
+
+    queryQualityScore();
+
     data['preview_resource'] = {};
     data['datastore_active'] = false;
     data['is_geospatial'] = false;
