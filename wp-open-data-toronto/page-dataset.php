@@ -37,7 +37,7 @@
                 </div>
                 <dl>
                   <dt>Data Quality Score<span class="sr-only">: </span></dt>
-                  <dd id="field-quality"></dd>
+                  <dd id="field-quality">Not available</dd>
                   <dt>Last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
