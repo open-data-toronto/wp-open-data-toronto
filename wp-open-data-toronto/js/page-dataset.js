@@ -264,7 +264,10 @@ function queryQualityScore() {
           var result = response['result'];
 
           if (result.length > 0) {
-              $('#field-quality').text(result[0]['grade_norm']);
+              $('#field-quality').text(
+                  result[0]['grade_norm'] +
+                  '<span class="badge badge-info">beta</span>'
+              );
           }
       }
   );
