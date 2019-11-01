@@ -260,7 +260,11 @@ function queryQualityScore() {
       function(response) {
           var result = response['result'];
 
-          console.log(response)
+          if (result.length > 0) {4
+              $('#field-quality').text(result[0]['grade_norm']);
+          } else {
+              $('#field-quality').prev().hide();
+          }
       }
   );
 }
