@@ -36,6 +36,8 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
+                  <dt>Data Quality Score<span class="sr-only">: </span></dt>
+                  <dd id="field-quality"></dd>
                   <dt>Last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>

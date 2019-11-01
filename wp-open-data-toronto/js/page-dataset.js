@@ -260,6 +260,7 @@ function queryQualityScore() {
       function(response) {
           var result = response['result'];
 
+          console.log(response)
       }
   );
 }
