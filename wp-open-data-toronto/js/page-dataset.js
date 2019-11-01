@@ -263,7 +263,7 @@ function queryQualityScore() {
       function(response) {
           var result = response['result'];
 
-          if (result.length > 0) {4
+          if (result.length > 0) {
               $('#field-quality').text(result[0]['grade_norm']);
           }
       }
