@@ -1,19 +1,19 @@
 </main>
 <?php wp_footer(); ?>
 
-<footer id="pre-footer" role="contentinfo">
+<div id="pre-footer" role="contentinfo">
     <div class="container">
       <div class="row">
-        <div class="col-sm-3 col-md-6">
+        <div class="col-sm-12 col-md-3">
           <a href="mailto:opendata@toronto.ca">
             <i class="fa fa-envelope"> </i> 
           </a>
-          <a href="https://twitter.com/Open_TO?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+          <a href="https://twitter.com/Open_TO">
             <i class="fa fa-twitter"></i>
           </a>
         </div>     
       <!-- Begin Mailchimp Signup Form -->
-        <div id="col-sm-9 col-md-6">
+        <div class="col-md-9">
           <form action="https://toronto.us7.list-manage.com/subscribe/post?u=4bfad28974017cb009fd6d24a&amp;id=36d03c2b81" method="post" class="mailchimp" name="mc-embedded-subscribe-form"  target="_blank" novalidate>
 	          <label for="monthly updates" id="monthly-updates"><b>Receive monthly updates</b></label>
 	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
@@ -23,7 +23,7 @@
         </div>
       </div>
   </div>
-</footer>
+</div>
   
 
   <footer id="footer" role="contentinfo">

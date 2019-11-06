@@ -197,9 +197,8 @@ ul.status li{
 }
  a:link {
      font-weight: bold !important;
-}
-main.site-content a:link{
-	text-decoration: underline;
+     font-family: 'Roboto';
+     color: #0063ad;
 }
 .normal-text {
     text-decoration: none !important;
@@ -290,6 +289,8 @@ main.site-content a:link{
      margin: 8px 50px 12px 0;
      color: #185688 !important;
      font-weight: 500;
+     font-family: 'Montserrat';
+     text-transform: uppercase
 }
  #temporary-notice {
      font-size: 12px;
@@ -303,12 +304,15 @@ main.site-content a:link{
 }
 
  #data-stories h3 {
-     font-size: 48px;
+     font-size: 34px;
      margin: 0 20px 20px 20px;
 }
 /** 1. Global Styles and Resets **/
  .time{
      text-align:right;
+}
+section#pages h2, section#pages p {
+    text-align: center;
 }
  body, html, *{
     padding: 0;
@@ -343,17 +347,17 @@ main.site-content a:link{
 /** 2. Typography / Buttons **/
  h1,h2,h3,h4,h5,h6{
     padding: 0;
-     margin: 0;
+    font-family: 'Montserrat';
+    margin: 0;
 }
  h1 {
-     font-size: 19px;
-     font-weight: 300;
-     color: #666666;
-     padding: 0 0 12px 0;
-}
- h1.entry-title {
-     font-size: 20px;
-     font-weight: 300;
+     display: block;
+     z-index: 222;
+     font-size:32px;
+     color: #ffffff;
+     text-align: center;
+     width: 100%;
+     padding: 0 20px 18px 20px;
 }
  h2{
      font-size: 22px;
@@ -381,8 +385,13 @@ main.site-content a:link{
      font-weight: bold;
 }
  a.btn.btn-md {
-     color: #ffffff;
-     background: #165788;
+    color: #ffffff;
+    background: #0f7b85;
+    border-radius: 0px !important;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    padding: 12px 18px;
 }
 /** 3. Layout / Breadcrumbs / Pagination **/
  #crestashareiconincontent{
@@ -574,6 +583,26 @@ footer#footer p {
     background-color: #f2f2f2;
     height: 90px;
 }
+#pre-footer a{
+    color: #aaa;
+    margin: 20px 4px;
+    display: inline-block;
+    border: 1px solid #aaa;
+    border-radius: 100%;
+    width: 50px;
+    text-align: center;
+    height: 50px;
+    padding: 0 !important;
+}
+#pre-footer i{
+    padding: 0;
+}
+form.mailchimp {
+    height: 50px;
+    display: block;
+    padding: 16px 0 0 0;
+    text-align: right
+}
 
 /** 6. Homepage Template **/
  .hero .jumbotron{
@@ -745,7 +774,6 @@ footer#footer p {
 }
  .main-content a {
      font-weight: bold;
-     text-decoration: underline;
 }
  .meta-box {
      border: 1px solid #ccc;
@@ -1335,6 +1363,7 @@ border: 0;
 }
  ul.post-list li{
      font-weight: 500;
+     font-size: 16px;
 }
  .blog-sidebar {
      padding: 0;

@@ -4,12 +4,12 @@
   <section class="content-area">
     <div class="container">
       <div class="hero" aria-label="Introduction">
+
         <!-- Jumbotron echoes featured image for Homepage -->
         <div class="jumbotron text-center" style="background-image:url('<?php the_post_thumbnail_url(); ?>');">
-          <div class="heading">
-            <h1 class="sr-only"><span id="introduction">Welcome to the City of Toronto's Open Data Portal</span></h1>
-          </div>
+          
           <div class="row">
+            <h1>Search the City of Toronto's Open Data Portal</h1>
             <div class="col-md-6 offset-md-3">
               <form id="dataset-search" class="form-inline" role="search">
                 <div class="input-group">
@@ -97,8 +97,8 @@
           ?>
 
           <div class="col-md-4">
-           <h2> <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-            <img src="<?php the_post_thumbnail_url(); ?>" alt="" class="img-responsive"/><br/>
+           <h2> <a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2>
+            <img src="<?php the_post_thumbnail_url(); ?>" alt="" class="img-responsive"/></a><br/>
             <p><?php the_excerpt(); ?></p>
           </div>
 
