@@ -624,7 +624,7 @@ input#mc-embedded-subscribe {
 
 /** 6. Homepage Template **/
  .hero .jumbotron{
-     padding: 8rem 2rem 10rem 2rem;
+     padding: 4rem 2rem 5rem 2rem;
 }
 .hero .jumbotron .form-inline .input-group {
     margin: 0 auto;
@@ -684,6 +684,7 @@ input#mc-embedded-subscribe {
      background-image: url(/wp-content/themes/wp-open-data-toronto/img/homepage-winter.jpg);
      background-size: cover;
      background-position: 50% 73%;
+     background: #666666;
 }
  div[id*="ajaxsearchlite"] {
      box-shadow: none !important;
