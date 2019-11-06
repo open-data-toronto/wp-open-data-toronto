@@ -36,6 +36,11 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
+                  <dt>Data Quality Score
+                    <span class="badge badge-info">beta</span>
+                    <span class="sr-only">: </span>
+                  </dt>
+                  <dd id="field-quality">Not available</dd>
                   <dt>Last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
@@ -168,7 +173,7 @@
                               <img src="/wp-content/themes/wp-open-data-toronto/img/ckan.png" alt="CKAN logo">
                             </div>
                             <div class="col-md-7">
-                              <h4 class="card-title">Visualize this data!</h4>
+                              <h4 class="card-title">Visualize this data</h4>
                               <p>Want to explore this data without having to download it? Try it here</p>
                             </div>
                           <div class="col-md-3 explore-column">

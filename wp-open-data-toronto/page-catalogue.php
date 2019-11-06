@@ -47,6 +47,15 @@
               </ul>
             </div>
 
+            <div class="card" id="vocab_civic_issues-filter">
+              <div class="card-header filter-heading">
+                <h3>Civic Issues</h3>
+              </div>
+              <ul data-type="filter" data-field="vocab_civic_issues" class="list-group list-group-flush" id="vocab_civic_issues-values">
+                <li class="show-more list-group-item list-group-item-action" data-field="vocab_civic_issues"></li>
+              </ul>
+            </div>
+
             <div class="card" id="owner_division-filter">
               <div class="card-header filter-heading">
                 <h3>Publisher</h3>
