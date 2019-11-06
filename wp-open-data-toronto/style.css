@@ -603,6 +603,24 @@ form.mailchimp {
     padding: 16px 0 0 0;
     text-align: right
 }
+input#mce-EMAIL {
+    font-size: 20px;
+    padding: 3px 3px 3px 8px;
+    display: inline-block;
+    margin-left: 16px;
+    width: 260px;
+    font-family: Roboto;
+}
+input#mc-embedded-subscribe {
+    font-family: Montserrat;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #0f7b84;
+    border: 0;
+    margin: -5px 0 0 2px !important;
+    display: inline-block;
+    height: 39px;
+}
 
 /** 6. Homepage Template **/
  .hero .jumbotron{
@@ -727,6 +745,9 @@ form.mailchimp {
      border-radius: 0;
      font-size: 16px;
      padding: 12px 20px;
+    font-family: Montserrat;
+    font-weight: bold;
+    text-transform: uppercase;
 }
  .hero input.form-control {
      border: 0;
@@ -1216,7 +1237,7 @@ input#search {
  .btn-secondary:hover {
      color: #ffffff;
      background-color: #0e626b;
-     border-color: none
+     border-color: none;
 }
  .table-list h2 a:hover{
      text-decoration: underline !important;
