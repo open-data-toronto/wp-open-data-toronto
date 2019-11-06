@@ -36,7 +36,7 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
-                  <dt>Data Last refreshed<span class="sr-only">: </span></dt>
+                  <dt>Data last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
                   <dt>Metadata last updated<span class="sr-only">: </span></dt>
                   <dd data-field="metadata_modified"></dd>
