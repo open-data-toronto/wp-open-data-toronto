@@ -9,8 +9,8 @@ $.extend(config, {
     'isInitializing': true,
     'cataloguePages': 0,
     'datasetsPerPage': 10,
-    'filters': ['dataset_category', 'owner_division', 'vocab_formats', 'vocab_topics'],
-    'filterSize': 6 // Actual number of results shown is filterSize -1
+    'filters': ['dataset_category', 'owner_division', 'vocab_civic_issues', 'vocab_formats', 'vocab_topics'],
+    'filterSize': 6 // Actual number of results shown is filterSize minus 1
 });
 
 /**
@@ -54,20 +54,22 @@ function buildCatalogue(response) {
 
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i],
-            formatLabels = '',
-            topicLabels = '',
+            listLabels = [],
             specialLabel = '';
 
-        if (row['formats'] && row['formats'].length > 0) {
-            formatLabels = '<div class="col-md-4 text-left attributes">' +
-                             '<div class="dataset-meta-label">Formats</div><span>' + row['formats'].split(',').join(' | ') + '</span>' +
-                           '</div>';
-        }
+        for (var j = 0; j < config['filters'].length; j++) {
+            if (config['filters'][j].startsWith('vocab_')) {
+                var f = config['filters'][j].replace('vocab_', '');
 
-        if (row['topics']&& row['topics'].length > 0) {
-            topicLabels = '<div class="col-md-8 text-left attributes">' +
-                            '<div class="dataset-meta-label">Topics</div><span>' + row['topics'].split(',').join(' | ') + '</span>' +
-                          '</div>';
+                if (row.hasOwnProperty(f) && row[f]) {
+                    listLabels.push(
+                        '<div class="col-md-4 text-left attributes">' +
+                          '<div class="dataset-meta-label">' + toTitleCase(f) + '</div>' +
+                          '<span>' + row[f].split(',').join(' | ') + '</span>' +
+                        '</div>'
+                    );
+                }
+            }
         }
 
         if (row['is_retired']) {
@@ -90,17 +92,25 @@ function buildCatalogue(response) {
                       '<p class="dataset-excerpt">' + row['excerpt'] + '</p>' +
                     '</div>' +
                 '</div>' +
-                '<div class="row"><div class="col-md-4 text-left attributes">' +
-                  '<div class="dataset-meta-label">Last Refreshed</div><span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
+                '<div class="row">' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Refresh Rate</div>' +
+                    '<span>' + row['refresh_rate'] + '</span>' +
+                  '</div>' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Last Refreshed</div>' +
+                    '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
+                  '</div>' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Publisher</div>' +
+                    '<span>' + row['owner_division'] + '</span>' +
+                  '</div>' +
+                  '<div class="col-md-4 text-left attributes">' +
+                    '<div class="dataset-meta-label">Type</div>' +
+                    '<span>' + row['dataset_category'] + '</span>' +
+                  '</div>' +
+                  listLabels.join('\n') +
                 '</div>' +
-                '<div class="col-md-4 text-left attributes">' +
-                  '<div class="dataset-meta-label">Publisher</div><span>' + row['owner_division'] + '</span>' +
-                '</div>' +
-                '<div class="col-md-4 text-left attributes">' +
-                  '<div class="dataset-meta-label">Type</div><span>' + row['dataset_category'] + '</span>' +
-                '</div>' +
-                formatLabels +
-                topicLabels +
               '</div>' +
             '</div>');
     }
@@ -389,15 +399,13 @@ function loadCatalogue() {
         state['filters']['search'] = DOMPurify.sanitize(state['filters']['search']).replace(/[^a-zA-Z0-9\s]+/g,'');
     }
 
-    getCKAN('catalogue_search', $.extend(true, {
-        'type': 'full',
+    getCKAN('search_packages', $.extend(true, {
         'rows': config['datasetsPerPage'],
         'sort': state['sort'],
         'start': state['page'] * config['datasetsPerPage']
     }, state['filters']), buildCatalogue);
 
-    getCKAN('catalogue_search', $.extend(true, {
-        'type': 'facet',
+    getCKAN('search_facet', $.extend(true, {
         'rows': config['datasetsPerPage'],
         'facet_field': config['filters']
     }, state['filters']), buildSidebar);

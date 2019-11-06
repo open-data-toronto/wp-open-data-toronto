@@ -23,6 +23,9 @@ $.extend(config, {
 
 function buildDataset(response) {
     var data = config['package'] = response['result'];
+
+    queryQualityScore();
+
     data['preview_resource'] = {};
     data['datastore_active'] = false;
     data['is_geospatial'] = false;
@@ -252,6 +255,21 @@ function queryContents() {
         $('#content-features').append(featuresTable);
     });
 }
+
+function queryQualityScore() {
+  getCKAN(
+      'quality_show',
+      { 'package_id': config['package']['name'] },
+      function(response) {
+          var result = response['result'];
+
+          if (result.length > 0) {
+              $('#field-quality').text(result[0]['grade_norm']);
+          }
+      }
+  );
+}
+
 
 /**
  * Creates the HTML element events
