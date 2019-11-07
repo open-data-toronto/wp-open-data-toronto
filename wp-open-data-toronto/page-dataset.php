@@ -38,8 +38,6 @@
                 <dl>
                   <dt>Data last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
-                  <dt>Metadata last updated<span class="sr-only">: </span></dt>
-                  <dd data-field="metadata_modified"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
                   <dd data-field="published_date"></dd>
                   <dt>Refreshed<span class="sr-only">: </span></dt>
