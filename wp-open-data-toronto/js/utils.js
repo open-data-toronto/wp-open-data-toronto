@@ -69,6 +69,16 @@ function isMobile() {
     return check;
 }
 
+function toTitleCase(s) {
+    s = s.replace('_', ' ').toLowerCase().split(' ');
+
+    for (var i = 0; i < s.length; i++) {
+      s[i] = s[i].charAt(0).toUpperCase() + s[i].slice(1);
+    }
+
+    return s.join(' ');
+}
+
 function truncateString(original, size, clean, padding) {
     if (original == null) {
         return '';
