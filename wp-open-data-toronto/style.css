@@ -489,7 +489,7 @@ main.site-content a:link{
 }
 /** 5. Footer **/
 #footer {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     text-align: center;
     color: #ffffff;
     background-color: #165788;
@@ -554,6 +554,27 @@ footer#footer p {
  .pre-footer{
      margin-top: 80px;
 }
+#monthly-updates {
+    margin-top: 15px;
+}
+.fa-envelope
+{
+    margin-top: 10px;
+    font-size: 20pt; 
+}
+.fa-twitter
+{
+    font-size: 20pt; 
+    margin-top: 10px;
+    padding-left: 10px;
+}
+#pre-footer {
+    margin-top: 2rem;
+    color: #165788;
+    background-color: #f2f2f2;
+    height: 90px;
+}
+
 /** 6. Homepage Template **/
  .hero .jumbotron{
      padding: 8rem 2rem 10rem 2rem;
