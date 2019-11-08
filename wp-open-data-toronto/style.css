@@ -212,3 +212,37 @@ a.breadcrumb-item {
     width: auto;
     margin: 0 auto;
 }
+
+
+.page-template-page-catalogue .banner{
+    height:60px;
+    background-image: navajowhite !important;
+    background-position: 50% 50%;
+    padding: 0px;
+}
+.page-template-page-catalogue .background{
+    background: #fff;
+    padding: 13px 0;
+    opacity: 0.9;
+}
+.page-template-page-catalogue h1{
+    text-align: left;
+    padding: 0 0 0 20px;
+}
+.dataset.card{width:100%;
+margin: 0 0 15px 0;
+padding: 25px 30px}
+
+.dataset-search-results{
+    padding: 0;
+}
+#results-count{
+    padding:0;
+    margin-left: -15px !important;
+    padding-top: 13px;
+    padding-left: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #175787;
+    font-family: Montserrat !important;
+}
