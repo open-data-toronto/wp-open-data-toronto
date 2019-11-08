@@ -15,16 +15,6 @@
       </div>
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="banner" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>) !important">
-            <div class="background">
-              <h1><?php the_title(); ?></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="col-md-3 hide-full-length">
           <!-- Sidebar Content -->
           <div class="blog-sidebar" role="complementary">
@@ -88,6 +78,8 @@
         <div class="col-md-9">
           <section class="main-post-listing"  aria-label="Blog Posts" id="content">
          
+             <h1 class="sr-only"><?php the_title(); ?></h1>
+
 
             <!-- News&Updates -->
             <div class="row">
@@ -95,7 +87,7 @@
 
                 <h2>Articles</h2>
                 
-                <div class="row">
+                <div class="row" style="padding: 10px 0 0 0">
 
                 <?php
                 $the_query = new WP_Query( array( 'posts_per_page' => 20 ) );
@@ -103,11 +95,11 @@
                   while ( $the_query->have_posts() ) :
                     $the_query->the_post();
                 ?>
-                   <div class="col-md-6">
+                   <div class="col-md-6" style="margin: 0 0 20px 0">
                  
-                  <div class="row">
+                  <div class="row showcase-item">
                     <div class="col-md-12">
-                      <div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div>
+                      <a href="<?php the_permalink(); ?>"><div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div></a>
                     </div>
                     <div class="col-md-12">
                       <a href="<?php the_permalink(); ?>">

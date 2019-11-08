@@ -24,6 +24,7 @@ Template:        wp-bootstrap-starter
 ===========================
 */
 
+body, p, html, *{font-family: Roboto;}
 #super-header{
     background: #165788;
     height: 80px;
@@ -171,4 +172,22 @@ input#search {
 }
 .dataset .row{
     padding: px 0 0 0
+}
+
+.banner{
+    height: 190px;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin: 0 0 20px 0;
+}
+.showcase-thumbnail{
+    height: 200px;
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 0px;
+    border: 1px solid #f4f4f4;
+    margin: 0 0 10px 0;
+}
+.showcase-item .attributes{
+    font-size: 12px;
 }
