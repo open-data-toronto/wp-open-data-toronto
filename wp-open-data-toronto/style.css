@@ -44,7 +44,7 @@ header#masthead {
 }
 
 /* Wordmark */
-a.navbar-brand {
+a.navbar-brand{
     font-family: Montserrat;
     font-weight: 600;
     color: #165787;
@@ -147,7 +147,7 @@ p{font-size: 14px}
 color: #fff;
 text-shadow: 2px 2px 2px #222;
 }
-.jumbotron{padding: 180px 0; border-radius: 0;margin: 0 20px}
+.jumbotron{padding: 180px 0; border-radius: 0;margin: 0 20px; background-size: cover; background-position: 50% 50%;}
 
 input#search {
     width: 310px;
@@ -190,4 +190,25 @@ input#search {
 }
 .showcase-item .attributes{
     font-size: 12px;
+}
+
+.breadcrumb {
+    padding: 0 0 10px 0;
+    margin-bottom: 2rem;
+    list-style: none;
+    background: 0;
+    border-radius: 0;
+    margin-top: -23px;
+    font-family: Montserrat !important;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #666;
+}
+a.breadcrumb-item {
+    font-family: Montserrat;
+    font-weight: 500;
+}
+.form-inline .input-group {
+    width: auto;
+    margin: 0 auto;
 }
