@@ -51,12 +51,12 @@
                   <dd data-field="refresh_rate"></dd>
                   <dt>Data type<span class="sr-only">: </span></dt>
                   <dd data-field="dataset_category"></dd>
-                  <dt>More information<span class="sr-only">: </span></dt>
-                  <dd data-field="information_url"></dd>
                   <dt>Civic issues<span class="sr-only">: </span></dt>
                   <dd data-field="civic_issues"></dd>
                   <dt>Topics<span class="sr-only">: </span></dt>
                   <dd data-field="topics"></dd>
+                  <dt>More information<span class="sr-only">: </span></dt>
+                  <dd data-field="information_url"></dd>
                 </dl>
               </div>
               <div class="card">
