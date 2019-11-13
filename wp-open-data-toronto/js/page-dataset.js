@@ -64,13 +64,14 @@ function buildDataset(response) {
                 case 'information_url':
                     $(this).append('<a href="' + data[field] + '" class="inline-link">' + 'External Link' + '</a>');
                     break;
+                case 'civic_issues':
                 case 'topics':
                     var content = data[field].split(',');
                     for (var i in content) {
                         if (!$(this).is(':empty')) {
                             $(this).append(', ');
                         }
-                        $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
+                        $(this).append('<a href="/catalogue?vocab_' + field + '=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
                     }
                     break;
                 case 'title':
