@@ -23,6 +23,7 @@ $.extend(config, {
 
 function buildDataset(response) {
     var data = config['package'] = response['result'];
+    var isRealTime = data['refresh_rate'].toLowerCase() == 'real-time';
 
     queryQualityScore();
 
@@ -51,7 +52,9 @@ function buildDataset(response) {
             data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
         }
 
-        if (data[field] && data[field].length) {
+
+        if (data[field] && data[field].length &&
+          !(field == 'last_refreshed' && isRealTime)) {
             var converter = new showdown.Converter();
 
             switch(field) {
