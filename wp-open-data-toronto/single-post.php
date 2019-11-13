@@ -16,16 +16,6 @@
       </div>
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="banner" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>) !important">
-            <div class="background">
-              <h1><span class="sr-only">Blog article: </span><?php the_title(); ?></h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="col-md-3 hide-full-length">
           <!-- Sidebar Content -->
           <div class="blog-sidebar" role="complementary">
@@ -85,7 +75,15 @@
           </div>
         </div>
 
-        <div class="col-md-9 show-full-length" id="content">
+      
+
+        <div class="col-md-9 post-content" id="content">
+
+              <h1><span class="sr-only">Blog article: </span><?php the_title(); ?></h1>
+
+              <div class="byline">Published by <?php the_author(); ?> on <?php the_date(); ?></div>
+          <img class="img-responsive" src="<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>" alt="<?php the_title(); ?>"/>
+
           <h2 class="sr-only">Article text</h2>
           <?php
           while ( have_posts() ) :

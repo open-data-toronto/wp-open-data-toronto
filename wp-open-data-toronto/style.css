@@ -142,7 +142,7 @@ section#about ul li{
 ul li a:link, ul li a:visited{
     color: #31708f
 }
-p{font-size: 14px}
+p, p ul li, p ol li, ul li, ol li{font-size: 16px}
 .jumbotron h1{padding: 0px 0 30px 0;
 color: #fff;
 text-shadow: 2px 2px 2px #222;
@@ -174,7 +174,7 @@ input#search {
     padding: px 0 0 0
 }
 
-.banner{
+.jumbotron .banner{
     height: 190px;
     background-size: cover;
     background-position: 50% 50%;
@@ -261,4 +261,21 @@ input#mce-EMAIL {
     padding: 6px 0 8px 6px;
     margin: 0 0 0 10px;
     width: 250px;
+}
+#content h1{
+    text-align: left;
+    margin: 0;
+}
+#content.post-content  h1{
+    padding: 0 0 6px 0;
+    display: block;
+}
+#content.post-content .byline{
+    padding: 0 0 12px 0;
+    display: block;
+    color: #222222;
+    font-family: Montserrat;
+}
+#content.post-content img{
+    padding: 0 0 12px 0;
 }
