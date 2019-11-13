@@ -212,8 +212,6 @@ a.breadcrumb-item {
     width: auto;
     margin: 0 auto;
 }
-
-
 .page-template-page-catalogue .banner{
     height:60px;
     background-image: navajowhite !important;
@@ -245,4 +243,22 @@ padding: 25px 30px}
     font-weight: bold;
     color: #175787;
     font-family: Montserrat !important;
+}
+#pre-footer a i.fa {
+    color: #afafaf;
+    font-size: 33px;
+    text-align: center;
+    display: inline-block;
+    padding: 0 20px 0 0;
+}
+form.mailchimp {
+    float: right;
+    display: block;
+    font-family: Roboto;
+    font-weight: 100;
+}
+input#mce-EMAIL {
+    padding: 6px 0 8px 6px;
+    margin: 0 0 0 10px;
+    width: 250px;
 }
