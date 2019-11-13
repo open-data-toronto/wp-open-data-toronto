@@ -279,3 +279,7 @@ input#mce-EMAIL {
 #content.post-content img{
     padding: 0 0 12px 0;
 }
+.btn-sm {
+    padding: 7px 12px;
+    background: #d60808;
+}

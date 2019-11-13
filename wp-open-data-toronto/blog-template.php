@@ -19,6 +19,10 @@
           <!-- Sidebar Content -->
           <div class="blog-sidebar" role="complementary">
             <h2 class="sr-only">Explore Open Data Blog</h2>
+
+            <h3>Knowledge Centre</h3>
+            <p>Whether you're a seasoned data scientist, or a beginner - Toronto Open Data has you covered! We publish new content biweekly.</p>
+            <br/>
             <h3>Latest Posts</h3>
             <ul class="post-list">
               <?php
@@ -85,12 +89,19 @@
             <div class="row">
               <div class="col-md-12" aria-label="Blog Posts">
 
-                <h2>Articles</h2>
-                
+                <div class="row">
+                <div class="col-md-10">
+                    <h2><i class="fa fa-calendar"></i> News &amp; Events</h2>
+                  </div>
+                  <div class="col-md-2">
+                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">News and Events</span></a>
+                  </div>
+                </div>
+
                 <div class="row" style="padding: 10px 0 0 0">
 
                 <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 20 ) );
+                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
                 if ( $the_query->have_posts() ) :
                   while ( $the_query->have_posts() ) :
                     $the_query->the_post();
@@ -118,6 +129,169 @@
                 wp_reset_postdata();
                 ?>
               </div>
+              <div class="row">
+                <div class="col-md-10">
+                    <h2><i class="fa fa-book"></i> Data Stories</h2>
+                  </div>
+                  <div class="col-md-2">
+                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">data stories</span></a>
+                  </div>
+                </div>
+
+               <div class="row" style="padding: 10px 0 0 0">
+
+                <?php
+                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
+                if ( $the_query->have_posts() ) :
+                  while ( $the_query->have_posts() ) :
+                    $the_query->the_post();
+                ?>
+                   <div class="col-md-6" style="margin: 0 0 20px 0">
+                 
+                  <div class="row showcase-item">
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>"><div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div></a>
+                    </div>
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>">
+                        <h3><?php the_title() ;?></h3>
+                      </a>
+                      <div class="attributes">
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
+                      </div>
+                      <p><?php the_excerpt(); ?></p>
+                    </div>
+                  </div>
+                  </div>
+                <?php
+                  endwhile;
+                endif;
+                wp_reset_postdata();
+                ?>
+              </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <h2><i class="fa fa-mortar-board"></i> Tools &amp; Training</h2>
+                  </div>
+                  <div class="col-md-2">
+                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">tools and training</span></a>
+                  </div>
+                </div>
+
+               <div class="row" style="padding: 10px 0 0 0">
+
+                <?php
+                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
+                if ( $the_query->have_posts() ) :
+                  while ( $the_query->have_posts() ) :
+                    $the_query->the_post();
+                ?>
+                   <div class="col-md-6" style="margin: 0 0 20px 0">
+                 
+                  <div class="row showcase-item">
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>"><div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div></a>
+                    </div>
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>">
+                        <h3><?php the_title() ;?></h3>
+                      </a>
+                      <div class="attributes">
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
+                      </div>
+                      <p><?php the_excerpt(); ?></p>
+                    </div>
+                  </div>
+                  </div>
+                <?php
+                  endwhile;
+                endif;
+                wp_reset_postdata();
+                ?>
+              </div>
+
+             <div class="row">
+                <div class="col-md-10">
+                    <h2><i class="fa fa-video-camera"></i> Video &amp; Multimedia</h2>
+                  </div>
+                  <div class="col-md-2">
+                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">videos and multimedia</span></a>
+                  </div>
+                </div>
+
+               <div class="row" style="padding: 10px 0 0 0">
+
+                <?php
+                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
+                if ( $the_query->have_posts() ) :
+                  while ( $the_query->have_posts() ) :
+                    $the_query->the_post();
+                ?>
+                   <div class="col-md-6" style="margin: 0 0 20px 0">
+                 
+                  <div class="row showcase-item">
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>"><div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div></a>
+                    </div>
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>">
+                        <h3><?php the_title() ;?></h3>
+                      </a>
+                      <div class="attributes">
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
+                      </div>
+                      <p><?php the_excerpt(); ?></p>
+                    </div>
+                  </div>
+                  </div>
+                <?php
+                  endwhile;
+                endif;
+                wp_reset_postdata();
+                ?>
+              </div>
+
+<div class="row">
+                <div class="col-md-10">
+                    <h2><i class="fa fa-tree"></i> Civic Issues</h2>
+                  </div>
+                  <div class="col-md-2">
+                    <a href="#" class="btn btn-primary btn-sm pull-right">View More <span class="sr-only">News and Events</span></a>
+                  </div>
+                </div>
+
+               <div class="row" style="padding: 10px 0 0 0">
+
+                <?php
+                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
+                if ( $the_query->have_posts() ) :
+                  while ( $the_query->have_posts() ) :
+                    $the_query->the_post();
+                ?>
+                   <div class="col-md-6" style="margin: 0 0 20px 0">
+                 
+                  <div class="row showcase-item">
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>"><div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div></a>
+                    </div>
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>">
+                        <h3><?php the_title() ;?></h3>
+                      </a>
+                      <div class="attributes">
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
+                      </div>
+                      <p><?php the_excerpt(); ?></p>
+                    </div>
+                  </div>
+                  </div>
+                <?php
+                  endwhile;
+                endif;
+                wp_reset_postdata();
+                ?>
+              </div>
+
             </div></div>
 
             
