@@ -278,9 +278,6 @@
                       <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title() ;?></h3>
                       </a>
-                      <div class="attributes">
-                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
-                      </div>
                       <p><?php the_excerpt(); ?></p>
                     </div>
                   </div>

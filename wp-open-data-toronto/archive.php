@@ -11,20 +11,11 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <a class="breadcrumb-item" href="<?php echo site_url(); ?>">Open Data Portal home</a>
           <a class="breadcrumb-item" href="<?php echo site_url(); ?>/blog">Open Data Blog</a>
-          <a class="breadcrumb-item">Posts labeled with '<?php printf( __( '%s', 'twentyfourteen' ), single_cat_title( '', false ) ); ?>'</a>
+          <a class="breadcrumb-item">Articles filed under '<?php printf( __( '%s', 'twentyfourteen' ), single_cat_title( '', false ) ); ?>'</a>
         </nav>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="banner" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>) !important">
-          <div class="background">
-            <h1><?php printf( __( 'Category Archives: %s', 'twentyfourteen' ), single_cat_title( '', false ) ); ?></h1>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="row">
       <div class="col-md-3">
@@ -77,20 +68,27 @@
       <div class="col-md-9" id="content">
         <div class="row">
           <div class="col-md-12">
-            
+             <h1><?php printf( __( 'Articles filed under ', 'twentyfourteen' ), single_cat_title( '', false ) ); ?></h1>
+<br/>
                   <h2 class="sr-only">Posts</h2>
+
+            <div class="row">           
             <?php while ( have_posts() ) : the_post(); ?>
+                   <div class="col-md-6" style="margin: 0 0 20px 0">
+          
             <div class="single-long-post">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?><?php echo $url ?>)"></div>
-                </div>
-                <div class="col-md-8">
-                  <a href="<?php the_permalink(); ?>">
-                  <h3><?php the_title(); ?></h3></a>
-                  <div class="excerpt"><?php the_excerpt(); ?></div>
-                </div>
-              </div>
+                  <div class="row showcase-item">
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>"><div class="showcase-thumbnail" style="background-image:url(<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>)"></div></a>
+                    </div>
+                    <div class="col-md-12">
+                      <a href="<?php the_permalink(); ?>">
+                        <h3><?php the_title() ;?></h3>
+                      </a>
+                      <p><?php the_excerpt(); ?></p>
+                    </div>
+                  </div>
+                  </div>
             </div>
             <?php
             endwhile;

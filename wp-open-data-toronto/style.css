@@ -283,3 +283,9 @@ input#mce-EMAIL {
     padding: 7px 12px;
     background: #d60808;
 }
+section#content i.fa {
+    font-size: 24px;
+    color: #666666;
+    margin: 0 10px 0px 0px;
+    display: inline-block;
+}

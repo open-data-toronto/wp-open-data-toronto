@@ -81,7 +81,9 @@
 
               <h1><span class="sr-only">Blog article: </span><?php the_title(); ?></h1>
 
-              <div class="byline">Published by <?php the_author(); ?> on <?php the_date(); ?></div>
+              <div class="byline">
+                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
+                      </div>
           <img class="img-responsive" src="<?php $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ); echo $url ?>" alt="<?php the_title(); ?>"/>
 
           <h2 class="sr-only">Article text</h2>
