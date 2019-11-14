@@ -369,6 +369,8 @@ form.dataset-filter{
 
  .filter a {
      color: #6d6d6d;
+     display: block;
+     width: 100%;
 }
  .filter a:hover {
      color: #185688;
@@ -380,7 +382,7 @@ form.dataset-filter{
      color: #185688;
 }
  .filter-selected a{
-    background: #666666 !important;
+    background: #30708f !important;
     font-weight: bold !important;
     padding: 4px 10px;
     color: #F5F5F5 !important;

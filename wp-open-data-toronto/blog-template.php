@@ -26,7 +26,7 @@
             <h3>Latest Posts</h3>
             <ul class="post-list">
               <?php
-              $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
+              $query2 = new WP_Query( array( 'posts_per_page' => 10 ) );
               while ( $query2->have_posts() ) :
                 $query2->the_post(); ?>
                 <li>
@@ -45,7 +45,7 @@
               wp_list_categories([
                 'orderby'    => 'name',
                 'show_count' => true,
-                'exclude'    => array( 10 ),
+                'exclude'    => array( 125, 126, 124, 123, 10 ),
                 'title_li'   => ''
               ]);
               ?>

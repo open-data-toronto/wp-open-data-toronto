@@ -60,7 +60,7 @@
       <!-- This query calls, in order, a single post that is categorized as both Data Story AND Featured. and was created most recently -->
 
       <?php global $post; 
-      $args = array('category_name' => 'data-stories+featured', 'numberposts' => 1);
+      $args = array('category_name' => 'featured-data-story', 'numberposts' => 1);
       $custom_posts = get_posts($args);
       foreach($custom_posts as $post) : setup_postdata($post);
         ?>
@@ -91,8 +91,47 @@
         <div class="row">
 
           <!-- This query calls, in order, 3 posts that are categorized as Featured that are NOT data stories. Ordered by last created. -->
+         
           <?php global $post; 
-          $args = array('category_name' => 'featured', 'numberposts' => 3);
+          $args = array('category_name' => 'feature-1', 'numberposts' => 1);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
+
+          <div class="col-md-4">
+            <a href="<?php the_permalink(); ?>">
+            <img src="<?php the_post_thumbnail_url(); ?>" alt="" class="img-responsive"/></a><br/>
+
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+
+            <p><?php the_excerpt(); ?></p>
+          </div>
+
+          <?php
+        endforeach;
+          ?>
+
+           <?php global $post; 
+          $args = array('category_name' => 'feature-2', 'numberposts' => 1);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
+
+          <div class="col-md-4">
+            <a href="<?php the_permalink(); ?>">
+            <img src="<?php the_post_thumbnail_url(); ?>" alt="" class="img-responsive"/></a><br/>
+
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+
+            <p><?php the_excerpt(); ?></p>
+          </div>
+
+          <?php
+        endforeach;
+          ?>
+
+           <?php global $post; 
+          $args = array('category_name' => 'feature-3', 'numberposts' => 1);
           $custom_posts = get_posts($args);
           foreach($custom_posts as $post) : setup_postdata($post);
           ?>

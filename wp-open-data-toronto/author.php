@@ -47,7 +47,7 @@
               wp_list_categories([
                 'orderby'    => 'name',
                 'show_count' => true,
-                'exclude'    => array( 10 ),
+                'exclude'    => array( 125, 126, 124, 123, 10 ),
                 'title_li'   => ''
               ]);
               ?>
