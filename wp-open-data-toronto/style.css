@@ -406,3 +406,25 @@ form.dataset-filter{
     width: auto;
     margin: 0 0 6px 0;
 }
+/* Dataset Catalogue */
+dl {
+    padding: 12px 0 0 18px;
+}
+.accordion .card-header{
+    padding: 0;
+}
+.card-body.accordion__body {
+    padding: 12px;
+}
+.accordion .card{
+    border: 0;
+}
+
+.accordion .mb-0 .btn:hover, .btn:focus {
+    outline: 2px solid #31708f !important;
+    color: #31708f;
+    background: #Ffffff !important;
+}
+.accordion .mb-0 .btn{
+    outline: 2px solid #31708f;
+}
