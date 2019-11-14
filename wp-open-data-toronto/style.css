@@ -319,6 +319,7 @@ section#pages h2 a{
 /* Data Catalogue */
 form.dataset-filter{
     width: 100%;
+    margin: 0 0 20px 0
 }
 .page-template h2{
     margin: 0 0 15px 0;
@@ -339,8 +340,12 @@ form.dataset-filter{
 
 .status-label.new-tag{background: #155788 !important;}
 .status-label.retired-tag{background: #666666 !important;}
+.sort.info{padding:0}
 
 
+.dataset-sidebar .card{
+    margin: 0 0 30px 0
+}
 /* Responsive */
 
 @media (max-width: 992px){
@@ -377,16 +382,19 @@ form.dataset-filter{
  .filter-selected a{
     background: #666666 !important;
     font-weight: bold !important;
+    padding: 4px 10px;
     color: #F5F5F5 !important;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
 }
 .filter-selected span.badge {
     display: none;
 }
 .filter .badge {
-   background: #666666;
+   background: #31708f;
    position: absolute;
    top: 50%;
-   margin: 0rem .8rem;
    right: 0;
    transform: translateY(-50%);
    font-size: 100%;
@@ -396,15 +404,17 @@ form.dataset-filter{
     display: none;
 }
 .status-label {
+    display: inline-block;
+    text-transform: lowercase; 
+    padding: 4px 8px; 
+    font-size: 80%;
+    font-weight: 700;
+    line-height: 1;
     color: #fff;
-    font-weight: bold;
-    font-family: Montserrat;
-    padding: 5px 0 6px 0;
     text-align: center;
-    border-radius: 2px;
-    font-size: 14px;
-    width: auto;
-    margin: 0 0 6px 0;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
 }
 /* Dataset Catalogue */
 dl {
@@ -419,7 +429,6 @@ dl {
 .accordion .card{
     border: 0;
 }
-
 .accordion .mb-0 .btn:hover, .btn:focus {
     outline: 2px solid #31708f !important;
     color: #31708f;
@@ -427,4 +436,26 @@ dl {
 }
 .accordion .mb-0 .btn{
     outline: 2px solid #31708f;
+}
+
+.card-header.filter-heading {
+    background: 0;
+    text-align: left;
+    padding: 0;
+    border: 0;
+}
+.dataset-sidebar .card{
+    border:0;
+}
+.dataset-sidebar .list-group-item{
+    border: 0;
+    padding: 2px 0 4px 0;
+    font-size:16px
+}
+.filter-selected a {
+    background: #666666 !important;
+    font-weight: bold !important;
+    padding: 4px 10px;
+    color: #F5F5F5 !important;
+    border-radius: 5px;
 }
