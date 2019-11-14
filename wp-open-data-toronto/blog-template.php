@@ -94,7 +94,7 @@
                     <h2><i class="fa fa-calendar"></i> News &amp; Events</h2>
                   </div>
                   <div class="col-md-2">
-                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">News and Events</span></a>
+                    <a href="/category/news/" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">News and Events</span></a>
                   </div>
                 </div>
 
@@ -116,9 +116,7 @@
                       <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title() ;?></h3>
                       </a>
-                      <div class="attributes">
-                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
-                      </div>
+                      
                       <p><?php the_excerpt(); ?></p>
                     </div>
                   </div>
@@ -129,12 +127,15 @@
                 wp_reset_postdata();
                 ?>
               </div>
+
+              <hr/> 
+
               <div class="row">
                 <div class="col-md-10">
                     <h2><i class="fa fa-book"></i> Data Stories</h2>
                   </div>
                   <div class="col-md-2">
-                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">data stories</span></a>
+                    <a href="/category/data-stories" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">data stories</span></a>
                   </div>
                 </div>
 
@@ -169,12 +170,16 @@
                 wp_reset_postdata();
                 ?>
               </div>
+
+              <hr/> 
+
+
             <div class="row">
                 <div class="col-md-10">
                     <h2><i class="fa fa-mortar-board"></i> Tools &amp; Training</h2>
                   </div>
                   <div class="col-md-2">
-                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">tools and training</span></a>
+                    <a href="/category/training" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">tools and training</span></a>
                   </div>
                 </div>
 
@@ -209,13 +214,13 @@
                 wp_reset_postdata();
                 ?>
               </div>
-
+<hr/> 
              <div class="row">
                 <div class="col-md-10">
                     <h2><i class="fa fa-video-camera"></i> Video &amp; Multimedia</h2>
                   </div>
                   <div class="col-md-2">
-                    <a href="#" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">videos and multimedia</span></a>
+                    <a href="/category/multimedia" class="btn btn-primary btn-sm pull-right">View more <span class="sr-only">videos and multimedia</span></a>
                   </div>
                 </div>
 
@@ -250,13 +255,13 @@
                 wp_reset_postdata();
                 ?>
               </div>
-
+<hr/> 
 <div class="row">
                 <div class="col-md-10">
                     <h2><i class="fa fa-tree"></i> Civic Issues</h2>
                   </div>
                   <div class="col-md-2">
-                    <a href="#" class="btn btn-primary btn-sm pull-right">View More <span class="sr-only">News and Events</span></a>
+                    <a href="/category/civic-issues" class="btn btn-primary btn-sm pull-right">View More <span class="sr-only">Civic issues</span></a>
                   </div>
                 </div>
 

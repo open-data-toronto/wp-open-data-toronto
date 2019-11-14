@@ -101,7 +101,7 @@
             <a href="<?php the_permalink(); ?>">
             <img src="<?php the_post_thumbnail_url(); ?>" alt="" class="img-responsive"/></a><br/>
 
-            <h2><a href="<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 
             <p><?php the_excerpt(); ?></p>
           </div>

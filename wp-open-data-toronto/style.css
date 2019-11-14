@@ -5,7 +5,8 @@ Author:          Sidra Mahmood, Yizhao Tan, Carlos Hernandez
 Template:        wp-bootstrap-starter
 -------------------------------------------------------------- */
 
-body, p, html, *, a{font-family: 'Roboto';}
+body, p, html, *, a{font-family: 'Roboto'}
+
 #super-header{
     background: #165788;
     height: 80px;
@@ -23,7 +24,15 @@ header#masthead {
     font-family: Roboto;
     font-weight: 400
 }
+#masthead .navbar-nav > li > a {
+    color: #2c2c2c;
+}
 
+#masthead .navbar-nav > li > a:hover,
+#masthead .navbar-nav > li > a:focus{
+    color: #000000;
+    text-decoration: underline;
+}
 /* Wordmark */
 a.navbar-brand{
     font-family: Montserrat;
@@ -195,7 +204,6 @@ a.breadcrumb-item {
 }
 .page-template-page-catalogue .banner{
     height:60px;
-    background-image: navajowhite !important;
     background-position: 50% 50%;
     padding: 0px;
 }
@@ -260,6 +268,11 @@ input#mce-EMAIL {
 #content.post-content img{
     padding: 0 0 12px 0;
 }
+section#content hr {
+    margin: 0px 0 40px 0;
+    padding: 0;
+    border: 0;
+}
 .btn-sm {
     padding: 7px 12px;
     background: #d60808;
@@ -315,6 +328,14 @@ form.dataset-filter{
     border-radius: 0;
     padding: 3px 0 4px 9px;
 }
+ .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
+    background: #FFEB9C;
+}
+
+.status-label.new-tag{background: #155788 !important;}
+.status-label.retired-tag{background: #666666 !important;}
+
+
 /* Responsive */
 
 @media (max-width: 992px){
