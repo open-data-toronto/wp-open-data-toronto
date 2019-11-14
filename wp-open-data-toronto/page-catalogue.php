@@ -22,9 +22,7 @@
           <!-- Banner -->
           <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'thumbnail'); ?>) !important">
             <div class="background">
-              <h1>
-                <?php the_title();?>
-              </h1>
+              
             </div>
           </div>
           <!-- End Banner -->
