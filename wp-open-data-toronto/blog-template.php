@@ -100,12 +100,11 @@
 
                 <div class="row" style="padding: 10px 0 0 0">
 
-                <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
-                if ( $the_query->have_posts() ) :
-                  while ( $the_query->have_posts() ) :
-                    $the_query->the_post();
-                ?>
+                <?php global $post; 
+          $args = array('category_name' => 'news', 'numberposts' => 2);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
                    <div class="col-md-6" style="margin: 0 0 20px 0">
                  
                   <div class="row showcase-item">
@@ -122,10 +121,8 @@
                   </div>
                   </div>
                 <?php
-                  endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+        endforeach;
+          ?>
               </div>
 
               <hr/> 
@@ -141,12 +138,11 @@
 
                <div class="row" style="padding: 10px 0 0 0">
 
-                <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
-                if ( $the_query->have_posts() ) :
-                  while ( $the_query->have_posts() ) :
-                    $the_query->the_post();
-                ?>
+                <?php global $post; 
+          $args = array('category_name' => 'data-stories', 'numberposts' => 2);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
                    <div class="col-md-6" style="margin: 0 0 20px 0">
                  
                   <div class="row showcase-item">
@@ -157,18 +153,14 @@
                       <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title() ;?></h3>
                       </a>
-                      <div class="attributes">
-                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
-                      </div>
+                      
                       <p><?php the_excerpt(); ?></p>
                     </div>
                   </div>
                   </div>
                 <?php
-                  endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+        endforeach;
+          ?>
               </div>
 
               <hr/> 
@@ -185,12 +177,11 @@
 
                <div class="row" style="padding: 10px 0 0 0">
 
-                <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
-                if ( $the_query->have_posts() ) :
-                  while ( $the_query->have_posts() ) :
-                    $the_query->the_post();
-                ?>
+                <?php global $post; 
+          $args = array('category_name' => 'training', 'numberposts' => 2);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
                    <div class="col-md-6" style="margin: 0 0 20px 0">
                  
                   <div class="row showcase-item">
@@ -201,18 +192,14 @@
                       <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title() ;?></h3>
                       </a>
-                      <div class="attributes">
-                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
-                      </div>
+                      
                       <p><?php the_excerpt(); ?></p>
                     </div>
                   </div>
                   </div>
                 <?php
-                  endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+        endforeach;
+          ?>
               </div>
 <hr/> 
              <div class="row">
@@ -226,12 +213,11 @@
 
                <div class="row" style="padding: 10px 0 0 0">
 
-                <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
-                if ( $the_query->have_posts() ) :
-                  while ( $the_query->have_posts() ) :
-                    $the_query->the_post();
-                ?>
+                <?php global $post; 
+          $args = array('category_name' => 'multimedia', 'numberposts' => 2);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
                    <div class="col-md-6" style="margin: 0 0 20px 0">
                  
                   <div class="row showcase-item">
@@ -242,18 +228,14 @@
                       <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title() ;?></h3>
                       </a>
-                      <div class="attributes">
-                        Published on <?php the_date(); ?> by <?php echo get_post_meta($post->ID, 'byline', true); ?>
-                      </div>
+                      
                       <p><?php the_excerpt(); ?></p>
                     </div>
                   </div>
                   </div>
                 <?php
-                  endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+        endforeach;
+          ?>
               </div>
 <hr/> 
 <div class="row">
@@ -267,12 +249,11 @@
 
                <div class="row" style="padding: 10px 0 0 0">
 
-                <?php
-                $the_query = new WP_Query( array( 'posts_per_page' => 2 ) );
-                if ( $the_query->have_posts() ) :
-                  while ( $the_query->have_posts() ) :
-                    $the_query->the_post();
-                ?>
+                 <?php global $post; 
+          $args = array('category_name' => 'civic-issues', 'numberposts' => 2);
+          $custom_posts = get_posts($args);
+          foreach($custom_posts as $post) : setup_postdata($post);
+          ?>
                    <div class="col-md-6" style="margin: 0 0 20px 0">
                  
                   <div class="row showcase-item">
@@ -283,15 +264,14 @@
                       <a href="<?php the_permalink(); ?>">
                         <h3><?php the_title() ;?></h3>
                       </a>
+                      
                       <p><?php the_excerpt(); ?></p>
                     </div>
                   </div>
                   </div>
                 <?php
-                  endwhile;
-                endif;
-                wp_reset_postdata();
-                ?>
+        endforeach;
+          ?>
               </div>
 
             </div></div>
