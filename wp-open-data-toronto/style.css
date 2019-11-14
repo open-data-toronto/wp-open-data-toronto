@@ -289,3 +289,12 @@ section#content i.fa {
     margin: 0 10px 0px 0px;
     display: inline-block;
 }
+
+/* Responsive */
+
+@media (max-width: 992px){
+    button.navbar-toggler{
+        position: absolute;
+    right: 0;
+}
+}
