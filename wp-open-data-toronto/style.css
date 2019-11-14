@@ -157,8 +157,13 @@ input#search {
     font-weight: 400
 }
 .dataset .dataset-meta-label{
-    font-weight:200;
-    margin-top:14px
+    font-weight: 500;
+    margin-top: 14px;
+    font-family: Montserrat;
+    color: #000000;
+}
+.attributes span {
+    font-size: 15px;
 }
 .dataset .row{
     padding: px 0 0 0
@@ -343,4 +348,61 @@ form.dataset-filter{
         position: absolute;
     right: 0;
 }
+}
+
+/* Accessibility */
+.sr-only-focusable:focus {
+    display: block;
+    margin: 0 0 20px 0 !important;
+    padding: 9px;
+    background: #fff283 !important;
+    outline-width: 2px;
+    outline-offset: 2px
+}
+/* Increase contrast for error */
+#search-error{color:#A72925 !important}
+
+ .filter a {
+     color: #6d6d6d;
+}
+ .filter a:hover {
+     color: #185688;
+}
+ .filter a:hover::before{
+     color: #185688;
+}
+ .filter-selected a::before{
+     color: #185688;
+}
+ .filter-selected a{
+    background: #666666 !important;
+    font-weight: bold !important;
+    color: #F5F5F5 !important;
+}
+.filter-selected span.badge {
+    display: none;
+}
+.filter .badge {
+   background: #666666;
+   position: absolute;
+   top: 50%;
+   margin: 0rem .8rem;
+   right: 0;
+   transform: translateY(-50%);
+   font-size: 100%;
+}
+
+.hidden {
+    display: none;
+}
+.status-label {
+    color: #fff;
+    font-weight: bold;
+    font-family: Montserrat;
+    padding: 5px 0 6px 0;
+    text-align: center;
+    border-radius: 2px;
+    font-size: 14px;
+    width: auto;
+    margin: 0 0 6px 0;
 }
