@@ -45,8 +45,7 @@
                 wp_reset_query();
             ?>  
 
-
-              <a class="btn btn-md" href="/about/">Learn more about Open Data</a>
+            <a class="btn btn-md" href="/about/">Learn more about Open Data</a>
             </div>
 
             <div class="col-md-6 offset-md-1">
@@ -67,19 +66,20 @@
         ?>
 
       <!-- Data Stories -->
+      <div class="col-md-12">
       <section id="data-stories" aria-label="Data Stories" style="background-image:url('<?php the_post_thumbnail_url(); ?>')">
         <div class="jumbotron text-center" style="background: rgba(0, 0, 0, 0.67);">
-          <h2 class="heading small">DATA STORY</h2>
           <div class="row">
             <div class="col-md-8 offset-md-2">
-              <h3><?php the_title(); ?></h3>
+              <h2><?php the_title(); ?></h2>
               <p><?php the_excerpt(); ?></p>
+              <br/>
               <p><a class="btn btn-md" href="<?php the_permalink(); ?>">Read "<?php the_title(); ?>"</a></p>
             </div>
           </div>
         </div>
       </section>
-
+    </div>
       <?php
       endforeach;
       ?>
@@ -87,26 +87,32 @@
 
       <!-- Pages -->
       <section id="pages" aria-label="Secondary Pages">
+        
         <div class="row">
 
           <!-- This query calls, in order, 3 posts that are categorized as Featured that are NOT data stories. Ordered by last created. -->
-           <?php global $post; 
+          <?php global $post; 
           $args = array('category_name' => 'featured', 'numberposts' => 3);
           $custom_posts = get_posts($args);
           foreach($custom_posts as $post) : setup_postdata($post);
           ?>
 
           <div class="col-md-4">
-           <h2> <a href="<?php the_permalink(); ?>"><?php the_title(); ?></h2>
+            <a href="<?php the_permalink(); ?>">
             <img src="<?php the_post_thumbnail_url(); ?>" alt="" class="img-responsive"/></a><br/>
+
+            <h2><a href="<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+
             <p><?php the_excerpt(); ?></p>
           </div>
 
           <?php
         endforeach;
           ?>
-        </div>
+      </div>
       </section>
+
+
     </div>
   </section>
 </div><!-- end row -->

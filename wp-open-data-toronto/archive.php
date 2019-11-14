@@ -68,7 +68,7 @@
       <div class="col-md-9" id="content">
         <div class="row">
           <div class="col-md-12">
-             <h1><?php printf( __( 'Articles filed under ', 'twentyfourteen' ), single_cat_title( '', false ) ); ?></h1>
+             <h1>Articles filed under <i><?php printf( __( '%s', 'twentyfourteen' ), single_cat_title( '', false ) ); ?></i></h1>
 <br/>
                   <h2 class="sr-only">Posts</h2>
 

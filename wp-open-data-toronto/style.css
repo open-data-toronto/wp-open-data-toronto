@@ -5,25 +5,6 @@ Author:          Sidra Mahmood, Yizhao Tan, Carlos Hernandez
 Template:        wp-bootstrap-starter
 -------------------------------------------------------------- */
 
-/* Index
-===========================
-1. Global Styles and Resets
-2. Typography / Buttons
-3. Layout / Breadcrumbs / Pagination
-4. Header and Navigation
-5. Footer
-6. Homepage Template
-7. Plain Page Template
-8. Form Fields
-9. Catalogue Page Template
-10. Blog Index Template
-11. Dynamic Fields / Accordion
-12. Ninja Forms Overrides
-13. Tablepress Overrides
-14. Device-specific Styles
-===========================
-*/
-
 body, p, html, *, a{font-family: 'Roboto';}
 #super-header{
     background: #165788;
@@ -288,6 +269,33 @@ section#content i.fa {
     color: #666666;
     margin: 0 10px 0px 0px;
     display: inline-block;
+}
+
+/* Homepage */
+#data-stories h2{
+    color: #ffffff;
+}
+#data-stories h3{
+    color: #ffffff;
+}
+#data-stories p{
+    color: #ffffff;
+}
+#data-stories .jumbotron{
+    padding: 80px 20px;
+    margin: 0;
+}
+#data-stories{
+    background-size: cover;
+    background-position: 50% 50%;
+}
+section#pages{
+    margin: 30px 15px;
+}
+section#pages h2 a{
+    font-family: Montserrat;
+    margin: 10px 0 20px 0;
+    display: block;
 }
 
 /* Responsive */
