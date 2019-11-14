@@ -14,7 +14,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:bold,bolditalic|Roboto:bold,italic"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:light,regular,bold,bolditalic|Roboto:light,regular,bold,italic"/>
 
     <!--Favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url(); ?>/wp-content/themes/wp-open-data-toronto/img/favicon/apple-touch-icon.png">
