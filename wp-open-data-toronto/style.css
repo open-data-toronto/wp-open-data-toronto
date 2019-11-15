@@ -350,8 +350,33 @@ form.dataset-filter{
 
 @media (max-width: 992px){
     button.navbar-toggler{
-        position: absolute;
+    position: absolute;
     right: 0;
+}
+#pre-footer{
+    text-align: center;
+}
+form.mailchimp{
+    margin: 12px auto 12px auto;
+    width: 100%;
+    text-align: center
+}
+form.mailchimp input.email{
+    display: block;
+    margin: 0 auto;
+}
+input#mce-EMAIL{
+    width: 90%; 
+}
+input#search{
+    width: 100%;
+}
+.hero {
+    max-width: 100%;
+}
+.col-md-5{
+    width: 100%;
+    overflow: hidden;
 }
 }
 
@@ -460,4 +485,15 @@ dl {
     padding: 4px 10px;
     color: #F5F5F5 !important;
     border-radius: 5px;
+}
+/* Search */
+.search-results-content .card{
+    padding: 19px 20px 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 0px;
+    box-shadow: 1px 1px 2px #ccc;
+}
+.search-results-content h2 a{
+    font-family: Montserrat;
+    font-weight: 500;
 }
