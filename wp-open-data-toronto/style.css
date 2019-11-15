@@ -364,6 +364,16 @@ form.dataset-filter{
 .dataset-sidebar .card{
     margin: 0 0 30px 0
 }
+
+/* 404 Page */
+.large.heading {
+    font-size: 10rem;
+    text-align: center;
+    color: #175787;
+}
+.subtext{
+    text-align: center
+}
 /* Responsive */
 
 /* Medium Devices */
