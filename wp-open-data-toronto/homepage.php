@@ -74,7 +74,7 @@
               <h2><?php the_title(); ?></h2>
               <p><?php the_excerpt(); ?></p>
               <br/>
-              <p><a class="btn btn-md" href="<?php the_permalink(); ?>">Read "<?php the_title(); ?>"</a></p>
+              <p><a class="btn btn-md" href="<?php the_permalink(); ?>">Read Article</a></p>
             </div>
           </div>
         </div>
