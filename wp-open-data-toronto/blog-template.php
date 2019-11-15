@@ -23,6 +23,8 @@
             <h3>Knowledge Centre</h3>
             <p>Whether you're a seasoned data scientist, or a beginner - Toronto Open Data has you covered! We publish new content biweekly.</p>
             <br/>
+
+            <div class="hidden-sm-down">
             <h3>Latest Posts</h3>
             <ul class="post-list">
               <?php
@@ -77,6 +79,7 @@
             </ul>
           </div>
         </div>
+      </div>
 
         <!-- Main Post Listing -->
         <div class="col-md-9">

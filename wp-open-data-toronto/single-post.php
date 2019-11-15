@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-md-3 hide-full-length">
           <!-- Sidebar Content -->
-          <div class="blog-sidebar" role="complementary">
+          <div class="blog-sidebar hidden-sm-down" role="complementary">
             <h2 class="sr-only">Explore Open Data Blog</h2>
             <h3>Latest Posts</h3>
             <ul class="post-list">

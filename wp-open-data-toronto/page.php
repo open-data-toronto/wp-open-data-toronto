@@ -18,6 +18,7 @@
       <div class="row">
         <div class="col-md-3">
           <div class="hide-full-length">
+            
             <!-- Call General Sidebar // sidebar.php -->
             <?php get_sidebar(); ?>
           </div>

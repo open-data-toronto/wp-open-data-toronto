@@ -345,7 +345,6 @@ form.dataset-filter{
 }
 .card-header.filter-heading {
     padding: 12px 0 3px 10px;
-    /* text-transform: uppercase; */
 }
 .list-group-flush .list-group-item {
     border-right: 0;
@@ -370,12 +369,60 @@ form.dataset-filter{
 /* Medium Devices */
 
 @media (max-width: 768px){
+.blog-sidebar{
+    text-align: center
+}
+ul.page-list {
+    margin: -20px 0 20px 0;
+    padding: 0;
+    text-align: center;
+    list-style: none
+}
+ul.page-list ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul.page-list ul li a{
+    color: #31708f;
+    border: 1px solid #c3c3c3;
+    display: block;
+    padding: 7px 0;
+    text-align: center;
+    margin-top: -1px;
+}
+ul.page-list li a{
+    color: #31708f;
+    border: 1px solid #c3c3c3;
+    display: block;
+    padding: 7px 0;
+    text-align: center;
+    margin-top: -1px;
+}
+#content h1{
+    text-align: center
+}
 
+.about-dataset h3{
+    text-align: center
+}
+#super-header{
+    height: 60px;
+}
+.about-dataset{
+    text-align: center
+}
  .hero .jumbotron {
     padding: 40px 0;
     width: 100% !important;
     margin-left: 0px;
     margin-top: -40px;
+}
+section.main-post-listing{
+    text-align: center
+}
+section.main-post-listing .btn{
+    width: 100%;
 }
 nav form.form-inline button.btn{
     width: 100%;
@@ -501,6 +548,9 @@ input#search{
 /* Dataset Catalogue */
 dl {
     padding: 12px 0 0 18px;
+}
+.accordion{
+    border: 2px solid #316f8f;
 }
 .accordion .card-header{
     padding: 0;
