@@ -5,7 +5,30 @@ Author:          Sidra Mahmood, Yizhao Tan, Carlos Hernandez
 Template:        wp-bootstrap-starter
 -------------------------------------------------------------- */
 
+
+/* Resets */
+
 body, p, html, *, a{font-family: 'Roboto'}
+
+h1{
+    text-align:center;
+    display: block;
+    width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6{font-family: Montserrat}
+h1{font-size:30px}
+h2{font-size: 24px}
+h3{font-size:20px}
+h4{font-size: 16px}
+h5{font-size: 14px}
+
+ul li a:link, ul li a:visited{
+    color: #31708f
+}
+p, p ul li, p ol li, ul li, ol li{font-size: 16px}
+
+/* COT Header */
 
 #super-header{
     background: #165788;
@@ -18,6 +41,7 @@ body, p, html, *, a{font-family: 'Roboto'}
 }
 
 /* Navigation */
+
 header#masthead {
     box-shadow: none;
     margin-bottom: 0;
@@ -34,6 +58,7 @@ header#masthead {
     text-decoration: underline;
 }
 /* Wordmark */
+
 a.navbar-brand{
     font-family: Montserrat;
     font-weight: 600;
@@ -43,6 +68,7 @@ a.navbar-brand{
 }
 
 /* Buttons */
+
 .btn-primary {
     color: #fff;
     background-color: #165787;
@@ -53,19 +79,6 @@ a.navbar-brand{
     font-size: 13px;
     padding: 10px 21px;
 }
-h1{
-    text-align:center;
-    display: block;
-    width: 100%;
-}
-
-h1,h2,h3,h4,h5,h6{font-family: Montserrat}
-h1{font-size:30px}
-h2{font-size: 24px}
-h3{font-size:20px}
-h4{font-size: 16px}
-h5{font-size: 14px}
-
 .btn{
     background: #31708f !important;
     color: #ffffff;
@@ -84,6 +97,9 @@ h5{font-size: 14px}
     background: #Ffffff !important;
 
 }
+
+/* Footers */
+
 footer#footer {
     background: #165787;
     padding: 12px 0;
@@ -97,15 +113,21 @@ footer#footer a:link{
     padding: 14px 0 0 0;
     display: block;
 }
+#pre-footer{
+    padding: 30px 0;
+    background: #f4f4f4;
+}
+
+/* Page Specific */
+
 main.site-content {
     padding: 40px 0 60px 0;
     box-shadow: 0px 3px 12px #ccc;
     margin: 0 0 0px 0;
 }
-#pre-footer{
-    padding: 30px 0;
-    background: #f4f4f4;
-}
+
+/* Homepage */
+
 section#about{
     margin: 40px 0px 60px 0;
     display: block;
@@ -129,10 +151,7 @@ section#about ul li{
     display:block;
     padding: 0 0 5px 0
 }
-ul li a:link, ul li a:visited{
-    color: #31708f
-}
-p, p ul li, p ol li, ul li, ol li{font-size: 16px}
+
 .jumbotron h1{padding: 0px 0 30px 0;
 color: #fff;
 text-shadow: 2px 2px 2px #222;
@@ -348,7 +367,43 @@ form.dataset-filter{
 }
 /* Responsive */
 
-@media (max-width: 992px){
+/* Medium Devices */
+
+@media (max-width: 768px){
+
+ .hero .jumbotron {
+    padding: 40px 0;
+    width: 100% !important;
+    margin-left: 0px;
+    margin-top: -40px;
+}
+nav form.form-inline button.btn{
+    width: 100%;
+}
+ul#menu-homepage li.menu-item {
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    margin: -1px 0px 0px 0px;
+}
+ul#menu-homepage li.menu-item:nth-child(1){
+    margin: 0;
+}
+nav.navbar input.form-control{
+    width: 100% !important;
+    margin: 0 0 7px 0 !important;
+    border-radius: 0;
+    background: #f4f4f4;
+}
+#pre-footer{
+    padding: 20px 0 10px 0;
+}
+section#about{
+    margin: 15px 0 20px 0;
+    text-align: center
+}
+.hero .jumbotron h1{
+    padding: 0 30px;
+}
     button.navbar-toggler{
     position: absolute;
     right: 0;
