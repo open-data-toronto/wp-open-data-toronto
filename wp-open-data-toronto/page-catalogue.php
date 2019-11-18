@@ -17,20 +17,6 @@
         </div>
       </div>
 
-      <div class="row block-hidden">
-        <div class="col-md-12">
-          <!-- Banner -->
-          <div class="banner" style="background-image:url(<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'thumbnail'); ?>) !important">
-            <div class="background">
-              <h1>
-                <?php the_title();?>
-              </h1>
-            </div>
-          </div>
-          <!-- End Banner -->
-        </div>
-      </div>
-
       <div class="row d-flex block-hidden" id="content">
         <!-- Sidebar -->
 
@@ -87,6 +73,9 @@
         <!-- End Sidebar -->
         <div class="col-md-9">
           <div class="container-fluid">
+            <div class="row">
+              <h2>Dataset Catalogue</h2>
+            </div>
             <!-- Dataset Search Area -->
             <div class="row" id="dataset-search-box">
               <form class="dataset-filter" id="search-dataset" role="search" aria-label="Search the Open Data Catalogue">

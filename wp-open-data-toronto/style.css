@@ -5,37 +5,352 @@ Author:          Sidra Mahmood, Yizhao Tan, Carlos Hernandez
 Template:        wp-bootstrap-starter
 -------------------------------------------------------------- */
 
-/* Index
-===========================
-1. Global Styles and Resets
-2. Typography / Buttons
-3. Layout / Breadcrumbs / Pagination
-4. Header and Navigation
-5. Footer
-6. Homepage Template
-7. Plain Page Template
-8. Form Fields
-9. Catalogue Page Template
-10. Blog Index Template
-11. Dynamic Fields / Accordion
-12. Ninja Forms Overrides
-13. Tablepress Overrides
-14. Device-specific Styles
-===========================
-*/
 
-/* Default */
-.dataset-sidebar li a {
-    padding: 7px !important;
+/* Resets */
+
+body, p, html, *, a{font-family: 'Roboto'}
+
+h1{
+    text-align:center;
+    display: block;
+    width: 100%;
 }
-ul.newsfeed li a {
+
+h1,h2,h3,h4,h5,h6{font-family: Montserrat}
+h1{font-size:30px}
+h2{font-size: 24px}
+h3{font-size:20px}
+h4{font-size: 16px}
+h5{font-size: 14px}
+
+ul li a:link, ul li a:visited{
+    color: #31708f
+}
+p, p ul li, p ol li, ul li, ol li{font-size: 16px}
+
+/* COT Header */
+
+#super-header{
+    background: #165788;
+    height: 80px;
+    margin: 0;
+}
+#super-header img {
+    width: 160px;
+    margin-top: 13px;
+}
+
+/* Navigation */
+
+header#masthead {
+    box-shadow: none;
+    margin-bottom: 0;
+    font-family: Roboto;
+    font-weight: 400
+}
+#masthead .navbar-nav > li > a {
+    color: #2c2c2c;
+}
+
+#masthead .navbar-nav > li > a:hover,
+#masthead .navbar-nav > li > a:focus{
+    color: #000000;
+    text-decoration: underline;
+}
+/* Wordmark */
+
+a.navbar-brand{
+    font-family: Montserrat;
+    font-weight: 600;
+    color: #165787;
+    margin-right: 30px;
+    text-transform: uppercase;
+}
+
+/* Buttons */
+
+.btn-primary {
+    color: #fff;
+    background-color: #165787;
+    border-color: none;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px 21px;
+}
+.btn{
+    background: #31708f !important;
+    color: #ffffff;
+    text-transform:uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    font-family: Montserrat;
+    padding: 10px 21px;
+    border-radius: 0;
+    border: 2px solid #31708f;
+}
+.btn:hover,
+.btn:focus{
+    border: inset 2px solid #31708f !important;
+    color: #31708f;
+    background: #Ffffff !important;
+
+}
+
+/* Footers */
+
+footer#footer {
+    background: #165787;
+    padding: 12px 0;
+    text-align: center;
+    color: #ffffff;
+    margin: 0px 0 0 0;
+}
+footer#footer a:link{
+    color: #ffffff;
+    font-family: Roboto;
+    padding: 14px 0 0 0;
+    display: block;
+}
+#pre-footer{
+    padding: 30px 0;
+    background: #f4f4f4;
+}
+
+/* Page Specific */
+
+main.site-content {
+    padding: 40px 0 60px 0;
+    box-shadow: 0px 3px 12px #ccc;
+    margin: 0 0 0px 0;
+}
+
+/* Homepage */
+
+section#about{
+    margin: 40px 0px 60px 0;
+    display: block;
+    padding: 0
+}
+section#about h2{
+    padding: 20px 0 20px 0
+}
+section#about ul{
+    margin: 0 0 30px 0;
+    padding:0
+}
+section#about ul li{
+    font-family: Roboto;
+    font-size: 14px;
+    display:table;
+    font-weight: 500;
+    color: #31708f;
+    list-style-type: disc;
+    margin: 0;
+    display:block;
+    padding: 0 0 5px 0
+}
+
+.jumbotron h1{padding: 0px 0 30px 0;
+color: #fff;
+text-shadow: 2px 2px 2px #222;
+}
+.jumbotron{padding: 180px 0; border-radius: 0;margin: 0 20px; background-size: cover; background-position: 50% 50%;}
+
+input#search {
+    width: 310px;
+}
+.dataset.card{
+    padding: 30px 40px
+}
+.dataset.card p{
+    font-family: Roboto;font-size:14px; color: #222;
+}
+.dataset.card h3{
+    font-weight:600
+}
+.dataset .attributes{
+    font-size:12px;
+    color: #000;
+    font-weight: 400
+}
+.dataset .dataset-meta-label{
+    font-weight: 500;
+    margin-top: 14px;
+    font-family: Montserrat;
+    color: #000000;
+}
+.attributes span {
+    font-size: 15px;
+}
+.dataset .row{
+    padding: px 0 0 0
+}
+
+.jumbotron .banner{
+    height: 190px;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin: 0 0 20px 0;
+}
+.showcase-thumbnail{
+    height: 200px;
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 0px;
+    border: 1px solid #f4f4f4;
+    margin: 0 0 10px 0;
+}
+.showcase-item .attributes{
+    font-size: 12px;
+}
+
+.breadcrumb {
+    padding: 0 0 10px 0;
+    margin-bottom: 2rem;
+    list-style: none;
+    background: 0;
+    border-radius: 0;
+    margin-top: -23px;
+    font-family: Montserrat !important;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #666;
+}
+a.breadcrumb-item {
+    font-family: Montserrat;
+    font-weight: 500;
+}
+.form-inline .input-group {
+    width: auto;
+    margin: 0 auto;
+}
+.page-template-page-catalogue .banner{
+    height:60px;
+    background-position: 50% 50%;
+    padding: 0px;
+}
+.page-template-page-catalogue .background{
+    background: #fff;
+    padding: 13px 0;
+    opacity: 0.9;
+}
+.page-template-page-catalogue h1{
+    text-align: left;
+    padding: 0 0 0 20px;
+}
+.dataset.card{width:100%;
+margin: 0 0 15px 0;
+padding: 25px 30px}
+
+.dataset-search-results{
+    padding: 0;
+}
+#results-count{
+    padding:0;
+    margin-left: -15px !important;
+    padding-top: 13px;
+    padding-left: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #175787;
+    font-family: Montserrat !important;
+}
+#pre-footer a i.fa {
+    color: #afafaf;
+    font-size: 33px;
+    text-align: center;
+    display: inline-block;
+    padding: 0 20px 0 0;
+}
+form.mailchimp {
+    float: right;
+    display: block;
+    font-family: Roboto;
+    font-weight: 100;
+}
+input#mce-EMAIL {
+    padding: 6px 0 8px 6px;
+    margin: 0 0 0 10px;
+    width: 250px;
+}
+#content h1{
+    text-align: left;
+    margin: 0;
+}
+#content.post-content  h1{
+    padding: 0 0 6px 0;
+    display: block;
+}
+#content.post-content .byline{
+    padding: 0 0 12px 0;
+    display: block;
+    color: #222222;
+    font-family: Montserrat;
+}
+#content.post-content img{
+    padding: 0 0 12px 0;
+}
+section#content hr {
+    margin: 0px 0 40px 0;
+    padding: 0;
+    border: 0;
+}
+.btn-sm {
+    padding: 7px 12px;
+    background: #d60808;
+}
+section#content i.fa {
+    font-size: 24px;
+    color: #666666;
+    margin: 0 10px 0px 0px;
+    display: inline-block;
+}
+
+/* Homepage */
+#data-stories h2{
+    color: #ffffff;
+}
+#data-stories h3{
+    color: #ffffff;
+}
+#data-stories p{
+    color: #ffffff;
+}
+#data-stories .jumbotron{
+    padding: 80px 20px;
+    margin: 0;
+}
+#data-stories{
+    background-size: cover;
+    background-position: 50% 50%;
+}
+section#pages{
+    margin: 30px 15px;
+}
+section#pages h2 a{
+    font-family: Montserrat;
+    margin: 10px 0 20px 0;
     display: block;
 }
 
-/** Focus States **/
- #content a:focus{
-    text-decoration: underline;
-    border: 0;
+/* Data Catalogue */
+form.dataset-filter{
+    width: 100%;
+    margin: 0 0 20px 0
+}
+.page-template h2{
+    margin: 0 0 15px 0;
+}
+.card-header.filter-heading {
+    padding: 12px 0 3px 10px;
+}
+.list-group-flush .list-group-item {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    padding: 3px 0 4px 9px;
 }
  .about-dataset a:focus, .sidebar a:focus, a.breadcrumb-item:focus{
     background: #FFEB9C;
@@ -43,49 +358,144 @@ ul.newsfeed li a {
 
 .status-label.new-tag{background: #155788 !important;}
 .status-label.retired-tag{background: #666666 !important;}
+.sort.info{padding:0}
 
-/* Tables */
- .table a:focus{
-    background: abdbff;
-}
 
-ul.list-group li a:focus {
-    margin-bottom: 2px !important;
+.dataset-sidebar .card{
+    margin: 0 0 30px 0
 }
 
-.list-group-item-action:focus{
-    margin-bottom: 2px !important;
+/* 404 Page */
+.large.heading {
+    font-size: 10rem;
+    text-align: center;
+    color: #175787;
 }
-.form-control:focus {
-    color: #464a4c;
-    background-color: #fff;
-    outline: thin dotted #222222;
+.subtext{
+    text-align: center
 }
-input#search:focus{
+/* Responsive */
+
+/* Medium Devices */
+
+@media (max-width: 768px){
+.blog-sidebar{
+    text-align: center
 }
-a.btn:focus{
-    color: #ffffff;
-    background: #165788;
-	outline-width: 2px;
-    outline-offset: 2px
+.byline{
+    text-align: center
 }
-a:focus{
-    display: inline-block;
-	outline-width: 2px;
-    outline-offset: 2px
+ul.page-list {
+    margin: -20px 0 20px 0;
+    padding: 0;
+    text-align: center;
+    list-style: none
+}
+ul.page-list ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul.page-list ul li a{
+    color: #31708f;
+    border: 1px solid #c3c3c3;
+    display: block;
+    padding: 7px 0;
+    text-align: center;
+    margin-top: -1px;
+}
+ul.page-list li a{
+    color: #31708f;
+    border: 1px solid #c3c3c3;
+    display: block;
+    padding: 7px 0;
+    text-align: center;
+    margin-top: -1px;
+}
+#content h1{
+    text-align: center
 }
 
-main.site-content a.btn:focus {
-    background: #222222 !important;
+.about-dataset h3{
+    text-align: center
 }
-/* Buttons */
- button:focus, a.btn:focus{
-    background: #222222 !important;
+#super-header{
+    height: 60px;
 }
- #super-header a:focus{
-	outline-width: 2px;
-    outline-offset: 2px;
+.about-dataset{
+    text-align: center
 }
+ .hero .jumbotron {
+    padding: 40px 0;
+    width: 100% !important;
+    margin-left: 0px;
+    margin-top: -40px;
+}
+section.main-post-listing{
+    text-align: center
+}
+section.main-post-listing .btn{
+    width: 100%;
+}
+nav form.form-inline button.btn{
+    width: 100%;
+}
+ul#menu-homepage li.menu-item {
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    margin: -1px 0px 0px 0px;
+}
+ul#menu-homepage li.menu-item:nth-child(1){
+    margin: 0;
+}
+nav.navbar input.form-control{
+    width: 100% !important;
+    margin: 0 0 7px 0 !important;
+    border-radius: 0;
+    background: #f4f4f4;
+}
+#pre-footer{
+    padding: 20px 0 10px 0;
+}
+section#about{
+    margin: 15px 0 20px 0;
+    text-align: center
+}
+.hero .jumbotron h1{
+    padding: 0 30px;
+}
+    button.navbar-toggler{
+    position: absolute;
+    right: 0;
+}
+#pre-footer{
+    text-align: center;
+}
+form.mailchimp{
+    margin: 12px auto 12px auto;
+    width: 100%;
+    text-align: center
+}
+form.mailchimp input.email{
+    display: block;
+    margin: 0 auto;
+}
+input#mce-EMAIL{
+    width: 90%; 
+}
+input#search{
+    width: 100%;
+}
+.hero {
+    max-width: 100%;
+}
+.col-md-5{
+    width: 100%;
+    overflow: hidden;
+}
+}
+
+/* Accessibility */
 .sr-only-focusable:focus {
     display: block;
     margin: 0 0 20px 0 !important;
@@ -94,142 +504,13 @@ main.site-content a.btn:focus {
     outline-width: 2px;
     outline-offset: 2px
 }
-.btn-primary.focus, .btn-primary:focus {
-    padding: 9px 16px;
-    background-color: white;
-}
-
-.single-post section.content-area h3 {
-    margin: 0 0 20px 0;
-}
-
-/** End Focus States **/
-
-.inline-link {
-    padding: 0px !important;
-}
-a.btn{
-    text-decoration:none !important;
-    padding: 9px 12px 12px 12px;
-}
 /* Increase contrast for error */
 #search-error{color:#A72925 !important}
 
-/* Figures */
-figure img {
-    border-bottom: 1px solid #cccccc;
-}
-figure.wp-caption {
-    border: 1px solid #cccccc;
-    font-weight: bold;
-}
-.collapsed span.fa.fa-chevron-down {
-    padding-right: 11px !important;
-}
-.accordion{display:block;width:100%;max-width:100%;}
-            .accordion .card{max-width:100%;}
-            .accordion .card .btn{text-align:left;display:inline-block;color:#ffffff;background:#155788;font-weight:bold;padding:12px 12px;}
-            .accordion .card .btn:hover{background:#000;}
-            .accordion .card .btn .fa{float: none; text-align: right;}
-            .card-header{padding: 0;}
-
-           table#table-resources .btn{
-            width: max-content;
-           }
-
-.accordion .card .btn .fa {
-    float: right;
-    padding-left: 11px;
-    padding-right: 3px;
-    padding-top: 2px;
-}
-section{max-width: 100%;}
-/* COT Header */
-.card-body.accordion__body {
-    border: 1px solid #ccc;
-    padding: 20px;
-}
-form.dataset-filter{
-    width: 100%;
-}
-/* Text */
-/* Migration */
- header#masthead{
-    background: 0;
-}
-ul.status{
-    padding:0;
-    margin:15px 0 25px 0;
-    list-style:none
-}
-ul.status li{
-    padding:0;
-    margin:0;
-    list-style:none
-}
- :root {
-     --brandPrimary: #1594a3;
-     --brandSecondary: #1534a3;
-     --brandAccent: #ABC249;
-     --brandLightGray: #F5F5F5;
-     --brandDarkGray: #212121;
-}
- .col h3{
-     font-size: 22px;
-     font-weight: 400;
-     text-align: center;
-     padding: 10px 0 30px 0;
-}
- h3{
-    font-size: 19px;
-}
-.blog-sidebar h3{
-     margin: 0 0 14px 0;
-}
- h2.lead {
-     font-size: 30px;
-     width: 100%;
-}
- .col p{
-     text-align: center;
-     padding: 20px 20px 0 20px;
-     font-size: 14px !important;
-}
- a:link {
-     font-weight: bold !important;
-}
-main.site-content a:link{
-	text-decoration: underline;
-}
-.normal-text {
-    text-decoration: none !important;
-}
-.btn-primary.focus, .btn-primary:focus {
-    -webkit-box-shadow: 0;
-    box-shadow: none !important;
-    background: #000000 !important;
-}
-.btn-primary{border-radius: 0 !important;}
- .col{
-     width: 50%;
-     padding: 15px;
-     display: table-cell;
-     border-collapse: collapse;
-}
-}
-}
- .col-container{
-     display: table;
-     width: 100%;
-     border: 1px solid #ccc;
-     margin-top: -1px;
-}
- .col:nth-child(2){
-     border-left: 1px solid #ccc;
-}
-
  .filter a {
      color: #6d6d6d;
+     display: block;
+     width: 100%;
 }
  .filter a:hover {
      color: #185688;
@@ -241,18 +522,21 @@ main.site-content a:link{
      color: #185688;
 }
  .filter-selected a{
-    background: #666666 !important;
+    background: #30708f !important;
     font-weight: bold !important;
+    padding: 4px 10px;
     color: #F5F5F5 !important;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
 }
 .filter-selected span.badge {
     display: none;
 }
 .filter .badge {
-   background: #666666;
+   background: #31708f;
    position: absolute;
    top: 50%;
-   margin: 0rem .8rem;
    right: 0;
    transform: translateY(-50%);
    font-size: 100%;
@@ -261,1373 +545,73 @@ main.site-content a:link{
 .hidden {
     display: none;
 }
-/** Checkbox Styles **/
- dd {
-     word-wrap: break-word;
-}
- ul.pagination li{
-     padding: 0;
-     margin: 0;
-}
- ul.pagination li a{
-     font-size: 16px !important;
-     line-height: 20px;
-}
- ul.pagination a:link, ul.pagination a:visited{
-     font-weight: 500;
-     font-family: 'Roboto';
-     color: #175787;
-}
- ul.pagination a:hover {
-     font-weight: 500;
-     font-family: 'Roboto';
-     color: #fff;
-     background: #175787;
-     border: 1px solid #175787;
-}
- a.navbar-brand {
-     font-size: 25px;
-     margin: 8px 50px 12px 0;
-     color: #185688 !important;
-     font-weight: 500;
-}
- #temporary-notice {
-     font-size: 12px;
-     font-weight: 600;
-}
- #temporary-notice a:link, #temporary-notice a:visited{
-     color: #000000
-}
- #masthead .navbar-nav > li > a:focus, #masthead .navbar-nav > li > a:hover {
-     text-decoration: underline;
-}
-
- #data-stories h3 {
-     font-size: 48px;
-     margin: 0 20px 20px 20px;
-}
-/** 1. Global Styles and Resets **/
- .time{
-     text-align:right;
-}
- body, html, *{
-    padding: 0;
-    margin:0;
-}
- li{
-     font-size: 14px;
-     line-height: 20px;
-    /* margin: 0 15px */
-}
- ul, li{
-     list-style: none;
-     padding: 0;
-}
- a{
-     color: #124fcb;
-}
- .code{
-     padding: 15px 20px 20px 20px;
-     font-family: monospace;
-     background: #f4f4f4;
-     color: #666666;
-     white-space: pre-wrap;
-}
- .card-block{
-     padding: 0;
-}
- .card-img-top img{
-     height: 300px;
-     box-shadow: 0px 0px 2px #ccc;
-}
-/** 2. Typography / Buttons **/
- h1,h2,h3,h4,h5,h6{
-    padding: 0;
-     margin: 0;
-}
- h1 {
-     font-size: 19px;
-     font-weight: 300;
-     color: #666666;
-     padding: 0 0 12px 0;
-}
- h1.entry-title {
-     font-size: 20px;
-     font-weight: 300;
-}
- h2{
-     font-size: 22px;
-     margin: 0 0 26px 0;
-}
- button.btn.btn-default {
-     background: #1594a3;
-}
- button.btn.btn-primary{
-     border: 0;
-     background: #0e626b;
-     color: #fff;
-     font-weight: bold;
-}
- button.btn.btn-outline-primary{
-     border-color: #0e626b;
-     background: white;
-     color: #0e626b;
-     font-weight: bold;
-}
- button.btn.btn-outline-primary:hover{
-     border-color: #0e626b;
-     background: #0e626b;
-     color: white;
-     font-weight: bold;
-}
- a.btn.btn-md {
-     color: #ffffff;
-     background: #165788;
-}
-/** 3. Layout / Breadcrumbs / Pagination **/
- #crestashareiconincontent{
-     float: right;
-     margin-top: -20px;
-}
- #crestashareicon{
-     display: none;
-}
- #pages{
-     padding: 40px 0;
-}
- .breadcrumb {
-     padding: .75rem 0 0 0;
-     margin-bottom: 1rem;
-     list-style: none;
-     background: 0 !important;
-     border-radius: .25rem;
-     font-weight: 500;
-     font-size: 14px;
-}
- .breadcrumb a:link{
-     text-decoration: underline;
-}
- .wp-pagenavi a, .wp-pagenavi span {
-     text-decoration: none;
-     border: 0;
-     padding: 0;
-     margin: 0 5px 0 0;
-}
- .wp-pagenavi span.current {
-     font-weight: bold;
-     margin-left: 11px;
-}
- .background h1 {
-     color: #fff;
-     display: block;
-     position: absolute;
-     left: 40px;
-     font-size: 40px;
-     bottom: 30px;
-     font-weight: 300;
-     text-align: left
-}
- .background {
-     background: rgba(34, 34, 34, 0.54);
-     color: #fff;
-     padding: 0;
-     height: 20rem;
-}
- .page-content .large.heading {
-     font-size: 218px;
-     text-align: center;
-     color: #0097a6;
-}
- .page-content .subtext {
-     text-align: center;
-     font-size: 52px;
-     margin: 0 0 210px 0;
-}
-/** 4. Header and Navigation **/
- .social-media img {
-     width: 19px !important;
-     margin: 2px 0 0 0;
-}
- #masthead .navbar-nav > li > a {
-     color: #353535;
-     padding: 8px;
-}
- header#masthead {
-     box-shadow: none !important;
-     margin-bottom: 0;
-}
- button.navbar-toggler{
-     position: absolute;
-     right: 0;
-     top: 17px;
-}
- a.navbar-brand img {
-     width: 102px;
-     margin: 0 0 0 -8px;
-}
- .navbar {
-     padding: 0 !important;
-}
- .navbar-light .navbar-toggler {
-     color: rgb(0, 0, 0);
-     border: 1px solid #cccccc !important;
-}
-.navbar-toggler:focus{
-        background: #aedcff !important;
-    }
-
- .profile-photo img {
-     margin: 15px 0;
-     max-width: 100%;
-}
- p.biography{
-     font-size: 14px;
-}
- #nav-catalogue {
-     margin: auto;
-     width: 50%;
-}
-/** 5. Footer **/
-#footer {
-    /* margin-top: 2rem; */
-    text-align: center;
-    color: #ffffff;
-    background-color: #165788;
-    height: 80px;
-}
-footer#footer p {
-    padding-top: 28px;
-}
- nav#footer-nav img {
-     display: inline-block;
-     margin-right: 5px;
-}
- nav#footer-nav{
-     text-align: left;
-     background: #165788;
-}
- nav#footer-nav a{
-     display: inline;
-     width: 100%;
-     color: #ffffff;
-     background: #165788;
-}
- nav#footer-nav a:visited{
-     color: #ffffff;
-     background: #165788;
-}
- nav#footer-nav li a:visited{
-     color: #ffffff;
-     background: #165788;
-}
- nav#footer-nav li a{
-     background: #165788;
-     color: #ffffff;
-}
- footer#footer li a:visited{
-     color: #ffffff;
-     background: #165788;
-}
- footer#footer a:link{
-     color: #ffffff;
-     background: #165788;
-}
- footer#footer p a:visited{
-     color: #ffffff;
-     background: #165788;
-}
- footer#footer p a:link{
-     color: #ffffff;
-     background: #165788;
-}
- footer#footer{
-     background: #165788;
-}
- #footer-nav img {
-     width: auto;
-     max-width: 3.25rem;
-     height: 1rem;
-}
- #footer-nav a:not(:last-of-type) {
-     margin-right: 1.5em;
-}
- .pre-footer{
-     margin-top: 80px;
-}
-#monthly-updates {
-    margin-top: 15px;
-}
-.fa-envelope
-{
-    margin-top: 10px;
-    font-size: 20pt; 
-}
-.fa-twitter
-{
-    font-size: 20pt; 
-    margin-top: 10px;
-    padding-left: 10px;
-}
-#pre-footer {
-    margin-top: 2rem;
-    color: #165788;
-    background-color: #f2f2f2;
-    height: 90px;
-}
-
-/** 6. Homepage Template **/
- .hero .jumbotron{
-     padding: 8rem 2rem 10rem 2rem;
-}
-.hero .jumbotron .form-inline .input-group {
-    margin: 0 auto;
-}
-.hero .jumbotron:after {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #0000008f;
-    top: 0;
-    content: '';
-    left: 0;
-}
- .jumbotron .heading{
-     padding: 15px 0;
-     font-weight: lighter
-}
- #content h2{
-    /* margin: 0 0 22px 0;
-     */
-}
- #about p {
-     padding-top: 8px;
-     padding-bottom: 23px;
-}
- .home section{
-     padding: 0;
-     margin: 20px 0 40px 0;
-}
- ul.newsfeed{
-     width: 100%;
-     margin-top: 12px
-}
- ul.newsfeed li {
-     padding: 4px 0;
-     margin: 0;
-     font-size: 13px;
-     border-bottom: 1px solid #f4f4f4;
-}
- ul.newsfeed li:last-child{
-     border-bottom: none;
-}
-#super-header {
-    background: #165788;
-    height: 80px;
-    margin: 0;
-}
-#super-header img {
-    width: 160px;
-    margin-top: 13px;
-}
- section#about {
-     padding: 50px 0;
-}
- .hero .jumbotron {
-     background-image: url(/wp-content/themes/wp-open-data-toronto/img/homepage-winter.jpg);
-     background-size: cover;
-     background-position: 50% 73%;
-}
- div[id*="ajaxsearchlite"] {
-     box-shadow: none !important;
-}
- .hero .jumbotron .heading{
-     padding: 15px 0;
-     font-weight: normal;
-     color: #fff;
-     font-size: 32px;
-     text-shadow: 1px 1px 6px #222;
-}
- section#data-stories{
-     color: #ffffff;
-     background: #000000;
-     background-size: cover;
-     background-position: 50% 50%;
-}
- section#data-stories .jumbotron {
-     height: 500px;
-}
- section#data-stories .jumbotron .heading{
-     padding: 15px 0;
-     font-weight: bold;
-     text-transform: uppercase;
-     font-size: 11px;
-}
- .background-video {
-     position: absolute;
-     left: 0;
-     top: 0;
-     width: 100%;
-     background: #000;
-     overflow: hidden
-}
- .jumbotron h2 {
-     font-size: 42px;
-     color: #fff;
-}
- .jumbotron button.btn {
-     background: transparent;
-     color: #fff;
-     border: 2px solid #fff;
-     border-radius: 0;
-     font-size: 16px;
-     padding: 12px 20px;
-}
- .jumbotron{
-     position: relative;
-     overflow: hidden
-}
- .jumbotron iframe{
-     opacity: 0.4;
-     margin-top: -100px;
-}
- .hero .jumbotron button.btn {
-     background: #117b86;
-     color: #fff;
-     border: 0;
-     border-radius: 0;
-     font-size: 16px;
-     padding: 12px 20px;
-}
- .hero input.form-control {
-     border: 0;
-     border-radius: 0;
-}
- .jumbotron{
-     border-radius: 0;
-}
-/** 7. Plain Page Template **/
- #content.site-content {
-     padding-bottom: 0;
-     padding-top: 0px;
-}
- .page-template-default .content-area h3{
-     padding: 0;
-     margin: 0px 0 10px 0;
-     font-weight: 500;
-}
- #content{
-     background: #ffffff;
-}
- #content p, #content li {
-     font-size: 16px;
-     line-height: 24px;
-}
- .home #content{
-     background :#ffffff
-}
- .main-content h3 {
-     font-size: 19px;
-     font-weight: 400;
-     padding: 0 0 15px 0;
-     margin: 0;
-}
- .main-content p {
-     padding: 0 0 15px 0;
-     margin: 0;
-}
- .main-content ul li {
-     list-style-type: disc;
-}
- .main-content ol li{
-     list-style-type: decimal;
-     margin-left: 8px !important;
-}
- .main-content a {
-     font-weight: bold;
-     text-decoration: underline;
-}
- .meta-box {
-     border: 1px solid #ccc;
-     background: #f8f8f8;
-     padding: 20px 20px 5px 20px;
-     border: 1px solid #ccc;
-     margin: 0 0 10px 0;
-}
- .meta-box h4 {
-     font-size: 16px;
-     padding: 0 0 4px 0;
-     margin: 0;
-}
- .meta-box p {
-     font-size: 14px;
-     line-height: 17px;
-     padding: 0 0 10px 0;
-}
-/** 8. Form Fields **/
- select{
-     border-radius: 0 !important;
-}
- input{
-     border-radius: 0 !important;
-}
-input#search {
-    border: 2px solid #007d88;
-    width: 320px;
-}
-/** Search Results **/
- .search-results-content {
-     width: 100%;
-     display: block;
-     border: 1px solid #dddddd;
-     margin-top: -1px;
-     padding: 30px;
-}
- .search-results-content a {
-     text-decoration: none;
-}
- .search-results-content a p{
-     color: #666;
-}
- .search-results-content h3 {
-     font-weight: 400;
-     margin: 0 0 6px 0;
-}
- .search-results-content p {
-     font-size: 15px;
-}
- .sidebar {
-     padding: 0;
-     border: 1px solid #ccc;
-}
- ul.page-list {
-     margin: 0;
-}
- ul.page-list a {
-     font-weight: 600;
-     padding: 10px 11px;
-     display: block;
-     border-bottom: 1px solid #ccc;
-}
- ul.page-list li ul li a{
-     padding: 8px 12px 8px 26px;
-     margin: 0;
-}
- ul.page-list li ul li:last-child a{
-     border: 0;
-}
- ul.page-list li{
-     padding: 0;
-     margin: 0;
-}
- ul.page-list li ul li:before {
-     content: '\00bb';
-     position: absolute;
-     padding: 8px 12px;
-}
- #sidebar-search{
-     background: transparent;
-     color: #bfbfbf;
-     margin-left: -40px;
-}
- #ajaxsearchlite1 .probox .proinput input{
-     font-size: 20px !important;
-}
- #ajaxsearchlite1 .probox{
-     height: 40px !important;
-}
- #ajaxsearchlite1 .probox .proinput{
-     padding: 5px 5px !important
-}
- .probox .promagnifier .innericon svg {
-     fill: rgb(195, 195, 195) !important;
-     width: 60px !important;
-     margin-left: -14px !important;
-     margin-top: 5px !important;
-     height: 78% !important;
-}
- .probox .promagnifier{
-     width: 38px !important;
-     height: 38px !important
-}
- #ajaxsearchlite1.probox{
-     background-color: #ffffff;
-     box-shadow: 0 !important;
-     border: 1px solid #ddd;
-}
- #ajaxsearchlite1.probox.proinput{
-     color:#222222 !important;
-     text-shadow: none !important
-}
-/** START OF CARLOS CHANGES (I think) **/
-/** 9. Catalogue Page Template **/
- .dataset-sidebar .card {
-     margin-bottom: 1.25rem;
-    border: 1px solid #ccc;
-    border-radius: 0 !important;
-}
- .dataset-sidebar .filter-heading {
-     background: #f5f5f5;
-     padding: .75rem !important;
-}
- .dataset-sidebar li {
-     padding: 0 !important;
-}
- .dataset-sidebar ul li:first-of-type {
-     border-top: 0 !important;
-}
- .dataset-sidebar a, .dataset-sidebar dl, .filter-no-results span {
-     padding: .5rem .8rem;
-     margin: 0;
-     width: 100%;
-     font-size: .8rem !important;
-}
- .dataset-sidebar .show-more {
-     text-align: center;
-     background: #F5F5F5;
-}
- .dataset-sidebar .show-more a {
-     margin: 0 auto;
-}
- .not-found {
-     padding: 1em;
-}
- #dataset-search-box input {
-     border-radius: calc(.25rem - 1px) 0 0 calc(.25rem - 1px) !important;
-}
- .show-more .on-hover {
-     color: #F5F5F5;
-     background: #666666;
-     border-radius: inherit !important;
-}
- .table-list .card {
-     border-radius: 0 0 0 0 !important;
-}
-.card{
-     border: 0;
-}
-/* DATASET PAGE */
- #dataset-accordion .card {
-     border: 0;
-     border-radius: 0;
-     margin: 0;
-}
- #dataset-accordion .card-header {
-     border: 1px solid #ccc;
-     border-radius: inherit;
-     padding: 0px;
-}
- #dataset-accordion .card-header h4 a {
-     display: block;
-     padding: 10px;
-     font-weight: bold;
-}
-/* logic for hovering through card headers for expand/collapse */
- #dataset-accordion .card-header a {
-}
- span.fa{
-     transition: none !important;
-}
- #dataset-accordion .card-header a:hover {
-     color: #F5F5F5 !important;
-     background-color: #165788 !important;
-     transition: all 0.5s ease !important;
-}
-/* accordion cards: Defaults */
- #dataset-accordion .card-content {
-     padding: 30px 20px;
-}
- #dataset-accordion .card-content.inactive {
-     background: #F5F5F5;
-     font-style: italic;
-}
- .dataset-meta-label:first-child{
-     padding-top: 0;
-}
- #dataset-accordion table:not(hljs-ln) {
-     margin: 0 !important;
-     font-size: 14px;
-}
- #dataset-accordion table:not(.hljs-ln) th {
-     border-top: 0 !important;
-     padding-top: 4px !important;
-     padding-bottom: 4px !important;
-}
- #dataset-accordion table:not(.hljs-ln) th:first-of-type {
-     padding-left: 20px !important;
-     padding-right: 20px !important;
-}
- #dataset-accordion table:not(.hljs-ln) th:last-of-type {
-     padding-right: 20px !important;
-     padding-left: 20px !important;
-}
- #dataset-accordion table:not(.hljs-ln) td {
-     padding-top: 4px !important;
-     padding-bottom: 4px !important;
-}
- #dataset-accordion td:nth-child(2n+1) {
-     padding-left: 20px !important;
-}
- #dataset-accordion .accordion-arrow {
-     display: inline-block;
-     margin: 0 0;
-     margin-left: 1rem;
-     margin-right: 1rem;
-     float: right;
-}
-/* accordion card overrides: Explore Data */
- #dataset-accordion .explore-line:visbile {
-     margin: 0 !important;
-     padding-top: 1em !important;
-     padding-bottom: 1em !important;
-}
- #dataset-accordion .explore-line:visbile:nth-child(odd) {
-     border-top: 1px solid rgba(0, 0, 0, .125);
-}
- #dataset-accordion .explore-column, #dataset-accordion .explore-img {
-     text-align: center !important;
-     margin-top: auto !important;
-     margin-bottom: auto !important;
-}
-/* accordion card overrides: Dataset Features */
- #collapse-features .dataTables_wrapper div.row:last-of-type {
-     padding: 0 20px !important;
-     margin-bottom: 0.5em;
-     margin-top: 0.5em;
-     font-size: 14px;
-}
- #dataset-accordion #collapse-features table {
-     border-bottom: 1px solid rgba(0, 0, 0, .125);
-}
-/* accordion card overrides: Get Data */
- #dataset-accordion #collapse-download td {
-     vertical-align: middle;
-}
- #dataset-accordion #table-resources {
-     margin: 0;
-}
- #dataset-accordion #table-resources th:first, #dataset-accordion #table-resources td:nth-child(3n+1) {
-     text-align: left !important;
-}
- #dataset-accordion #table-resources th:nth-child(n+2), #dataset-accordion #table-resources td:nth-child(1n+2) {
-     text-align: center !important;
-}
- #dataset-accordion .dropdown-item.selected {
-     font-weight: bold;
-}
- #dataset-accordion .dropdown-item.selected:hover {
-     background: transparent;
-}
- #dataset-accordion .dropdown-item:not(.selected):hover {
-     cursor: pointer;
-}
-/* accordion card overrides: For Developers */
- #api-examples pre {
-     background: #FFFFFF;
-     border-left: 1px solid rgba(0, 0, 0, .125);
-     border-bottom: 1px solid rgba(0, 0, 0, .125);
-     border-right: 1px solid rgba(0, 0, 0, .125);
-}
- #api-examples code {
-     background: #FFFFFF;
-     padding:0 ;
-}
- #api-examples code tr:nth-child(even) {
-     background: #F5F5F5;
-}
- #api-examples code td {
-     -webkit-touch-callout: none;
-     -webkit-user-select: none;
-     -khtml-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
-     user-select: none;
-}
- #api-examples code td.hljs-ln-numbers {
-     border-right: 2px solid rgba(0, 0, 0, .125);
-     padding: 0.2em 0.3em !important;
-     vertical-align: top;
-}
- #api-examples code td.hljs-ln-code {
-     padding: 0.2em 0.3em !important;
-     white-space: pre-wrap;
-}
- #dataset-accordion #collapse-developers h5 {
-     padding-bottom: 1em;
-}
- #dataset-accordion #collapse-developers #code-copy {
-     float: right;
-}
-/** END OF CARLOS CHANGES **/
- .data-type-filter ul li {
-     padding: 0;
-     margin: 0;
-     font-size: 14px;
-     font-weight: 500;
-     line-height: 22px;
-}
- .data-type-filter h2{
-     margin-top: 40px;
-}
- a.dataset-tags:after{
-     content: ', ';
-     display: inline-block;
-     margin-left: -2px;
-}
- a.dataset-tags:last-child:after{
-     content: '';
-}
- .about-dataset .title{
-     font-weight: 500;
-     font-size: 12px;
-     text-transform: uppercase;
-     color: #666666;
-}
- .title h3 {
-     font-size: 21px;
-     text-transform: none;
-     font-weight: 400;
-     color: #000;
-     margin: 0;
-}
- .about-dataset .value {
-     font-size: 14px;
-     color: #222222;
-     font-weight: 400;
-     margin: 6px 0 10px 0;
-}
- .about-dataset .sm{
-     font-size: 12px;
-}
- .about-dataset .value a:link, .about-dataset .value a:visited{
-     color: #245484;
-}
- .about-dataset .lg{
-     font-size: 24px;
-}
- .about-dataset hr{
-     padding: 0 0 10px 0;
-}
- #description-dataset{
-     margin:0 0 20px 0;
-}
- #description-dataset h4{
-     font-weight: 400;
-     font-size: 22px;
-}
-#description-dataset h3 {
-    margin: 0 0 12px 0;
-}
- #dataset-preview, #explore-dataset, #download-datset{
-     margin: 0 0 40px 0;
-}
- #explore-dataset a.btn {
-     color: #fff;
-     background: #165788;
-}
- #description-dataset hr{
-     margin: 0 0 20px 0;
-}
- .dataset-download{
-     margin: 0 0 40px 0;
-}
- table.border{
-     border: 1px solid #eee;
-}
- .table{
-     margin-bottom: 35px;
-}
- .content-area #columns-dataset h3 {
-     padding: 0;
-     margin: 0;
-}
- .content-area #columns-dataset h3 a:link, .content-area #columns-dataset h3 a:visited{
-     padding: 0;
-     margin: 0;
-     display: block;
-}
- #download-dataset h3 a:link, #download-dataset h3 a:visited{
-     padding: 0 !important;
-     margin: 0;
-     display: block;
-}
- .home #pages img{
-     margin-bottom: 12px;
-}
- .banner{
-     background: #000000;
-     height: 20rem;
-     margin: 0 0 20px 0;
-     text-align: center;
-     padding: 0;
-     background-size: cover;
-     background-position: 50% 50%;
-}
- .table-list .dataset {
-     border-bottom: 1px solid #ccc;
-     padding:1.3em 1em;
-     margin-right: 0;
-     margin-left: 0;
-}
- .table-list .dataset:first-child{
-     border-top: 0 margin-top: -1px;
-}
- .table-list .card{
-     border-radius: 0 !important;
-     margin: 0 0 15px 0;
-     box-shadow: 1px 1px 2px #ccc;
-     border: 1px solid #ccc;
-}
- .table-list{
-     display: block;
-     margin-bottom: 1em;
-}
- .table-list h2 a:visited, .table-list h2 a:link{
-     color: #155687 !important;
-}
- .btn-secondary:hover {
-     color: #ffffff;
-     background-color: #0e626b;
-     border-color: none
-}
- .table-list h2 a:hover{
-     text-decoration: underline !important;
-}
- .table-list a h3 {
-     color: #155687;
-     font-weight: 500;
-}
- .table-list p {
-     font-size: 13px;
-     line-height: 20px;
-     padding: 10px 0
-}
- .attributes {
-     font-size: 13px !important;
-}
- .category-filter li, .format-filter li, .division-filter li{
-     margin: 0;
-     font-weight: 500;
-     line-height: 23px;
-}
- .category-filter {
-     margin-top: 22px;
-}
- .dataset.row .row{
-     width: 100% ;
-}
- .dataset-meta-label {
-     font-weight: bold !important ;
-     padding-top: 10px;
-}
- .dataset-info {
-     display: grid;
-}
- .badge-secondary {
-     color: #fff;
-     background: #0e626b;
-}
- #dataset-search-results .info {
-     font-weight: bold;
-     padding-left: 0 !important;
-     padding-right: 0 !important;
-}
- #dataset-search-results .info.count{
-     margin-top: calc(.5rem - 1px * 2) ;
-}
- #dataset-search-box{
-     margin-bottom: 1.5em;
-}
-/** 10. Blog Index Template **/
- .featured-banner img.img-responsive {
-     margin: 0 0 20px 0;
-}
- .featured-banner h3{
-     font-size: 1.4rem;
-}
- .featured-banner .attributes{
-     font-size: 13px;
-}
- .featured-content {
-     padding-bottom: 2px;
-     margin-bottom: 8px;
-}
- .excerpt p{
-     line-height: 1.4em
-}
- .excerpt{
-     font-size: 14px;
-     line-height: 22px;
-     margin: 12px 0 0 0;
-}
- .excerpt a{
-     color: #666;
-}
- .excerpt a:hover{
-     text-decoration: none
-}
- .showcase-thumbnail {
-     padding: 0 0 20px 0;
-     background: #222;
-}
- .showcase-thumbnail img{
-     margin-bottom: 20px;
-}
- ul.post-list .showcase-thumbnail{
-     height: 120px;
-}
- .showcase-thumbnail {
-     height: 120px;
-     background-size: 100%;
-     background-position: 50% 50%;
-     border: 1px solid #ddd;
-}
- .page-template-blog-template h4{
-     font-size: 20px;
-     margin: 0;
-}
- .single-post h5 {
-     font-size: 18px;
-     margin: 20px 0;
-     color: #5ac1a4;
-}
- .single-long-post{
-     margin: 0 0 25px 0;
-     border-bottom: 1px solid #e8e8e8;
-     padding: 0 0 28px 0;
-}
-.single-long-post:last-child {
-border: 0;
-}
- .single-long-post a p{
-     color: #222;
-}
- .page-template-blog-template p a{
-     color: #666666;
-}
- .page-template-blog-template p a:hover{
-     color: #666666;
-     text-decoration: none
-}
- .page-template-blog-template a:hover{
-     text-decoration: none
-}
- .page-template-blog-template p{
-     margin: 15px 0 25px 0;
-     font-size: 15px;
-}
- .blog-posts-sidebar h3 {
-     padding: 0;
-     margin: 0;
-}
- .single-post h4 {
-     font-size: 18px;
-     margin: 40px 0;
-     border-top: 1px solid gainsboro;
-     padding: 12px 0;
-     border-bottom: 1px solid #ccc;
-     text-transform: uppercase;
-     color: #666;
-}
- ul.post-list {
-     padding: 0;
-     margin: 0
-}
- ul.post-list li{
-     font-weight: 500;
-}
- .blog-sidebar {
-     padding: 0;
-}
-
- .page-template-blog-template h3 {
-     font-size: 18px;
-     margin: 0 0 12px 0;
-}
- .blog-posts-sidebar{
-     margin: 0 0 40px 0;
-}
- ul.post-list li {
-     font-weight: 500;
-     padding: 0 0 6px 0;
-     margin: 0;
-}
- .post-list li:first-child{
-     border: none;
-}
- .post-template-default .show-full-length li {
-     font-size: 15px;
-     line-height: 27px;
-     list-style-type: decimal;
-     margin-left: 20px;
-}
- .post-template-default .show-full-length img{
-     margin: 0 0 20px 0;
-}
- .page-template-blog-template .attributes {
-     font-size: 14px;
-     font-weight: 500;
-}
-/** 11. Dynamic Fields / Accordion **/
- #accordion{
-    border-top: 1px solid #ddd;
-}
- #collapseOne img {
-     margin-bottom: 20px;
-}
- #collapseOne, #collapseTwo, #collapseThree, #collapseFour, #collapseFive{
-     padding: 40px;
-     border-left: 1px solid #ddd;
-     border-right: 1px solid #ddd;
-     border-bottom: 1px solid #ddd;
-}
- .tablepress{
-     border: 1px solid #dddddd !important;
-     margin: 15px 0;
-}
- .dataTables_scrollBody {
-     border-right: 1px solid #ddd;
-}
-/* .card-header:first-child {
-     border-radius: 0;
-}
- .card-header h4 a{
-     background: #165788;
-     color: #fff;
-}
- .card-header h4 a.collapsed{
-     background: #fff !important;
-     color: #165788;
-}
- */
- h4.card-title {
-     font-size: 20px;
-}
- span.fa.fa-chevron-down {
-     transform: rotate(180deg);
-    /* Firefox */
-     -moz-transition: all 1s ease;
-    /* WebKit */
-     -webkit-transition: all 1s ease;
-    /* Opera */
-     -o-transition: all 1s ease;
-    /* Standard */
-     transition: all 1s ease;
-}
- .collapsed span.fa.fa-chevron-down {
-     transform: rotate(0deg);
-    /* Firefox */
-     -moz-transition: all 1s ease;
-    /* WebKit */
-     -webkit-transition: all 1s ease;
-    /* Opera */
-     -o-transition: all 1s ease;
-    /* Standard */
-     transition: all 1s ease;
-}
- blockquote.error-state{
-     text-align: center;
-     width: 100%;
-}
- .nf-mp-header h3 {
-     text-align: center;
-     font-weight: 100;
-     font-size: 23px;
-     padding: 30px 0;
-}
- .nf-field-element h2 {
-     font-size: 19px;
-}
-/* 13. Tablepress Overrides */
- table.tablepress{
-     border: 1px solid #ddd;
-     margin: 0;
-}
- div#data-attributes {
-     margin: 15px 0;
-}
- table.tablepress thead th {
-     background-color: #ffffff;
-     color: #025aa5;
-     font-weight: 500;
-}
- #mapid {
-    height: 200px;
-}
- table.download-table {
-     border: 1px solid #ddd;
-}
- .download-table th {
-     padding: 8px 12px;
-     border-bottom: 1px solid #ddd;
-     font-weight: 500;
-     color: #165788;
-}
- .download-table tbody tr td {
-     padding: 8px 12px;
-     border-bottom: 1px solid #ddd;
-     font-size: 14px;
-     color: #222;
-}
- .download-table tbody tr:nth-child(even) {
-     background: #f4f4f4;
-}
- #collapseFive h4{
-     margin: 0 0 12px 0;
-}
- .share_buttons_1 {
-     display: none;
-}
- .alert{
-     margin-bottom: 0 !important;
-     border-radius: 0 !important;
-}
-/** Device Specific **/
-/** Change how the toggle menu looks on mobile **/
- @media (max-width: 991px) {
-     ul#menu-homepage li{
-         font-size: 14px;
-         line-height: 20px;
-         margin: 0 15px;
-         margin: -1px 0 0 0px;
-         text-align: center;
-         border: 1px solid #ccc;
-         background: #fbfbfb;
-         font-weight: 500;
-    }
-     .blog-sidebar {
-     display: none;
-}
-
-    .background h1 {
+.status-label {
+    display: inline-block;
+    text-transform: lowercase; 
+    padding: 4px 8px; 
+    font-size: 80%;
+    font-weight: 700;
+    line-height: 1;
     color: #fff;
-    display: block;
-    position: static;
-    font-size: 31px;
-    font-weight: 300;
     text-align: center;
-    padding: 24px;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
 }
+/* Dataset Catalogue */
+dl {
+    padding: 12px 0 0 18px;
 }
-@media (max-width:1700px){
-     #toc_container{
-        position: initial !important;
-    }
+.accordion{
+    border: 2px solid #316f8f;
 }
-@media (max-width: 767px) {
-table#table-resources{width: 100%; display: block;}
-table#table-resources td{width: 100%; display: block;text-align: center;padding:9px 22px;}
-table#table-resources th{display: none;}
-table#table-resources tbody{border: 1px solid #ccc;}
-
-    #super-header {
-    height: 49px;
-    }
-    #super-header img {
-    width: 84px;
-    height: auto;
-}
-#data-stories h3 {
-    font-size: 26px;
-}
-.complete-post-list p, .complete-post-list ul, .complete-post-list ol {
-    padding-left: 0;
-    padding-right: 0;
-}
-tr td span.fa.fa-download {
-    display: none;
-}
-footer#footer {
-    height: 49px;
+.accordion .card-header{
     padding: 0;
 }
-     .hero .jumbotron .heading {
-         font-size: 24px !important;
-    }
-     .jumbotron.text-center {
-         padding: 30px 20px 50px 20px !important;
-    }
-     section#about{
-         padding: 0 !important;
-    }
-     p{
-         font-size: 14px !important;
-         padding: 0px;
-    }
-     section#about h2{
-         margin-top: 40px;
-    }
-     a.btn.btn-md {
-         margin: 2px 0 3px 0;
-    }
-     section#data-stories .jumbotron {
-         height: 430px !important
-    }
-     #pages h2 {
-         margin-top: 30px;
-         text-align: center;
-    }
-     .time{
-         text-align: left !important
-    }
-    .banner{
-        height: 10rem;
-    }
-    .background{
-        height: 10rem;
-    }
-    .page-template-blog-template section.single-sidebar{
-        display: none;
-    }
-    section.main-post-listing{
-        text-align: center;
-    }
-    .showcase-thumbnail{
-        margin: 0 0 30px 0;
-    }
-    hr{
-        border: 0;
-    }
-    .mobile-hidden{
-        display: none;
-    }
-    #results-count{
-        text-align: center;
-        font-size: 24px;
-        margin: -15px 0 0 0;
-    }
-    .row.table-list{border-top: 0;}
-    label.col-sm-5.text-right.col-form-label {
-    color: #fff;
-    margin-top: -20px;
+.card-body.accordion__body {
+    padding: 12px;
 }
-    .attributes{
-        padding: 0 30px;
-    }
+.accordion .card{
+    border: 0;
 }
-#dataset-accordion .card-header a {
-    display: block;
-    background: white;
-    padding: 15px;
-    margin-top: -1px;
+.accordion .mb-0 .btn:hover, .btn:focus {
+    outline: 2px solid #31708f !important;
+    color: #31708f;
+    background: #Ffffff !important;
 }
-#dataset-accordion .card:first-child {
-    border-top: 1px solid #ccc;
-}
-#dataset-accordion .card-content {
-    margin: -1px 0 0 0;
-    border: 1px solid #ccc;
+.accordion .mb-0 .btn{
+    outline: 2px solid #31708f;
 }
 
-#dataset-error-heading {
-    font-size: 92px;
+.card-header.filter-heading {
+    background: 0;
+    text-align: left;
+    padding: 0;
+    border: 0;
 }
-
-#dataset-error-subtext {
-    font-size: 52px;
+.dataset-sidebar .card{
+    border:0;
 }
-
-.attributes .dataset-meta-label{margin-top: 10px}
-p.dataset-excerpt{border-bottom: 1px solid #cccccc; padding: 12px 0 20px 0 !important}
-.dataset-card h3{display: block; margin: 0 0 12px 0}
-.status-label{float:right; text-align: center; padding: 4px 8px; display: block; color:#fff; border-radius:6px; font-size: 12px; font-weight: bold; width: auto}
+.dataset-sidebar .list-group-item{
+    border: 0;
+    padding: 2px 0 4px 0;
+    font-size:16px
+}
+.filter-selected a {
+    background: #666666 !important;
+    font-weight: bold !important;
+    padding: 4px 10px;
+    color: #F5F5F5 !important;
+    border-radius: 5px;
+}
+/* Search */
+.search-results-content .card{
+    padding: 19px 20px 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 0px;
+    box-shadow: 1px 1px 2px #ccc;
+}
+.search-results-content h2 a{
+    font-family: Montserrat;
+    font-weight: 500;
+}

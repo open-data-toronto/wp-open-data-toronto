@@ -23,6 +23,7 @@ $.extend(config, {
 
 function buildDataset(response) {
     var data = config['package'] = response['result'];
+    var isRealTime = data['refresh_rate'].toLowerCase() == 'real-time';
 
     queryQualityScore();
 
@@ -51,7 +52,9 @@ function buildDataset(response) {
             data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
         }
 
-        if (data[field] && data[field].length) {
+
+        if (data[field] && data[field].length &&
+          !(field == 'last_refreshed' && isRealTime)) {
             var converter = new showdown.Converter();
 
             switch(field) {
@@ -61,13 +64,14 @@ function buildDataset(response) {
                 case 'information_url':
                     $(this).append('<a href="' + data[field] + '" class="inline-link">' + 'External Link' + '</a>');
                     break;
+                case 'civic_issues':
                 case 'topics':
                     var content = data[field].split(',');
                     for (var i in content) {
                         if (!$(this).is(':empty')) {
                             $(this).append(', ');
                         }
-                        $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
+                        $(this).append('<a href="/catalogue?vocab_' + field + '=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
                     }
                     break;
                 case 'title':

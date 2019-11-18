@@ -14,7 +14,8 @@
     </div>
     <!-- End breadcrumbs -->
     <div id="content">
-    <h1 class="sr-only">Search results</h1>
+    <h1>Search results for <i><?php echo esc_html( $s ); ?></i></h1>
+    <br/>
     <div class="row">
       <div class="col-md-12">
         <?php
@@ -24,8 +25,10 @@
         ?>
 
         <div class="search-results-content">
-          <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+          <div class="card">
+          <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
           <?php the_excerpt(); ?>
+          </div>
         </div>
 
         <?php

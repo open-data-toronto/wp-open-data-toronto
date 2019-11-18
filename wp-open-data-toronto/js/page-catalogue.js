@@ -55,7 +55,8 @@ function buildCatalogue(response) {
     for (var i = 0; i < data['results'].length; i++) {
         var row = data['results'][i],
             listLabels = [],
-            specialLabel = '';
+            specialLabel = '',
+            dateLabel = '';
 
         for (var j = 0; j < config['filters'].length; j++) {
             if (config['filters'][j].startsWith('vocab_')) {
@@ -74,12 +75,19 @@ function buildCatalogue(response) {
 
         if (row['is_retired']) {
           specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label retired-tag" aria-label="archived">Retired</div>' +
+                           '<div class="status-label retired-tag pull-right" aria-label="archived">Retired</div>' +
                          '</div>';
         } else if (getDaysSince(row['metadata_created']) <= 30) {
           specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label new-tag" aria-label="new">New</div>' +
+                           '<div class="status-label new-tag pull-right" aria-label="new">New</div>' +
                          '</div>';
+        }
+
+        if (row['refresh_rate'].toLowerCase() != 'real-time') {
+          dateLabel = '<div class="col-md-4 text-left attributes">' +
+            '<div class="dataset-meta-label">Last Refreshed</div>' +
+            '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
+          '</div>'
         }
 
         $('.table-list').append(
@@ -97,10 +105,7 @@ function buildCatalogue(response) {
                     '<div class="dataset-meta-label">Refresh Rate</div>' +
                     '<span>' + row['refresh_rate'] + '</span>' +
                   '</div>' +
-                  '<div class="col-md-4 text-left attributes">' +
-                    '<div class="dataset-meta-label">Last Refreshed</div>' +
-                    '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
-                  '</div>' +
+                  dateLabel +
                   '<div class="col-md-4 text-left attributes">' +
                     '<div class="dataset-meta-label">Publisher</div>' +
                     '<span>' + row['owner_division'] + '</span>' +

@@ -13,6 +13,9 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
 
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:light,regular,bold,bolditalic|Roboto:light,regular,bold,italic"/>
+
     <!--Favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url(); ?>/wp-content/themes/wp-open-data-toronto/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo site_url(); ?>/wp-content/themes/wp-open-data-toronto/img/favicon/favicon-32x32.png">

@@ -14,7 +14,8 @@
           </nav>
         </div>
       </div>
-      <!-- Banner -->
+
+<!--     
       <div class="row block-hidden">
         <div class="col-md-12">
           <div class="banner" data-field="image_url">
@@ -24,7 +25,7 @@
           </div>
         </div>
       </div>
-
+ -->
       <section class="complete-post-list" aria-label="List of Datasets">
         <div class="row block-hidden">
           <!-- Dataset Sidebar -->
@@ -43,20 +44,18 @@
                   <dd id="field-quality">Not available</dd>
                   <dt>Data last refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="last_refreshed"></dd>
-                  <dt>Metadata last updated<span class="sr-only">: </span></dt>
-                  <dd data-field="metadata_modified"></dd>
                   <dt>Published on<span class="sr-only">: </span></dt>
                   <dd data-field="published_date"></dd>
                   <dt>Refreshed<span class="sr-only">: </span></dt>
                   <dd data-field="refresh_rate"></dd>
                   <dt>Data type<span class="sr-only">: </span></dt>
                   <dd data-field="dataset_category"></dd>
-                  <dt>More information<span class="sr-only">: </span></dt>
-                  <dd data-field="information_url"></dd>
                   <dt>Civic issues<span class="sr-only">: </span></dt>
                   <dd data-field="civic_issues"></dd>
                   <dt>Topics<span class="sr-only">: </span></dt>
                   <dd data-field="topics"></dd>
+                  <dt>More information<span class="sr-only">: </span></dt>
+                  <dd data-field="information_url"></dd>
                 </dl>
               </div>
               <div class="card">
