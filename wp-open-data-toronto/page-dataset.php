@@ -14,7 +14,8 @@
           </nav>
         </div>
       </div>
-      <!-- Banner -->
+
+<!--     
       <div class="row block-hidden">
         <div class="col-md-12">
           <div class="banner" data-field="image_url">
@@ -24,7 +25,7 @@
           </div>
         </div>
       </div>
-
+ -->
       <section class="complete-post-list" aria-label="List of Datasets">
         <div class="row block-hidden">
           <!-- Dataset Sidebar -->

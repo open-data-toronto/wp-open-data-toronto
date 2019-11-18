@@ -75,11 +75,11 @@ function buildCatalogue(response) {
 
         if (row['is_retired']) {
           specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label retired-tag" aria-label="archived">Retired</div>' +
+                           '<div class="status-label retired-tag pull-right" aria-label="archived">Retired</div>' +
                          '</div>';
         } else if (getDaysSince(row['metadata_created']) <= 30) {
           specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label new-tag" aria-label="new">New</div>' +
+                           '<div class="status-label new-tag pull-right" aria-label="new">New</div>' +
                          '</div>';
         }
 
