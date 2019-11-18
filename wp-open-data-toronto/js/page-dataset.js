@@ -407,7 +407,7 @@ function generateSnippets() {
         'library(dplyr)',
         '',
         '# get all resources for this package',
-        'resources <- list_package_resources("bodysafe")',
+        'resources <- list_package_resources("+' config['package']['id'] + '")',
         '',
         '# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources',
         'datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))',
