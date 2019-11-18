@@ -41,14 +41,14 @@
             </ul>
             <br/>
 
-            <h3>Categories</h3>
+            <h3>Category</h3>
             <ul class="post-list">
               <?php
               wp_list_categories([
                 'orderby'    => 'name',
                 'show_count' => true,
-                'exclude'    => array( 125, 126, 124, 123, 10 ),
-                'title_li'   => ''
+                'title_li'   => '',
+                'exclude_slugs' => [ 'feature-1', 'feature-2', 'feature-3', 'featured-data-story', 'uncategorized']
               ]);
               ?>
             </ul>

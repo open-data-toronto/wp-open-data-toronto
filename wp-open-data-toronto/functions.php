@@ -99,3 +99,17 @@ function wpdocs_custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
 
+function wpse_217847_list_terms_exclusions( $query, $args ) {
+    if ( ! empty( $args['exclude_slugs'] ) ) {
+        if ( ! is_array( $slugs = $args['exclude_slugs'] ) )
+            $slugs = array_map( 'trim', explode( ',', $slugs ) );
+
+        $slugs  = array_map( 'esc_sql', $slugs );
+        $slugs  = implode( '","', $slugs );
+        $query .= sprintf( ' AND t.slug NOT IN ("%s")', $slugs );
+    }
+
+    return $query;
+}
+
+add_filter( 'list_terms_exclusions', 'wpse_217847_list_terms_exclusions', 10, 2 );
