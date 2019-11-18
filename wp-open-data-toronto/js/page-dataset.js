@@ -403,14 +403,18 @@ function generateSnippets() {
     ]
 
     snippets['r'] = [
-        'library(httr)',
+        'library(opendatatoronto)',
+        'library(dplyr)',
         '',
-        '# Get the dataset metadata by passing package_id to the package_search endpoint',
-        '# For example, to retrieve the metadata for this dataset:',
+        '# get all resources for this package',
+        'resources <- list_package_resources("bodysafe")',
         '',
-        'response <- GET(' + '"' + config['ckanAPI'] + 'package_show", query=list("id"="' + config['package']['id'] + '"))',
-        'package <- content(response, "parsed")',
-        'print(package)'
+        '# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources',
+        'datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))',
+        '',
+        '# load the first datastore resource as a sample',
+        'data <- filter(datastore_resources, row_number()==1) %>% get_resource()',
+        'data'
     ]
 
     var previewResource = config['package']['preview_resource'];
