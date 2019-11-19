@@ -404,7 +404,7 @@ function generateSnippets() {
             '        p = { "id": resource["id"] }',
             '        r = urllib.request.urlopen(url, data=bytes(json.dumps(p), encoding="utf-8"))',
             '        data = json.loads(r.read())',
-                '    df = pd.DataFrame(data["result"]["records"])',
+            '        df = pd.DataFrame(data["result"]["records"])',
             '        break',
             'df'
         ]);
