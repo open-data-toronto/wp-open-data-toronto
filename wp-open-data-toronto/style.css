@@ -565,22 +565,35 @@ dl {
 .accordion{
     border: 2px solid #316f8f;
 }
+span.accordion-arrow {
+    float: right;
+}
 .accordion .card-header{
     padding: 0;
 }
 .card-body.accordion__body {
     padding: 12px;
 }
+.accordion .mb-0 .btn {
+    text-align: left;
+    outline: 2px solid #31708f !important;;
+    margin:0 0 4px 0
+}
+#header-Developers .btn{
+    margin-bottom:0
+}
 .accordion .card{
     border: 0;
 }
-.accordion .mb-0 .btn:hover, .btn:focus {
-    outline: 2px solid #31708f !important;
+.accordion .mb-0 .btn:hover, .accordion .mb-0 .btn:focus {
     color: #31708f;
     background: #Ffffff !important;
 }
 .accordion .mb-0 .btn{
     outline: 2px solid #31708f;
+}
+span.fa.fa-download {
+    padding: 0 0 0 12px;
 }
 
 .card-header.filter-heading {
