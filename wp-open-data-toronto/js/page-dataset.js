@@ -86,9 +86,6 @@ function buildDataset(response) {
                 case 'notes':
                     $(this).html(converter.makeHtml(data[field]));
                     break;
-                case 'refresh_rate':
-                    $(this).append('<a href="/catalogue/?refresh_rate=' + encodeURIComponent(data[field]) +'" class=inline-link>' + data[field] + '</a>');
-                    break;
                 default:
                     $(this).text(data[field]);
             }
