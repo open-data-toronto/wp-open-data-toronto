@@ -26,10 +26,12 @@
             <h3>Knowledge Centre</h3>
             <p>Whether you're a seasoned data scientist, or a beginner - Toronto Open Data has you covered! We publish new content biweekly.</p>
             <br/>
+
+            <div class="hidden-sm-down">
             <h3>Latest Posts</h3>
             <ul class="post-list">
               <?php
-              $query2 = new WP_Query( array( 'posts_per_page' => 5 ) );
+              $query2 = new WP_Query( array( 'posts_per_page' => 10 ) );
               while ( $query2->have_posts() ) :
                 $query2->the_post(); ?>
                 <li>
@@ -42,14 +44,14 @@
             </ul>
             <br/>
 
-            <h3>Categories</h3>
+            <h3>Category</h3>
             <ul class="post-list">
               <?php
               wp_list_categories([
                 'orderby'    => 'name',
                 'show_count' => true,
-                'exclude'    => array( 10 ),
-                'title_li'   => ''
+                'title_li'   => '',
+                'exclude_slugs' => [ 'feature-1', 'feature-2', 'feature-3', 'featured-data-story', 'uncategorized']
               ]);
               ?>
             </ul>
@@ -80,6 +82,7 @@
             </ul>
           </div>
         </div>
+      </div>
         
       <div class="col-md-9" id="content">
         <div class="row">
