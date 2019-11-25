@@ -481,7 +481,7 @@ form.mailchimp input.email{
     margin: 0 auto;
 }
 input#mce-EMAIL{
-    width: 90%; 
+    width: 90%;
 }
 input#search{
     width: 100%;
@@ -547,8 +547,8 @@ input#search{
 }
 .status-label {
     display: inline-block;
-    text-transform: lowercase; 
-    padding: 4px 8px; 
+    text-transform: lowercase;
+    padding: 4px 8px;
     font-size: 80%;
     font-weight: 700;
     line-height: 1;

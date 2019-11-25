@@ -268,6 +268,7 @@ function queryQualityScore() {
           var result = response['result'];
 
           if (result.length > 0) {
+              $('#field-quality').addClass(result[0]['grade_norm'].toLowerCase());
               $('#field-quality').text(result[0]['grade_norm']);
           }
       }
