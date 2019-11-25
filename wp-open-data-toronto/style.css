@@ -628,3 +628,20 @@ span.fa.fa-download {
     font-family: Montserrat;
     font-weight: 500;
 }
+/* Field Quality */
+dd#field-quality:before {
+    margin: -6px 0 0 0;
+    content: "\f091";
+    padding-right: 7px;
+    font-family: "FontAwesome";
+    font-size: 21px;
+    vertical-align: middle;
+    color: #777777;
+    display: inline-block;
+}
+dd#field-quality .gold:before{
+    color: #f0ad4e;
+    }
+dd#field-quality .bronze:before{
+    color: #8a6d3b;
+}
