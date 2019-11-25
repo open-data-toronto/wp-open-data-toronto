@@ -4,21 +4,29 @@ $.extend(config, {
 
 function init() {
     var fields = ['fl=metadata_created', 'fl=name', 'fl=title'];
-    getCKAN('package_search?' + fields.join('&'), { 'rows': config['datasetsShown'], 'sort': 'metadata_created desc' }, function(response) {
-        var data = response['result'];
-        for (var i = 0; i < data['results'].length; i++) {
-            var row = data['results'][i];
+    getCKAN(
+        'package_search?' + fields.join('&'),
+        { 'rows': config['datasetsShown'], 'sort': 'metadata_created desc' },
+        function(response) {
+            var data = response['result'];
+            for (var i = 0; i < data['results'].length; i++) {
+                var row = data['results'][i];
 
-            $('.newsfeed').append('<li>' +
-                                    '<a href="/dataset/' + row['name'] + '/">' +
-                                      row['title'] +
-                                      '<div class="float-right">' +
-                                        '<span class="sr-only">Published on:</span>' + getTimeSince(row['metadata_created']) +
-                                      '</div>' +
-                                    '</a>' +
-                                  '</li>')
+                $('.newsfeed').append(
+                  '<li>' +
+                    '<a href="/dataset/' + row['name'] + '/">' +
+                      '<div class="col-md-9">' + row['title'] + '</div>' +
+                      '<div class="col-md-3">' +
+                        '<span class="sr-only">Published </span>' +
+                        '<div class="pull-right">' +
+                          getTimeSince(row['metadata_created']) +
+                        '</div>' +
+                      '</div>' +
+                    '</a>' +
+                  '</li>');
+            }
         }
-    });
+    );
 
     $('#dataset-search').on('submit', function(evt) {
         evt.preventDefault();
