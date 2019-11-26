@@ -7,7 +7,7 @@
 
         <!-- Jumbotron echoes featured image for Homepage -->
         <div class="jumbotron text-center" style="background-image:url('<?php the_post_thumbnail_url(); ?>');">
-          
+
           <div class="row">
             <h1>Search the City of Toronto's Open Data Portal</h1>
             <div class="col-md-6 offset-md-3">
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
 
       <section id="about" aria-label="About City of Toronto Open Data">
         <div id="content"></div>
@@ -35,22 +35,22 @@
             <!-- This displays the excerpt from the About page -->
              <?php echo get_the_excerpt(); ?>
 
-            <?php 
+            <?php
                 query_posts("page_id=35");
                 while ( have_posts() ) : the_post()
             ?>
             <?php the_excerpt(); ?>
             <?php
-                endwhile; 
+                endwhile;
                 wp_reset_query();
-            ?>  
+            ?>
 
             <a class="btn btn-md" href="/about/">Learn more about Open Data</a>
             </div>
 
             <div class="col-md-6 offset-md-1">
               <h2>Recently Added Datasets</h2>
-              <ul class="newsfeed"></ul>
+              <div class="newsfeed"></div>
               <a class="btn btn-md" href="/catalogue/">Explore the Catalogue</a>
             </div>
           </div>
@@ -59,7 +59,7 @@
 
       <!-- This query calls, in order, a single post that is categorized as both Data Story AND Featured. and was created most recently -->
 
-      <?php global $post; 
+      <?php global $post;
       $args = array('category_name' => 'featured-data-story', 'numberposts' => 1);
       $custom_posts = get_posts($args);
       foreach($custom_posts as $post) : setup_postdata($post);
@@ -87,12 +87,12 @@
 
       <!-- Pages -->
       <section id="pages" aria-label="Secondary Pages">
-        
+
         <div class="row">
 
           <!-- This query calls, in order, 3 posts that are categorized as Featured that are NOT data stories. Ordered by last created. -->
-         
-          <?php global $post; 
+
+          <?php global $post;
           $args = array('category_name' => 'feature-1', 'numberposts' => 1);
           $custom_posts = get_posts($args);
           foreach($custom_posts as $post) : setup_postdata($post);
@@ -111,7 +111,7 @@
         endforeach;
           ?>
 
-           <?php global $post; 
+           <?php global $post;
           $args = array('category_name' => 'feature-2', 'numberposts' => 1);
           $custom_posts = get_posts($args);
           foreach($custom_posts as $post) : setup_postdata($post);
@@ -130,7 +130,7 @@
         endforeach;
           ?>
 
-           <?php global $post; 
+           <?php global $post;
           $args = array('category_name' => 'feature-3', 'numberposts' => 1);
           $custom_posts = get_posts($args);
           foreach($custom_posts as $post) : setup_postdata($post);
