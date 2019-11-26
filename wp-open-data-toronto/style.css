@@ -649,3 +649,12 @@ dd.silver:before{
 dd#.bronze:before{
     color: #8a6d3b !important;
 }
+.hljs-ln td{
+    padding: 0px 14px 2px 0;
+}
+td.hljs-ln-numbers{
+    color: #bbbbbb;
+}
+table.hljs-ln tr:nth-child(even){
+    background: #f4f4f4;
+}
