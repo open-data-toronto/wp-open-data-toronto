@@ -23,6 +23,7 @@ $.extend(config, {
 
 function buildDataset(response) {
     var data = config['package'] = response['result'];
+    var isRealTime = data['refresh_rate'].toLowerCase() == 'real-time';
 
     queryQualityScore();
 
@@ -51,7 +52,9 @@ function buildDataset(response) {
             data[field] = data[field] || '/wp-content/themes/wp-open-data-toronto/img/skyline.jpg';
         }
 
-        if (data[field] && data[field].length) {
+
+        if (data[field] && data[field].length &&
+          !(field == 'last_refreshed' && isRealTime)) {
             var converter = new showdown.Converter();
 
             switch(field) {
@@ -61,13 +64,14 @@ function buildDataset(response) {
                 case 'information_url':
                     $(this).append('<a href="' + data[field] + '" class="inline-link">' + 'External Link' + '</a>');
                     break;
+                case 'civic_issues':
                 case 'topics':
                     var content = data[field].split(',');
                     for (var i in content) {
                         if (!$(this).is(':empty')) {
                             $(this).append(', ');
                         }
-                        $(this).append('<a href="/catalogue?vocab_topics=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
+                        $(this).append('<a href="/catalogue?vocab_' + field + '=' + encodeURIComponent(content[i]) + '" class="inline-link">' + content[i] + '</a>');
                     }
                     break;
                 case 'title':
@@ -264,6 +268,7 @@ function queryQualityScore() {
           var result = response['result'];
 
           if (result.length > 0) {
+              $('#field-quality').addClass(result[0]['grade_norm'].toLowerCase());
               $('#field-quality').text(result[0]['grade_norm']);
           }
       }
@@ -331,6 +336,7 @@ function generateSnippets() {
     snippets['python'] = [
         'import urllib',
         'import json',
+        'import pandas as pd',
         '',
         '# Get the dataset metadata by passing package_id to the package_search endpoint',
         '# For example, to retrieve the metadata for this dataset:',
@@ -339,34 +345,47 @@ function generateSnippets() {
         'params = { "id": "' + config['package']['id'] + '"}',
         'response = urllib.request.urlopen(url, data=bytes(json.dumps(params), encoding="utf-8"))',
         'package = json.loads(response.read())',
-        'print(package)'
+        'print(package["result"])',
     ]
 
     snippets['javascript'] = [
-        '// Get the dataset metadata by passing package_id to the package_search endpoint',
-        '// For example, to retrieve the metadata for this dataset:',
+        'const',
+        '    https = require("https"),',
+        '    packageName = "chemical-tracking-chemtrac";',
         '',
-        'var package = {}',
-        '$.ajax({',
-        '    dataType: "json",',
-        '    type: "GET",',
-        '    url: "' + config['ckanAPI'] + 'package_show",',
-        '    data: { "id": "' + config['package']['id'] + '" }',
-        '}).done(function(response) {',
-        '    package = response;',
-        '    console.log(response);',
-        '});'
+        '// promise to retrieve the package',
+        'const getPackage = new Promise((resolve, reject) => {',
+        '    https.get(`' + config['ckanAPI'] +'package_show?id=${packageName}`, (response) => {',
+        '        let dataChunks = [];',
+        '        response',
+        '            .on("data", (chunk) => {',
+        '                dataChunks.push(chunk)',
+        '            })',
+        '            .on("end", () => {',
+        '                let data = Buffer.concat(dataChunks)',
+        '                resolve(JSON.parse(data.toString())["result"])',
+        '            })',
+        '            .on("error", (error) => {',
+        '                reject(error)',
+        '            })',
+        '    });',
+        '});',
+        '',
+        'getPackage.then(pkg => {',
+        '    // this is the metadata of the package',
+        '    console.log(pkg);',
+        '}).catch(error => {',
+        '    console.error(error);',
+        '})',
     ]
 
     snippets['r'] = [
-        'library(httr)',
+        'library(opendatatoronto)',
+        'library(dplyr)',
         '',
-        '# Get the dataset metadata by passing package_id to the package_search endpoint',
-        '# For example, to retrieve the metadata for this dataset:',
-        '',
-        'response <- GET(' + '"' + config['ckanAPI'] + 'package_show", query=list("id"="' + config['package']['id'] + '"))',
-        'package <- content(response, "parsed")',
-        'print(package)'
+        '# get package',
+        'package <- show_package("' + config['package']['id'] + '")',
+        'package',
     ]
 
     var previewResource = config['package']['preview_resource'];
@@ -383,52 +402,61 @@ function generateSnippets() {
             '        p = { "id": resource["id"] }',
             '        r = urllib.request.urlopen(url, data=bytes(json.dumps(p), encoding="utf-8"))',
             '        data = json.loads(r.read())',
-            '        print(data)',
-            '        break'
+            '        df = pd.DataFrame(data["result"]["records"])',
+            '        break',
+            'df'
         ]);
 
         snippets['javascript'] = snippets['javascript'].concat([
+            '// since this package has resources in the datastore, one can get the data rather than just the metadata of the resources',
+            '// promise to retrieve data of a datastore resource ',
+            'const getDatastoreResource = resource => new Promise((resolve, reject) => {',
+            '    https.get(`' + config['ckanAPI'] + 'datastore_search?id=${resource["id"]}`, (response) => {',
+            '        let dataChunks = [];',
+            '        response',
+            '            .on("data", (chunk) => {',
+            '                dataChunks.push(chunk)',
+            '            })',
+            '            .on("end", () => {',
+            '                let data = Buffer.concat(dataChunks)',
+            '                resolve(JSON.parse(data.toString())["result"]["records"])',
+            '            })',
+            '            .on("error", (error) => {',
+            '                reject(error)',
+            '            })',
+            '    })',
+            '});',
             '',
-            '// Get the data by passing the resource_id to the datastore_search endpoint',
-            '// See https://docs.ckan.org/en/latest/maintaining/datastore.html for detailed parameters options',
-            '// For example, to retrieve the data content for the first resource in the datastore:',
+            '// get the package information again',
+            'getPackage.then(package => {',
+            '    // get the datastore resources for the package',
+            '    let datastoreResources = package["resources"].filter(r => r.datastore_active);',
             '',
-            'var resources = [];',
-            '// setTimeout to wait for response from package_show call',
-            '// This function can be included as a part of the callback instead',
-            'setTimeout(function() {',
-            '    for (var i in package["result"]["resources"]) {',
-            '        var resource = package["result"]["resources"][i];',
-            '        if (resource["datastore_active"]) {',
-            '            $.ajax({',
-            '                dataType: "json",',
-            '                type: "GET",',
-            '                url: "' + config['ckanAPI'] + 'datastore_search",',
-            '                data: { "id": resource["id"] }',
-            '            }).done(function(response) {',
-            '                resources.push(response);',
-            '                console.log(response);',
-            '            });',
-            '            break;',
-            '        }',
-            '    }',
-            '}, 1000);'
+            '    // retrieve the first datastore resource as an example',
+            '    getDatastoreResource(datastoreResources[0])',
+            '        .then(resource => {',
+            '            // this is the actual data of the resource',
+            '            console.log(resource)',
+            '        })',
+            '        .catch(error => {',
+            '            console.error(error);',
+            '        })',
+            '}).catch(error => {',
+            '    console.error(error);',
+            '})',
         ]);
 
         snippets['r'] = snippets['r'].concat([
             '',
-            '# Get the data by passing the resource_id to the datastore_search endpoint',
-            '# See https://docs.ckan.org/en/latest/maintaining/datastore.html for detailed parameters options',
-            '# For example, to retrieve the data content for the first resource in the datastore:',
+            '# get all resources for this package',
+            'resources <- list_package_resources("' + config['package']['id'] + '")',
             '',
-            'for (resource in package$result$resources) {',
-            '    if (resource$datastore_active){',
-            '        r <- GET(' + '"' + config['ckanAPI'] + 'datastore_search", query=list("id"=resource$id))',
-            '        data <- content(r, "parsed")',
-            '        print(data)',
-            '        break',
-            '    }',
-            '}',
+            '# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources',
+            'datastore_resources <- filter(resources, tolower(format) %in% c(\'csv\', \'geojson\'))',
+            '',
+            '# load the first datastore resource as a sample',
+            'data <- filter(datastore_resources, row_number()==1) %>% get_resource()',
+            'data'
         ])
     }
 

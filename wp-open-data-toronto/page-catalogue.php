@@ -51,6 +51,15 @@
               </ul>
             </div>
 
+            <div class="card" id="refresh_rate-filter">
+              <div class="card-header filter-heading">
+                <h3>Refresh Rate</h3>
+              </div>
+              <ul data-type="filter" data-field="refresh_rate" class="list-group list-group-flush" id="refresh_rate-values">
+                <li class="show-more list-group-item list-group-item-action" data-field="refresh_rate"></li>
+              </ul>
+            </div>
+
             <div class="card" id="dataset_category-filter">
               <div class="card-header filter-heading">
                 <h3>Type</h3>

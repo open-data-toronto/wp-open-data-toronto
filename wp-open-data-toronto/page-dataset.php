@@ -15,7 +15,7 @@
         </div>
       </div>
 
-<!--     
+<!--
       <div class="row block-hidden">
         <div class="col-md-12">
           <div class="banner" data-field="image_url">
@@ -37,7 +37,7 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
-                  <dt>Data Quality Score
+                  <dt>Data quality score
                     <span class="badge badge-info">beta</span>
                     <span class="sr-only">: </span>
                   </dt>
@@ -50,12 +50,14 @@
                   <dd data-field="refresh_rate"></dd>
                   <dt>Data type<span class="sr-only">: </span></dt>
                   <dd data-field="dataset_category"></dd>
-                  <dt>More information<span class="sr-only">: </span></dt>
-                  <dd data-field="information_url"></dd>
                   <dt>Civic issues<span class="sr-only">: </span></dt>
                   <dd data-field="civic_issues"></dd>
                   <dt>Topics<span class="sr-only">: </span></dt>
                   <dd data-field="topics"></dd>
+                  <dt>More information<span class="sr-only">: </span></dt>
+                  <dd data-field="information_url"></dd>
+                  <dt>License<span class="sr-only">: </span></dt>
+                  <dd><a href="https://open.toronto.ca/open-data-license/" class="inline-link">Open Government License - Toronto</a></dd>
                 </dl>
               </div>
               <div class="card">
