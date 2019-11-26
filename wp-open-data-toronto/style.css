@@ -658,3 +658,16 @@ td.hljs-ln-numbers{
 table.hljs-ln tr:nth-child(even){
     background: #f4f4f4;
 }
+.newsfeed a.row {
+    font-family: 'Roboto';
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 4px 0;
+    margin-left: 0;
+}
+.newsfeed a.row:nth-last-child(1){
+    border-bottom: none;
+}
+.newsfeed a.row .col-md-9 {
+    padding-left: 0;
+}
