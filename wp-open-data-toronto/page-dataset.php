@@ -37,7 +37,7 @@
                   <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
                 </div>
                 <dl>
-                  <dt>Data Quality Score
+                  <dt>Data quality score
                     <span class="badge badge-info">beta</span>
                     <span class="sr-only">: </span>
                   </dt>
