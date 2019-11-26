@@ -592,7 +592,8 @@ span.accordion-arrow {
 .accordion .mb-0 .btn{
     outline: 2px solid #31708f;
 }
-span.fa.fa-download {
+span.fa.fa-download,
+span.fa.fa-desktop {
     padding: 0 0 0 12px;
 }
 
@@ -636,12 +637,45 @@ dd#field-quality:before {
     font-family: "FontAwesome";
     font-size: 21px;
     vertical-align: middle;
-    color: #777777;
+    color: #cccccc;
     display: inline-block;
 }
-dd#field-quality .gold:before{
-    color: #f0ad4e;
+dd.gold:before{
+    color: #f0ad4e !important;
     }
-dd#field-quality .bronze:before{
-    color: #8a6d3b;
+dd.silver:before{
+    color: #777777 !important;
+}
+dd#.bronze:before{
+    color: #8a6d3b !important;
+}
+.hljs-ln td{
+    padding: 0px 14px 2px 0;
+}
+td.hljs-ln-numbers{
+    color: #bbbbbb;
+}
+table.hljs-ln tr:nth-child(even){
+    background: #f4f4f4;
+}
+.newsfeed a.row {
+    font-family: 'Roboto';
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding: 6px 0;
+    margin-left: 0;
+}
+.newsfeed a.row:nth-last-child(1){
+    border-bottom: none;
+}
+.newsfeed a.row .col-md-9 {
+    padding-left: 0;
+}
+.newsfeed{
+    margin: 0 0 20px 0
+}
+.newsfeed a:link, .newsfeed a:visited{
+    font-weight: bold;    
+    color: #31708f;
+    font-size:15px
 }

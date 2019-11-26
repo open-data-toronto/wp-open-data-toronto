@@ -13,8 +13,7 @@ function init() {
                 var row = data['results'][i];
 
                 $('.newsfeed').append(
-                  '<li>' +
-                    '<a href="/dataset/' + row['name'] + '/">' +
+                    '<a href="/dataset/' + row['name'] + '/"  class="row">' +
                       '<div class="col-md-9">' + row['title'] + '</div>' +
                       '<div class="col-md-3">' +
                         '<span class="sr-only">Published </span>' +
@@ -22,8 +21,8 @@ function init() {
                           getTimeSince(row['metadata_created']) +
                         '</div>' +
                       '</div>' +
-                    '</a>' +
-                  '</li>');
+                    '</a>'
+                );
             }
         }
     );
