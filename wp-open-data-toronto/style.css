@@ -679,3 +679,7 @@ table.hljs-ln tr:nth-child(even){
     color: #31708f;
     font-size:15px
 }
+.card-body.accordion__body{
+    margin-top: -2px;
+    background: #ffffff;
+}
