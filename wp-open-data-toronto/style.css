@@ -646,7 +646,7 @@ dd.gold:before{
 dd.silver:before{
     color: #777777 !important;
 }
-dd#.bronze:before{
+dd.bronze:before{
     color: #8a6d3b !important;
 }
 .hljs-ln td{
