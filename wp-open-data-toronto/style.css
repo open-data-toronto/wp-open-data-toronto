@@ -636,12 +636,15 @@ dd#field-quality:before {
     font-family: "FontAwesome";
     font-size: 21px;
     vertical-align: middle;
-    color: #777777;
+    color: #cccccc;
     display: inline-block;
 }
-dd#field-quality .gold:before{
-    color: #f0ad4e;
+dd.gold:before{
+    color: #f0ad4e !important;
     }
-dd#field-quality .bronze:before{
-    color: #8a6d3b;
+dd.silver:before{
+    color: #777777 !important;
+}
+dd#.bronze:before{
+    color: #8a6d3b !important;
 }
