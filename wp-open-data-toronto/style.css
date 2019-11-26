@@ -592,7 +592,8 @@ span.accordion-arrow {
 .accordion .mb-0 .btn{
     outline: 2px solid #31708f;
 }
-span.fa.fa-download {
+span.fa.fa-download,
+span.fa.fa-desktop {
     padding: 0 0 0 12px;
 }
 
