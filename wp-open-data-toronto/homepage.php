@@ -50,7 +50,7 @@
 
             <div class="col-md-6 offset-md-1">
               <h2>Recently Added Datasets</h2>
-              <div class="newsfeed"></div>
+              <div class="newsfeed row"></div>
               <a class="btn btn-md" href="/catalogue/">Explore the Catalogue</a>
             </div>
           </div>
