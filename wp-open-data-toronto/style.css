@@ -661,8 +661,8 @@ table.hljs-ln tr:nth-child(even){
 .newsfeed a.row {
     font-family: 'Roboto';
     width: 100%;
-    border-bottom: 1px solid #ccc;
-    padding: 4px 0;
+    border-bottom: 1px solid #ddd;
+    padding: 6px 0;
     margin-left: 0;
 }
 .newsfeed a.row:nth-last-child(1){
@@ -670,4 +670,12 @@ table.hljs-ln tr:nth-child(even){
 }
 .newsfeed a.row .col-md-9 {
     padding-left: 0;
+}
+.newsfeed{
+    margin: 0 0 20px 0
+}
+.newsfeed a:link, .newsfeed a:visited{
+    font-weight: bold;    
+    color: #31708f;
+    font-size:15px
 }
