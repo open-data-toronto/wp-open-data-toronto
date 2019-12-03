@@ -31,7 +31,7 @@
       <p>
         <a href="https://www.toronto.ca/home/copyright-information/">
           <i aria-hidden="true" class="fa fa-copyright"></i>
-          <span class="sr-only">Copyright</span> City of Toronto 1998 - 2019
+          <span class="sr-only">Copyright</span> City of Toronto 1998 - <?php echo date("Y"); ?>
         </a>
       </p>
     </div>
