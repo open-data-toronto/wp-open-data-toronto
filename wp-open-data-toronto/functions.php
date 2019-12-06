@@ -83,21 +83,15 @@ function arphabet_widgets_init() {
 }
 add_action( 'widgets_init', 'arphabet_widgets_init' );
 
-
 // Adds Excerpts to Pages
 add_post_type_support( 'page', 'excerpt' );
 
 add_theme_support( 'post-thumbnails' );
 
-
-?>
-
-<?php
 function wpdocs_custom_excerpt_length( $length ) {
     return 20;
 }
 add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
-
 
 function wpse_217847_list_terms_exclusions( $query, $args ) {
     if ( ! empty( $args['exclude_slugs'] ) ) {
@@ -113,3 +107,4 @@ function wpse_217847_list_terms_exclusions( $query, $args ) {
 }
 
 add_filter( 'list_terms_exclusions', 'wpse_217847_list_terms_exclusions', 10, 2 );
+?>
