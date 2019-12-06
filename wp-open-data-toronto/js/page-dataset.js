@@ -197,6 +197,11 @@ function queryViews() {
                     $('#content-preview').append('<iframe width="' + w +  '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
                     previewFound = true;
                 }
+            } else if (config['package']['dataset_category'] == 'Table') {
+                var w = $('#body-dataPreview').width();
+                viewURL = config['ckanURL'] + '/visualize_data?resource_id=' + config['package']['preview_resource']['id'];
+                $('#explore-ckan').append('<iframe width="' + w + '" height="520" style="display: block;" src="' + viewURL + '" frameBorder="0"></iframe>');
+                exploreFound = true;
             } else if (results[i]['view_type'] == 'recline_view') {
                 $('#redirect-ckan').attr('href', viewURL);
                 exploreFound = true;

@@ -174,19 +174,6 @@
                       <div data-key="3" id="body-Explore" class="collapse" aria-labelledby="header-Explore" data-parent="#js-accordion__su9l98td5">
                         <div class="card-body accordion__body">
                           <div class="row explore-line" id="explore-ckan">
-                            <div class="col-md-2 explore-img">
-                              <img src="/wp-content/themes/wp-open-data-toronto/img/ckan.png" alt="CKAN logo">
-                            </div>
-                            <div class="col-md-7">
-                              <h4 class="card-title">Visualize this data</h4>
-                              <p>Want to explore this data without having to download it? Try it here</p>
-                            </div>
-                          <div class="col-md-3 explore-column">
-                          <a class="btn btn-outline-primary" id="redirect-ckan" href="#" target="_blank">
-                            <span class="fa fa-area-chart"></span>Visualize
-                            <span class="sr-only"> Visualize data in new window</span>
-                          </a>
-                        </div>
                       </div>
                     </div>
                   </div>
