@@ -216,7 +216,7 @@
                           <div class="col-md-12">
                             <ul class="nav nav-tabs" id="devTabs" role="tablist">
                               <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
-                              <li class="nav-item"><a id="javascript-tab" class="nav-link" data-toggle="tab" href="#javascript" role="tab" aria-controls="javascript" aria-selected="true">JavaScript</a></li>
+                              <li class="nav-item"><a id="nodejs-tab" class="nav-link" data-toggle="tab" href="#nodejs" role="tab" aria-controls="nodejs" aria-selected="true">Node.js</a></li>
                               <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
                             </ul>
                             <div class="tab-content" id="api-examples">
@@ -224,9 +224,9 @@
                                 <pre><code class="python" id="code-python"></code></pre>
                                 <button class="btn btn-outline-primary btn-copy" data-language="python" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                               </div>
-                              <div class="tab-pane fade" id="javascript" role="tabpanel" aria-labelledby="javascript-tab">
-                                <pre><code class="javascript" id="code-javascript"></code></pre>
-                                <button class="btn btn-outline-primary btn-copy" data-language="javascript" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                              <div class="tab-pane fade" id="nodejs" role="tabpanel" aria-labelledby="nodejs-tab">
+                                <pre><code class="nodejs" id="code-nodejs"></code></pre>
+                                <button class="btn btn-outline-primary btn-copy" data-language="nodejs" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
                               </div>
                               <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
                                 <pre><code class="r" id="code-r"></code></pre>
@@ -249,7 +249,7 @@
 </div><!-- end row -->
 </div><!-- end container -->
 
-<script type="text/javascript">
+<script type="text/nodejs">
     jQuery(document).ready(function($) {
         var datasetName = '<?php echo get_query_var( 'dataset' ) ?>';
         init(datasetName);

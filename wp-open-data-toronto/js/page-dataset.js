@@ -348,7 +348,7 @@ function generateSnippets() {
         'print(package["result"])',
     ]
 
-    snippets['javascript'] = [
+    snippets['nodejs'] = [
         'const',
         '    https = require("https"),',
         '    packageName = "' + config['package']['id'] + '";',
@@ -407,7 +407,7 @@ function generateSnippets() {
             'df'
         ]);
 
-        snippets['javascript'] = snippets['javascript'].concat([
+        snippets['nodejs'] = snippets['nodejs'].concat([
             '// since this package has resources in the datastore, one can get the data rather than just the metadata of the resources',
             '// promise to retrieve data of a datastore resource ',
             'const getDatastoreResource = resource => new Promise((resolve, reject) => {',
