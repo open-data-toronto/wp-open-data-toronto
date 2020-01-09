@@ -66,7 +66,7 @@ function buildCatalogue(response) {
             dateLabel = '';
 
         for (var j = 0; j < config['filters'].length; j++) {
-            if (config['filters'][j].startsWith('vocab_')) {
+            if (config['filters'][j].slice(0, 'vocab_'.length) === 'vocab_') {
                 var f = config['filters'][j].replace('vocab_', '');
 
                 if (row.hasOwnProperty(f) && row[f]) {
