@@ -249,7 +249,7 @@
 </div><!-- end row -->
 </div><!-- end container -->
 
-<script type="text/nodejs">
+<script type="text/javascript">
     jQuery(document).ready(function($) {
         var datasetName = '<?php echo get_query_var( 'dataset' ) ?>';
         init(datasetName);
