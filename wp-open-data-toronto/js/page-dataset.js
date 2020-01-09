@@ -348,14 +348,14 @@ function generateSnippets() {
         'print(package["result"])',
     ]
 
-    snippets['javascript'] = [
+    snippets['nodejs'] = [
         'const',
         '    https = require("https"),',
-        '    packageName = "chemical-tracking-chemtrac";',
+        '    packageName = "' + config['package']['id'] + '";',
         '',
         '// promise to retrieve the package',
         'const getPackage = new Promise((resolve, reject) => {',
-        '    https.get(`' + config['ckanAPI'] +'package_show?id=${packageName}`, (response) => {',
+        '    https.get(`' + config['ckanAPI'] +'package_show?id=${packageId}`, (response) => {',
         '        let dataChunks = [];',
         '        response',
         '            .on("data", (chunk) => {',
@@ -407,7 +407,7 @@ function generateSnippets() {
             'df'
         ]);
 
-        snippets['javascript'] = snippets['javascript'].concat([
+        snippets['nodejs'] = snippets['nodejs'].concat([
             '// since this package has resources in the datastore, one can get the data rather than just the metadata of the resources',
             '// promise to retrieve data of a datastore resource ',
             'const getDatastoreResource = resource => new Promise((resolve, reject) => {',
