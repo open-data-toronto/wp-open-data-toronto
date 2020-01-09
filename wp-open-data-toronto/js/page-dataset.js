@@ -351,11 +351,11 @@ function generateSnippets() {
     snippets['javascript'] = [
         'const',
         '    https = require("https"),',
-        '    packageName = "chemical-tracking-chemtrac";',
+        '    packageName = "' + config['package']['id'] + '";',
         '',
         '// promise to retrieve the package',
         'const getPackage = new Promise((resolve, reject) => {',
-        '    https.get(`' + config['ckanAPI'] +'package_show?id=${packageName}`, (response) => {',
+        '    https.get(`' + config['ckanAPI'] +'package_show?id=${packageId}`, (response) => {',
         '        let dataChunks = [];',
         '        response',
         '            .on("data", (chunk) => {',
