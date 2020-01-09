@@ -351,7 +351,7 @@ function generateSnippets() {
     snippets['nodejs'] = [
         'const',
         '    https = require("https"),',
-        '    packageName = "' + config['package']['id'] + '";',
+        '    packageId = "' + config['package']['id'] + '";',
         '',
         '// promise to retrieve the package',
         'const getPackage = new Promise((resolve, reject) => {',
