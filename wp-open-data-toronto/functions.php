@@ -108,3 +108,5 @@ function wpse_217847_list_terms_exclusions( $query, $args ) {
 
 add_filter( 'list_terms_exclusions', 'wpse_217847_list_terms_exclusions', 10, 2 );
 ?>
+<!-- This snippet removes orphan and blank <p> tags from the content -->
+<?php remove_filter( 'the_content', 'wpautop' ); ?>
