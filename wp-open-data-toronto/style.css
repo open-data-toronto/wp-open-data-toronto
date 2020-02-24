@@ -684,3 +684,12 @@ table.hljs-ln tr:nth-child(even){
     margin-top: -2px;
     background: #ffffff;
 }
+
+/** Small Devices **/
+
+@media (max-width: 768px){
+    #description-dataset .accordion{
+        max-width: 90vw !important;
+        width: 90vw;
+    }
+}
