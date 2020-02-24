@@ -11,6 +11,9 @@
           <a href="https://twitter.com/Open_TO">
             <i class="fa fa-twitter"></i>
           </a>
+          <a href="https://github.com/open-data-toronto">
+            <i class="fa fa-github"></i>
+          </a>
         </div>     
       <!-- Begin Mailchimp Signup Form -->
         <div class="col-md-9">
