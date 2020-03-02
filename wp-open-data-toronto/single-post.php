@@ -99,6 +99,8 @@
             the_content();
           endwhile;
           ?>
+
+          <?php comments_template(); ?> 
         </div>
       </div>
     </div>
