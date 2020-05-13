@@ -15,7 +15,7 @@ $.extend(config, {
         'refresh_rate',
         'vocab_civic_issues',
         'vocab_formats',
-        'vocab_topics'
+        "vocab_topics"
     ],
     'filterSize': 6 // Actual number of results shown is filterSize minus 1
 });
