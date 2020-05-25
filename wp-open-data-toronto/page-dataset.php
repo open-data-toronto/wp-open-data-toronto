@@ -14,18 +14,6 @@
           </nav>
         </div>
       </div>
-
-<!--
-      <div class="row block-hidden">
-        <div class="col-md-12">
-          <div class="banner" data-field="image_url">
-            <div class="background">
-              <h1 data-field='title'></h1>
-            </div>
-          </div>
-        </div>
-      </div>
- -->
       <section class="complete-post-list" aria-label="List of Datasets">
         <div class="row block-hidden">
           <!-- Dataset Sidebar -->
@@ -74,7 +62,7 @@
             </div>
           </div>
 
-            <!-- Main Content Area -->
+          <!-- Main Content Area -->
           <div class="col-md-9" id="content">
             <div id="description-dataset">
               <div class="row">
@@ -91,7 +79,6 @@
               <div class="row">
                 <div class="col-md-12">
                   <!-- Accordion -->
-
                   <div class="accordion">
                     <div class="card accordion__section">
                       <div class="card-header accordion__header" id="header-dataPreview">
@@ -189,65 +176,64 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                <div class="card accordion__section">
-                  <div class="card-header accordion__header" id="header-Developers">
-                    <div class="mb-0">
-                      <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Developers" aria-expanded="false">
-                        For Developers
-                        <span class="accordion-arrow">
-                          <span class="fa fa-chevron-down"></span>
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div data-key="4" id="body-Developers" class="collapse" aria-labelledby="header-Developers" data-parent="#js-accordion__su9l98td5">
-                    <div class="card-body accordion__body">
-                      <div class="card-block">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
-                          </div>
+                    <div class="card accordion__section">
+                      <div class="card-header accordion__header" id="header-Developers">
+                        <div class="mb-0">
+                          <button class="btn btn-block btn-link collapsed accordion__button" data-toggle="collapse" data-target="#body-Developers" aria-expanded="false">
+                            For Developers
+                            <span class="accordion-arrow">
+                              <span class="fa fa-chevron-down"></span>
+                            </span>
+                          </button>
                         </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <ul class="nav nav-tabs" id="devTabs" role="tablist">
-                              <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
-                              <li class="nav-item"><a id="nodejs-tab" class="nav-link" data-toggle="tab" href="#nodejs" role="tab" aria-controls="nodejs" aria-selected="true">Node.js</a></li>
-                              <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
-                            </ul>
-                            <div class="tab-content" id="api-examples">
-                              <div class="tab-pane fade show active" id="python" role="tabpanel" aria-labelledby="python-tab">
-                                <pre><code class="python" id="code-python"></code></pre>
-                                <button class="btn btn-outline-primary btn-copy" data-language="python" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                      </div>
+
+                      <div data-key="4" id="body-Developers" class="collapse" aria-labelledby="header-Developers" data-parent="#js-accordion__su9l98td5">
+                        <div class="card-body accordion__body">
+                          <div class="card-block">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <p>Below are sample code snippets for accessing a dataset via the API. Refer to the <a href="http://docs.ckan.org/en/latest/api/index.html" target="_blank">CKAN API documentation</a> for a complete list of endpoints.</p>
                               </div>
-                              <div class="tab-pane fade" id="nodejs" role="tabpanel" aria-labelledby="nodejs-tab">
-                                <pre><code class="nodejs" id="code-nodejs"></code></pre>
-                                <button class="btn btn-outline-primary btn-copy" data-language="nodejs" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
-                              </div>
-                              <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
-                                <pre><code class="r" id="code-r"></code></pre>
-                                <button class="btn btn-outline-primary btn-copy" data-language="r" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <ul class="nav nav-tabs" id="devTabs" role="tablist">
+                                  <li class="nav-item"><a id="python-tab" class="nav-link active" data-toggle="tab" href="#python" role="tab" aria-controls="python" aria-selected="true">Python</a></li>
+                                  <li class="nav-item"><a id="nodejs-tab" class="nav-link" data-toggle="tab" href="#nodejs" role="tab" aria-controls="nodejs" aria-selected="true">Node.js</a></li>
+                                  <li class="nav-item"><a id="r-tab" class="nav-link" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a></li>
+                                </ul>
+                                <div class="tab-content" id="api-examples">
+                                  <div class="tab-pane fade show active" id="python" role="tabpanel" aria-labelledby="python-tab">
+                                    <pre><code class="python" id="code-python"></code></pre>
+                                    <button class="btn btn-outline-primary btn-copy" data-language="python" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                                  </div>
+                                  <div class="tab-pane fade" id="nodejs" role="tabpanel" aria-labelledby="nodejs-tab">
+                                    <pre><code class="nodejs" id="code-nodejs"></code></pre>
+                                    <button class="btn btn-outline-primary btn-copy" data-language="nodejs" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                                  </div>
+                                  <div class="tab-pane fade" id="r" role="tabpanel" aria-labelledby="r-tab">
+                                    <pre><code class="r" id="code-r"></code></pre>
+                                    <button class="btn btn-outline-primary btn-copy" data-language="r" data-toggle="popover" data-content="Copied to clipboard" type="button"><span class="fa fa-copy"></span>&nbsp; Copy<span class="sr-only"> code snippet</span></button>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
                   </div>
+                  <!-- end accordion -->
                 </div>
-              </div><!-- end accordion -->
+              </div>
             </div>
-          </div>
         </div>
       </section>
     </div>
   </section>
-</div><!-- end row -->
-</div><!-- end container -->
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
