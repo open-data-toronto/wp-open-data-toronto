@@ -459,17 +459,15 @@ function buildUI() {
 function generateSnippets() {
   var snippets = {};
   snippets["python"] = [
-    "import urllib",
-    "import json",
     "import pandas as pd",
+    "import requests",
     "",
     "# Get the dataset metadata by passing package_id to the package_search endpoint",
     "# For example, to retrieve the metadata for this dataset:",
     "",
     'url = "' + config["ckanAPI"] + 'package_show"',
     'params = { "id": "' + config["package"]["id"] + '"}',
-    'response = urllib.request.urlopen(url, data=bytes(json.dumps(params), encoding="utf-8"))',
-    "package = json.loads(response.read())",
+    "package = requests.get(url, params = params).json()",
     'print(package["result"])',
   ];
 
@@ -527,8 +525,7 @@ function generateSnippets() {
       '    if resource["datastore_active"]:',
       '        url = "' + config["ckanAPI"] + 'datastore_search"',
       '        p = { "id": resource["id"] }',
-      '        r = urllib.request.urlopen(url, data=bytes(json.dumps(p), encoding="utf-8"))',
-      "        data = json.loads(r.read())",
+      "        data = requests.get(url, params = p).json()",
       '        df = pd.DataFrame(data["result"]["records"])',
       "        break",
       "df",
