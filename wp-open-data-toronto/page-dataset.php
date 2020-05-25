@@ -4,6 +4,7 @@
 
   <section class="content-area">
     <div class="container">
+
       <!-- Breadcrumbs -->
       <div class="row">
         <div class="col-md-12">
@@ -14,8 +15,10 @@
           </nav>
         </div>
       </div>
+
       <section class="complete-post-list" aria-label="List of Datasets">
         <div class="row block-hidden">
+
           <!-- Dataset Sidebar -->
           <div class="col-md-3 dataset-sidebar">
             <div class="about-dataset">
@@ -168,11 +171,13 @@
                               <h4 class="card-title">Visualize this data</h4>
                               <p>Want to explore this data without having to download it? Try it here</p>
                             </div>
-                          <div class="col-md-3 explore-column">
-                          <a class="btn btn-outline-primary" id="redirect-ckan" href="#" target="_blank">
-                            <span class="fa fa-area-chart"></span>Visualize
-                            <span class="sr-only"> Visualize data in new window</span>
-                          </a>
+                            <div class="col-md-3 explore-column">
+                            <a class="btn btn-outline-primary" id="redirect-ckan" href="#" target="_blank">
+                              <span class="fa fa-area-chart"></span>Visualize
+                              <span class="sr-only"> Visualize data in new window</span>
+                            </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -232,6 +237,7 @@
             </div>
         </div>
       </section>
+      
     </div>
   </section>
 
