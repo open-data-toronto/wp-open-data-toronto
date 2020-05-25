@@ -248,6 +248,38 @@
                             </a>
                           </div>
                         </div>
+                        <div class="row explore-line" id="explore-visualize">
+                          <div class="col-md-2 explore-img">
+                            <img
+                              src="/wp-content/themes/wp-open-data-toronto/img/ckan.png"
+                              alt="CKAN logo"
+                            />
+                          </div>
+                          <div class="col-md-7">
+                            <h4 class="card-title">
+                              Visualize this data
+                              <span class="badge badge-info">beta</span>
+                            </h4>
+                            <p>
+                              We are working with others to make data easier to
+                              visualize. Feel free to experiment and let us know
+                              via Twitter how we can continue to improve it.
+                            </p>
+                          </div>
+                          <div class="col-md-3 explore-column">
+                            <a
+                              class="btn btn-outline-primary"
+                              id="redirect-ckan"
+                              href="#"
+                              target="_blank"
+                            >
+                              <span class="fa fa-area-chart"></span>Visualize
+                              <span class="sr-only">
+                                Visualize data in new window</span
+                              >
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
