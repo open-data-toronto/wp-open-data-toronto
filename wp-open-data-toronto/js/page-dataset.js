@@ -294,6 +294,9 @@ function queryViews() {
         } else if (results[i]["view_type"] == "recline_view") {
           $("#redirect-ckan").attr("href", viewURL);
           exploreFound = true;
+        } else if (results[i]["view_type"] == "visualize") {
+          $("#redirect-visualize").attr("href", viewURL);
+          exploreFound = true;
         }
       }
 

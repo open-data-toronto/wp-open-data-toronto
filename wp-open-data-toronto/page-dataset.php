@@ -269,7 +269,7 @@
                           <div class="col-md-3 explore-column">
                             <a
                               class="btn btn-outline-primary"
-                              id="redirect-ckan"
+                              id="redirect-visualize"
                               href="#"
                               target="_blank"
                             >
