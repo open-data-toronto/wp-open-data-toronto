@@ -109,12 +109,4 @@ function wpse_217847_list_terms_exclusions( $query, $args ) {
 add_filter( 'list_terms_exclusions', 'wpse_217847_list_terms_exclusions', 10, 2 );
 ?>
 <?php remove_filter( 'the_content', 'wpautop' ); 
-
-add_filter('comment_form_default_fields', 'unset_url_field');
-function unset_url_field($fields){
-    if(isset($fields['url']))
-       unset($fields['url']);
-       return $fields;
-}
-
 ?>
