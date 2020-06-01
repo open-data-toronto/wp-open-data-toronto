@@ -579,7 +579,7 @@ span.accordion-arrow {
 }
 .accordion .mb-0 .btn {
     text-align: left;
-    outline: 2px solid #31708f !important;;
+    outline: 1px solid #31708f !important;;
     margin:0 0 4px 0
 }
 #header-Developers .btn{
@@ -593,7 +593,7 @@ span.accordion-arrow {
     background: #Ffffff !important;
 }
 .accordion .mb-0 .btn{
-    outline: 2px solid #31708f;
+    outline: 1px solid #31708f;
 }
 span.fa.fa-download,
 span.fa.fa-desktop {
