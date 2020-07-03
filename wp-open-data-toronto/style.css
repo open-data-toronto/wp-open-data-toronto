@@ -96,9 +96,6 @@ a.navbar-brand{
     color: #31708f;
     background: #Ffffff !important;
 }
-ul li a.comment-reply-link{
-    color: #ffffff;
-}
 
 /* Footers */
 
@@ -694,68 +691,4 @@ table.hljs-ln tr:nth-child(even){
         max-width: 90vw !important;
         width: 90vw;
     }
-}
-/** comments **/
-#comments {
-    padding: 0px;
-    margin: 20px 0;
-}
-span.says{display:none;}
-h5.mt-0, .comment-meta {
-    display: inline;
-}
-.media-body-wrap.card {
-    border: 0;
-    padding: 0;
-}
-.card-header {
-    background: 0;
-    padding: 0;
-    font-style: normal;
-    border: 0;
-}
-cite.fn {
-    font-style: normal;
-}
-ul.comment-list{ 
-}
-.comment-body {
-    padding: 20px 10px 20px 0;
-    border: 1px solid #ccc;
-}
-#content.post-content img {
-    display: none;
-}
-.card-header, h5 {
-    font-size: 18px;
-    font-weight: 600;
-    padding: 0 0 0 10px;
-}
-.comment-content.card-block {
-    padding: 10px 20px 20px 20px;
-    background: #f4f4f4;
-    margin: 12px 20px;
-}
-footer.reply.comment-reply.card-footer {
-    background: 0;
-    padding: 0;
-    margin: 0  0 0 20px;
-    text-align: left;
-    border: 0;
-}
-#comments ul.children {
-    margin: -25px 0 0 20px;
-}
-li.comment {
-    margin-top: -25px;
-}
-h2.comments-title {
-    margin: 0 0 40px 0;
-    font-weight: bold;
-}
-div#respond {
-    background: #f4f4f4;
-    padding: 28px 28px 0 27px;
-    margin: -25px 0 25px 0;
-    border: 1px solid #ccc;
 }
