@@ -744,6 +744,9 @@ table.hljs-ln tr:nth-child(even) {
     width: 90vw;
   }
 }
+#body-dataFeatures table {
+  table-layout: fixed;
+}
 
 #body-dataFeatures table tr td > p {
   margin: 0;
