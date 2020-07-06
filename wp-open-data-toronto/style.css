@@ -752,3 +752,8 @@ table.hljs-ln tr:nth-child(even) {
   margin: 0;
   padding: 0;
 }
+
+#body-dataFeatures table tr td > ul {
+  padding-inline-start: inherit;
+  margin-bottom: 0;
+}
