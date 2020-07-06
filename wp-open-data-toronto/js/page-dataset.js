@@ -318,6 +318,7 @@ function queryViews() {
  */
 
 function queryContents() {
+  var converter = new showdown.Converter();
   getCKAN(
     "datastore_search",
     { resource_id: config["package"]["preview_resource"]["id"], limit: 3 },
@@ -343,7 +344,7 @@ function queryContents() {
         if (fields[i]["id"] == "_id") {
           columnDesc = "Unique row identifier for Open Data database";
         } else if (fields[i]["info"]) {
-          columnDesc = fields[i]["info"]["notes"];
+          columnDesc = converter.makeHtml(fields[i]["info"]["notes"]);
         }
 
         previewTable.find("thead").append("<th>" + fields[i]["id"] + "</th>");

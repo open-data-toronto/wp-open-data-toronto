@@ -744,3 +744,8 @@ table.hljs-ln tr:nth-child(even) {
     width: 90vw;
   }
 }
+
+#body-dataFeatures table tr td > p {
+  margin: 0;
+  padding: 0;
+}
