@@ -744,16 +744,12 @@ table.hljs-ln tr:nth-child(even) {
     width: 90vw;
   }
 }
+
 #body-dataFeatures table {
   table-layout: fixed;
 }
 
-#body-dataFeatures table tr td > p {
-  margin: 0;
-  padding: 0;
-}
-
-#body-dataFeatures table tr td > ul {
-  padding-inline-start: inherit;
+#body-dataFeatures tbody > tr > td :last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
 }
