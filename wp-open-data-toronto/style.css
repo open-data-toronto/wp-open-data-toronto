@@ -745,10 +745,6 @@ table.hljs-ln tr:nth-child(even) {
   }
 }
 
-#body-dataFeatures table {
-  table-layout: fixed;
-}
-
 #body-dataFeatures tbody > tr > td :last-child {
   margin-bottom: 0;
   padding-bottom: 0;
