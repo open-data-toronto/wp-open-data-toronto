@@ -156,7 +156,8 @@ function buildDataset(response) {
   for (var i in config["package"]["resources"]) {
     var resource = config["package"]["resources"][i];
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
-      
+    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
+    console.log(resourceLink)  
 
     if(resource["is_datastore_cache_file"]){continue};
 
@@ -209,6 +210,7 @@ function buildDataset(response) {
 
     }
     //console.log("Appending to tbody")
+    console.log(resourceLink)
     $("#table-resources tbody").append(
       '<tr data-stored="' +
         resource["datastore_active"] +
