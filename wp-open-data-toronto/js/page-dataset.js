@@ -19,7 +19,7 @@ $.extend(config, {
     epsg: ["WGS84", "MTM3"],
     dropdown: [
       ["4326", "WGS84"],
-      ["2019", "MTM3"],
+      ["2945", "MTM3"],
     ],
   },
   package: {},
