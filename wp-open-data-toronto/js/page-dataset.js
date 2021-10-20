@@ -102,7 +102,7 @@ function buildDataset(response) {
               $(this).append(", ");
             }
             $(this).append(
-              '<a href="/catalogue?vocab_' +
+              '<a href="/catalogue?' +
                 field +
                 "=" +
                 encodeURIComponent(content[i]) +
