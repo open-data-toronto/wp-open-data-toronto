@@ -34,7 +34,7 @@ $.extend(config, {
 
 function buildDataset(response) {
   var data = (config["package"] = response["result"]);
-  console.log(data)
+  //console.log(data)
   var isRealTime = data["refresh_rate"].toLowerCase() == "real-time";
 
   queryQualityScore();
@@ -45,7 +45,7 @@ function buildDataset(response) {
 
   for (var i in data["resources"]) {
     if (
-      data["resources"][i]["is_preview"] &&
+      data["resources"][i]["is_preview"] == true &&
       $.isEmptyObject(data["preview_resource"])
     ) {
       data["preview_resource"] = data["resources"][i];
@@ -157,7 +157,7 @@ function buildDataset(response) {
     var resource = config["package"]["resources"][i];
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
     resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
-    console.log(resourceLink)  
+    //console.log(resourceLink)  
 
     if(resource["is_datastore_cache_file"]){continue};
 
@@ -209,8 +209,8 @@ function buildDataset(response) {
       resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
 
     }
-    //console.log("Appending to tbody")
-    console.log(resourceLink)
+    ////console.log("Appending to tbody")
+    //console.log(resourceLink)
     $("#table-resources tbody").append(
       '<tr data-stored="' +
         resource["datastore_active"] +
@@ -237,7 +237,7 @@ function buildDataset(response) {
         "</td>" +
         "</tr>"
     );
-    //console.log("Appended to tbody")
+    ////console.log("Appended to tbody")
 
     if (["html", "web", "jsp"].indexOf(resource["format"]) != -1) {
       $("#table-resources tr:last-child td:last-child a").html(
@@ -451,10 +451,10 @@ function buildUI() {
         
         datastore_cache = JSON.parse(decodeURIComponent($("td#datastore_cache").attr("data")));
         
-        //console.log(datastore_cache)
-        //console.log(format)
-        //console.log(proj)
-        //console.log(download_name)
+        ////console.log(datastore_cache)
+        ////console.log(format)
+        ////console.log(proj)
+        ////console.log(download_name)
         if(proj){ 
           resource_id = datastore_cache[format][proj]
           proj_suffix = " - " + proj
@@ -532,7 +532,7 @@ function generateSnippets() {
     "",
     "getPackage.then(pkg => {",
     "    // this is the metadata of the package",
-    "    console.log(pkg);",
+    "    //console.log(pkg);",
     "}).catch(error => {",
     "    console.error(error);",
     "})",
@@ -596,7 +596,7 @@ function generateSnippets() {
       "    getDatastoreResource(datastoreResources[0])",
       "        .then(resource => {",
       "            // this is the actual data of the resource",
-      "            console.log(resource)",
+      "            //console.log(resource)",
       "        })",
       "        .catch(error => {",
       "            console.error(error);",
