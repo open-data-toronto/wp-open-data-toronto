@@ -204,7 +204,11 @@ function buildDataset(response) {
       }
       format = generateDropdowns("format", format);
 
-      cache_id = resource["datastore_cache"][ resource["format"] ]
+      //console.log( resource["format"] )
+      //console.log( resource["datastore_cache"] )
+
+      cache_id = resource["datastore_cache"][ resource["format"].toUpperCase() ]
+      //console.log(cache_id)
       resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
       resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
 
@@ -450,15 +454,17 @@ function buildUI() {
           download_name = $("td#download_name").text()
         
         datastore_cache = JSON.parse(decodeURIComponent($("td#datastore_cache").attr("data")));
-        
-        ////console.log(datastore_cache)
-        ////console.log(format)
+        console.log(datastore_cache)
+        console.log(format)
         ////console.log(proj)
         ////console.log(download_name)
         if(proj){ 
           resource_id = datastore_cache[format][proj]
           proj_suffix = " - " + proj
-        }else{resource_id = datastore_cache[format]};
+        }else{
+          resource_id = datastore_cache[format]
+          proj_suffix = ""
+        };
 
         // set the href for the download button
         //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
