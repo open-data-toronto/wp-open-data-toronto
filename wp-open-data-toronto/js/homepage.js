@@ -3,10 +3,11 @@ $.extend(config, {
 });
 
 function init() {
-  var fields = ["fl=metadata_created", "fl=name", "fl=title"];
+  //var fields = ["fl=date_published", "fl=name", "fl=title"];
+  //console.log("package_search?" + fields.join("&"))
   getCKAN(
-    "package_search?" + fields.join("&"),
-    { rows: config["datasetsShown"], sort: "metadata_created desc" },
+    "package_search?",// + fields.join("&"),
+    { rows: config["datasetsShown"], sort: "date_published desc" },
     function (response) {
       var data = response["result"];
       for (var i = 0; i < data["results"].length; i++) {
@@ -22,7 +23,7 @@ function init() {
             '<div class="col-md-3">' +
             '<span class="sr-only">Published </span>' +
             '<div class="pull-right">' +
-            getTimeSince(row["metadata_created"]) +
+            getTimeSince(row["date_published"]) +
             "</div>" +
             "</div>" +
             "</a>"
