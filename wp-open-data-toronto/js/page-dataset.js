@@ -19,7 +19,7 @@ $.extend(config, {
     epsg: ["WGS84", "MTM3"],
     dropdown: [
       ["4326", "WGS84"],
-      ["2019", "MTM3"],
+      ["2945", "MTM3"],
     ],
   },
   package: {},
@@ -34,6 +34,7 @@ $.extend(config, {
 
 function buildDataset(response) {
   var data = (config["package"] = response["result"]);
+  //console.log(data)
   var isRealTime = data["refresh_rate"].toLowerCase() == "real-time";
 
   queryQualityScore();
@@ -44,7 +45,7 @@ function buildDataset(response) {
 
   for (var i in data["resources"]) {
     if (
-      data["resources"][i]["is_preview"] &&
+      data["resources"][i]["is_preview"] == true &&
       $.isEmptyObject(data["preview_resource"])
     ) {
       data["preview_resource"] = data["resources"][i];
@@ -101,7 +102,7 @@ function buildDataset(response) {
               $(this).append(", ");
             }
             $(this).append(
-              '<a href="/catalogue?vocab_' +
+              '<a href="/catalogue?' +
                 field +
                 "=" +
                 encodeURIComponent(content[i]) +
@@ -153,8 +154,12 @@ function buildDataset(response) {
   }
 
   for (var i in config["package"]["resources"]) {
-    var resource = config["package"]["resources"][i],
-      resourceLink = config["ckanURL"] + "/download_resource/" + resource["id"];
+    var resource = config["package"]["resources"][i];
+      //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
+    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
+    //console.log(resourceLink)  
+
+    if(resource["is_datastore_cache_file"]){continue};
 
     resource["format"] = resource["format"].toLowerCase();
 
@@ -172,7 +177,11 @@ function buildDataset(response) {
           config["projectionOptions"]["dropdown"]
         );
 
-        resourceLink += "?format=geojson&projection=4326";
+        cache_id = resource["datastore_cache"]["GEOJSON"]["4326"]
+        resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
+        resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+
+        //resourceLink += "?format=geojson&projection=4326";
       } else {
         for (var f in config["projectionOptions"]["epsg"]) {
           if (
@@ -194,15 +203,25 @@ function buildDataset(response) {
         format.unshift(config["formatOptions"]["tabular"]["extended"]);
       }
       format = generateDropdowns("format", format);
-      resourceLink +=
-        "?format=" + (resource["format"] == "csv" ? "csv" : "json");
-    }
 
+      //console.log( resource["format"] )
+      //console.log( resource["datastore_cache"] )
+
+      cache_id = resource["datastore_cache"][ resource["format"].toUpperCase() ]
+      //console.log(cache_id)
+      resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
+      resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+
+    }
+    ////console.log("Appending to tbody")
+    //console.log(resourceLink)
     $("#table-resources tbody").append(
       '<tr data-stored="' +
         resource["datastore_active"] +
         '">' +
-        "<td>" +
+        '<td id="datastore_cache" style="display: none;" data = '+ encodeURIComponent(JSON.stringify(resource["datastore_cache"])) +'>' +
+        '</td>' +
+        "<td id='download_name'>" +
         resource["name"] +
         "</td>" +
         "<td>" +
@@ -222,6 +241,7 @@ function buildDataset(response) {
         "</td>" +
         "</tr>"
     );
+    ////console.log("Appended to tbody")
 
     if (["html", "web", "jsp"].indexOf(resource["format"]) != -1) {
       $("#table-resources tr:last-child td:last-child a").html(
@@ -394,7 +414,7 @@ function queryQualityScore() {
 }
 
 /**
- * Creates the HTML element events
+ * Creates the HTML element events (customize HTML based on selecting dropdown menu values, etc)
  */
 
 function buildUI() {
@@ -426,18 +446,37 @@ function buildUI() {
     function (evt) {
       var row = $(this).parents("tr"),
         btn = row.find("a"),
-        link = btn.attr("href").split("?")[0];
+        link = btn.attr("href").split("/resource/")[0];
 
       if (row.data("stored")) {
-        var format = row.find(".select-download-format").val(),
-          proj = row.find(".select-download-projection").val();
+        var format = row.find(".select-download-format").val().toUpperCase(),
+          proj = row.find(".select-download-projection").val(),
+          download_name = $("td#download_name").text()
+        
+        datastore_cache = JSON.parse(decodeURIComponent($("td#datastore_cache").attr("data")));
+        console.log(datastore_cache)
+        console.log(format)
+        ////console.log(proj)
+        ////console.log(download_name)
+        if(proj){ 
+          resource_id = datastore_cache[format][proj]
+          proj_suffix = " - " + proj
+        }else{
+          resource_id = datastore_cache[format]
+          proj_suffix = ""
+        };
 
+        // set the href for the download button
+        //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
+        // we need a way to access the resource so we can get its datastore_cache variable
+        // could we put it on a hidden element?
+        // could we make a call to get that data when this page starts up?
         btn.attr(
           "href",
-          link +
-            "?format=" +
-            format +
-            (proj != undefined ? "&projection=" + proj : "")
+          link + "/resource/" + resource_id + "/download/" + download_name + proj_suffix + "." + format.toLowerCase() //
+            //"?format=" +
+            //format +
+            //(proj != undefined ? "&projection=" + proj : "")
         );
       }
     }
@@ -499,7 +538,7 @@ function generateSnippets() {
     "",
     "getPackage.then(pkg => {",
     "    // this is the metadata of the package",
-    "    console.log(pkg);",
+    "    //console.log(pkg);",
     "}).catch(error => {",
     "    console.error(error);",
     "})",
@@ -563,7 +602,7 @@ function generateSnippets() {
       "    getDatastoreResource(datastoreResources[0])",
       "        .then(resource => {",
       "            // this is the actual data of the resource",
-      "            console.log(resource)",
+      "            //console.log(resource)",
       "        })",
       "        .catch(error => {",
       "            console.error(error);",

@@ -13,9 +13,9 @@ $.extend(config, {
         'dataset_category',
         'owner_division',
         'refresh_rate',
-        'vocab_civic_issues',
-        'vocab_formats',
-        "vocab_topics"
+        'civic_issues',
+        'formats',
+        "topics"
     ],
     'filterSize': 6 // Actual number of results shown is filterSize minus 1
 });
