@@ -84,7 +84,7 @@ function buildCatalogue(response) {
           specialLabel = '<div class="col-md-2">' +
                            '<div class="status-label retired-tag pull-right" aria-label="archived">Retired</div>' +
                          '</div>';
-        } else if (getDaysSince(row['metadata_created']) <= 30) {
+        } else if (getDaysSince(row['date_published']) <= 30) {
           specialLabel = '<div class="col-md-2">' +
                            '<div class="status-label new-tag pull-right" aria-label="new">New</div>' +
                          '</div>';
