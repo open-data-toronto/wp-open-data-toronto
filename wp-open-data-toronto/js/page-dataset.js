@@ -451,13 +451,14 @@ function buildUI() {
       if (row.data("stored")) {
         var format = row.find(".select-download-format").val().toUpperCase(),
           proj = row.find(".select-download-projection").val(),
-          download_name = $("td#download_name").text()
+          download_name = row.find("td#download_name").text()
         
-        datastore_cache = JSON.parse(decodeURIComponent($("td#datastore_cache").attr("data")));
-        console.log(datastore_cache)
-        console.log(format)
-        ////console.log(proj)
-        ////console.log(download_name)
+        console.log("Testing.............")
+
+        console.log(download_name)
+ 
+        datastore_cache = JSON.parse(decodeURIComponent(row.find("td#datastore_cache").attr("data")));
+        
         if(proj){ 
           resource_id = datastore_cache[format][proj]
           proj_suffix = " - " + proj
