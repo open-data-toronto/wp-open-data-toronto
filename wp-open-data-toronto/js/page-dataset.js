@@ -204,8 +204,8 @@ function buildDataset(response) {
       }
       format = generateDropdowns("format", format);
 
-      //console.log( resource["format"] )
-      //console.log( resource["datastore_cache"] )
+      console.log( resource["format"] )
+      console.log( resource )
 
       cache_id = resource["datastore_cache"][ resource["format"].toUpperCase() ]
       //console.log(cache_id)

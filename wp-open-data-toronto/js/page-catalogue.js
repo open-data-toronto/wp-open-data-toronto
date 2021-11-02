@@ -32,6 +32,7 @@ function buildCatalogue(response) {
     $('#nav-catalogue').hide();
 
     var data = response['result'];
+    console.log(data)
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
     if (data['results'].length == 0) {
@@ -64,9 +65,10 @@ function buildCatalogue(response) {
             listLabels = [],
             specialLabel = '',
             dateLabel = '';
-
+        console.log(config['filters'])
         for (var j = 0; j < config['filters'].length; j++) {
-            if (config['filters'][j].slice(0, 'vocab_'.length) === 'vocab_') {
+            
+            if ( ["civic_issues", "formats", "topics"].includes( config['filters'][j] )) {
                 var f = config['filters'][j].replace('vocab_', '');
 
                 if (row.hasOwnProperty(f) && row[f]) {
