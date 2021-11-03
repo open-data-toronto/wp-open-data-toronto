@@ -95,7 +95,7 @@ function buildCatalogue(response) {
         if (row['refresh_rate'].toLowerCase() != 'real-time') {
           dateLabel = '<div class="col-md-4 text-left attributes">' +
             '<div class="dataset-meta-label">Last Refreshed</div>' +
-            '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['metadata_modified'].split('-')) + '</span>' +
+            '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['last_refreshed'].split('-')) + '</span>' +
           '</div>'
         }
 
@@ -450,7 +450,7 @@ function updateURL() {
         urlParam.push('n=' + state['page']);
     }
 
-    if (state['sort'] != 'metadata_modified desc') {
+    if (state['sort'] != 'last_refreshed desc') {
         urlParam.push('sort=' + state['sort']);
     }
 
