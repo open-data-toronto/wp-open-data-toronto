@@ -200,13 +200,10 @@ function buildDataset(response) {
       }
     } else if (resource["datastore_active"]) {
       format = config["formatOptions"]["tabular"]["default"].slice();
-      if (resource["format"] == "csv") {
-        format.unshift(config["formatOptions"]["tabular"]["extended"]);
-      }
+      //if (resource["format"] == "csv") {
+      //  format.unshift(config["formatOptions"]["tabular"]["extended"]);
+      //}
       format = generateDropdowns("format", format);
-
-      console.log( resource["format"] )
-      console.log( resource )
 
       cache_id = resource["datastore_cache"][ resource["format"].toUpperCase() ]
       //console.log(cache_id)
