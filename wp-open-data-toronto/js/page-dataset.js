@@ -9,6 +9,7 @@ $.extend(config, {
     ], // First element in CKAN format (converted to lowerCase), second is displayed in WP
     tabular: {
       default: [
+        ["csv", "CSV"],
         ["json", "JSON"],
         ["xml", "XML"],
       ],
@@ -287,6 +288,8 @@ function queryViews() {
         exploreFound = false,
         previewFound = false;
 
+      console.log(results)
+
       for (var i in results) {
         var viewURL =
           config["ckanURL"] +
@@ -296,6 +299,7 @@ function queryViews() {
           results[i]["resource_id"] +
           "/view/" +
           results[i]["id"];
+          console.log(viewURL)
         if (
           config["package"]["dataset_category"] == "Map" &&
           results[i]["view_type"] == "recline_map_view"
@@ -452,10 +456,6 @@ function buildUI() {
         var format = row.find(".select-download-format").val().toUpperCase(),
           proj = row.find(".select-download-projection").val(),
           download_name = row.find("td#download_name").text()
-        
-        console.log("Testing.............")
-
-        console.log(download_name)
  
         datastore_cache = JSON.parse(decodeURIComponent(row.find("td#datastore_cache").attr("data")));
         
