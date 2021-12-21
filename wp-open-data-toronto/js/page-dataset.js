@@ -45,17 +45,10 @@ function buildDataset(response) {
   data["is_geospatial"] = false;
 
   for (var i in data["resources"]) {
-    console.log("Preview? " + data["resources"][i]["is_preview"])
     if ('is_preview' in data["resources"][i]) {
       if (["True", true].indexOf(data["resources"][i]["is_preview"]) != -1 && $.isEmptyObject(data["preview_resource"]))
       {
         data["preview_resource"] = data["resources"][i]
-        
-        console.log("Preview Resource!")
-        console.log(i)
-        console.log(data["resources"])
-        console.log(data["resources"][i])
-        console.log(data["preview_resource"])
       }
 
     }
@@ -166,8 +159,7 @@ function buildDataset(response) {
     var resource = config["package"]["resources"][i];
 
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
-    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
-    //console.log(resourceLink)  
+    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] //+ "." + resource["format"].toLowerCase();
 
     if(resource["is_datastore_cache_file"]){continue};
 
@@ -190,6 +182,7 @@ function buildDataset(response) {
         cache_id = resource["datastore_cache"]["GEOJSON"]["4326"]
         resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
         resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+        
 
         //resourceLink += "?format=geojson&projection=4326";
       } else {
@@ -219,11 +212,12 @@ function buildDataset(response) {
         //console.log(cache_id)
         resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
         resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+        
+
       }
 
     }
-    ////console.log("Appending to tbody")
-    //console.log(resourceLink)
+
     $("#table-resources tbody").append(
       '<tr data-stored="' +
         resource["datastore_active"] +
@@ -266,10 +260,7 @@ function buildDataset(response) {
   buildUI();
 
   var previewResource = config["package"]["preview_resource"];
-  console.log("Showing Preview Resource!")
-  console.log(previewResource)
-  console.log(previewResource["datastore_active"])
-  console.log(config["package"]["dataset_category"])
+
   if (
     previewResource != undefined &&
     previewResource["datastore_active"] &&
@@ -300,7 +291,6 @@ function queryViews() {
         exploreFound = false,
         previewFound = false;
 
-      console.log(results)
 
       for (var i in results) {
         var viewURL =
@@ -311,7 +301,6 @@ function queryViews() {
           results[i]["resource_id"] +
           "/view/" +
           results[i]["id"];
-          console.log(viewURL)
         if (
           config["package"]["dataset_category"] == "Map" &&
           results[i]["view_type"] == "recline_map_view"
@@ -486,7 +475,7 @@ function buildUI() {
         // could we make a call to get that data when this page starts up?
         btn.attr(
           "href",
-          link + "/resource/" + resource_id + "/download/" + download_name + proj_suffix + "." + format.toLowerCase() //
+          link + "/resource/" + resource_id + "/download/" + download_name + proj_suffix + "." + format.toLowerCase().replace("shp", "zip") // useful since many gis clients read shapefiles as .zip, not as .shp
             //"?format=" +
             //format +
             //(proj != undefined ? "&projection=" + proj : "")
