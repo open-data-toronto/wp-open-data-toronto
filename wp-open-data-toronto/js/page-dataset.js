@@ -52,7 +52,9 @@ function buildDataset(response) {
       data["preview_resource"] = data["resources"][i];
     }
 
-    if (data["resources"][i]["datastore_active"] && !data["datastore_active"]) {
+    if (data["resources"][i]["datastore_active"] && data["resources"][i]["datastore_active"] != "False" && !data["datastore_active"]) {
+      console.log("Datastore Activated!")
+      console.log(data["resources"][i])
       data["datastore_active"] = true;
     }
 
@@ -156,6 +158,7 @@ function buildDataset(response) {
 
   for (var i in config["package"]["resources"]) {
     var resource = config["package"]["resources"][i];
+
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
     resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
     //console.log(resourceLink)  
@@ -198,17 +201,23 @@ function buildDataset(response) {
           }
         }
       }
-    } else if (resource["datastore_active"]) {
+    } else if (resource["datastore_active"] && resource["datastore_active"] != "False") {
+      console.log("Datastore Active!")
+      console.log(resource["datastore_active"])
+      console.log(resource["id"])
+      console.log(resource["format"])
       format = config["formatOptions"]["tabular"]["default"].slice();
       //if (resource["format"] == "csv") {
       //  format.unshift(config["formatOptions"]["tabular"]["extended"]);
       //}
       format = generateDropdowns("format", format);
 
-      cache_id = resource["datastore_cache"][ resource["format"].toUpperCase() ]
-      //console.log(cache_id)
-      resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
-      resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+      if(resource["datastore_cache"]) {
+        cache_id = resource["datastore_cache"][ resource["format"].toUpperCase() ]
+        //console.log(cache_id)
+        resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
+        resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+      }
 
     }
     ////console.log("Appending to tbody")
@@ -241,7 +250,8 @@ function buildDataset(response) {
     );
     ////console.log("Appended to tbody")
 
-    if (["html", "web", "jsp"].indexOf(resource["format"]) != -1) {
+    if (["html", "web", "jsp"].indexOf(resource["format"].toLowerCase()) != -1) {
+      console.log("Web Page!")
       $("#table-resources tr:last-child td:last-child a").html(
         "Visit page" +
           '<span class="sr-only">Visit ' +
