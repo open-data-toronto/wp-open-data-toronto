@@ -45,16 +45,22 @@ function buildDataset(response) {
   data["is_geospatial"] = false;
 
   for (var i in data["resources"]) {
-    if (
-      data["resources"][i]["is_preview"] == true &&
-      $.isEmptyObject(data["preview_resource"])
-    ) {
-      data["preview_resource"] = data["resources"][i];
-    }
+    console.log("Preview? " + data["resources"][i]["is_preview"])
+    if ('is_preview' in data["resources"][i]) {
+      if (["True", true].indexOf(data["resources"][i]["is_preview"]) != -1 && $.isEmptyObject(data["preview_resource"]))
+      {
+        data["preview_resource"] = data["resources"][i]
+        
+        console.log("Preview Resource!")
+        console.log(i)
+        console.log(data["resources"])
+        console.log(data["resources"][i])
+        console.log(data["preview_resource"])
+      }
 
+    }
+      
     if (data["resources"][i]["datastore_active"] && data["resources"][i]["datastore_active"] != "False" && !data["datastore_active"]) {
-      console.log("Datastore Activated!")
-      console.log(data["resources"][i])
       data["datastore_active"] = true;
     }
 
@@ -202,10 +208,6 @@ function buildDataset(response) {
         }
       }
     } else if (resource["datastore_active"] && resource["datastore_active"] != "False") {
-      console.log("Datastore Active!")
-      console.log(resource["datastore_active"])
-      console.log(resource["id"])
-      console.log(resource["format"])
       format = config["formatOptions"]["tabular"]["default"].slice();
       //if (resource["format"] == "csv") {
       //  format.unshift(config["formatOptions"]["tabular"]["extended"]);
@@ -251,7 +253,6 @@ function buildDataset(response) {
     ////console.log("Appended to tbody")
 
     if (["html", "web", "jsp"].indexOf(resource["format"].toLowerCase()) != -1) {
-      console.log("Web Page!")
       $("#table-resources tr:last-child td:last-child a").html(
         "Visit page" +
           '<span class="sr-only">Visit ' +
@@ -265,6 +266,10 @@ function buildDataset(response) {
   buildUI();
 
   var previewResource = config["package"]["preview_resource"];
+  console.log("Showing Preview Resource!")
+  console.log(previewResource)
+  console.log(previewResource["datastore_active"])
+  console.log(config["package"]["dataset_category"])
   if (
     previewResource != undefined &&
     previewResource["datastore_active"] &&
