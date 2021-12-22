@@ -159,7 +159,7 @@ function buildDataset(response) {
     var resource = config["package"]["resources"][i];
 
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
-    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] //+ "." + resource["format"].toLowerCase();
+    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
 
     if(resource["is_datastore_cache_file"]){continue};
 
@@ -467,7 +467,6 @@ function buildUI() {
           resource_id = datastore_cache[format]
           proj_suffix = ""
         };
-
         // set the href for the download button
         //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
         // we need a way to access the resource so we can get its datastore_cache variable
