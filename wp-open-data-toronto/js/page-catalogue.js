@@ -82,15 +82,17 @@ function buildCatalogue(response) {
             }
         }
 
-        if (row['is_retired']) {
-          specialLabel = '<div class="col-md-2">' +
-                           '<div class="status-label retired-tag pull-right" aria-label="archived">Retired</div>' +
-                         '</div>';
-        } else if (getDaysSince(row['date_published']) <= 30) {
+         if (getDaysSince(row['date_published']) <= 30) {
           specialLabel = '<div class="col-md-2">' +
                            '<div class="status-label new-tag pull-right" aria-label="new">New</div>' +
                          '</div>';
-        }
+        } else if (row['is_retired']) {
+            if (row['is_retired'].toLowerCase() == 'true'){
+                specialLabel = '<div class="col-md-2">' +
+                                 '<div class="status-label retired-tag pull-right" aria-label="archived">Retired</div>' +
+                               '</div>';
+                            } 
+        } 
 
         if (row['refresh_rate'].toLowerCase() != 'real-time') {
           dateLabel = '<div class="col-md-4 text-left attributes">' +
