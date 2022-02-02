@@ -32,7 +32,7 @@ function buildCatalogue(response) {
     $('#nav-catalogue').hide();
 
     var data = response['result'];
-    console.log(data)
+    
     state['size'] = Math.ceil(data['count'] / config['datasetsPerPage']);
 
     if (data['results'].length == 0) {
@@ -65,7 +65,7 @@ function buildCatalogue(response) {
             listLabels = [],
             specialLabel = '',
             dateLabel = '';
-        console.log(config['filters'])
+        
         for (var j = 0; j < config['filters'].length; j++) {
             
             if ( ["civic_issues", "formats", "topics"].includes( config['filters'][j] )) {
@@ -94,11 +94,13 @@ function buildCatalogue(response) {
                             } 
         } 
 
-        if (row['refresh_rate'].toLowerCase() != 'real-time') {
-          dateLabel = '<div class="col-md-4 text-left attributes">' +
-            '<div class="dataset-meta-label">Last Refreshed</div>' +
-            '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['last_refreshed'].split('-')) + '</span>' +
-          '</div>'
+        if (row["refresh_rate"]) {
+            if (row['refresh_rate'].toLowerCase() != 'real-time') {
+            dateLabel = '<div class="col-md-4 text-left attributes">' +
+                '<div class="dataset-meta-label">Last Refreshed</div>' +
+                '<span>' + getFullDate(row['last_refreshed'] ? row['last_refreshed'].split('-') : row['date_published'].split('-')) + '</span>' +
+            '</div>'
+            }
         }
 
         $('.table-list').append(
