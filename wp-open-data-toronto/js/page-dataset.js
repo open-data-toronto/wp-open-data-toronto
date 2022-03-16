@@ -159,8 +159,9 @@ function buildDataset(response) {
     var resource = config["package"]["resources"][i];
 
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
-    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase();
-
+    resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase().replace("shp", "zip");
+    console.log(resourceLink)
+    
     if(resource["is_datastore_cache_file"]){continue};
 
     resource["format"] = resource["format"].toLowerCase();
