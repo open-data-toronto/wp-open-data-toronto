@@ -17,10 +17,10 @@ $.extend(config, {
     },
   },
   projectionOptions: {
-    epsg: ["WGS84", "MTM3"],
+    epsg: ["WGS84", "MTM10"],
     dropdown: [
       ["4326", "WGS84"],
-      ["2945", "MTM3"],
+      ["2952", "MTM10"],
     ],
   },
   package: {},
