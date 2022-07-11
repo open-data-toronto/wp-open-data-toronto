@@ -160,7 +160,7 @@ function buildDataset(response) {
 
       //https://ckanadmin1.intra.dev-toronto.ca/dataset/<package-id>/resource/<resource-id>/download/<name-of-download>
     resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + resource["id"] + "/download/" + resource["name"] + "." + resource["format"].toLowerCase().replace("shp", "zip");
-    console.log(resourceLink)
+    console.log(resource)
     
     if(resource["is_datastore_cache_file"]){continue};
 
@@ -169,7 +169,9 @@ function buildDataset(response) {
     var format = '<div class="format">' + resource["format"] + "</div>",
       projection = '<div class="projection">' + "Not Applicable" + "</div>";
 
+    // if the package has geospatial data ...
     if (data["is_geospatial"]) {
+      // if a resource is geospatial, give it epsg and format dropdowns
       if (resource["datastore_active"] && resource["format"] == "geojson") {
         format = generateDropdowns(
           "format",
@@ -181,6 +183,18 @@ function buildDataset(response) {
         );
 
         cache_id = resource["datastore_cache"]["GEOJSON"]["4326"]
+        resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
+        resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
+      }
+
+      // if a resource is not geospatial but is datastore, just give it format dropdowns
+      if (resource["datastore_active"] && resource["format"] == "csv") {
+        format = generateDropdowns(
+          "format",
+          config["formatOptions"]["tabular"]["default"]
+        );
+      
+        cache_id = resource["datastore_cache"]["CSV"]
         resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
         resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
         
@@ -235,7 +249,7 @@ function buildDataset(response) {
         "<td>" +
         '<a href="' +
         resourceLink +
-        '" target="_blank" class="btn btn-outline-primary">' +
+        '" class="btn btn-outline-primary" download>' +
         "Download" +
         '<span class="sr-only">Download ' +
         resource["name"] +
