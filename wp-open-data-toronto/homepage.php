@@ -14,7 +14,7 @@
               <form id="dataset-search" class="form-inline" role="search">
                 <div class="input-group">
                   <label for="search" class="sr-only">Search Dataset Catalogue</label>
-                  <input type="text" class="form-control" name="search" id="search" placeholder="Search datasets"/>
+                  <input type="text" class="form-control" name="search" id="main-search" placeholder="Search datasets"/>
                   <span class="input-group-btn">
                     <button class="btn btn-secondary" type="submit">Search</button>
                   </span>
