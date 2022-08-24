@@ -5,6 +5,7 @@ $.extend(config, {
 function init() {
   //var fields = ["fl=date_published", "fl=name", "fl=title"];
   //console.log("package_search?" + fields.join("&"))
+  console.log("INIT!")
   getCKAN(
     "package_search?",// + fields.join("&"),
     { rows: config["datasetsShown"], sort: "date_published desc" },
@@ -35,7 +36,8 @@ function init() {
   $("#dataset-search").on("submit", function (evt) {
     evt.preventDefault();
 
-    var term = encodeURIComponent($("#search").val());
+    var term = encodeURIComponent($("#main-search").val());
+
     window.location.href =
       "../catalogue?search=" +
       term +
