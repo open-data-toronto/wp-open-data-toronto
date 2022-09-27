@@ -576,8 +576,6 @@ function generateSnippets() {
   ];
 
   var previewResource = config["package"]["preview_resource"];
-  console.log("TESTttt")
-  console.log(previewResource != undefined && [true, "True", "true"].indexOf( previewResource["datastore_active"] ) )
   if (previewResource != undefined && [true, "True", "true"].indexOf( previewResource["datastore_active"] )!=-1 ) {
     console.log("Concatenating...")
     snippets["python"] = snippets["python"].concat([
