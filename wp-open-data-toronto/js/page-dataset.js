@@ -576,7 +576,10 @@ function generateSnippets() {
   ];
 
   var previewResource = config["package"]["preview_resource"];
-  if (previewResource != undefined && [true, "True", "true"].indexOf( previewResource["datastore_active"] ) ) {
+  console.log("TESTttt")
+  console.log(previewResource != undefined && [true, "True", "true"].indexOf( previewResource["datastore_active"] ) )
+  if (previewResource != undefined && [true, "True", "true"].indexOf( previewResource["datastore_active"] )!=-1 ) {
+    console.log("Concatenating...")
     snippets["python"] = snippets["python"].concat([
       "",
       '       # for datastore_active resources:',
@@ -584,7 +587,7 @@ function generateSnippets() {
       '',
       '           # To get all records in CSV format:',
       '           url = base_url + "/datastore/dump/" + resource["id"]',
-      '           resource_dump_data = requests.get(url)',
+      '           resource_dump_data = requests.get(url).text',
       '           print(resource_dump_data)',
       '',
       '           # To selectively pull records and attribute-level metadata:',
@@ -653,10 +656,12 @@ function generateSnippets() {
   }
   snippets["python"] = snippets["python"].concat([
     "",
-    '       # To download the first non datastore_active resource :',
+    '       # To get metadata for non datastore_active resources:',
     '       if not resource["datastore_active"]:',
-    '           url = base_url + "/datastore/dump/" + resource["id"]',
-    '           resource_dump_data = requests.get(url)',
+    '           url = base_url + "/api/3/action/resource_show?id=" + resource["id"]',
+    '           resource_metadata = requests.get(url).json()',
+    '           print(resource_metadata)',
+    '           # From here, you can use the "url" attribute to download this file',
     "",
   ])
 
