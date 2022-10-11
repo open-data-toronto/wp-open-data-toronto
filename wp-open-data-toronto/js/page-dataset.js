@@ -58,8 +58,8 @@ function buildDataset(response) {
     }
 
     if (
-      ["shp", "geojson"].indexOf(
-        config["package"]["resources"][i]["format"].toLowerCase()
+      ["map"].indexOf(
+        config["package"]["dataset_category"].toLowerCase()
       ) != -1 &&
       !data["is_geospatial"]
     ) {
@@ -172,7 +172,7 @@ function buildDataset(response) {
     // if the package has geospatial data ...
     if (data["is_geospatial"]) {
       // if a resource is geospatial, give it epsg and format dropdowns
-      if (resource["datastore_active"] && resource["format"] == "geojson") {
+      if (resource["datastore_active"]) {
         format = generateDropdowns(
           "format",
           config["formatOptions"]["geospatial"]
@@ -187,34 +187,34 @@ function buildDataset(response) {
         resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
       }
 
-      // if a resource is not geospatial but is datastore, just give it format dropdowns
-      if (resource["datastore_active"] && resource["format"] == "csv") {
-        format = generateDropdowns(
-          "format",
-          config["formatOptions"]["tabular"]["default"]
-        );
+    // if a resource is not geospatial but is datastore, just give it format dropdowns
+    if (resource["datastore_active"] && !data["is_geospatial"]) {
+      format = generateDropdowns(
+        "format",
+        config["formatOptions"]["tabular"]["default"]
+      );
+    
+      cache_id = resource["datastore_cache"]["CSV"]
+      resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
+      resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
       
-        cache_id = resource["datastore_cache"]["CSV"]
-        resourceLink = config["ckanURL"] + "/dataset/" + resource["package_id"] + "/resource/" + "~~resource_id~~" + "/download/" + resource["name"] + "." + resource["format"].toLowerCase()
-        resourceLink = resourceLink.replace("~~resource_id~~", cache_id) ;
-        
 
-        //resourceLink += "?format=geojson&projection=4326";
-      } else {
-        for (var f in config["projectionOptions"]["epsg"]) {
-          if (
-            resource["name"]
-              .toUpperCase()
-              .indexOf(config["projectionOptions"]["epsg"][f]) != -1
-          ) {
-            projection =
-              '<div class="projection">' +
-              config["projectionOptions"]["epsg"][f] +
-              "</div>";
-            break;
-          }
+      //resourceLink += "?format=geojson&projection=4326";
+    } else {
+      for (var f in config["projectionOptions"]["epsg"]) {
+        if (
+          resource["name"]
+            .toUpperCase()
+            .indexOf(config["projectionOptions"]["epsg"][f]) != -1
+        ) {
+          projection =
+            '<div class="projection">' +
+            config["projectionOptions"]["epsg"][f] +
+            "</div>";
+          break;
         }
       }
+    }
     } else if (resource["datastore_active"] && resource["datastore_active"] != "False") {
       format = config["formatOptions"]["tabular"]["default"].slice();
       //if (resource["format"] == "csv") {
