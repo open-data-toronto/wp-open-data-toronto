@@ -172,7 +172,7 @@ function buildDataset(response) {
     // if the package has geospatial data ...
     if (data["is_geospatial"]) {
       // if a resource is geospatial, give it epsg and format dropdowns
-      if (resource["datastore_active"]) {
+      if ( [true, "True", "true"].indexOf( resource["datastore_active"] )!=-1 ) {
         format = generateDropdowns(
           "format",
           config["formatOptions"]["geospatial"]
@@ -188,7 +188,7 @@ function buildDataset(response) {
       }
 
     // if a resource is not geospatial but is datastore, just give it format dropdowns
-    if (resource["datastore_active"] && !data["is_geospatial"]) {
+    if ([true, "True", "true"].indexOf( data["datastore_active"] )!=-1 && !data["is_geospatial"]) {
       format = generateDropdowns(
         "format",
         config["formatOptions"]["tabular"]["default"]
