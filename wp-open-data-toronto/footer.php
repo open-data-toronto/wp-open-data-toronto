@@ -17,7 +17,7 @@
         </div>     
       <!-- Begin Mailchimp Signup Form -->
         <div class="col-md-9">
-          <form action="https://toronto.us7.list-manage.com/subscribe/post?u=4bfad28974017cb009fd6d24a&amp;id=36d03c2b81" method="post" class="mailchimp" name="mc-embedded-subscribe-form"  target="_blank" novalidate>
+          <form action="https://toronto.us14.list-manage.com/subscribe/post?u=d67d2b71f00176ea5fb510f86&amp;id=d58efd9b1a&amp;f_id=000b9de0f0" method="post" class="mailchimp" name="mc-embedded-subscribe-form"  target="_blank" novalidate>
 	          <label for="monthly updates" id="monthly-updates"><b>Receive monthly updates</b></label>
 	            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
               <input type="submit" value="Sign up" name="subscribe" id="mc-embedded-subscribe"  class="btn btn-primary my-2 my-sm-0">
