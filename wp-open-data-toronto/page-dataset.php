@@ -124,6 +124,37 @@
                       </div>
                     </div>
                   </div>
+                  <div class="card accordion__section">
+                    <div
+                      class="card-header accordion__header"
+                      id="header-dataFeatures"
+                    >
+                      <div class="mb-0">
+                        <button
+                          class="btn btn-block btn-link collapsed accordion__button"
+                          data-toggle="collapse"
+                          data-target="#body-dataFeatures"
+                          aria-expanded="false"
+                        >
+                          Data Features
+                          <span class="accordion-arrow">
+                            <span class="fa fa-chevron-down"></span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      data-key="1"
+                      id="body-dataFeatures"
+                      class="collapse"
+                      aria-labelledby="header-dataFeatures"
+                      data-parent="#js-accordion__su9l98td5"
+                    >
+                      <div class="card-body accordion__body">
+                        <div id="content-features" class="col-md-12"></div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="card accordion__section">
                     <div
@@ -157,37 +188,6 @@
                     </div>
                   </div>
 
-                  <div class="card accordion__section">
-                    <div
-                      class="card-header accordion__header"
-                      id="header-dataFeatures"
-                    >
-                      <div class="mb-0">
-                        <button
-                          class="btn btn-block btn-link collapsed accordion__button"
-                          data-toggle="collapse"
-                          data-target="#body-dataFeatures"
-                          aria-expanded="false"
-                        >
-                          Data Features
-                          <span class="accordion-arrow">
-                            <span class="fa fa-chevron-down"></span>
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      data-key="1"
-                      id="body-dataFeatures"
-                      class="collapse"
-                      aria-labelledby="header-dataFeatures"
-                      data-parent="#js-accordion__su9l98td5"
-                    >
-                      <div class="card-body accordion__body">
-                        <div id="content-features" class="col-md-12"></div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="card accordion__section">
                     <div
                       class="card-header accordion__header"
