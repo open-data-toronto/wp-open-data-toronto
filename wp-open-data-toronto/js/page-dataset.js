@@ -283,8 +283,9 @@ function buildDataset(response) {
   ) {
     queryContents();
     queryViews();
+    getQuality();
   } else {
-    $("#body-dataPreview, #body-dataFeatures, #body-Explore")
+    $("#body-dataPreview, #body-dataFeatures, #body-Explore", "#body-dataquality")
       .find(".card-body")
       .html('<div class="not-available">Not available for this dataset</div>');
   }
@@ -348,6 +349,57 @@ function queryViews() {
           '<div class="not-available">Not available for this dataset</div>'
         );
       }
+    }
+  );
+}
+
+/**
+ * Calls resource_view_list CKAN API endpoint and builds the data quality if the
+ * dataset has one associated with it
+ */
+
+function getQuality() {
+  getCKAN(
+    "resource_view_list",
+    { id: config["package"]["preview_resource"]["id"] },
+    function (response) {
+      var results = response["result"],
+        previewFound = false;
+
+
+      for (var i in results) {
+        var viewURL =
+          config["ckanURL"] +
+          "/dataset/" +
+          config["package"]["name"] +
+          "/resource/" +
+          results[i]["resource_id"] +
+          "/view/" +
+          results[i]["id"];
+        if (
+          results[i]["view_type"] == "dqs_view"
+        ) {
+          if (!$("#content-quality iframe").length) {
+            var w = $("#body-dataPreview").width();
+            console.log(w)
+            $("#content-quality").append(
+              '<iframe width="' +
+                w +
+                '" height="520" style="display: block;" src="' +
+                viewURL +
+                '" frameBorder="0"></iframe>'
+            );
+            previewFound = true;
+          }
+        } 
+      }
+
+      if (!previewFound) {
+        $("#body-Explore .card-body").html(
+          '<div class="not-available">Not available for this dataset</div>'
+        );
+      }
+
     }
   );
 }
