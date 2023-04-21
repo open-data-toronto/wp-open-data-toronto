@@ -31,12 +31,14 @@
                 <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
               </div>
               <dl>
+                <!--
                 <dt>
                   Data quality score
                   <span class="badge badge-info">beta</span>
                   <span class="sr-only">: </span>
                 </dt>
                 <dd id="field-quality">Not available</dd>
+                -->
                 <dt>Data last refreshed<span class="sr-only">: </span></dt>
                 <dd data-field="last_refreshed"></dd>
                 <dt>Published on<span class="sr-only">: </span></dt>
@@ -122,6 +124,39 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="card accordion__section">
+                    <div
+                      class="card-header accordion__header"
+                      id="header-dataquality"
+                    >
+                      <div class="mb-0">
+                        <button
+                          class="btn btn-block btn-link collapsed accordion__button"
+                          data-toggle="collapse"
+                          data-target="#body-dataquality"
+                          aria-expanded="true"
+                        >
+                          Data Quality
+                          <span class="accordion-arrow">
+                            <span class="fa fa-chevron-down"></span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      data-key="9"
+                      id="body-dataquality"
+                      class="collapse"
+                      aria-labelledby="header-dataquality"
+                      data-parent="#js-accordion__su9l98td5"
+                    >
+                      <div class="card-body accordion__body">
+                        <div id="content-quality" class="col-md-12"></div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="card accordion__section">
                     <div
                       class="card-header accordion__header"
