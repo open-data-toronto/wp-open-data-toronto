@@ -276,16 +276,22 @@ function buildDataset(response) {
 
   var previewResource = config["package"]["preview_resource"];
 
+  console.log("!!!!!!!!!!!!!!")
+  console.log(config)
+  console.log(previewResource == undefined)
+  console.log(config["package"])
   if (
     previewResource != undefined &&
     previewResource["datastore_active"] &&
     ["Map", "Table"].indexOf(config["package"]["dataset_category"]) != -1
   ) {
+    console.log("Running JS!")
     queryContents();
     queryViews();
     getQuality();
   } else {
-    $("#body-dataPreview, #body-dataFeatures, #body-Explore", "#body-dataquality")
+    console.log("Not running JS!")
+    $("#body-dataPreview, #body-dataFeatures, #body-Explore, #body-dataquality")
       .find(".card-body")
       .html('<div class="not-available">Not available for this dataset</div>');
   }
