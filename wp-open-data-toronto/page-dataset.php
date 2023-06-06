@@ -31,14 +31,14 @@
                 <h3><span class="fa fa-database"></span>&nbsp; Details</h3>
               </div>
               <dl>
-                <!--
+                
                 <dt>
                   Data quality score
                   <span class="badge badge-info">beta</span>
                   <span class="sr-only">: </span>
                 </dt>
                 <dd id="field-quality">Not available</dd>
-                -->
+                
                 <dt>Data last refreshed<span class="sr-only">: </span></dt>
                 <dd data-field="last_refreshed"></dd>
                 <dt>Published on<span class="sr-only">: </span></dt>
